@@ -1,0 +1,25 @@
+:root {
+  /* Clean Girl Palette */
+  --color-bg: #FDFBF7; /* Cream/Off-white */
+  --color-text: #4A4A4A; /* Soft Dark Gray */
+  --color-text-light: #8A8A8A;
+  
+  --color-primary: #E6B8B8; /* Soft Pink */
+  --color-primary-light: #F2DCDC;
+  
+  --color-secondary: #C1D7C6; /* Sage Green */
+  --color-secondary-light: #E0EBE2;
+
+  --color-accent: #B8B8E6; /* Lavender */
+  --color-accent-light: #DCDCF2;
+  
+  /* UI Elements */
+  --card-bg: #FFFFFF;
+  --border-radius: 16px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  
+  /* Typography */
+  --font-main: 'Inter', sans-serif;
+  --font-hand: 'Caveat', cursive; /* For "handwritten" notes */
+}
