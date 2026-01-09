@@ -2,28 +2,40 @@ import React, { useEffect, useState, useRef } from 'react';
 
 // SVG Component for the Sausage Dog
 const SausageDogSVG = ({ color = "#8B4513", w = 60, h = 40 }) => (
+    // ViewBox adjusted for Right-Facing Dog
     <svg width={w} height={h} viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Tail */}
-        <path d="M85 20C85 20 90 10 95 15C100 20 95 25 88 28" stroke={color} strokeWidth="4" strokeLinecap="round" />
+
+        {/* Tail (Now on Left) */}
+        <path d="M15 20C15 20 10 10 5 15C0 20 5 25 12 28" stroke={color} strokeWidth="4" strokeLinecap="round" />
+
         {/* Body - The Sausage Part */}
-        <rect x="20" y="20" width="70" height="25" rx="12" fill={color} />
-        {/* Head */}
-        <circle cx="20" cy="25" r="18" fill={color} />
-        {/* Snout */}
-        <path d="M10 25L2 28L10 31" fill={color} />
-        <circle cx="4" cy="27" r="2" fill="black" />
-        {/* Ear */}
-        <path d="M20 25C20 25 10 30 12 40C14 50 24 40 24 35" fill="#5D2906" />
-        {/* Eye */}
-        <circle cx="15" cy="20" r="2.5" fill="black" />
-        <circle cx="16" cy="19" r="1" fill="white" />
+        <rect x="10" y="20" width="70" height="25" rx="12" fill={color} />
+
+        {/* Head Group (Now on Right) */}
+        <g transform="translate(75, 25)">
+            {/* Main Head Shape - Ellipse for snouty look */}
+            <ellipse cx="0" cy="0" rx="15" ry="12" fill={color} />
+            {/* Snout Extension */}
+            <path d="M5 2L18 0L15 8Z" fill={color} />
+            {/* Nose Tip */}
+            <circle cx="18" cy="1" r="2.5" fill="black" />
+
+            {/* Ear - Flappy and brown */}
+            <path d="M-5 0C-5 0 -15 5 -12 15C-10 25 0 15 0 10" fill="#5D2906" />
+
+            {/* Eye */}
+            <circle cx="5" cy="-5" r="2.5" fill="black" />
+            <circle cx="6" cy="-6" r="1" fill="white" />
+        </g>
+
         {/* Legs */}
-        <path d="M30 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
-        <path d="M40 45V52" stroke={color} strokeWidth="5" strokeLinecap="round" />
-        <path d="M75 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
-        <path d="M85 45V52" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M20 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M30 45V52" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M65 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M75 45V52" stroke={color} strokeWidth="5" strokeLinecap="round" />
+
         {/* Collar */}
-        <rect x="28" y="20" width="4" height="25" fill="#FF4444" opacity="0.8" />
+        <rect x="68" y="20" width="4" height="25" fill="#FF4444" opacity="0.8" />
     </svg>
 );
 
