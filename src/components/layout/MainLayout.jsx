@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2 } from 'lucide-react';
@@ -8,6 +8,7 @@ import BackgroundSlideshow from './BackgroundSlideshow';
 
 const MainLayout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   // Data & Navigation State
   const [diseases, setDiseases] = useState([]);
@@ -181,7 +182,7 @@ const MainLayout = () => {
 
       {/* Main Content */}
       <main style={{ flex: 1, padding: '40px', overflowY: 'auto', paddingTop: '40px' }} className="main-content">
-        <Outlet context={{ diseases, refresh: fetchDiseases }} />
+        <Outlet context={{ diseases, refresh: fetchDiseases }} key={location.pathname + location.search} />
       </main>
 
       {/* Global CSS for responsiveness */}
