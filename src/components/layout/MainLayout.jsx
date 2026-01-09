@@ -3,6 +3,8 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash } from 'lucide-react';
+import DachshundMascot from '../fun/DachshundMascot';
+import BackgroundSlideshow from './BackgroundSlideshow';
 
 const MainLayout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
