@@ -13,6 +13,7 @@ const MainLayout = () => {
   const [diseases, setDiseases] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [subjectsOpen, setSubjectsOpen] = useState(true);
+  const [showMascots, setShowMascots] = useState(true); // Default true
 
   const fetchDiseases = async () => {
     try {
@@ -135,6 +136,28 @@ const MainLayout = () => {
             <PlusCircle size={20} /> Novo Resumo
           </NavLink>
           {/* <NavLink to="/settings" style={navStyle}><Settings size={20} /> Ajustes</NavLink> */}
+
+          {/* Mascot Toggle */}
+          <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: '1px solid #eee' }}>
+            <button
+              onClick={() => setShowMascots(!showMascots)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                fontSize: '0.9rem',
+                color: showMascots ? 'var(--color-primary)' : '#aaa',
+                width: '100%',
+                padding: '8px 16px'
+              }}
+            >
+              <span style={{ fontSize: '1.2rem' }}>{showMascots ? '🐶' : '🚫'}</span>
+              {showMascots ? 'Salsichas: On' : 'Salsichas: Off'}
+            </button>
+          </div>
         </nav>
 
         <div style={{ fontSize: '0.8rem', color: '#ccc', textAlign: 'center' }}>

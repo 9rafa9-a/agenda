@@ -2,40 +2,40 @@ import React, { useEffect, useState, useRef } from 'react';
 
 // SVG Component for the Sausage Dog
 const SausageDogSVG = ({ color = "#8B4513", w = 60, h = 40 }) => (
-    // ViewBox adjusted for Right-Facing Dog
     <svg width={w} height={h} viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Tail - Wagging upwards */}
+        <path d="M15 25C10 15 5 10 2 15" stroke={color} strokeWidth="4" strokeLinecap="round" />
 
-        {/* Tail (Now on Left) */}
-        <path d="M15 20C15 20 10 10 5 15C0 20 5 25 12 28" stroke={color} strokeWidth="4" strokeLinecap="round" />
+        {/* Body - Long capsule */}
+        <rect x="10" y="25" width="65" height="22" rx="11" fill={color} />
 
-        {/* Body - The Sausage Part */}
-        <rect x="10" y="20" width="70" height="25" rx="12" fill={color} />
+        {/* Neck/Collar - Slanted for perspective */}
+        <path d="M70 26L74 46" stroke="#FF4444" strokeWidth="6" />
 
-        {/* Head Group (Now on Right) */}
-        <g transform="translate(75, 25)">
-            {/* Main Head Shape - Ellipse for snouty look */}
-            <ellipse cx="0" cy="0" rx="15" ry="12" fill={color} />
-            {/* Snout Extension */}
-            <path d="M5 2L18 0L15 8Z" fill={color} />
-            {/* Nose Tip */}
-            <circle cx="18" cy="1" r="2.5" fill="black" />
+        {/* Head Group */}
+        <g transform="translate(72, 22)">
+            {/* Snout - Long and rounded (The "Sausage" face) */}
+            <rect x="0" y="5" width="28" height="14" rx="7" fill={color} />
 
-            {/* Ear - Flappy and brown */}
-            <path d="M-5 0C-5 0 -15 5 -12 15C-10 25 0 15 0 10" fill="#5D2906" />
+            {/* Forehead/Skull - Blending into snout */}
+            <circle cx="5" cy="10" r="10" fill={color} />
 
-            {/* Eye */}
-            <circle cx="5" cy="-5" r="2.5" fill="black" />
-            <circle cx="6" cy="-6" r="1" fill="white" />
+            {/* Nose Tip - Cute button nose */}
+            <circle cx="26" cy="12" r="3" fill="#2d1a10" />
+
+            {/* Ear - Large, floppy, dark brown */}
+            <path d="M2 8C-2 15 -2 25 5 28C8 29 10 25 10 20C10 15 8 8 2 8" fill="#5D2906" />
+
+            {/* Eye - Bright and lively */}
+            <circle cx="12" cy="8" r="2.5" fill="black" />
+            <circle cx="13" cy="7" r="1" fill="white" />
         </g>
 
-        {/* Legs */}
+        {/* Legs - Short and stubby */}
         <path d="M20 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
-        <path d="M30 45V52" stroke={color} strokeWidth="5" strokeLinecap="round" />
-        <path d="M65 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
-        <path d="M75 45V52" stroke={color} strokeWidth="5" strokeLinecap="round" />
-
-        {/* Collar */}
-        <rect x="68" y="20" width="4" height="25" fill="#FF4444" opacity="0.8" />
+        <path d="M30 46V53" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M60 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M70 46V53" stroke={color} strokeWidth="5" strokeLinecap="round" />
     </svg>
 );
 
@@ -72,14 +72,15 @@ const DachshundMascot = () => {
     // Random spawner logic
     useEffect(() => {
         const interval = setInterval(() => {
-            if (Math.random() > 0.6) { // 40% chance every 4s
+            // Check every 60 seconds. High chance (90%) to spawn ONE group/dog.
+            if (Math.random() > 0.1) {
                 const r = Math.random();
                 if (r > 0.9) spawnDogsPack();
                 else if (r > 0.7) spawnDog('ZOOMIES');
                 else if (r > 0.5) spawnDog('LONG_BOI');
                 else spawnDog('NORMAL');
             }
-        }, 4000);
+        }, 60000); // 60 seconds interval
         return () => clearInterval(interval);
     }, []);
 
