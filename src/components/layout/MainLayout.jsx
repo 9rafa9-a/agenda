@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash } from 'lucide-react';
