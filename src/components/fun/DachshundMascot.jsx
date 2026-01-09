@@ -67,29 +67,60 @@ const DachshundMascot = () => {
         }, 1000);
     };
 
+    // Debug trigger
+    const forceSpawn = () => {
+        console.log('Force spawning dog via button');
+        spawnDog('NORMAL');
+    };
+
     return (
         <>
+            {/* Debug Button - Remove later */}
+            <button
+                onClick={forceSpawn}
+                style={{
+                    position: 'fixed',
+                    bottom: '10px',
+                    right: '10px',
+                    zIndex: 10002,
+                    padding: '8px 16px',
+                    background: 'red',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    opacity: 0.5
+                }}
+            >
+                Chamar Salsicha (Debug)
+            </button>
+
             {dogs.map(dog => (
                 <div
                     key={dog.id}
-                    className="walking-dog" // Class for animation finding
-                    onAnimationEnd={() => removeDog(dog.id)} // Cleanup when done
+                    className="walking-dog"
+                    onAnimationEnd={() => {
+                        console.log('Animation ended for dog', dog.id);
+                        removeDog(dog.id);
+                    }}
                     onClick={() => handleBark(dog.id)}
                     style={{
                         position: 'fixed',
-                        bottom: '10px',
-                        left: '-10%', // Start off-screen
+                        bottom: '20px', // Raised slightly
+                        left: '-10%',
                         fontSize: '3rem',
                         zIndex: dog.zIndex,
                         cursor: 'pointer',
                         transform: `scale(${dog.scale})`,
                         userSelect: 'none',
-                        filter: 'drop-shadow(0 4px 4px rgba(0,0,0,0.1))',
+                        // Red border for visibility check
+                        border: '2px solid red',
+                        background: 'rgba(255, 255, 0, 0.2)', // Yellow tint
                         // CSS Animation
                         animation: `walkAcross ${dog.duration} linear forwards`
                     }}
                 >
-                    <div style={{ position: 'relative' }}> {/* Wrapper for bark positioning */}
+                    <div style={{ position: 'relative' }}>
                         {dog.emoji}
                         {dog.isBarking && (
                             <div style={{
@@ -109,7 +140,6 @@ const DachshundMascot = () => {
                                 Au! 🦴
                             </div>
                         )}
-                        {/* Heart float animation */}
                         {!dog.isBarking && (
                             <div style={{
                                 position: 'absolute',
@@ -126,8 +156,8 @@ const DachshundMascot = () => {
             ))}
             <style>{`
             @keyframes walkAcross {
-                0% { left: -10%; }
-                100% { left: 110%; }
+                0% { left: -10vw; } 
+                100% { left: 110vw; } /* Using VW to ensure it crosses screen */
             }
             @keyframes float {
                 0%, 100% { transform: translateY(0); opacity: 0.8; }
