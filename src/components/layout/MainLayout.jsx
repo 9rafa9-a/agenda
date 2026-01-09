@@ -37,7 +37,7 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'rgba(255,255,255,0.85)' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'transparent' }}>
       <BackgroundSlideshow />
       {/* Mobile Header */}
       <div className="mobile-header" style={{
@@ -204,6 +204,9 @@ const MainLayout = () => {
             transform: translateX(-100%);
             transition: transform 0.3s ease;
             border-right: none !important;
+            background: #fff !important; /* Solid white to prevent overlap issues */
+            z-index: 200;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
           }
           .sidebar.mobile-open {
             transform: translateX(0);
