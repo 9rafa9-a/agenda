@@ -80,29 +80,55 @@ const TopicSection = ({ title, content, color = 'default', isEditable, onChange,
                 </div>
 
                 {isEditable ? (
-                    <textarea
-                        value={content}
-                        onChange={(e) => onChange(e.target.value)}
-                        placeholder={`Escreva sobre ${title}...`}
-                        style={{
-                            flex: 1,
-                            border: 'none',
-                            background: 'rgba(255,255,255,0.5)',
-                            resize: 'none',
-                            fontFamily: 'inherit',
-                            fontSize: isFullscreen ? '1.2rem' : '0.9rem',
+                    <>
+                        {/* Normal Textarea for non-print usage */}
+                        <textarea
+                            className="no-print"
+                            value={content}
+                            onChange={(e) => onChange(e.target.value)}
+                            placeholder={`Escreva sobre ${title}...`}
+                            style={{
+                                flex: 1,
+                                border: 'none',
+                                background: 'rgba(255,255,255,0.5)',
+                                resize: 'none',
+                                fontFamily: 'inherit',
+                                fontSize: isFullscreen ? '1.2rem' : '0.9rem',
+                                padding: '16px',
+                                borderRadius: '8px',
+                                outline: 'none',
+                                lineHeight: 1.6
+                            }}
+                        />
+                        {/* Print-only expansion div - mimics textarea look but expands fully */}
+                        <div className="print-only" style={{
+                            display: 'none', // Overridden by media print
+                            whiteSpace: 'pre-wrap',
+                            fontSize: '0.9rem',
                             padding: '16px',
+                            background: 'rgba(255,255,255,0.5)',
                             borderRadius: '8px',
-                            outline: 'none',
-                            lineHeight: 1.6
-                        }}
-                    />
+                            border: `1px solid ${styles.border}`
+                        }}>
+                            {content || '...'}
+                        </div>
+                    </>
                 ) : (
                     <div style={{ fontSize: '0.9rem', whiteSpace: 'pre-wrap' }}>
                         {content || <span style={{ color: 'rgba(0,0,0,0.4)', fontStyle: 'italic' }}>Em branco...</span>}
                     </div>
                 )}
             </div>
+            {/* Styles for print toggle */}
+            <style>{`
+                @media print {
+                    .no-print { display: none !important; }
+                    .print-only { display: block !important; }
+                    /* Force blocks to not break awkwardly */
+                    div { break-inside: avoid; } 
+                }
+            `}</style>
+        </div >
         </>
     );
 };

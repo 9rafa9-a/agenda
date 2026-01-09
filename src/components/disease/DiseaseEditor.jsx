@@ -65,9 +65,10 @@ const DiseaseEditor = () => {
         setData(prev => ({ ...prev, [key]: value }));
     };
 
-    const handleSave = async () => {
-        if (!name.trim()) return alert("Adicione um título!");
-        setSaving(true);
+    const handleSave = async (silent = false) => {
+        if (!name.trim()) return; // Don't auto-save empty docs
+
+        if (!silent) setSaving(true);
         try {
             const payload = {
                 name,
@@ -79,19 +80,37 @@ const DiseaseEditor = () => {
 
             if (id) {
                 await updateDoc(doc(db, 'diseases', id), payload);
-                alert('Salvo com sucesso!');
+                if (!silent) alert('Salvo com sucesso!');
             } else {
-                await addDoc(collection(db, 'diseases'), payload);
-                alert('Criado com sucesso!');
-                navigate('/');
+                // For new docs, we only auto-save if we have enough info to create it
+                // But typically we shouldn't auto-create docs without user intent. 
+                // Let's rely on manual save for the FIRST create, then auto-save updates.
+                if (!silent) {
+                    const docRef = await addDoc(collection(db, 'diseases'), payload);
+                    alert('Criado com sucesso!');
+                    navigate(`/edit/${docRef.id}`, { replace: true });
+                }
             }
         } catch (e) {
             console.error("Error saving document: ", e);
-            alert("Erro ao salvar: " + e.message);
+            if (!silent) alert("Erro ao salvar: " + e.message);
         } finally {
-            setSaving(false);
+            if (!silent) setSaving(false);
         }
     };
+
+    // Auto-Save Logic (Debounced)
+    useEffect(() => {
+        // Only auto-save if we have an ID (document exists) to avoid phantom creations
+        if (!id) return;
+
+        const timer = setTimeout(() => {
+            console.log("Auto-saving...");
+            handleSave(true);
+        }, 3000); // Wait 3 seconds of inactivity
+
+        return () => clearTimeout(timer);
+    }, [data, name, subject]); // Dependencies: any change triggers timer reset
 
     // PDF Export
     const handlePrint = useReactToPrint({
