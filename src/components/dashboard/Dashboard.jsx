@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import DiseaseCard from './DiseaseCard';
+import ActivityCalendar from './ActivityCalendar';
 import { Plus, RefreshCw, Search, X } from 'lucide-react';
 import { useNavigate, useOutletContext, useSearchParams } from 'react-router-dom';
 
@@ -132,6 +133,9 @@ const Dashboard = () => {
                     </button>
                 </div>
             </div>
+
+            {/* Activity Calendar */}
+            <ActivityCalendar diseases={diseases} />
 
             <div style={{
                 display: 'grid',
