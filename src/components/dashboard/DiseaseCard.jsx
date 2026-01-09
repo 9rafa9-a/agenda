@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Edit2, Trash2 } from 'lucide-react';
 
-const DiseaseCard = ({ id, name, tags = [], lastEdited }) => {
+const DiseaseCard = ({ id, name, subject, tags = [], lastEdited }) => {
     const navigate = useNavigate();
 
     return (
@@ -37,6 +37,21 @@ const DiseaseCard = ({ id, name, tags = [], lastEdited }) => {
                     marginBottom: '8px',
                     color: 'var(--color-text)'
                 }}>{name || 'Sem Título'}</h3>
+
+                {subject && (
+                    <div style={{
+                        display: 'inline-block',
+                        fontSize: '0.75rem',
+                        background: 'var(--color-primary-light)',
+                        color: 'var(--color-primary)',
+                        padding: '4px 10px',
+                        borderRadius: '20px',
+                        marginBottom: '8px',
+                        fontWeight: '600'
+                    }}>
+                        {subject}
+                    </div>
+                )}
 
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                     {tags.map(tag => (

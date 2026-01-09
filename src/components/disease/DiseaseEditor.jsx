@@ -26,6 +26,7 @@ const DiseaseEditor = () => {
     const componentRef = useRef(); // For PDF
 
     const [name, setName] = useState('');
+    const [subject, setSubject] = useState('');
     const [data, setData] = useState({
         definition: '', epidemiology: '', clinical: '',
         diagnosis: '', differential: '', treatment: '',
@@ -45,6 +46,7 @@ const DiseaseEditor = () => {
                     if (docSnap.exists()) {
                         const docData = docSnap.data();
                         setName(docData.name);
+                        setSubject(docData.subject || '');
                         setData(docData.topics);
                     } else {
                         console.log("No such document!");
@@ -69,6 +71,7 @@ const DiseaseEditor = () => {
         try {
             const payload = {
                 name,
+                subject,
                 topics: data,
                 lastEdited: Date.now(),
                 userId: 'default-user' // Eventually use auth.currentUser.uid
@@ -126,6 +129,33 @@ const DiseaseEditor = () => {
                     borderRadius: 'var(--border-radius)',
                     boxShadow: 'var(--shadow-sm)'
                 }}>
+                    <input
+                        type="text"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        placeholder="Matéria (ex: Ginecologia)"
+                        list="subjects-list"
+                        style={{
+                            display: 'block',
+                            margin: '0 auto 16px auto',
+                            padding: '8px 16px',
+                            borderRadius: '20px',
+                            border: '1px solid #eee',
+                            fontSize: '0.9rem',
+                            textAlign: 'center',
+                            width: '200px',
+                            outline: 'none',
+                            color: '#666'
+                        }}
+                    />
+                    <datalist id="subjects-list">
+                        <option value="Cardiologia" />
+                        <option value="Ginecologia" />
+                        <option value="Pediatria" />
+                        <option value="Cirurgia" />
+                        <option value="Preventiva" />
+                    </datalist>
+
                     <label style={{
                         display: 'block',
                         fontSize: '0.8rem',
