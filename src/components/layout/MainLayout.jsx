@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2 } from 'lucide-react';
 import DachshundMascot from '../fun/DachshundMascot';
@@ -15,10 +15,10 @@ const MainLayout = () => {
   const [subjectsOpen, setSubjectsOpen] = useState(true);
   const [showMascots, setShowMascots] = useState(true); // Default true
 
-  const fetchDiseases = async () => {
-    try {
-      const q = query(collection(db, "diseases"), orderBy("lastEdited", "desc"));
-      const querySnapshot = await getDocs(q);
+  // Real-time subscription
+  React.useEffect(() => {
+    const q = query(collection(db, "diseases"), orderBy("lastEdited", "desc"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const list = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
@@ -33,14 +33,15 @@ const MainLayout = () => {
           .filter(Boolean)
       )].sort();
       setSubjects(uniqueSubjects);
-    } catch (error) {
-      console.error("Error fetching diseases:", error);
-    }
-  };
+    }, (error) => {
+      console.error("Error listening to diseases:", error);
+    });
 
-  React.useEffect(() => {
-    fetchDiseases();
+    return () => unsubscribe();
   }, []);
+
+  // Manual refresh no longer needed but kept for context if needed
+  const fetchDiseases = () => { };
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'transparent' }}>
