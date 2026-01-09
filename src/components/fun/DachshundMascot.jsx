@@ -1,11 +1,38 @@
 import React, { useEffect, useState, useRef } from 'react';
 
+// SVG Component for the Sausage Dog
+const SausageDogSVG = ({ color = "#8B4513", w = 60, h = 40 }) => (
+    <svg width={w} height={h} viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Tail */}
+        <path d="M85 20C85 20 90 10 95 15C100 20 95 25 88 28" stroke={color} strokeWidth="4" strokeLinecap="round" />
+        {/* Body - The Sausage Part */}
+        <rect x="20" y="20" width="70" height="25" rx="12" fill={color} />
+        {/* Head */}
+        <circle cx="20" cy="25" r="18" fill={color} />
+        {/* Snout */}
+        <path d="M10 25L2 28L10 31" fill={color} />
+        <circle cx="4" cy="27" r="2" fill="black" />
+        {/* Ear */}
+        <path d="M20 25C20 25 10 30 12 40C14 50 24 40 24 35" fill="#5D2906" />
+        {/* Eye */}
+        <circle cx="15" cy="20" r="2.5" fill="black" />
+        <circle cx="16" cy="19" r="1" fill="white" />
+        {/* Legs */}
+        <path d="M30 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M40 45V52" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M75 45V55" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        <path d="M85 45V52" stroke={color} strokeWidth="5" strokeLinecap="round" />
+        {/* Collar */}
+        <rect x="28" y="20" width="4" height="25" fill="#FF4444" opacity="0.8" />
+    </svg>
+);
+
 // Dog types and their properties
 const DOG_TYPES = {
-    NORMAL: { duration: '15s', emoji: '🐕', scale: 1, zIndex: 9999 },
-    PUPPY: { duration: '12s', emoji: '🐕', scale: 0.7, zIndex: 10000 },
-    LONG_BOI: { duration: '20s', emoji: '🌭', scale: 1.5, zIndex: 9998 },
-    ZOOMIES: { duration: '3s', emoji: '🐕💨', scale: 1, zIndex: 10001 }
+    NORMAL: { duration: '15s', component: <SausageDogSVG />, scale: 1.5, zIndex: 9999 },
+    PUPPY: { duration: '12s', component: <SausageDogSVG w={40} h={30} />, scale: 1, zIndex: 10000 },
+    LONG_BOI: { duration: '20s', component: <SausageDogSVG w={90} h={40} />, scale: 2, zIndex: 9998 },
+    ZOOMIES: { duration: '3s', component: <SausageDogSVG />, scale: 1.5, zIndex: 10001 }
 };
 
 const DachshundMascot = () => {
@@ -16,8 +43,6 @@ const DachshundMascot = () => {
     const spawnDog = (type = 'NORMAL') => {
         const id = dogIdCounter.current++;
         const config = DOG_TYPES[type] || DOG_TYPES.NORMAL;
-
-        // console.log(`Spawning Dog: ${type} (ID: ${id})`); 
 
         setDogs(prev => [...prev, {
             id,
@@ -67,71 +92,42 @@ const DachshundMascot = () => {
         }, 1000);
     };
 
-    // Debug trigger
-    const forceSpawn = () => {
-        console.log('Force spawning dog via button');
-        spawnDog('NORMAL');
-    };
-
     return (
         <>
-            {/* Debug Button - Remove later */}
-            <button
-                onClick={forceSpawn}
-                style={{
-                    position: 'fixed',
-                    bottom: '10px',
-                    right: '10px',
-                    zIndex: 10002,
-                    padding: '8px 16px',
-                    background: 'red',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    opacity: 0.5
-                }}
-            >
-                Chamar Salsicha (Debug)
-            </button>
-
             {dogs.map(dog => (
                 <div
                     key={dog.id}
                     className="walking-dog"
-                    onAnimationEnd={() => {
-                        console.log('Animation ended for dog', dog.id);
-                        removeDog(dog.id);
-                    }}
+                    onAnimationEnd={() => removeDog(dog.id)}
                     onClick={() => handleBark(dog.id)}
                     style={{
                         position: 'fixed',
-                        bottom: '20px', // Raised slightly
+                        bottom: '10px',
                         left: '-10%',
-                        fontSize: '3rem',
                         zIndex: dog.zIndex,
                         cursor: 'pointer',
                         transform: `scale(${dog.scale})`,
                         userSelect: 'none',
-                        // Red border for visibility check
-                        border: '2px solid red',
-                        background: 'rgba(255, 255, 0, 0.2)', // Yellow tint
-                        // CSS Animation
+                        filter: 'drop-shadow(0 4px 2px rgba(0,0,0,0.1))',
                         animation: `walkAcross ${dog.duration} linear forwards`
                     }}
                 >
                     <div style={{ position: 'relative' }}>
-                        {dog.emoji}
+                        {/* Bouncing Animation Wrapper */}
+                        <div style={{ animation: 'bounce 0.5s infinite alternate' }}>
+                            {dog.component}
+                        </div>
+
                         {dog.isBarking && (
                             <div style={{
                                 position: 'absolute',
-                                top: '-40px',
+                                top: '-30px',
                                 left: '10px',
                                 background: '#fff',
                                 color: '#333',
                                 padding: '4px 10px',
                                 borderRadius: '12px',
-                                fontSize: '1rem',
+                                fontSize: '0.9rem',
                                 border: '2px solid #333',
                                 fontWeight: 'bold',
                                 whiteSpace: 'nowrap',
@@ -140,12 +136,13 @@ const DachshundMascot = () => {
                                 Au! 🦴
                             </div>
                         )}
+
                         {!dog.isBarking && (
                             <div style={{
                                 position: 'absolute',
-                                top: '-10px',
-                                right: '0px',
-                                fontSize: '1rem',
+                                top: '-5px',
+                                right: '5px',
+                                fontSize: '0.8rem',
                                 animation: 'float 2s infinite ease-in-out'
                             }}>
                                 ❤️
@@ -156,8 +153,12 @@ const DachshundMascot = () => {
             ))}
             <style>{`
             @keyframes walkAcross {
-                0% { left: -10vw; } 
-                100% { left: 110vw; } /* Using VW to ensure it crosses screen */
+                0% { left: -15vw; } 
+                100% { left: 110vw; } 
+            }
+            @keyframes bounce {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(-3px); }
             }
             @keyframes float {
                 0%, 100% { transform: translateY(0); opacity: 0.8; }
