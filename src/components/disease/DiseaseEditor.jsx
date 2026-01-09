@@ -73,6 +73,14 @@ const DiseaseEditor = () => {
         setData(prev => ({ ...prev, [key]: value }));
     };
 
+    // Toast State
+    const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
+
+    const showToastMsg = (msg, type = 'success') => {
+        setToast({ show: true, message: msg, type });
+        setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 3000);
+    };
+
     // Internal Save Logic
     const saveToFirestore = async (silent = false) => {
         if (!name.trim()) return;
@@ -92,7 +100,7 @@ const DiseaseEditor = () => {
             } else {
                 if (!silent) {
                     const docRef = await addDoc(collection(db, 'diseases'), payload);
-                    alert('Criado com sucesso!');
+                    showToastMsg('Criado com sucesso!');
                     navigate(`/edit/${docRef.id}`, { replace: true });
                     return docRef.id; // Return new ID
                 }
@@ -100,7 +108,7 @@ const DiseaseEditor = () => {
             return id;
         } catch (e) {
             console.error("Error saving document: ", e);
-            if (!silent) alert("Erro ao salvar: " + e.message);
+            if (!silent) showToastMsg("Erro ao salvar: " + e.message, 'error');
             throw e;
         } finally {
             if (!silent) setSaving(false);
@@ -123,7 +131,7 @@ const DiseaseEditor = () => {
                     type: 'manual_checkpoint'
                 };
                 await addDoc(collection(db, 'diseases', currentId, 'history'), historyPayload);
-                alert('Salvo e versão criada no histórico! 🕒');
+                showToastMsg('Resumo salvo', 'success');
             }
         } catch (e) {
             // Error handled in saveToFirestore
@@ -161,7 +169,7 @@ const DiseaseEditor = () => {
             setSubject(version.subject);
             setData(version.topics);
             setShowHistory(false);
-            // Trigger auto-save will eventually persist this restoration
+            showToastMsg('Versão restaurada!');
         }
     };
 
@@ -176,11 +184,11 @@ const DiseaseEditor = () => {
                     lastEdited: Date.now()
                 });
                 setTrashed(newStatus);
-                alert(newStatus ? 'Movido para a lixeira.' : 'Restaurado com sucesso!');
+                showToastMsg(newStatus ? 'Movido para a lixeira.' : 'Restaurado com sucesso!');
                 navigate(newStatus ? '/?trash=true' : '/');
             } catch (e) {
                 console.error("Error updating trash status:", e);
-                alert("Erro: " + e.message);
+                showToastMsg("Erro: " + e.message, 'error');
             }
         }
     };
@@ -190,11 +198,11 @@ const DiseaseEditor = () => {
         if (window.confirm('TEM CERTEZA? Isso apagará o resumo PERMANENTEMENTE e não pode ser desfeito.')) {
             try {
                 await deleteDoc(doc(db, 'diseases', id));
-                alert('Resumo deletado para sempre.');
+                showToastMsg('Resumo deletado para sempre.');
                 navigate('/?trash=true');
             } catch (e) {
                 console.error("Error deleting doc:", e);
-                alert("Erro ao deletar: " + e.message);
+                showToastMsg("Erro ao deletar: " + e.message, 'error');
             }
         }
     };
@@ -209,6 +217,35 @@ const DiseaseEditor = () => {
 
     return (
         <div style={{ maxWidth: '1200px', margin: '0 auto', paddingBottom: '40px' }}>
+            {/* Toast Notification */}
+            {toast.show && (
+                <div style={{
+                    position: 'fixed',
+                    bottom: '24px',
+                    right: '24px',
+                    background: toast.type === 'error' ? '#ff4444' : '#4caf50',
+                    color: '#fff',
+                    padding: '12px 24px',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    fontWeight: '600',
+                    zIndex: 3000,
+                    animation: 'slideIn 0.3s ease-out'
+                }}>
+                    {toast.type === 'error' ? <Ban size={20} /> : <CheckCircle size={20} />}
+                    {toast.message}
+                </div>
+            )}
+            <style>{`
+                @keyframes slideIn {
+                    from { transform: translateY(100%); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+            `}</style>
+
             {/* Top Controls */}
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <button onClick={() => navigate(trashed ? '/?trash=true' : '/')} style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#888' }}>
