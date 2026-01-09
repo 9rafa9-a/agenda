@@ -15,7 +15,17 @@ const Dashboard = () => {
 
     // Filter Logic
     const filteredDiseases = useMemo(() => {
+        const isTrashView = searchParams.get('trash') === 'true';
+
         return diseases.filter(d => {
+            // Trash Filter
+            const isTrashed = !!d.trashed;
+            if (isTrashView) {
+                if (!isTrashed) return false;
+            } else {
+                if (isTrashed) return false;
+            }
+
             // Subject Filter (Multi-subject support)
             if (activeSubject) {
                 // Determine if the disease's subject string includes the active filter
@@ -49,9 +59,9 @@ const Dashboard = () => {
             }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <h2 style={{ fontSize: '1.8rem', margin: 0 }}>
-                        {activeSubject ? activeSubject : 'Meus Resumos'}
+                        {searchParams.get('trash') === 'true' ? '🗑️ Lixeira' : (activeSubject ? activeSubject : 'Meus Resumos')}
                     </h2>
-                    {activeSubject && (
+                    {(activeSubject || searchParams.get('trash') === 'true') && (
                         <span
                             style={{
                                 fontSize: '0.85rem',
