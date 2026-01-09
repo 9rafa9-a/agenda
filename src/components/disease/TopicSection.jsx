@@ -128,7 +128,6 @@ const TopicSection = ({ title, content, color = 'default', isEditable, onChange,
                     div { break-inside: avoid; } 
                 }
             `}</style>
-        </div >
         </>
     );
 };

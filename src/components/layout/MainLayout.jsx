@@ -25,8 +25,13 @@ const MainLayout = () => {
       }));
       setDiseases(list);
 
-      // Extract unique subjects
-      const uniqueSubjects = [...new Set(list.map(d => d.subject).filter(Boolean))].sort();
+      // Extract unique subjects (Split by comma and trim)
+      const uniqueSubjects = [...new Set(
+        list.map(d => d.subject ? d.subject.split(',') : [])
+          .flat()
+          .map(s => s.trim())
+          .filter(Boolean)
+      )].sort();
       setSubjects(uniqueSubjects);
     } catch (error) {
       console.error("Error fetching diseases:", error);

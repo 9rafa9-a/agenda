@@ -16,8 +16,13 @@ const Dashboard = () => {
     // Filter Logic
     const filteredDiseases = useMemo(() => {
         return diseases.filter(d => {
-            // Subject Filter
-            if (activeSubject && d.subject !== activeSubject) return false;
+            // Subject Filter (Multi-subject support)
+            if (activeSubject) {
+                // Determine if the disease's subject string includes the active filter
+                // We split by comma to ensure exact match on one of the tags to avoid partial word matching issues (e.g. "Cardiology" matching "Cardio")
+                const subjects = d.subject ? d.subject.split(',').map(s => s.trim()) : [];
+                if (!subjects.includes(activeSubject)) return false;
+            }
 
             // Search Filter
             if (searchTerm) {
