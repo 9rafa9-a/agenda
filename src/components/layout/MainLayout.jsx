@@ -35,7 +35,8 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--color-bg)' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'rgba(255,255,255,0.85)' }}>
+      <BackgroundSlideshow />
       {/* Mobile Header */}
       <div className="mobile-header" style={{
         display: 'none', // Hidden on desktop
@@ -61,14 +62,6 @@ const MainLayout = () => {
       <aside style={{
         width: '250px',
         padding: '32px',
-        background: '#fff',
-        borderRight: '1px solid #eee',
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'sticky',
-        top: 0,
-        height: '100vh',
-        zIndex: 90
       }} className={`sidebar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
 
         {/* Mobile-only close button/padding adjustment */}
@@ -148,9 +141,7 @@ const MainLayout = () => {
 
       {/* Main Content */}
       <main style={{ flex: 1, padding: '40px', overflowY: 'auto', paddingTop: '40px' }} className="main-content">
-        <main style={{ flex: 1, padding: '40px', overflowY: 'auto', paddingTop: '40px' }} className="main-content">
-          <Outlet context={{ diseases, refresh: fetchDiseases }} />
-        </main>
+        <Outlet context={{ diseases, refresh: fetchDiseases }} />
       </main>
 
       {/* Global CSS for responsiveness */}
