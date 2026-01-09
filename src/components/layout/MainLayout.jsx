@@ -39,6 +39,7 @@ const MainLayout = () => {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'transparent' }}>
       <BackgroundSlideshow />
+      <DachshundMascot />
       {/* Mobile Header */}
       <div className="mobile-header" style={{
         display: 'none', // Hidden on desktop
