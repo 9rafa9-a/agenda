@@ -1,137 +1,109 @@
+```javascript
 import React, { useEffect, useState, useRef } from 'react';
 
 // Dog types and their properties
 const DOG_TYPES = {
-    NORMAL: { speed: 15, emoji: '🐕', scale: 1, zIndex: 9999 },
-    PUPPY: { speed: 12, emoji: '🐕', scale: 0.7, zIndex: 10000 },
-    LONG_BOI: { speed: 20, emoji: '🌭', scale: 1.5, zIndex: 9998 },
-    ZOOMIES: { speed: 3, emoji: '🐕💨', scale: 1, zIndex: 10001 }
+  NORMAL: { duration: '15s', emoji: '🐕', scale: 1, zIndex: 9999 },
+  PUPPY: { duration: '12s', emoji: '🐕', scale: 0.7, zIndex: 10000 },
+  LONG_BOI: { duration: '20s', emoji: '🌭', scale: 1.5, zIndex: 9998 },
+  ZOOMIES: { duration: '3s', emoji: '🐕💨', scale: 1, zIndex: 10001 }
 };
 
 const DachshundMascot = () => {
-    const [dogs, setDogs] = useState([]);
-    const dogIdCounter = useRef(0);
+  const [dogs, setDogs] = useState([]);
+  const dogIdCounter = useRef(0);
 
-    // Helper to spawn a dog
-    const spawnDog = (type = 'NORMAL', delay = 0) => {
-        const id = dogIdCounter.current++;
-        const dogConfig = DOG_TYPES[type] || DOG_TYPES.NORMAL;
+  // Helper to spawn a dog
+  const spawnDog = (type = 'NORMAL') => {
+    const id = dogIdCounter.current++;
+    const config = DOG_TYPES[type] || DOG_TYPES.NORMAL;
+    
+    console.log(`Spawning Dog: ${ type } (ID: ${ id })`); // Debugging log
 
-        // Add dog to state
-        setTimeout(() => {
-            setDogs(prev => [...prev, {
-                id,
-                ...dogConfig,
-                startTime: Date.now(),
-                position: -10, // Start just off screen left
-                isBarking: false
-            }]);
-        }, delay);
-    };
+    setDogs(prev => [...prev, {
+      id,
+      ...config,
+      isBarking: false
+    }]);
+  };
 
-    // Immediate spawn on mount
-    useEffect(() => {
-        spawnDog('NORMAL'); // The Greeter
-        spawnDog('PUPPY', 2000); // And a puppy shortly after
-    }, []);
+  // Immediate spawn on mount
+  useEffect(() => {
+    spawnDog('NORMAL'); 
+    setTimeout(() => spawnDog('PUPPY'), 2000);
+  }, []);
 
-    // Random spawner logic
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const rand = Math.random();
-            if (rand > 0.6) { // 40% chance every 4s
-                const typeRand = Math.random();
-                if (typeRand > 0.9) {
-                    // PACK: Spawn 3
-                    spawnDog('NORMAL');
-                    spawnDog('NORMAL', 800);
-                    spawnDog('PUPPY', 1600);
-                } else if (typeRand > 0.7) {
-                    spawnDog('ZOOMIES');
-                } else if (typeRand > 0.5) {
-                    spawnDog('LONG_BOI');
-                } else {
-                    spawnDog('NORMAL');
-                }
-            }
-        }, 4000); // Check every 4 seconds
+  // Random spawner logic
+  useEffect(() => {
+    const interval = setInterval(() => {
+        if (Math.random() > 0.6) { // 40% chance every 4s
+            const r = Math.random();
+            if (r > 0.9) spawnDogsPack();
+            else if (r > 0.7) spawnDog('ZOOMIES');
+            else if (r > 0.5) spawnDog('LONG_BOI');
+            else spawnDog('NORMAL');
+        }
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
-        return () => clearInterval(interval);
-    }, []);
+  const spawnDogsPack = () => {
+      spawnDog('NORMAL');
+      setTimeout(() => spawnDog('NORMAL'), 800);
+      setTimeout(() => spawnDog('PUPPY'), 1600);
+  };
 
-    // Animation Loop
-    useEffect(() => {
-        let animationFrameId;
+  const removeDog = (id) => {
+      setDogs(prev => prev.filter(d => d.id !== id));
+  };
 
-        const animate = () => {
-            const now = Date.now();
+  const handleBark = (id) => {
+    setDogs(prev => prev.map(d => 
+        d.id === id ? { ...d, isBarking: true } : d
+    ));
+    setTimeout(() => {
+        setDogs(prev => prev.map(d => 
+            d.id === id ? { ...d, isBarking: false } : d
+        ));
+    }, 1000);
+  };
 
-            setDogs(prevDogs => {
-                // Filter out dogs that have crossed the screen
-                const activeDogs = prevDogs.filter(dog => dog.position <= 110);
-
-                return activeDogs.map(dog => {
-                    const elapsed = (now - dog.startTime) / 1000; // seconds
-                    const totalDist = 120; // -10 to 110
-                    const progress = elapsed / dog.speed;
-                    const newPos = -10 + (totalDist * progress);
-
-                    return { ...dog, position: newPos };
-                });
-            });
-
-            animationFrameId = requestAnimationFrame(animate);
-        };
-
-        animationFrameId = requestAnimationFrame(animate);
-        return () => cancelAnimationFrame(animationFrameId);
-    }, []);
-
-    const handleBark = (id) => {
-        setDogs(prev => prev.map(d => {
-            if (d.id === id) return { ...d, isBarking: true };
-            return d;
-        }));
-
-        // Stop barking after 1s
-        setTimeout(() => {
-            setDogs(prev => prev.map(d => {
-                if (d.id === id) return { ...d, isBarking: false };
-                return d;
-            }));
-        }, 1000);
-    };
-
-    return (
-        <>
-            {dogs.map(dog => (
-                <div
-                    key={dog.id}
-                    onClick={() => handleBark(dog.id)}
-                    style={{
-                        position: 'fixed',
-                        bottom: '10px',
-                        left: `${dog.position}%`,
-                        fontSize: '3rem',
-                        zIndex: dog.zIndex,
-                        cursor: 'pointer',
-                        transform: `scale(${dog.scale})`,
-                        transition: 'bottom 0.2s',
-                        userSelect: 'none',
-                        filter: 'drop-shadow(0 4px 4px rgba(0,0,0,0.1))'
-                    }}
-                >
+  return (
+    <>
+        {dogs.map(dog => (
+            <div
+                key={dog.id}
+                className="walking-dog" // Class for animation finding
+                onAnimationEnd={() => removeDog(dog.id)} // Cleanup when done
+                onClick={() => handleBark(dog.id)}
+                style={{
+                    position: 'fixed',
+                    bottom: '10px',
+                    left: '-10%', // Start off-screen
+                    fontSize: '3rem',
+                    zIndex: dog.zIndex,
+                    cursor: 'pointer',
+                    transform: `scale(${ dog.scale })`,
+                    userSelect: 'none',
+                    filter: 'drop-shadow(0 4px 4px rgba(0,0,0,0.1))',
+                    // CSS Animation
+                    animation: `walkAcross ${ dog.duration } linear forwards`
+                }}
+            >
+                <div style={{ position: 'relative' }}> {/* Wrapper for bark positioning */}
                     {dog.emoji}
                     {dog.isBarking && (
                         <div style={{
                             position: 'absolute',
-                            top: '-30px',
-                            left: '20px',
+                            top: '-40px',
+                            left: '10px',
                             background: '#fff',
-                            padding: '4px 8px',
+                            color: '#333',
+                            padding: '4px 10px',
                             borderRadius: '12px',
                             fontSize: '1rem',
                             border: '2px solid #333',
+                            fontWeight: 'bold',
                             whiteSpace: 'nowrap',
                             animation: 'pop 0.2s ease-out'
                         }}>
@@ -140,31 +112,36 @@ const DachshundMascot = () => {
                     )}
                     {/* Heart float animation */}
                     {!dog.isBarking && (
-                        <div style={{
+                         <div style={{
                             position: 'absolute',
                             top: '-10px',
                             right: '0px',
                             fontSize: '1rem',
-                            opacity: 0.8,
                             animation: 'float 2s infinite ease-in-out'
                         }}>
                             ❤️
                         </div>
                     )}
                 </div>
-            ))}
-            <style>{`
-            @keyframes float {
-                0%, 100% { transform: translateY(0); opacity: 0.8; }
-                50% { transform: translateY(-5px); opacity: 1; }
-            }
-            @keyframes pop {
-                0% { transform: scale(0); }
-                100% { transform: scale(1); }
-            }
-        `}</style>
-        </>
-    );
+            </div>
+        ))}
+        <style>{`
+@keyframes walkAcross {
+    0 % { left: -10 %; }
+    100 % { left: 110 %; }
+}
+@keyframes float {
+    0 %, 100 % { transform: translateY(0); opacity: 0.8; }
+    50 % { transform: translateY(-5px); opacity: 1; }
+}
+@keyframes pop {
+    0 % { transform: scale(0); }
+    100 % { transform: scale(1); }
+}
+`}</style>
+    </>
+  );
 };
 
 export default DachshundMascot;
+```
