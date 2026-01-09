@@ -4,14 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
-// REPLACE WITH YOUR ACTUAL CONFIG
 const firebaseConfig = {
-    apiKey: "AIzaSyA-fn3kNs--8XmhnMSsw2v6nQH_LeIHvhA",
-    authDomain: "day-compass-f6r82.firebaseapp.com",
-    projectId: "day-compass-f6r82",
-    storageBucket: "day-compass-f6r82.firebasestorage.app",
-    messagingSenderId: "897361444884",
-    appId: "1:897361444884:web:7c8d7ba4e616d99df36701"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
