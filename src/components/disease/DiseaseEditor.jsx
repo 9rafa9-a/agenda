@@ -225,7 +225,7 @@ const DiseaseEditor = () => {
             {/* Save Button */}
             <div style={{ marginTop: '40px', textAlign: 'center' }}>
                 <button
-                    onClick={handleSave}
+                    onClick={handleManualSave}
                     disabled={saving}
                     style={{
                         background: 'var(--color-text)',

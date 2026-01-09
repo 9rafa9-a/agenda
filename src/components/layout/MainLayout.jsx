@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
-import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash } from 'lucide-react';
+import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2 } from 'lucide-react';
 import DachshundMascot from '../fun/DachshundMascot';
 import BackgroundSlideshow from './BackgroundSlideshow';
 
@@ -139,6 +139,14 @@ const MainLayout = () => {
             onClick={() => setMobileMenuOpen(false)}
           >
             <PlusCircle size={20} /> Novo Resumo
+          </NavLink>
+
+          <NavLink to="/?trash=true"
+            className={({ isActive }) => window.location.search.includes('trash=true') ? 'nav-item active' : 'nav-item'}
+            style={{ ...navStyle, marginTop: '16px', color: '#ff6b6b' }}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <Trash2 size={20} /> Lixeira
           </NavLink>
           {/* <NavLink to="/settings" style={navStyle}><Settings size={20} /> Ajustes</NavLink> */}
 
