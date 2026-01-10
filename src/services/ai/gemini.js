@@ -20,22 +20,24 @@ export const generateFlashcards = async (diseaseName, topics) => {
         if (!filledTopics) throw new Error("O resumo está vazio. Preencha alguns tópicos antes de gerar.");
 
         const prompt = `
-        Você é um preceptor de residência médica exigente.
-        Com base no seguinte resumo sobre a doença "${diseaseName}", crie 5 a 10 flashcards de alto nível para estudo.
+        ATUE COMO: Um gerador de flashcards estrito e literal.
+        TAREFA: Criar flashcards de estudo baseados EXCLUSIVAMENTE no texto fornecido abaixo.
         
-        RESUMO:
-        ${filledTopics}
+        TEMA: "${diseaseName}"
+        CONTEÚDO DO USUÁRIO:
+        "${filledTopics}"
 
-        REGRAS:
-        1. Foque em "pegadinhas", quadros clínicos típicos, e tratamentos de primeira linha.
-        2. O formato de saída DEVE ser um ARRAY JSON puro. Sem markdown, sem backticks.
-        3. Separadores claros se necessário, mas prefira JSON estruturado.
-        4. Exemplo de formato:
+        REGRAS RÍGIDAS (IMPORTANTE):
+        1. NÃO use conhecimento externo. Se o usuário escreveu "osteopenia", pergunte sobre osteopenia. Se ele NÃO escreveu sobre tratamento, NÃO crie perguntas de tratamento.
+        2. Crie perguntas diretas que testem a memorização exata do que foi escrito.
+        3. Se o texto for esquemático (ex: "Sintomas: A, B, C"), crie cards como "Quais os 3 sintomas citados?".
+        4. O formato de saída DEVE ser um ARRAY JSON puro. Sem markdown, sem backticks.
+        5. Gere entre 5 a 10 cards, dependendo da quantidade de texto.
+        
+        FORMATO JSON:
         [
-            { "front": "Qual a primeira linha de tratamento para X?", "back": "Droga Y" },
-            { "front": "Paciente com X apresenta Y. Qual o diagnóstico?", "back": "Z" }
+            { "front": "Pergunta baseada no texto", "back": "Resposta baseada no texto" }
         ]
-        5. Respostas curtas e diretas.
         `;
 
         const result = await model.generateContent(prompt);

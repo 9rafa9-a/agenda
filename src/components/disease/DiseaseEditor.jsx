@@ -58,6 +58,9 @@ const DiseaseEditor = () => {
                         setSubject(docData.subject || '');
                         setData(docData.topics);
                         setTrashed(!!docData.trashed);
+                        if (docData.lastGeneratedTopics) {
+                            setLastGenTopics(docData.lastGeneratedTopics);
+                        }
                     } else {
                         console.log("No such document!");
                     }
@@ -308,17 +311,21 @@ const DiseaseEditor = () => {
                     ) : (
                         <>
                             <button
-                                onClick={handleGenerateFlashcards}
+                                onClick={() => handleGenerateFlashcards(false)} // Smart Gen default
                                 disabled={generating}
                                 style={{
                                     display: 'flex', gap: '8px', alignItems: 'center',
-                                    color: '#9c27b0', background: '#f3e5f5', border: 'none',
+                                    color: updatesAvailable ? '#fff' : '#9c27b0',
+                                    background: updatesAvailable ? '#9c27b0' : '#f3e5f5', // Highlight if updates ready
+                                    border: 'none',
                                     padding: '8px 16px', borderRadius: '20px', fontWeight: '600',
-                                    cursor: generating ? 'wait' : 'pointer'
+                                    cursor: generating ? 'wait' : 'pointer',
+                                    transition: 'all 0.3s',
+                                    boxShadow: updatesAvailable ? '0 0 10px rgba(156, 39, 176, 0.5)' : 'none'
                                 }}
                             >
                                 {generating ? <RotateCw className="spin" size={20} /> : <Sparkles size={20} />}
-                                {generating ? 'Criando Mágica...' : 'Gerar Flashcards AI'}
+                                {generating ? 'Criando...' : (updatesAvailable ? 'Atualizar Flashcards' : 'Gerar Flashcards AI')}
                             </button>
                             <style>{`.spin { animation: spin 1s linear infinite; } @keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
 
