@@ -95,15 +95,19 @@ const DiseaseEditor = () => {
 
             if (!flashcards || flashcards.length === 0) throw new Error("IA não gerou cards.");
 
-            // 2. Save to Firestore (Decks)
-            const deckId = id; // Each disease is a deck
-            await setDoc(doc(db, 'flashcards', deckId), {
-                title: name,
-                cards: flashcards,
-                createdAt: Date.now(),
-                lastStudied: 0,
-                progress: { Rafa: {}, Ju: {} } // Multi-user progress init
-            }, { merge: true });
+            // 2. Save to Firestore (Subcollection)
+            const collectionRef = collection(db, 'diseases', id, 'flashcards');
+
+            // Batch write for atomicity (limit 500 but we only have 10-20)
+            const batch = [];
+            for (const card of flashcards) {
+                await addDoc(collectionRef, {
+                    ...card,
+                    diseaseId: id,
+                    createdAt: Date.now(),
+                    progress: { Rafa: {}, Ju: {} } // Init empty progress
+                });
+            }
 
             showToastMsg(`Sucesso! ${flashcards.length} cards gerados.`);
         } catch (e) {
