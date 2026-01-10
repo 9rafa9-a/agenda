@@ -85,11 +85,11 @@ const FlashcardDashboard = () => {
                 </h1>
                 <div style={{ display: 'flex', gap: '32px' }}>
                     <button onClick={() => handleUserSelect('Rafa')} style={userBtnStyle}>
-                        <div style={{ fontSize: '4rem' }}>👨‍⚕️</div>
+                        <div style={{ fontSize: '4rem' }}>👨🏻‍🦰</div>
                         Rafa
                     </button>
                     <button onClick={() => handleUserSelect('Ju')} style={userBtnStyle}>
-                        <div style={{ fontSize: '4rem' }}>👩‍⚕️</div>
+                        <div style={{ fontSize: '4rem' }}>👩🏻‍🦰</div>
                         Ju
                     </button>
                 </div>

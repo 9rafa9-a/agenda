@@ -84,8 +84,8 @@ const MainLayout = () => {
             onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
             onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            <span style={{ fontSize: '4rem' }}>👨‍⚕️</span>
-            <span style={{ fontSize: '2rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Rafa</span>
+            <span style={{ fontSize: '4rem' }}>👨🏻‍🦰</span>
+            <span style={{ fontSize: '2rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Dr. Rafa</span>
           </button>
 
           {/* Ju Button */}
@@ -102,12 +102,12 @@ const MainLayout = () => {
             onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
             onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            <span style={{ fontSize: '4rem' }}>👩‍⚕️</span>
-            <span style={{ fontSize: '2rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Ju</span>
+            <span style={{ fontSize: '4rem' }}>👩🏻‍🦰</span>
+            <span style={{ fontSize: '2rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Dra. Ju</span>
           </button>
         </div>
         <p style={{ marginTop: '40px', color: '#aaa' }}>Selecione para carregar seu progresso personalizado.</p>
-      </div>
+      </div >
     );
   }
 
@@ -253,7 +253,7 @@ const MainLayout = () => {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '1.2rem'
               }}>
-                {currentUser === 'Rafa' ? '👨‍⚕️' : '👩‍⚕️'}
+                {currentUser === 'Rafa' ? '👨🏻‍🦰' : '👩🏻‍🦰'}
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 'bold', color: '#555' }}>{currentUser}</div>
