@@ -3,11 +3,12 @@ import TopicSection from './TopicSection';
 // PDF Export
 import { useReactToPrint } from 'react-to-print';
 // History Icons
-import { Printer, Save, ArrowLeft, History, RotateCcw, Trash2, Ban, CheckCircle } from 'lucide-react';
+import { Printer, Save, ArrowLeft, History, RotateCcw, Trash2, Ban, CheckCircle, Brain, Sparkles } from 'lucide-react';
 // Firestore
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc, getDocs, setDoc, updateDoc, collection, addDoc, query, orderBy, deleteDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
+import { generateFlashcards } from '../../services/ai/gemini';
 
 const DEFAULT_TOPICS = {
     definition: { title: 'Definição/Fisio', color: 'pink' },
@@ -269,12 +270,29 @@ const DiseaseEditor = () => {
                             </button>
                         </>
                     ) : (
-                        <button
-                            onClick={handleTrash}
-                            style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#ff6b6b' }}
-                        >
-                            <Trash2 size={20} /> Excluir
-                        </button>
+                        <>
+                            <button
+                                onClick={handleGenerateFlashcards}
+                                disabled={generating}
+                                style={{
+                                    display: 'flex', gap: '8px', alignItems: 'center',
+                                    color: '#9c27b0', background: '#f3e5f5', border: 'none',
+                                    padding: '8px 16px', borderRadius: '20px', fontWeight: '600',
+                                    cursor: generating ? 'wait' : 'pointer'
+                                }}
+                            >
+                                {generating ? <RotateCw className="spin" size={20} /> : <Sparkles size={20} />}
+                                {generating ? 'Criando Mágica...' : 'Gerar Flashcards AI'}
+                            </button>
+                            <style>{`.spin { animation: spin 1s linear infinite; } @keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
+
+                            <button
+                                onClick={handleTrash}
+                                style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#ff6b6b' }}
+                            >
+                                <Trash2 size={20} /> Excluir
+                            </button>
+                        </>
                     )}
 
                     <div style={{ width: '1px', height: '24px', background: '#ddd' }}></div>

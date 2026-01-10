@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
-import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2 } from 'lucide-react';
+import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2, Brain, User, FileText } from 'lucide-react';
 import DachshundMascot from '../fun/DachshundMascot';
 import BackgroundSlideshow from './BackgroundSlideshow';
 
@@ -41,8 +41,75 @@ const MainLayout = () => {
     return () => unsubscribe();
   }, []);
 
+  // User Identity State
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('app_user') || null);
+
+  const handleLogin = (user) => {
+    setCurrentUser(user);
+    localStorage.setItem('app_user', user);
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('app_user');
+    setMobileMenuOpen(false);
+  };
+
   // Manual refresh no longer needed but kept for context if needed
   const fetchDiseases = () => { };
+
+  // GLOBAL LOCK SCREEN
+  if (!currentUser) {
+    return (
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+        background: '#f8f9fa', zIndex: 9999,
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+      }}>
+        <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '3.5rem', marginBottom: '40px', color: '#555' }}>
+          Quem é você?
+        </h1>
+        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {/* Rafa Button */}
+          <button
+            onClick={() => handleLogin('Rafa')}
+            style={{
+              background: '#e3f2fd', color: '#1565c0',
+              border: '2px solid #bbdefb', borderRadius: '30px',
+              padding: '40px 60px', cursor: 'pointer',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 4px 12px rgba(21, 101, 192, 0.1)'
+            }}
+            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
+            onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}
+          >
+            <span style={{ fontSize: '4rem' }}>👨‍⚕️</span>
+            <span style={{ fontSize: '2rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Rafa</span>
+          </button>
+
+          {/* Ju Button */}
+          <button
+            onClick={() => handleLogin('Ju')}
+            style={{
+              background: '#fce4ec', color: '#c2185b',
+              border: '2px solid #f8bbd0', borderRadius: '30px',
+              padding: '40px 60px', cursor: 'pointer',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 4px 12px rgba(194, 24, 91, 0.1)'
+            }}
+            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
+            onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}
+          >
+            <span style={{ fontSize: '4rem' }}>👩‍⚕️</span>
+            <span style={{ fontSize: '2rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Ju</span>
+          </button>
+        </div>
+        <p style={{ marginTop: '40px', color: '#aaa' }}>Selecione para carregar seu progresso personalizado.</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'transparent' }}>
@@ -135,6 +202,18 @@ const MainLayout = () => {
               </div>
             )}
           </div>
+          <NavLink to="/quizzes"
+            className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+            style={{
+              ...navStyle,
+              marginBottom: '8px'
+            }}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <FileText size={20} />
+            Provinhas 📝
+          </NavLink>
+
           <NavLink to="/new"
             className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
             style={navStyle}
@@ -152,8 +231,25 @@ const MainLayout = () => {
           </NavLink>
           {/* <NavLink to="/settings" style={navStyle}><Settings size={20} /> Ajustes</NavLink> */}
 
-          {/* Mascot Toggle */}
+          {/* User Profile */}
           <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: '1px solid #eee' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px', padding: '0 8px' }}>
+              <div style={{
+                width: '32px', height: '32px', borderRadius: '50%',
+                background: currentUser === 'Rafa' ? '#e3f2fd' : '#fce4ec',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '1.2rem'
+              }}>
+                {currentUser === 'Rafa' ? '👨‍⚕️' : '👩‍⚕️'}
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 'bold', color: '#555' }}>{currentUser}</div>
+                <button onClick={handleLogout} style={{ fontSize: '0.7rem', color: '#888', border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}>
+                  Sair / Trocar
+                </button>
+              </div>
+            </div>
+
             <button
               onClick={() => setShowMascots(!showMascots)}
               style={{
@@ -175,14 +271,14 @@ const MainLayout = () => {
           </div>
         </nav>
 
-        <div style={{ fontSize: '0.8rem', color: '#ccc', textAlign: 'center' }}>
+        <div style={{ fontSize: '0.8rem', color: '#ccc', textAlign: 'center', marginTop: '16px' }}>
           v1.0.0
         </div>
       </aside>
 
       {/* Main Content */}
       <main style={{ flex: 1, padding: '40px', overflowY: 'auto', paddingTop: '40px' }} className="main-content">
-        <Outlet context={{ diseases, refresh: fetchDiseases }} key={location.pathname + location.search} />
+        <Outlet context={{ diseases, refresh: fetchDiseases, currentUser }} key={location.pathname + location.search} />
       </main>
 
       {/* Global CSS for responsiveness */}
