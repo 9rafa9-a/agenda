@@ -37,6 +37,7 @@ const DiseaseEditor = () => {
     const [loading, setLoading] = useState(false);
     const [saving, setSaving] = useState(false);
     const [trashed, setTrashed] = useState(false);
+    const [generating, setGenerating] = useState(false);
 
     // History State
     const [showHistory, setShowHistory] = useState(false);
@@ -80,6 +81,38 @@ const DiseaseEditor = () => {
     const showToastMsg = (msg, type = 'success') => {
         setToast({ show: true, message: msg, type });
         setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 3000);
+    };
+
+    // AI Generation Logic
+    const handleGenerateFlashcards = async () => {
+        if (!name || generating) return;
+        setGenerating(true);
+        showToastMsg('Gerando flashcards com IA... Aguarde.', 'info');
+
+        try {
+            // 1. Generate Content
+            const context = `Doença/Tema: ${name}\nConteúdo: ${JSON.stringify(data)}`;
+            const flashcards = await generateFlashcards(context);
+
+            if (!flashcards || flashcards.length === 0) throw new Error("IA não gerou cards.");
+
+            // 2. Save to Firestore (Decks)
+            const deckId = id; // Each disease is a deck
+            await setDoc(doc(db, 'flashcards', deckId), {
+                title: name,
+                cards: flashcards,
+                createdAt: Date.now(),
+                lastStudied: 0,
+                progress: { Rafa: {}, Ju: {} } // Multi-user progress init
+            }, { merge: true });
+
+            showToastMsg(`Sucesso! ${flashcards.length} cards gerados.`);
+        } catch (e) {
+            console.error(e);
+            showToastMsg('Erro ao gerar cards: ' + e.message, 'error');
+        } finally {
+            setGenerating(false);
+        }
     };
 
     // Internal Save Logic

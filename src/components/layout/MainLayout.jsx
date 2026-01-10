@@ -202,6 +202,19 @@ const MainLayout = () => {
               </div>
             )}
           </div>
+
+          <NavLink to="/flashcards"
+            className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+            style={{
+              ...navStyle,
+              marginBottom: '8px'
+            }}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <Brain size={20} />
+            Flashcards (AI)
+          </NavLink>
+
           <NavLink to="/quizzes"
             className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
             style={{
