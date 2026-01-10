@@ -3,7 +3,7 @@ import TopicSection from './TopicSection';
 // PDF Export
 import { useReactToPrint } from 'react-to-print';
 // History Icons
-import { Printer, Save, ArrowLeft, History, RotateCcw, Trash2, Ban, CheckCircle, Brain, Sparkles } from 'lucide-react';
+import { Printer, Save, ArrowLeft, History, RotateCcw, Trash2, Ban, CheckCircle, Brain, Sparkles, RotateCw } from 'lucide-react';
 // Firestore
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc, getDocs, setDoc, updateDoc, collection, addDoc, query, orderBy, deleteDoc } from 'firebase/firestore';

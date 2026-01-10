@@ -1,9 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
-import { ArrowLeft, Check, X, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Check, X, ShieldCheck, Info, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const QuizSheet = () => {
     const { id } = useParams();
@@ -11,8 +11,12 @@ const QuizSheet = () => {
     const [quiz, setQuiz] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Modes: 'responding' (Taking test) | 'correcting' (Marking Answer Key)
-    const [mode, setMode] = useState('responding');
+    // Pagination State
+    const [currentPage, setCurrentPage] = useState(0);
+    const PER_PAGE = 10;
+
+    // Popover State
+    const [openKeyPopover, setOpenKeyPopover] = useState(null); // stores index of row open
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, 'quizzes', id), (doc) => {
@@ -26,21 +30,17 @@ const QuizSheet = () => {
 
     const handleBubbleClick = async (qIndex, option) => {
         if (!quiz) return;
-
         const qNum = (qIndex + 1).toString();
+        const newAnswers = { ...quiz.userAnswers, [qNum]: option };
+        await updateDoc(doc(db, 'quizzes', id), { userAnswers: newAnswers });
+    };
 
-        if (mode === 'responding') {
-            // Update User Answer
-            const newAnswers = { ...quiz.userAnswers, [qNum]: option };
-            // Auto-save
-            // Optimistic update local state handled by snapshot, but we can do it locally to fail fast?
-            // Snapshot is fast enough usually.
-            await updateDoc(doc(db, 'quizzes', id), { userAnswers: newAnswers });
-        } else {
-            // Update Correct Answer (Gabarito)
-            const newKeys = { ...quiz.correctAnswers, [qNum]: option };
-            await updateDoc(doc(db, 'quizzes', id), { correctAnswers: newKeys });
-        }
+    const handleKeyClick = async (qIndex, option) => {
+        if (!quiz) return;
+        const qNum = (qIndex + 1).toString();
+        const newKeys = { ...quiz.correctAnswers, [qNum]: option };
+        await updateDoc(doc(db, 'quizzes', id), { correctAnswers: newKeys });
+        setOpenKeyPopover(null); // Close after selection
     };
 
     if (loading) return <div>Carregando gabarito...</div>;
@@ -48,11 +48,12 @@ const QuizSheet = () => {
 
     // Stats Calculation
     const total = quiz.qCount;
+    const totalPages = Math.ceil(total / PER_PAGE);
+
     const answeredCount = Object.keys(quiz.userAnswers || {}).length;
     const correctKeys = quiz.correctAnswers || {};
     const keyCount = Object.keys(correctKeys).length;
 
-    // Calculate Score (only for questions that have a key)
     let correctCount = 0;
     let wrongCount = 0;
 
@@ -68,6 +69,10 @@ const QuizSheet = () => {
         ? Math.round((correctCount / (correctCount + wrongCount)) * 100)
         : 0;
 
+    // Pagination Logic
+    const startIdx = currentPage * PER_PAGE;
+    const currentQuestions = Array.from({ length: Math.min(PER_PAGE, total - startIdx) }).map((_, i) => startIdx + i);
+
     return (
         <div style={{ maxWidth: '800px', margin: '0 auto', paddingBottom: '60px' }}>
             {/* Header / Sticky Stats */}
@@ -80,42 +85,11 @@ const QuizSheet = () => {
                         <ArrowLeft size={18} /> Voltar
                     </button>
                     <h2 style={{ margin: 0, fontSize: '1.2rem', color: '#333' }}>{quiz.title}</h2>
-                    <div style={{ width: '80px' }}></div> {/* Spacer */}
-                </div>
-
-                <div style={{ display: 'flex', gap: '20px', alignItems: 'center', justifyContent: 'center' }}>
-                    {/* Mode Toggle */}
-                    <div style={{ background: '#e0e0e0', borderRadius: '30px', padding: '4px', display: 'flex' }}>
-                        <button
-                            onClick={() => setMode('responding')}
-                            style={{
-                                padding: '8px 24px', borderRadius: '24px', border: 'none',
-                                background: mode === 'responding' ? '#fff' : 'transparent',
-                                boxShadow: mode === 'responding' ? '0 2px 5px rgba(0,0,0,0.1)' : 'none',
-                                fontWeight: '600', color: mode === 'responding' ? '#333' : '#777',
-                                cursor: 'pointer', transition: 'all 0.2s'
-                            }}
-                        >
-                            ✏️ Responder
-                        </button>
-                        <button
-                            onClick={() => setMode('correcting')}
-                            style={{
-                                padding: '8px 24px', borderRadius: '24px', border: 'none',
-                                background: mode === 'correcting' ? '#fff' : 'transparent',
-                                boxShadow: mode === 'correcting' ? '0 2px 5px rgba(0,0,0,0.1)' : 'none',
-                                fontWeight: '600', color: mode === 'correcting' ? 'var(--color-primary)' : '#777',
-                                cursor: 'pointer', transition: 'all 0.2s',
-                                display: 'flex', alignItems: 'center', gap: '6px'
-                            }}
-                        >
-                            <ShieldCheck size={16} /> Gabarito
-                        </button>
-                    </div>
+                    <div style={{ width: '80px' }}></div>
                 </div>
 
                 {/* Score Bar */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', marginTop: '16px', fontSize: '0.9rem', color: '#555' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', fontSize: '0.9rem', color: '#555' }}>
                     <div>
                         <b>{answeredCount}</b>/{total} Respondidas
                     </div>
@@ -129,13 +103,31 @@ const QuizSheet = () => {
                 </div>
             </div>
 
+            {/* Pagination Controls (Top) */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
+                {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                        key={i}
+                        onClick={() => setCurrentPage(i)}
+                        style={{
+                            width: '32px', height: '32px', borderRadius: '50%', border: 'none',
+                            background: currentPage === i ? 'var(--color-primary)' : '#e0e0e0',
+                            color: currentPage === i ? '#fff' : '#666',
+                            fontWeight: 'bold', cursor: 'pointer'
+                        }}
+                    >
+                        {i + 1}
+                    </button>
+                ))}
+            </div>
+
             {/* Bubble Grid */}
             <div style={{
                 display: 'flex', flexDirection: 'column', gap: '12px',
                 background: '#fff', padding: '32px', borderRadius: '16px', boxShadow: 'var(--shadow-sm)',
                 border: '1px solid #eee'
             }}>
-                {Array.from({ length: total }).map((_, idx) => {
+                {currentQuestions.map((idx) => {
                     const qNum = (idx + 1).toString();
                     const userVal = quiz.userAnswers?.[qNum];
                     const keyVal = quiz.correctAnswers?.[qNum];
@@ -144,7 +136,8 @@ const QuizSheet = () => {
                         <div key={idx} style={{
                             display: 'flex', alignItems: 'center', gap: '16px',
                             padding: '8px', borderRadius: '8px',
-                            background: idx % 2 === 0 ? '#fcfcfc' : '#fff'
+                            background: idx % 2 === 0 ? '#fcfcfc' : '#fff',
+                            position: 'relative' // For popover positioning
                         }}>
                             {/* Question Number */}
                             <div style={{
@@ -157,13 +150,6 @@ const QuizSheet = () => {
                             {/* Options A-E */}
                             <div style={{ display: 'flex', gap: '12px', flex: 1 }}>
                                 {['A', 'B', 'C', 'D', 'E'].map(opt => {
-                                    // Visual Logic
-                                    // 1. Base: White bubble, Grey border
-                                    // 2. Selected (User): Blue filled
-                                    // 3. Gabarito Mode or Key Exist:
-                                    //    - If Key == Opt: Green Ring (Correct Answer)
-                                    //    - If User == Opt AND User != Key: Red filled (Wrong Answer)
-
                                     let bg = '#fff';
                                     let color = '#555';
                                     let border = '2px solid #e0e0e0';
@@ -174,38 +160,33 @@ const QuizSheet = () => {
                                     const hasKey = !!keyVal;
 
                                     if (hasKey) {
-                                        // Correction Visuals
                                         if (isKey) {
-                                            // This indicates the correct answer
                                             if (isSelectedByUser) {
-                                                // Correct!
+                                                // Correct + User Selected
                                                 bg = '#4caf50';
                                                 color = '#fff';
                                                 border = '2px solid #4caf50';
                                             } else {
-                                                // This was the correct answer, but user missed it
+                                                // Correct + User Missed
                                                 bg = '#fff';
                                                 color = '#4caf50';
-                                                border = '2px solid #4caf50'; // Green outline for correct answer
+                                                border = '2px solid #4caf50';
                                                 fontWeight = 'bold';
                                             }
                                         } else if (isSelectedByUser) {
-                                            // Wrong! (User selected this, but it's not key)
-                                            bg = '#ffcdd2'; // Light red
+                                            // Wrong + User Selected
+                                            bg = '#ffcdd2';
                                             color = '#c62828';
                                             border = '2px solid #ef5350';
                                         }
                                     } else {
-                                        // Study Mode Visuals (No Key yet)
+                                        // No Key Set yet
                                         if (isSelectedByUser) {
-                                            bg = '#e3f2fd'; // Light blue
+                                            bg = '#e3f2fd';
                                             color = '#1565c0';
                                             border = '2px solid #bbdefb';
                                         }
                                     }
-
-                                    // Hover effect logic handled via creating a specialized sub-component or simple CSS class in parent?
-                                    // Inline styles are tricky for hover. We'll stick to clear static states.
 
                                     return (
                                         <button
@@ -226,17 +207,85 @@ const QuizSheet = () => {
                                 })}
                             </div>
 
-                            {/* Status Icon for Row */}
-                            <div style={{ width: '24px' }}>
-                                {keyVal && userVal && (
-                                    userVal === keyVal
-                                        ? <Check size={20} color="#4caf50" />
-                                        : <X size={20} color="#ef5350" />
+                            {/* Info (Key Setter) Icon */}
+                            <div style={{ position: 'relative' }}>
+                                <button
+                                    onClick={() => setOpenKeyPopover(openKeyPopover === idx ? null : idx)}
+                                    style={{
+                                        background: 'none', border: 'none', cursor: 'pointer',
+                                        color: keyVal ? '#4caf50' : '#ccc', padding: '4px'
+                                    }}
+                                    title="Marcar Gabarito"
+                                >
+                                    <Info size={20} />
+                                </button>
+
+                                {/* Mini Popover for Setting Key */}
+                                {openKeyPopover === idx && (
+                                    <div style={{
+                                        position: 'absolute', right: '30px', top: '-10px',
+                                        background: '#fff', borderRadius: '30px',
+                                        boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
+                                        border: '1px solid #eee',
+                                        padding: '4px 8px',
+                                        display: 'flex', gap: '4px', zIndex: 100
+                                    }}>
+                                        {['A', 'B', 'C', 'D', 'E'].map(kOpt => (
+                                            <button
+                                                key={kOpt}
+                                                onClick={() => handleKeyClick(idx, kOpt)}
+                                                style={{
+                                                    width: '24px', height: '24px', borderRadius: '50%',
+                                                    border: '1px solid #ddd', background: keyVal === kOpt ? '#4caf50' : '#fff',
+                                                    color: keyVal === kOpt ? '#fff' : '#555',
+                                                    fontSize: '0.7rem', fontWeight: 'bold', cursor: 'pointer'
+                                                }}
+                                            >
+                                                {kOpt}
+                                            </button>
+                                        ))}
+                                        {/* Clear Key Option */}
+                                        <button
+                                            onClick={() => handleKeyClick(idx, null)}
+                                            style={{
+                                                width: '24px', height: '24px', borderRadius: '50%',
+                                                border: '1px solid #ddd', background: '#f5f5f5', color: '#888',
+                                                fontSize: '0.7rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                            }}
+                                            title="Limpar Gabarito"
+                                        >
+                                            <X size={12} />
+                                        </button>
+                                    </div>
                                 )}
                             </div>
                         </div>
                     );
                 })}
+            </div>
+
+            {/* Pagination Controls (Bottom) */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '24px' }}>
+                <button
+                    disabled={currentPage === 0}
+                    onClick={() => {
+                        setCurrentPage(p => p - 1);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    style={{ background: 'none', border: 'none', cursor: currentPage === 0 ? 'default' : 'pointer', color: currentPage === 0 ? '#ccc' : 'var(--color-primary)' }}
+                >
+                    <ChevronLeft size={32} />
+                </button>
+                <button
+                    disabled={currentPage === totalPages - 1}
+                    onClick={() => {
+                        setCurrentPage(p => p + 1);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    style={{ background: 'none', border: 'none', cursor: currentPage === totalPages - 1 ? 'default' : 'pointer', color: currentPage === totalPages - 1 ? '#ccc' : 'var(--color-primary)' }}
+                >
+                    <ChevronRight size={32} />
+                </button>
             </div>
         </div>
     );
