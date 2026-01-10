@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import TopicSection from './TopicSection';
+import EvidencePanel from './EvidencePanel';
 // PDF Export
 import { useReactToPrint } from 'react-to-print';
 // History Icons
@@ -39,10 +40,17 @@ const DiseaseEditor = () => {
     const [trashed, setTrashed] = useState(false);
     const [generating, setGenerating] = useState(false);
 
+    // Smart Sync State
+    const [lastGenTopics, setLastGenTopics] = useState(null);
+    const [updatesAvailable, setUpdatesAvailable] = useState(false);
+
     // History State
     const [showHistory, setShowHistory] = useState(false);
     const [historyList, setHistoryList] = useState([]);
     const [loadingHistory, setLoadingHistory] = useState(false);
+
+    // Evidence Panel State
+    const [showEvidence, setShowEvidence] = useState(false);
 
     // Load data if ID exists
     useEffect(() => {
@@ -86,23 +94,62 @@ const DiseaseEditor = () => {
         setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 3000);
     };
 
-    // AI Generation Logic
-    const handleGenerateFlashcards = async () => {
+    // Check for changes (Smart Sync)
+    useEffect(() => {
+        if (!lastGenTopics) return;
+
+        const hasChanges = Object.keys(data).some(key => {
+            const current = (data[key] || '').trim();
+            const last = (lastGenTopics[key] || '').trim();
+            return current !== last;
+        });
+
+        setUpdatesAvailable(hasChanges);
+    }, [data, lastGenTopics]);
+
+    // AI Generation Logic (Smart / Full)
+    const handleGenerateFlashcards = async (forceFull = false) => {
         if (!name || generating) return;
         setGenerating(true);
-        showToastMsg('Gerando flashcards com IA... Aguarde.', 'info');
+
+        let topicsToProcess = data;
+        let isIncremental = false;
+
+        // Smart Sync Logic
+        if (!forceFull && lastGenTopics) {
+            const changed = {};
+            let changeCount = 0;
+            Object.keys(data).forEach(key => {
+                const current = (data[key] || '').trim();
+                const last = (lastGenTopics[key] || '').trim();
+                if (current !== last) {
+                    changed[key] = current;
+                    changeCount++;
+                }
+            });
+
+            if (changeCount > 0) {
+                topicsToProcess = changed;
+                isIncremental = true;
+                showToastMsg(`Gerando cards para ${changeCount} tópicos atualizados...`, 'info');
+            } else {
+                showToastMsg('Nenhuma alteração detectada.', 'info');
+                setGenerating(false);
+                return;
+            }
+        } else {
+            showToastMsg('Gerando flashcards completos com IA... Aguarde.', 'info');
+        }
 
         try {
             // 1. Generate Content
-            const flashcards = await generateFlashcards(name, data);
+            const flashcards = await generateFlashcards(name, topicsToProcess);
 
             if (!flashcards || flashcards.length === 0) throw new Error("IA não gerou cards.");
 
             // 2. Save to Firestore (Subcollection)
             const collectionRef = collection(db, 'diseases', id, 'flashcards');
 
-            // Batch write for atomicity (limit 500 but we only have 10-20)
-            const batch = [];
             for (const card of flashcards) {
                 await addDoc(collectionRef, {
                     ...card,
@@ -112,7 +159,14 @@ const DiseaseEditor = () => {
                 });
             }
 
-            showToastMsg(`Sucesso! ${flashcards.length} cards gerados.`);
+            // 3. Update Last Generated Snapshot
+            await updateDoc(doc(db, 'diseases', id), {
+                lastGeneratedTopics: data // Save current full state as the new baseline
+            });
+            setLastGenTopics(data);
+            setUpdatesAvailable(false);
+
+            showToastMsg(`Sucesso! ${flashcards.length} novos cards gerados.`);
         } catch (e) {
             console.error(e);
             showToastMsg('Erro ao gerar cards: ' + e.message, 'error');
@@ -352,8 +406,29 @@ const DiseaseEditor = () => {
                     >
                         <Printer size={20} /> Baixar PDF
                     </button>
+
+                    <div style={{ width: '1px', height: '24px', background: '#ddd' }}></div>
+
+                    <button
+                        onClick={() => setShowEvidence(true)}
+                        style={{
+                            display: 'flex', gap: '8px', alignItems: 'center', color: '#1565c0',
+                            background: '#e3f2fd', border: 'none', padding: '8px 16px',
+                            borderRadius: '20px', fontWeight: '600', cursor: 'pointer'
+                        }}
+                    >
+                        🔬 Evidências
+                    </button>
                 </div>
             </div>
+
+            {/* Evidence Panel Drawer */}
+            {showEvidence && (
+                <EvidencePanel
+                    diseaseName={name}
+                    onClose={() => setShowEvidence(false)}
+                />
+            )}
 
             {/* History Modal */}
             {showHistory && (
