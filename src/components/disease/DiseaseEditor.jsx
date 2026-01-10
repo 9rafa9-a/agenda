@@ -91,8 +91,7 @@ const DiseaseEditor = () => {
 
         try {
             // 1. Generate Content
-            const context = `Doença/Tema: ${name}\nConteúdo: ${JSON.stringify(data)}`;
-            const flashcards = await generateFlashcards(context);
+            const flashcards = await generateFlashcards(name, data);
 
             if (!flashcards || flashcards.length === 0) throw new Error("IA não gerou cards.");
 
