@@ -1,107 +1,65 @@
 
-import React, { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import statsData from '../../data/amrigs_stats.json';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
-    Treemap, LineChart, Line, Cell
+    Treemap, PieChart, Pie, Cell, Sector
 } from 'recharts';
+import { LayoutGrid, PieChart as PieIcon, BarChart2, Layers } from 'lucide-react';
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#0088FE', '#00C49F'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#ff6b6b'];
 
 const AnalyticsDashboard = () => {
+    const [activeTab, setActiveTab] = useState('overview');
 
-    // 1. Bar Chart: Distribution by "Grande Área"
-    const areaDistribution = useMemo(() => {
+    // --- DATA PROCESSING (Columns B, C, G ONLY) ---
+
+    // 1. Column B: Grande Área
+    const areaData = useMemo(() => {
         const counts = {};
         statsData.forEach(q => {
-            counts[q.area] = (counts[q.area] || 0) + 1;
+            if (q.area) counts[q.area] = (counts[q.area] || 0) + 1;
         });
         return Object.entries(counts)
             .map(([name, value]) => ({ name, value }))
             .sort((a, b) => b.value - a.value);
     }, []);
 
-    // 2. Heatmap Data (Matrix: Area vs Focus)
-    const heatmapData = useMemo(() => {
-        const matrix = {}; // { Cirurgia: { Diagnóstico: 10, Tratamento: 5 } }
-        const foci = new Set();
-
-        statsData.forEach(q => {
-            if (!matrix[q.area]) matrix[q.area] = {};
-            // Group similar foci
-            let f = q.focus;
-            if (f.includes('Diagnóstico')) f = 'Diagnóstico';
-            if (f.includes('Tratamento') || f.includes('Conduta')) f = 'Tratamento/Conduta';
-            if (f.includes('Clínica') || f.includes('Quadro')) f = 'Quadro Clínico';
-
-            foci.add(f);
-            matrix[q.area][f] = (matrix[q.area][f] || 0) + 1;
-        });
-
-        return { matrix, foci: Array.from(foci).sort() };
-    }, []);
-
-    // 3. Top 10 Topics
-    const topTopics = useMemo(() => {
+    // 2. Column C: Especialidade
+    const specialtyData = useMemo(() => {
         const counts = {};
         statsData.forEach(q => {
-            if (q.topic && q.topic !== 'Outros') {
-                counts[q.topic] = (counts[q.topic] || 0) + 1;
-            }
+            if (q.specialty) counts[q.specialty] = (counts[q.specialty] || 0) + 1;
         });
         return Object.entries(counts)
             .map(([name, value]) => ({ name, value }))
             .sort((a, b) => b.value - a.value)
-            .slice(0, 10);
+            .slice(0, 20); // Top 20 strictly
     }, []);
 
-    // 4. Line Chart: Trend per Year (Area evolution)
-    const trendData = useMemo(() => {
-        // { 2017: { Cirurgia: 10, Clinica: 12 }, 2018: ... }
-        const years = {};
-        const areas = new Set();
-
-        statsData.forEach(q => {
-            if (!years[q.year]) years[q.year] = { name: q.year };
-            years[q.year][q.area] = (years[q.year][q.area] || 0) + 1;
-            areas.add(q.area);
-        });
-
-        return {
-            data: Object.values(years).sort((a, b) => a.name - b.name),
-            areas: Array.from(areas)
-        };
-    }, []);
-
-    // 5. Word Cloud Data
-    const wordCloudData = useMemo(() => {
-        const text = statsData.map(q => q.summary).join(' ');
-        const words = text.split(/\s+/);
+    // 3. Column G: Foco (Tratamento, Diagnóstico...)
+    const focusData = useMemo(() => {
         const counts = {};
-        const stopWords = ['de', 'a', 'o', 'e', 'do', 'da', 'em', 'um', 'uma', 'com', 'para', 'é', 'não', 'os', 'as', 'se', 'na', 'no', 'por', 'mais', 'pode', 'ser'];
-
-        words.forEach(w => {
-            const clean = w.toLowerCase().replace(/[.,:;()]/g, '');
-            if (clean.length > 3 && !stopWords.includes(clean)) {
-                counts[clean] = (counts[clean] || 0) + 1;
-            }
+        statsData.forEach(q => {
+            // Clean specific focus values if needed, purely strictly from Col G
+            let f = q.focus || 'Indefinido';
+            // Remove brackets if still passing through
+            f = f.replace(/[\[\]]/g, '').trim();
+            if (f) counts[f] = (counts[f] || 0) + 1;
         });
-
         return Object.entries(counts)
-            .map(([text, value]) => ({ text, value }))
-            .sort((a, b) => b.value - a.value)
-            .slice(0, 50); // Top 50 words
+            .map(([name, value]) => ({ name, value }))
+            .sort((a, b) => b.value - a.value);
     }, []);
 
-    // 6. Treemap Data
-    const treemapData = useMemo(() => {
-        // Hierarchy: Root -> Area -> Specialty
+    // 4. Cross: Area (B) vs Specialty (C) - For Treemap
+    const areaSpecialtyHierarchy = useMemo(() => {
         const areas = {};
         statsData.forEach(q => {
+            if (!q.area || !q.specialty) return;
             if (!areas[q.area]) areas[q.area] = {};
             areas[q.area][q.specialty] = (areas[q.area][q.specialty] || 0) + 1;
         });
-
         return Object.entries(areas).map(([areaName, specs]) => ({
             name: areaName,
             children: Object.entries(specs).map(([specName, val]) => ({
@@ -111,227 +69,309 @@ const AnalyticsDashboard = () => {
         }));
     }, []);
 
-    // Custom Treemap Content
-    const CustomTreemapContent = (props) => {
-        const { root, depth, x, y, width, height, index, payload, colors, rank, name } = props;
+    // 5. Cross: Area (B) vs Focus (G) - Heatmap Matrix
+    const areaFocusMatrix = useMemo(() => {
+        const matrix = {};
+        const allFocuses = new Set();
+
+        statsData.forEach(q => {
+            if (!q.area || !q.focus) return;
+            let f = q.focus.replace(/[\[\]]/g, '').trim();
+            allFocuses.add(f);
+
+            if (!matrix[q.area]) matrix[q.area] = {};
+            matrix[q.area][f] = (matrix[q.area][f] || 0) + 1;
+        });
+
+        return {
+            matrix,
+            focuses: Array.from(allFocuses).sort()
+        };
+    }, []);
+
+    // --- RENDER HELPERS ---
+
+    // Custom Active Shape for Pie Chart
+    const renderActiveShape = (props) => {
+        const RADIAN = Math.PI / 180;
+        const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
+        const sin = Math.sin(-RADIAN * midAngle);
+        const cos = Math.cos(-RADIAN * midAngle);
+        const sx = cx + (outerRadius + 10) * cos;
+        const sy = cy + (outerRadius + 10) * sin;
+        const mx = cx + (outerRadius + 30) * cos;
+        const my = cy + (outerRadius + 30) * sin;
+        const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+        const ey = my;
+        const textAnchor = cos >= 0 ? 'start' : 'end';
+
         return (
             <g>
-                <rect
-                    x={x}
-                    y={y}
-                    width={width}
-                    height={height}
-                    style={{
-                        fill: depth < 2 ? COLORS[index % COLORS.length] : '#ffffff00',
-                        stroke: '#fff',
-                        strokeWidth: 2 / (depth + 1e-10),
-                        strokeOpacity: 1 / (depth + 1e-10),
-                    }}
+                <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill} fontSize={16} fontWeight="bold">
+                    {payload.name}
+                </text>
+                <Sector
+                    cx={cx}
+                    cy={cy}
+                    innerRadius={innerRadius}
+                    outerRadius={outerRadius}
+                    startAngle={startAngle}
+                    endAngle={endAngle}
+                    fill={fill}
                 />
-                {depth === 1 ? (
-                    <text x={x + width / 2} y={y + height / 2 + 7} textAnchor="middle" fill="#fff" fontSize={14}>
-                        {name}
-                    </text>
-                ) : null}
-                {depth === 2 ? (
-                    <text x={x + 4} y={y + 14} fill="#000" fontSize={10} fillOpacity={0.7}>
-                        {name} ({Math.round(props.value)})
-                    </text>
-                ) : null}
+                <Sector
+                    cx={cx}
+                    cy={cy}
+                    startAngle={startAngle}
+                    endAngle={endAngle}
+                    innerRadius={outerRadius + 6}
+                    outerRadius={outerRadius + 10}
+                    fill={fill}
+                />
+                <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+                <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+                <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value} Questões`}</text>
+                <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
+                    {`(${(percent * 100).toFixed(1)}%)`}
+                </text>
             </g>
         );
     };
 
+    const [activeIndex, setActiveIndex] = useState(0);
+    const onPieEnter = (_, index) => setActiveIndex(index);
+
     return (
         <div style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto', fontFamily: 'var(--font-main)' }}>
-            <h1 style={{ fontFamily: 'var(--font-hand)', color: 'var(--color-primary)', textAlign: 'center', marginBottom: '40px' }}>
-                Raio-X da Prova 📊
+            <h1 style={{ fontFamily: 'var(--font-hand)', color: 'var(--color-primary)', textAlign: 'center', marginBottom: '20px' }}>
+                Raio-X: Análise Estratégica 📊
             </h1>
 
-            {/* Grid Layout */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '40px' }}>
+            {/* TAB NAVIGATION */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginBottom: '32px' }}>
+                {[
+                    { id: 'overview', icon: <LayoutGrid size={18} />, label: 'Visão Geral (B)' },
+                    { id: 'specialty', icon: <Layers size={18} />, label: 'Especialidades (C)' },
+                    { id: 'focus', icon: <PieIcon size={18} />, label: 'Foco da Banca (G)' },
+                    { id: 'matrix', icon: <BarChart2 size={18} />, label: 'Cruzamento (B x G)' },
+                ].map(tab => (
+                    <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        style={{
+                            display: 'flex', alignItems: 'center', gap: '8px',
+                            padding: '10px 20px', borderRadius: '24px',
+                            border: 'none', cursor: 'pointer',
+                            background: activeTab === tab.id ? 'var(--color-primary)' : '#f0f0f0',
+                            color: activeTab === tab.id ? '#fff' : '#666',
+                            fontWeight: '600', transition: 'all 0.2s',
+                            boxShadow: activeTab === tab.id ? '0 4px 12px rgba(156, 39, 176, 0.3)' : 'none'
+                        }}
+                    >
+                        {tab.icon} {tab.label}
+                    </button>
+                ))}
+            </div>
 
-                {/* 1. Bar Chart */}
-                <div style={cardStyle}>
-                    <h3 style={titleStyle}>1. Distribuição por Grande Área</h3>
-                    <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={areaDistribution}>
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <RechartsTooltip />
-                            <Bar dataKey="value" fill="#8884d8" name="Questões" radius={[4, 4, 0, 0]}>
-                                {areaDistribution.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                ))}
-                            </Bar>
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
+            {/* TAB CONTENT */}
+            <div style={{ minHeight: '500px' }}>
 
-                {/* 4. Line Chart: Trends */}
-                <div style={cardStyle}>
-                    <h3 style={titleStyle}>2. Tendência Anual (Linha do Tempo)</h3>
-                    <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={trendData.data}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <RechartsTooltip />
-                            <Legend />
-                            {trendData.areas.map((area, index) => (
-                                <Line
-                                    key={area}
-                                    type="monotone"
-                                    dataKey={area}
-                                    stroke={COLORS[index % COLORS.length]}
-                                    strokeWidth={3}
-                                    dot={{ r: 4 }}
-                                />
-                            ))}
-                        </LineChart>
-                    </ResponsiveContainer>
-                </div>
-
-                {/* 2. Heatmap (Table) */}
-                <div style={cardStyle}>
-                    <h3 style={titleStyle}>3. O que a banca cobra? (Heatmap)</h3>
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
-                            <thead>
-                                <tr>
-                                    <th style={{ padding: '8px', textAlign: 'left', borderBottom: '2px solid #eee' }}>Área</th>
-                                    {heatmapData.foci.map(f => (
-                                        <th key={f} style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #eee' }}>{f}</th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {Object.entries(heatmapData.matrix).map(([area, counts], idx) => (
-                                    <tr key={area} style={{ background: idx % 2 === 0 ? '#fafafa' : '#fff' }}>
-                                        <td style={{ padding: '12px', fontWeight: 'bold', color: COLORS[idx % COLORS.length] }}>{area}</td>
-                                        {heatmapData.foci.map(f => {
-                                            const val = counts[f] || 0;
-                                            // Heatmap color logic (simple opacity)
-                                            const opacity = Math.min(val / 20, 1);
-                                            return (
-                                                <td key={f} style={{ textAlign: 'center', padding: '8px' }}>
-                                                    <div style={{
-                                                        background: `rgba(136, 132, 216, ${opacity})`,
-                                                        color: opacity > 0.5 ? '#fff' : '#000',
-                                                        borderRadius: '4px', padding: '4px'
-                                                    }}>
-                                                        {val}
-                                                    </div>
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                {/* 3. Top 10 Table */}
-                <div style={cardStyle}>
-                    <h3 style={titleStyle}>4. "Mapa da Mina" (Top 10 Temas)</h3>
-                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                        <thead>
-                            <tr style={{ background: '#f5f5f5' }}>
-                                <th style={{ padding: '12px', textAlign: 'left', borderRadius: '8px 0 0 8px' }}>Rank</th>
-                                <th style={{ padding: '12px', textAlign: 'left' }}>Tema</th>
-                                <th style={{ padding: '12px', textAlign: 'right', borderRadius: '0 8px 8px 0' }}>Questões</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {topTopics.map((item, idx) => (
-                                <tr key={item.name} style={{ borderBottom: '1px solid #eee' }}>
-                                    <td style={{ padding: '12px', fontWeight: 'bold', color: '#888' }}>#{idx + 1}</td>
-                                    <td style={{ padding: '12px', fontWeight: '500' }}>{item.name}</td>
-                                    <td style={{ padding: '12px', textAlign: 'right' }}>
-                                        <span style={{
-                                            background: idx < 3 ? '#ffecb3' : '#e0e0e0',
-                                            padding: '4px 12px', borderRadius: '12px', fontSize: '0.85rem'
-                                        }}>
-                                            {item.value}
-                                        </span>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-
-                {/* 6. Treemap (Full Width) */}
-                <div style={{ ...cardStyle, gridColumn: '1 / -1', height: '500px' }}>
-                    <h3 style={titleStyle}>5. Hierarquia das Especialidades</h3>
-                    <ResponsiveContainer width="100%" height={400}>
-                        <Treemap
-                            data={treemapData}
-                            dataKey="size"
-                            ratio={4 / 3}
-                            stroke="#fff"
-                            fill="#8884d8"
-                            content={<CustomTreemapContent />}
-                        />
-                    </ResponsiveContainer>
-                </div>
-
-                {/* 5. Word Cloud (Full Width) */}
-                <div style={{ ...cardStyle, gridColumn: '1 / -1', height: '400px' }}>
-                    <h3 style={titleStyle}>6. Nuvem de Palavras-Chave (Top 50)</h3>
-                    <div style={{
-                        height: '300px',
-                        display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center',
-                        gap: '12px', overflowY: 'auto', padding: '10px'
-                    }}>
-                        {wordCloudData.map((w, i) => {
-                            // Simple font sizing logic
-                            const maxVal = wordCloudData[0]?.value || 1;
-                            const minVal = wordCloudData[wordCloudData.length - 1]?.value || 1;
-                            const fontSize = 12 + ((w.value - minVal) / (maxVal - minVal)) * 36; // Range 12px to 48px
-
-                            return (
-                                <span key={w.text} style={{
-                                    fontSize: `${fontSize}px`,
-                                    color: COLORS[i % COLORS.length],
-                                    fontWeight: w.value > (maxVal / 2) ? 'bold' : 'normal',
-                                    opacity: 0.8 + (Math.random() * 0.2),
-                                    cursor: 'default',
-                                    transition: 'transform 0.2s',
-                                }}
-                                    title={`${w.text}: ${w.value} ocorrências`}
-                                    onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'}
-                                    onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                {/* TAB 1: OVERVIEW (COLUMN B) */}
+                {activeTab === 'overview' && (
+                    <div style={cardStyle}>
+                        <h3 style={titleStyle}>Peso das Grandes Áreas (Coluna B)</h3>
+                        <p style={subtitleStyle}>Qual a proporção de cada grande área no total da prova?</p>
+                        <ResponsiveContainer width="100%" height={400}>
+                            <PieChart>
+                                <Pie
+                                    activeIndex={activeIndex}
+                                    activeShape={renderActiveShape}
+                                    data={areaData}
+                                    cx="50%"
+                                    cy="50%"
+                                    innerRadius={100}
+                                    outerRadius={140}
+                                    fill="#8884d8"
+                                    dataKey="value"
+                                    onMouseEnter={onPieEnter}
                                 >
-                                    {w.text}
-                                </span>
-                            );
-                        })}
+                                    {areaData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                            </PieChart>
+                        </ResponsiveContainer>
                     </div>
-                </div>
+                )}
+
+                {/* TAB 2: SPECIALTIES (COLUMN C) */}
+                {activeTab === 'specialty' && (
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
+                        <div style={cardStyle}>
+                            <h3 style={titleStyle}>Top 20 Especialidades (Coluna C)</h3>
+                            <p style={subtitleStyle}>As especialidades mais cobradas independente da grande área.</p>
+                            <ResponsiveContainer width="100%" height={400}>
+                                <BarChart data={specialtyData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                    <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} interval={0} fontSize={12} />
+                                    <YAxis />
+                                    <RechartsTooltip />
+                                    <Bar dataKey="value" fill="#00C49F" radius={[4, 4, 0, 0]}>
+                                        {specialtyData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        ))}
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        <div style={cardStyle}>
+                            <h3 style={titleStyle}>Hierarquia: Área (B) &gt; Especialidade (C)</h3>
+                            <p style={subtitleStyle}>Como as especialidades se distribuem dentro das grandes áreas.</p>
+                            <ResponsiveContainer width="100%" height={500}>
+                                <Treemap
+                                    data={areaSpecialtyHierarchy}
+                                    dataKey="size"
+                                    ratio={4 / 3}
+                                    stroke="#fff"
+                                    fill="#8884d8"
+                                    content={<CustomTreemapContent />}
+                                />
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                )}
+
+                {/* TAB 3: FOCUS (COLUMN G) */}
+                {activeTab === 'focus' && (
+                    <div style={cardStyle}>
+                        <h3 style={titleStyle}>Perfil da Banca (Coluna G)</h3>
+                        <p style={subtitleStyle}>O que a prova pede? Diagnóstico, Tratamento, Conduta ou Quadro Clínico?</p>
+                        <ResponsiveContainer width="100%" height={400}>
+                            <BarChart data={focusData} layout="vertical" margin={{ top: 20, right: 30, left: 100, bottom: 20 }}>
+                                <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+                                <XAxis type="number" />
+                                <YAxis dataKey="name" type="category" width={120} />
+                                <RechartsTooltip />
+                                <Bar dataKey="value" fill="#FFBB28" radius={[0, 4, 4, 0]}>
+                                    {focusData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Bar>
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                )}
+
+                {/* TAB 4: MATRIX (B x G) */}
+                {activeTab === 'matrix' && (
+                    <div style={cardStyle}>
+                        <h3 style={titleStyle}>Matriz: Área vs. Foco</h3>
+                        <p style={subtitleStyle}>Em Cirurgia cai mais "Conduta"? Em Clínica cai mais "Diagnóstico"?</p>
+                        <div style={{ overflowX: 'auto', marginTop: '20px' }}>
+                            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px', fontSize: '0.95rem' }}>
+                                <thead>
+                                    <tr>
+                                        <th style={{ padding: '12px', textAlign: 'left', color: '#888' }}>Área</th>
+                                        {areaFocusMatrix.focuses.map(f => (
+                                            <th key={f} style={{ padding: '12px', textAlign: 'center', color: '#555' }}>{f}</th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.entries(areaFocusMatrix.matrix).map(([area, counts], idx) => (
+                                        <tr key={area} style={{ background: '#fff', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
+                                            <td style={{ padding: '16px', fontWeight: 'bold', color: COLORS[idx % COLORS.length], borderLeft: `4px solid ${COLORS[idx % COLORS.length]}`, borderRadius: '8px 0 0 8px' }}>
+                                                {area}
+                                            </td>
+                                            {areaFocusMatrix.focuses.map(f => {
+                                                const val = counts[f] || 0;
+                                                const maxVal = 50; // Normalize-ish
+                                                const opacity = Math.min((val / maxVal) * 0.8 + 0.1, 1);
+                                                return (
+                                                    <td key={f} style={{ textAlign: 'center', padding: '12px', background: idx % 2 === 0 ? '#fafafa' : '#fff' }}>
+                                                        {val > 0 ? (
+                                                            <div style={{
+                                                                display: 'inline-block',
+                                                                padding: '6px 12px',
+                                                                borderRadius: '12px',
+                                                                background: `rgba(33, 150, 243, ${opacity})`,
+                                                                color: opacity > 0.5 ? '#fff' : '#333',
+                                                                fontWeight: '600',
+                                                                minWidth: '40px'
+                                                            }}>
+                                                                {val}
+                                                            </div>
+                                                        ) : <span style={{ color: '#eee' }}>-</span>}
+                                                    </td>
+                                                );
+                                            })}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
 
             </div>
         </div>
     );
 };
 
+// --- STYLES & SUBCOMPONENTS ---
+
 const cardStyle = {
     background: '#fff',
-    borderRadius: '16px',
-    padding: '24px',
-    boxShadow: 'var(--shadow-md)',
-    border: '1px solid #eee'
+    borderRadius: '20px',
+    padding: '30px',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+    border: '1px solid #f0f0f0'
 };
 
 const titleStyle = {
     marginTop: 0,
+    marginBottom: '8px',
+    fontSize: '1.4rem',
+    color: '#333',
+    fontWeight: '700'
+};
+
+const subtitleStyle = {
+    color: '#888',
     marginBottom: '24px',
-    fontSize: '1.2rem',
-    color: '#444',
-    borderBottom: '2px solid #f0f0f0',
-    paddingBottom: '12px'
+    fontSize: '0.95rem'
+};
+
+const CustomTreemapContent = (props) => {
+    const { depth, x, y, width, height, index, name, value, colors } = props;
+
+    return (
+        <g>
+            <rect
+                x={x}
+                y={y}
+                width={width}
+                height={height}
+                style={{
+                    fill: depth < 2 ? COLORS[index % COLORS.length] : '#ffffff00',
+                    stroke: '#fff',
+                    strokeWidth: 2 / (depth + 1e-10),
+                    strokeOpacity: 1 / (depth + 1e-10),
+                }}
+            />
+            {depth === 1 ? (
+                <text x={x + width / 2} y={y + height / 2} textAnchor="middle" fill="#fff" fontSize={16} fontWeight="bold" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
+                    {name}
+                </text>
+            ) : null}
+            {depth === 2 && width > 40 && height > 20 ? ( // Only show if enough space
+                <text x={x + width / 2} y={y + height / 2} textAnchor="middle" fill="#333" fontSize={11} fillOpacity={0.9}>
+                    {name.substring(0, width / 6)}...
+                </text>
+            ) : null}
+        </g>
+    );
 };
 
 export default AnalyticsDashboard;
