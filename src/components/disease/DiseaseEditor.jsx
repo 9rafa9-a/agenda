@@ -498,6 +498,15 @@ const DiseaseEditor = () => {
                 )
             }
 
+            {/* Exam Context Panel Drawer */}
+            {showExamContext && (
+                <ExamContextPanel
+                    diseaseName={name}
+                    editorContent={data} // Pass content for keyword checking
+                    onClose={() => setShowExamContext(false)}
+                />
+            )}
+
             {/* History Modal */}
             {
                 showHistory && (
