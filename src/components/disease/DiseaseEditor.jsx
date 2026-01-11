@@ -406,11 +406,11 @@ const DiseaseEditor = () => {
             `}</style>
 
             {/* Top Controls */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+            <div className="editor-controls" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
                 <button onClick={() => navigate(trashed ? '/?trash=true' : '/')} style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#888' }}>
-                    <ArrowLeft size={20} /> Voltar
+                    <ArrowLeft size={20} /> <span className="hide-mobile">Voltar</span>
                 </button>
-                <div style={{ display: 'flex', gap: '16px' }}>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'flex-end', flex: 1 }}>
 
                     {trashed ? (
                         <>
@@ -440,11 +440,13 @@ const DiseaseEditor = () => {
                                     padding: '8px 16px', borderRadius: '20px', fontWeight: '600',
                                     cursor: generating ? 'wait' : 'pointer',
                                     transition: 'all 0.3s',
-                                    boxShadow: updatesAvailable ? '0 0 10px rgba(156, 39, 176, 0.5)' : 'none'
+                                    boxShadow: updatesAvailable ? '0 0 10px rgba(156, 39, 176, 0.5)' : 'none',
+                                    fontSize: '0.85rem'
                                 }}
                             >
-                                {generating ? <RotateCw className="spin" size={20} /> : <Sparkles size={20} />}
-                                {generating ? 'Criando...' : (updatesAvailable ? 'Atualizar Flashcards' : 'Gerar Flashcards AI')}
+                                {generating ? <RotateCw className="spin" size={18} /> : <Sparkles size={18} />}
+                                {generating ? 'Criando...' : (updatesAvailable ? 'Atualizar Flashcards' : <span className="hide-mobile-text">Gerar Flashcards AI</span>)}
+                                <span className="show-mobile-text" style={{ display: 'none' }}>AI</span>
                             </button>
                             <style>{`.spin { animation: spin 1s linear infinite; } @keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
 
@@ -455,33 +457,34 @@ const DiseaseEditor = () => {
                                     display: 'flex', alignItems: 'center', gap: '8px',
                                     padding: '8px 16px', borderRadius: '20px', border: '1px solid #ddd', cursor: 'pointer',
                                     background: showExamContext ? '#ffedd5' : '#fff', color: showExamContext ? '#d97706' : '#555',
-                                    fontWeight: '600'
+                                    fontWeight: '600', fontSize: '0.85rem'
                                 }}>
-                                <FileText size={18} /> Questões
+                                <FileText size={18} /> <span className="hide-mobile-text">Questões</span>
                             </button>
 
                             <button id="btn-evidence" onClick={() => setShowEvidence(true)} style={{
                                 display: 'flex', alignItems: 'center', gap: '8px',
                                 padding: '8px 16px', borderRadius: '20px', border: '1px solid #ddd', cursor: 'pointer',
-                                background: '#fff', color: '#555', fontWeight: '600'
+                                background: '#fff', color: '#555', fontWeight: '600', fontSize: '0.85rem'
                             }}>
-                                <Brain size={18} /> Evidências 🔬
+                                <Brain size={18} /> <span className="hide-mobile-text">Evidências 🔬</span>
                             </button>
 
                             <button
                                 onClick={handleTrash}
-                                style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#ff6b6b' }}
+                                style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#ff6b6b', padding: '8px' }}
+                                title="Excluir"
                             >
-                                <Trash2 size={20} /> Excluir
+                                <Trash2 size={20} />
                             </button>
                         </>
                     )}
 
-                    <div style={{ width: '1px', height: '24px', background: '#ddd' }}></div>
+                    <div style={{ width: '1px', height: '24px', background: '#ddd', margin: '0 4px' }}></div>
 
                     <button
                         onClick={() => { setShowHistory(true); fetchHistory(); }}
-                        style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#666' }}
+                        style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#666', padding: '8px' }}
                     >
                         <History size={20} />
                     </button>
@@ -624,7 +627,7 @@ const DiseaseEditor = () => {
                 </div>
 
                 {/* VISUAL SECTIONS EDITOR */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
                     {/* Definition - Key Section */}
                     <div style={sectionCardStyle}>
                         <div style={{ marginBottom: '10px', fontWeight: 'bold', color: '#264653', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -684,20 +687,26 @@ const DiseaseEditor = () => {
                 </button>
             </div>
 
-            {/* PDF Styles Helper */}
             <style>{`
-        @media print {
-          .print-content {
-             margin: 0;
-             padding: 0;
-          }
-          /* Ensure colors print */
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-        }
-      `}</style>
+                 @media (max-width: 600px) {
+                    .hide-mobile { display: none; }
+                    .hide-mobile-text { display: none; }
+                    .show-mobile-text { display: inline !important; }
+                    .editor-controls { flex-direction: column-reverse; gap: 12px; }
+                    .editor-controls > div { width: 100%; justify-content: space-between !important; }
+                 }
+                 @media print {
+                  .print-content {
+                     margin: 0;
+                     padding: 0;
+                  }
+                  /* Ensure colors print */
+                  * {
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                  }
+                }
+            `}</style>
         </div >
     );
 };
