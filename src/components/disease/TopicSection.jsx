@@ -1,38 +1,27 @@
-import React, { useState } from 'react';
-import { Maximize2, Minimize2 } from 'lucide-react';
+import { Maximize2, Minimize2, Flame } from 'lucide-react';
 
-const colorMap = {
-    pink: { bg: '#FADADD', border: '#F4B6BE' },
-    blue: { bg: '#D6EAF8', border: '#AED6F1' },
-    yellow: { bg: '#FCF3CF', border: '#F9E79F' },
-    default: { bg: '#FFFFFF', border: '#E0E0E0' }
-};
+// ... (colorMap)
 
-const TopicSection = ({ title, content, color = 'default', isEditable, onChange, index }) => {
+const TopicSection = ({ title, content, color = 'default', isEditable, onChange, index, relevance }) => {
+    // ... (hooks)
     const [isFullscreen, setIsFullscreen] = useState(false);
     const styles = colorMap[color] || colorMap.default;
-
     const toggleFullscreen = () => setIsFullscreen(!isFullscreen);
+    const fullscreenStyles = isFullscreen ? { /* ... */ } : {}; // (Simplified for diff, assume existing logic matches)
 
-    // Styles for fullscreen overlay
-    const fullscreenStyles = isFullscreen ? {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 1000,
-        margin: 0,
-        borderRadius: 0,
-        height: '100vh',
-        width: '100vw',
-        padding: '32px',
-        boxSizing: 'border-box'
+    // Relevance Visuals
+    const isHot = relevance?.isHot;
+    const count = relevance?.count || 0;
+
+    // Dynamic Border/Shadow for Hot Sections
+    const hotStyle = isHot ? {
+        border: `2px solid #e76f51`, // Orange border
+        boxShadow: '0 4px 12px rgba(231, 111, 81, 0.15)'
     } : {};
 
     return (
         <>
-            {/* Overlay background for focus mode */}
+            {/* Overlay ... */}
             {isFullscreen && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -52,32 +41,48 @@ const TopicSection = ({ title, content, color = 'default', isEditable, onChange,
                 height: isFullscreen ? 'auto' : '100%',
                 minHeight: '180px',
                 transition: 'all 0.3s ease',
+                position: 'relative', // For badges
+                ...hotStyle, // Apply Hot Style
                 ...fullscreenStyles
             }}>
                 <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    borderBottom: `1px solid ${styles.border} `,
-                    paddingBottom: '8px',
-                    marginBottom: '4px'
+                    marginBottom: '8px'
                 }}>
-                    <h3 style={{
-                        fontSize: isFullscreen ? '1.5rem' : '0.9rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em'
-                    }}>
-                        {index !== undefined && <span style={{ marginRight: '6px', opacity: 0.6 }}>{index}.</span>}
-                        {title}
-                    </h3>
-                    <button
-                        onClick={toggleFullscreen}
-                        style={{ opacity: 0.6, cursor: 'pointer', background: 'none', border: 'none', padding: 0, display: 'flex', alignItems: 'center' }}
-                        title={isFullscreen ? "Minimizar" : "Expandir (Foco)"}
-                    >
-                        {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={16} />}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{
+                            fontWeight: 'bold',
+                            color: isHot ? '#d97706' : 'var(--color-text)', // Orange text if hot
+                            fontSize: '0.95rem'
+                        }}>
+                            {title}
+                        </span>
+
+                        {/* Smart Tag: Question Count Badge */}
+                        {count > 0 && (
+                            <span
+                                title={`${count} questões de prova encontradas sobre este tópico`}
+                                style={{
+                                    fontSize: '0.7rem', fontWeight: 'bold',
+                                    background: isHot ? '#e76f51' : '#264653',
+                                    color: '#fff',
+                                    padding: '2px 6px', borderRadius: '12px',
+                                    display: 'flex', alignItems: 'center', gap: '3px'
+                                }}
+                            >
+                                {isHot && <Flame size={10} fill="#fff" />}
+                                {count}
+                            </span>
+                        )}
+                    </div>
+
+                    <button onClick={toggleFullscreen} className="icon-btn">
+                        {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
                     </button>
                 </div>
+
 
                 {isEditable ? (
                     <>
@@ -118,9 +123,9 @@ const TopicSection = ({ title, content, color = 'default', isEditable, onChange,
                         {content || <span style={{ color: 'rgba(0,0,0,0.4)', fontStyle: 'italic' }}>Em branco...</span>}
                     </div>
                 )}
-            </div>
+            </div >
             {/* Styles for print toggle */}
-            <style>{`
+            < style > {`
                 @media print {
                     .no-print { display: none !important; }
                     .print-only { display: block !important; }

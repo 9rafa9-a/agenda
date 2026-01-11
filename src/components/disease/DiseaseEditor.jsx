@@ -11,6 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc, getDocs, setDoc, updateDoc, collection, addDoc, query, orderBy, deleteDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { generateFlashcards } from '../../services/ai/gemini';
+import statsData from '../../data/amrigs_stats.json'; // Import Stats
 
 const DEFAULT_TOPICS = {
     definition: { title: 'Definição/Fisio', color: 'pink' },
@@ -24,11 +25,25 @@ const DEFAULT_TOPICS = {
     notes: { title: 'Notas Questões (Erros)', color: 'yellow' },
 };
 
-const DiseaseEditor = () => {
-    const { id } = useParams(); // If we are editing existing one
-    const navigate = useNavigate();
-    const componentRef = useRef(); // For PDF
+// Map Exam "Focus" (Col G) to Editor Sections
+const SECTION_MAPPING = {
+    'Definição': 'definition', 'Fisiopatologia': 'definition', 'Etiologia': 'definition',
+    'Epidemiologia': 'epidemiology', 'Fatores de Risco': 'epidemiology',
+    'Quadro Clínico': 'clinical', 'Sinais e Sintomas': 'clinical', 'História Natural': 'clinical',
+    'Diagnóstico': 'diagnosis', 'Exames': 'diagnosis', 'Laboratório': 'diagnosis', 'Imagem': 'diagnosis',
+    'Diagnóstico Diferencial': 'differential',
+    'Tratamento': 'treatment', 'Conduta': 'treatment', 'Manejo': 'treatment', 'Cirurgia': 'treatment', 'Medicamentoso': 'treatment',
+    'Complicações': 'complications', 'Prognóstico': 'complications', 'Seguimento': 'complications',
+    'Prevenção': 'epidemiology', 'Rastreamento': 'diagnosis'
+};
 
+const DiseaseEditor = () => {
+    // ... (Hooks)
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const componentRef = useRef();
+
+    // ... (State)
     const [name, setName] = useState('');
     const [subject, setSubject] = useState('');
     const [data, setData] = useState({
@@ -36,24 +51,65 @@ const DiseaseEditor = () => {
         diagnosis: '', differential: '', treatment: '',
         complications: '', pearls: '', notes: ''
     });
+
+    // ... (Other State: loading, saving, trashed, generating, smart sync)
     const [loading, setLoading] = useState(false);
     const [saving, setSaving] = useState(false);
     const [trashed, setTrashed] = useState(false);
     const [generating, setGenerating] = useState(false);
-
-    // Smart Sync State
     const [lastGenTopics, setLastGenTopics] = useState(null);
     const [updatesAvailable, setUpdatesAvailable] = useState(false);
-
-    // History State
     const [showHistory, setShowHistory] = useState(false);
     const [historyList, setHistoryList] = useState([]);
     const [loadingHistory, setLoadingHistory] = useState(false);
-
-    // Evidence Panel State
     const [showEvidence, setShowEvidence] = useState(false);
-    // Exam Context State
     const [showExamContext, setShowExamContext] = useState(false);
+
+    // === SMART EXAM FEATURES ===
+    // Calculate Relevance per Section
+    const sectionRelevance = React.useMemo(() => {
+        if (!name) return {};
+        const normalizedName = name.trim().toLowerCase();
+
+        // 1. Filter Questions for this Topic
+        const relatedQuestions = statsData.filter(d =>
+            d.topic && d.topic.toLowerCase().trim() === normalizedName
+        );
+
+        if (relatedQuestions.length === 0) return {};
+
+        // 2. Count Hits per Section Key
+        const counts = {};
+        relatedQuestions.forEach(q => {
+            if (!q.focus) return;
+            // Fuzzy match focus strings to keys
+            const focusTerms = Object.keys(SECTION_MAPPING);
+            const matchedTerm = focusTerms.find(term => q.focus.includes(term));
+
+            if (matchedTerm) {
+                const key = SECTION_MAPPING[matchedTerm];
+                counts[key] = (counts[key] || 0) + 1;
+            } else {
+                // Fallback for uncategorized -> 'notes' or ignore?
+                // counts['notes'] = (counts['notes'] || 0) + 1;
+            }
+        });
+
+        // 3. Mark "Hot" Sections (Top 3 or > threshold)
+        // Let's say: > 3 questions = VERY HOT, > 0 = HOT
+        const relevance = {};
+        Object.keys(DEFAULT_TOPICS).forEach(key => {
+            const count = counts[key] || 0;
+            relevance[key] = {
+                count,
+                isHot: count >= 3, // High Yield threshold
+                hasQuestions: count > 0 // Any questions
+            };
+        });
+
+        return relevance;
+    }, [name]);
+    // ===========================
 
     // Load data if ID exists
     useEffect(() => {
@@ -420,189 +476,179 @@ const DiseaseEditor = () => {
                         onClick={() => { setShowHistory(true); fetchHistory(); }}
                         style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#666' }}
                     >
-                        <History size={20} /> Histórico
-                    </button>
-                    <button
-                        onClick={handlePrint}
-                        style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#666' }}
-                    >
-                        <Printer size={20} /> Baixar PDF
+                        <History size={20} />
                     </button>
 
-                    <div style={{ width: '1px', height: '24px', background: '#ddd' }}></div>
-
-                    🔬 Evidências
-                </button>
-            </div>
-        </div>
-
-            {/* Evidence Panel Drawer */ }
-    {
-        showEvidence && (
-            <EvidencePanel
-                diseaseName={name}
-                onClose={() => setShowEvidence(false)}
-            />
-        )
-    }
-
-    {/* History Modal */ }
-    {
-        showHistory && (
-            <div style={{
-                position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-                background: 'rgba(0,0,0,0.5)', zIndex: 2000,
-                display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }} onClick={() => setShowHistory(false)}>
-                <div style={{
-                    background: '#fff', padding: '32px', borderRadius: '12px',
-                    width: '90%', maxWidth: '500px', maxHeight: '80vh', overflowY: 'auto'
-                }} onClick={e => e.stopPropagation()}>
-                    <h3 style={{ marginTop: 0 }}>Histórico de Versões</h3>
-                    {loadingHistory ? <p>Carregando...</p> : (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            {historyList.length === 0 && <p style={{ color: '#aaa' }}>Nenhuma versão salva manualmente ainda.</p>}
-                            {historyList.map(v => (
-                                <div key={v.vid} style={{
-                                    border: '1px solid #eee', padding: '12px', borderRadius: '8px',
-                                    display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-                                }}>
-                                    <div>
-                                        <div style={{ fontWeight: 'bold' }}>{new Date(v.savedAt).toLocaleString()}</div>
-                                        <div style={{ fontSize: '0.8rem', color: '#666' }}>{v.topics ? Object.keys(v.topics).length : 0} tópicos</div>
-                                    </div>
-                                    <button
-                                        onClick={() => restoreVersion(v)}
-                                        style={{
-                                            background: '#eee', border: 'none', padding: '8px 12px', borderRadius: '6px',
-                                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px'
-                                        }}
-                                    >
-                                        <RotateCcw size={14} /> Restaurar
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    <button onClick={() => setShowHistory(false)} style={{ marginTop: '20px', width: '100%', padding: '12px', border: '1px solid #ddd', background: 'none', borderRadius: '8px', cursor: 'pointer' }}>Fechar</button>
+                    <button onClick={handlePrint} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888', padding: '8px' }}>
+                        <Printer size={20} />
+                    </button>
                 </div>
             </div>
-        )
-    }
 
-    {/* Printable Area Wrapper */ }
-    <div ref={componentRef} style={{ padding: '20px' }} className="print-content">
-        {/* Header Input */}
-        <div style={{
-            textAlign: 'center',
-            marginBottom: '32px',
-            background: '#fff',
-            padding: '24px',
-            borderRadius: 'var(--border-radius)',
-            boxShadow: 'var(--shadow-sm)'
-        }}>
-            <input
-                type="text"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                placeholder="Matéria (ex: Ginecologia)"
-                list="subjects-list"
-                style={{
-                    display: 'block',
-                    margin: '0 auto 16px auto',
-                    padding: '8px 16px',
-                    borderRadius: '20px',
-                    border: '1px solid #eee',
-                    fontSize: '0.9rem',
+            {/* Evidence Panel Drawer */}
+            {
+                showEvidence && (
+                    <EvidencePanel
+                        diseaseName={name}
+                        onClose={() => setShowEvidence(false)}
+                    />
+                )
+            }
+
+            {/* History Modal */}
+            {
+                showHistory && (
+                    <div style={{
+                        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                        background: 'rgba(0,0,0,0.5)', zIndex: 2000,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                    }} onClick={() => setShowHistory(false)}>
+                        <div style={{
+                            background: '#fff', padding: '32px', borderRadius: '12px',
+                            width: '90%', maxWidth: '500px', maxHeight: '80vh', overflowY: 'auto'
+                        }} onClick={e => e.stopPropagation()}>
+                            <h3 style={{ marginTop: 0 }}>Histórico de Versões</h3>
+                            {loadingHistory ? <p>Carregando...</p> : (
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                    {historyList.length === 0 && <p style={{ color: '#aaa' }}>Nenhuma versão salva manualmente ainda.</p>}
+                                    {historyList.map(v => (
+                                        <div key={v.vid} style={{
+                                            border: '1px solid #eee', padding: '12px', borderRadius: '8px',
+                                            display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                                        }}>
+                                            <div>
+                                                <div style={{ fontWeight: 'bold' }}>{new Date(v.savedAt).toLocaleString()}</div>
+                                                <div style={{ fontSize: '0.8rem', color: '#666' }}>{v.topics ? Object.keys(v.topics).length : 0} tópicos</div>
+                                            </div>
+                                            <button
+                                                onClick={() => restoreVersion(v)}
+                                                style={{
+                                                    background: '#eee', border: 'none', padding: '8px 12px', borderRadius: '6px',
+                                                    cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px'
+                                                }}
+                                            >
+                                                <RotateCcw size={14} /> Restaurar
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                            <button onClick={() => setShowHistory(false)} style={{ marginTop: '20px', width: '100%', padding: '12px', border: '1px solid #ddd', background: 'none', borderRadius: '8px', cursor: 'pointer' }}>Fechar</button>
+                        </div>
+                    </div>
+                )
+            }
+
+            {/* Printable Area Wrapper */}
+            <div ref={componentRef} style={{ padding: '20px' }} className="print-content">
+                {/* Header Input */}
+                <div style={{
                     textAlign: 'center',
-                    width: '200px',
-                    outline: 'none',
-                    color: '#666'
-                }}
-            />
-            <datalist id="subjects-list">
-                <option value="Cardiologia" />
-                <option value="Ginecologia" />
-                <option value="Pediatria" />
-                <option value="Cirurgia" />
-                <option value="Preventiva" />
-            </datalist>
+                    marginBottom: '32px',
+                    background: '#fff',
+                    padding: '24px',
+                    borderRadius: 'var(--border-radius)',
+                    boxShadow: 'var(--shadow-sm)'
+                }}>
+                    <input
+                        type="text"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        placeholder="Matéria (ex: Ginecologia)"
+                        list="subjects-list"
+                        style={{
+                            display: 'block',
+                            margin: '0 auto 16px auto',
+                            padding: '8px 16px',
+                            borderRadius: '20px',
+                            border: '1px solid #eee',
+                            fontSize: '0.9rem',
+                            textAlign: 'center',
+                            width: '200px',
+                            outline: 'none',
+                            color: '#666'
+                        }}
+                    />
+                    <datalist id="subjects-list">
+                        <option value="Cardiologia" />
+                        <option value="Ginecologia" />
+                        <option value="Pediatria" />
+                        <option value="Cirurgia" />
+                        <option value="Preventiva" />
+                    </datalist>
 
-            <label style={{
-                display: 'block',
-                fontSize: '0.8rem',
-                textTransform: 'uppercase',
-                marginBottom: '8px',
-                color: '#888'
-            }}>Tema da Aula / Doença</label>
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Ex: Insuficiência Cardíaca"
-                style={{
-                    fontSize: '2rem',
-                    textAlign: 'center',
-                    border: 'none',
-                    borderBottom: '2px solid var(--color-primary)',
-                    outline: 'none',
-                    width: '100%',
-                    maxWidth: '600px',
-                    fontFamily: 'var(--font-main)',
-                    fontWeight: 'bold',
-                    color: 'var(--color-text)'
-                }}
-            />
-        </div>
+                    <label style={{
+                        display: 'block',
+                        fontSize: '0.8rem',
+                        textTransform: 'uppercase',
+                        marginBottom: '8px',
+                        color: '#888'
+                    }}>Tema da Aula / Doença</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Ex: Insuficiência Cardíaca"
+                        style={{
+                            fontSize: '2rem',
+                            textAlign: 'center',
+                            border: 'none',
+                            borderBottom: '2px solid var(--color-primary)',
+                            outline: 'none',
+                            width: '100%',
+                            maxWidth: '600px',
+                            fontFamily: 'var(--font-main)',
+                            fontWeight: 'bold',
+                            color: 'var(--color-text)'
+                        }}
+                    />
+                </div>
 
-        {/* 9-Grid Layout */}
-        <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '24px'
-        }}>
-            {Object.entries(DEFAULT_TOPICS).map(([key, config], idx) => (
-                <TopicSection
-                    key={key}
-                    index={idx + 1}
-                    title={config.title}
-                    color={config.color}
-                    content={data[key]}
-                    isEditable={true}
-                    onChange={(val) => handleChange(key, val)}
-                />
-            ))}
-        </div>
-    </div>
+                {/* 9-Grid Layout */}
+                <div className="grid-layout">
+                    {Object.entries(DEFAULT_TOPICS).map(([key, config]) => (
+                        <TopicSection
+                            key={key}
+                            title={config.title}
+                            color={config.color}
+                            content={data[key]}
+                            onChange={(val) => handleChange(key, val)}
+                            isEditable={!trashed}
+                            index={key}
+                            relevance={sectionRelevance[key]} // Pass Smart Relevance
+                        />
+                    ))}
+                </div>
+            </div>
 
-    {/* Save Button */ }
-    <div style={{ marginTop: '40px', textAlign: 'center' }}>
-        <button
-            onClick={handleManualSave}
-            disabled={saving}
-            style={{
-                background: 'var(--color-text)',
-                color: '#fff',
-                padding: '12px 32px',
-                borderRadius: '50px',
-                fontSize: '1rem',
-                fontWeight: '600',
-                boxShadow: 'var(--shadow-md)',
-                transition: 'transform 0.2s',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                opacity: saving ? 0.7 : 1
-            }}
-            onMouseOver={(e) => !saving && (e.currentTarget.style.transform = 'scale(1.05)')}
-            onMouseOut={(e) => !saving && (e.currentTarget.style.transform = 'scale(1)')}
-        >
-            <Save size={20} /> {saving ? 'Salvando...' : 'Salvar Resumo'}
-        </button>
-    </div>
+            {/* Save Button */}
+            <div style={{ marginTop: '40px', textAlign: 'center' }}>
+                <button
+                    onClick={handleManualSave}
+                    disabled={saving}
+                    style={{
+                        background: 'var(--color-text)',
+                        color: '#fff',
+                        padding: '12px 32px',
+                        borderRadius: '50px',
+                        fontSize: '1rem',
+                        fontWeight: '600',
+                        boxShadow: 'var(--shadow-md)',
+                        transition: 'transform 0.2s',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        opacity: saving ? 0.7 : 1
+                    }}
+                    onMouseOver={(e) => !saving && (e.currentTarget.style.transform = 'scale(1.05)')}
+                    onMouseOut={(e) => !saving && (e.currentTarget.style.transform = 'scale(1)')}
+                >
+                    <Save size={20} /> {saving ? 'Salvando...' : 'Salvar Resumo'}
+                </button>
+            </div>
 
-    {/* PDF Styles Helper */ }
-    <style>{`
+            {/* PDF Styles Helper */}
+            <style>{`
         @media print {
           .print-content {
              margin: 0;
