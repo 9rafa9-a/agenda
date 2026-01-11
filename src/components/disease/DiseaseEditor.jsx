@@ -71,10 +71,13 @@ const DiseaseEditor = () => {
         if (!name) return {};
         const normalizedName = name.trim().toLowerCase();
 
-        // 1. Filter Questions for this Topic
-        const relatedQuestions = statsData.filter(d =>
-            d.topic && d.topic.toLowerCase().trim() === normalizedName
-        );
+        // 1. Filter Questions for this Topic (Fuzzy Match)
+        const relatedQuestions = statsData.filter(d => {
+            if (!d.topic) return false;
+            const t = d.topic.toLowerCase().trim();
+            // Check if one contains the other (bidirectional)
+            return t.includes(normalizedName) || normalizedName.includes(t);
+        });
 
         if (relatedQuestions.length === 0) return {};
 
