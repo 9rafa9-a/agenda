@@ -5,7 +5,8 @@ import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
     Treemap, PieChart, Pie, Cell, LineChart, Line, ScatterChart, Scatter, ZAxis
 } from 'recharts';
-import { LayoutGrid, Layers, PieChart as PieIcon, Crosshair, Search, Filter } from 'lucide-react';
+import { LayoutGrid, Layers, PieChart as PieIcon, Crosshair, Search, Filter, Sparkles } from 'lucide-react';
+import { useOutletContext } from 'react-router-dom';
 
 const COLORS = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#219ebc', '#023047', '#8ecae6'];
 
@@ -220,7 +221,7 @@ const AnalyticsDashboard = () => {
         <div style={{ padding: '20px', maxWidth: '1600px', margin: '0 auto', fontFamily: 'var(--font-main)', background: '#FAFAFA', minHeight: '100vh' }} >
 
             {/* HEADER & GLOBAL FILTERS */}
-            < div style={{ marginBottom: '30px', textAlign: 'center' }}>
+            <div style={{ marginBottom: '30px', textAlign: 'center' }}>
                 <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '2.5rem', color: '#264653', marginBottom: '10px' }}>
                     Raio-X Interativo 🩺
                 </h1>
@@ -325,8 +326,9 @@ const AnalyticsDashboard = () => {
                                     ratio={4 / 3}
                                     stroke="#fff"
                                     fill="#264653"
-                                    content={renderTreemapContent}
-                                />
+                                >
+                                    <CustomTreemapContent onClick={(name) => { setSelectedSpecialty(name); }} />
+                                </Treemap>
                             </ResponsiveContainer>
                             <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#888', marginTop: '10px' }}>
                                 👉 Clique num bloco para ver o Foco (Deep Dive)
@@ -361,15 +363,47 @@ const AnalyticsDashboard = () => {
 
             {/* === VIEW 3: TACTICAL === */}
             {activeTab === 'tactical' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
                     <div style={{ gridColumn: '1 / -1', marginBottom: '10px' }}>
                         {selectedArea && <span style={{ background: '#264653', color: '#fff', padding: '4px 12px', borderRadius: '16px' }}>Filtro: {selectedArea}</span>}
                     </div>
 
+                    {/* CONTENT GAP WIDGET */}
+                    <div style={cardStyle}>
+                        <h3 style={titleStyle}>🚨 Buracos no Estudo</h3>
+                        <p style={subtitleStyle}>Temas que caem MUITO e você ainda não tem resumo!</p>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
+                            {gapAnalysis.length === 0 ? (
+                                <div style={{ textAlign: 'center', padding: '20px', color: '#2a9d8f' }}>
+                                    <Sparkles size={32} style={{ marginBottom: '10px' }} />
+                                    <p>Parabéns! Você tem resumos cobrindo todos os top temas!</p>
+                                </div>
+                            ) : (
+                                gapAnalysis.map((gap, i) => (
+                                    <div key={i} style={{
+                                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                        padding: '10px', border: '1px solid #ffeba1', background: '#fff9db', borderRadius: '8px'
+                                    }}>
+                                        <div>
+                                            <div style={{ fontWeight: 'bold', color: '#d97706' }}>{gap.topic}</div>
+                                            <div style={{ fontSize: '0.8rem', color: '#b45309' }}>{gap.count} questões encontradas</div>
+                                        </div>
+                                        <a href={`/new?title=${encodeURIComponent(gap.topic)}`} style={{
+                                            background: '#d97706', color: '#fff', textDecoration: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold'
+                                        }}>
+                                            Criar Resumo
+                                        </a>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+
                     {/* HEATMAP REPLACEMENT */}
                     <div style={cardStyle}>
-                        <h3 style={titleStyle}>Mapa de Calor (Heatmap) - Top Especialidades Recorrentes</h3>
-                        <p style={subtitleStyle}>Veja quando cada especialidade caiu ao longo dos anos. (Baseado na Coluna C)</p>
+                        <h3 style={titleStyle}>Mapa de Calor (Heatmap) - Top Especialidades</h3>
+                        <p style={subtitleStyle}>Recorrência anual das especialidades (Col C).</p>
 
                         <div style={{ overflowX: 'auto', paddingBottom: '10px' }}>
                             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
