@@ -33,9 +33,10 @@ const AnalyticsDashboard = () => {
                     y={y}
                     width={width}
                     height={height}
-                    fill:COLORS[index % COLORS.length],
-                stroke: '#fff',
-                strokeWidth: 2,
+                    style={{
+                        fill: COLORS[index % COLORS.length],
+                        stroke: '#fff',
+                        strokeWidth: 2,
                     }}
                 />
                 {width > 50 && height > 30 && (
