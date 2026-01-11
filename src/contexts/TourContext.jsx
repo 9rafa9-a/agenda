@@ -23,6 +23,14 @@ export const TourProvider = ({ children }) => {
             action: 'next',
             position: 'center'
         },
+        // Mobile Only Step
+        ...(window.innerWidth <= 768 ? [{
+            id: 'open-menu',
+            target: '#mobile-menu-toggle',
+            message: "Primeiro, abra o menu para vermos as opções.",
+            action: 'next',
+            shouldClickTarget: true
+        }] : []),
         {
             id: 'nav-new',
             target: '#nav-new',
@@ -146,12 +154,18 @@ export const TourProvider = ({ children }) => {
             action: 'wait_click'
         },
         {
+            id: 'flashcard-select-deck',
+            target: '#deck-card-0', // First deck
+            message: "Aqui estão seus decks.\nClique no primeiro para começar a revisar.",
+            action: 'wait_click',
+            route: '/flashcards'
+        },
+        {
             id: 'flashcard-demo',
             target: '#flashcard-card', // Need to ID the flashcard in StudySession
             message: "A IA criou cards automaticamente!\nClique para virar e testar.",
             action: 'next',
             position: 'bottom',
-            route: '/flashcards' // Ensure route
         },
         {
             id: 'nav-quizzes',

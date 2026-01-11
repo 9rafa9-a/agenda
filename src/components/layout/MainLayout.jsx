@@ -198,7 +198,7 @@ const MainLayout = () => {
         alignItems: 'center', padding: '0 20px', justifyContent: 'space-between'
       }}>
         <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '1.5rem', color: 'var(--color-primary)' }}>Minha Residência</h1>
-        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <button id="mobile-menu-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>

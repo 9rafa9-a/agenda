@@ -143,8 +143,8 @@ const FlashcardDashboard = () => {
                 </div>
             ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
-                    {decks.map(deck => (
-                        <div key={deck.diseaseId} style={{
+                    {decks.map((deck, index) => (
+                        <div key={deck.diseaseId} id={`deck-card-${index}`} style={{
                             background: '#fff',
                             borderRadius: '16px',
                             padding: '24px',

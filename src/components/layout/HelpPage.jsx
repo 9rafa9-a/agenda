@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, Book, Brain, ShieldAlert, FileText, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,9 +8,34 @@ const sectionStyle = {
 
 const HelpPage = () => {
     const navigate = useNavigate();
+    const [isZoomed, setIsZoomed] = useState(false);
 
     return (
         <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', fontFamily: 'var(--font-main)', color: '#444' }}>
+            {/* ... (Header and other sections remain unchanged) ... */}
+
+            {/* LIGHTBOX OVERLAY */}
+            {isZoomed && (
+                <div
+                    onClick={() => setIsZoomed(false)}
+                    style={{
+                        position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+                        background: 'rgba(0,0,0,0.9)', zIndex: 9999,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        cursor: 'zoom-out', padding: '20px'
+                    }}
+                >
+                    <img
+                        src="/assets/capturar.png"
+                        alt="Zoom Mágica dos Dados"
+                        style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', boxShadow: '0 0 50px rgba(0,0,0,0.5)' }}
+                    />
+                    <div style={{ position: 'absolute', bottom: '40px', color: '#fff', background: 'rgba(0,0,0,0.5)', padding: '8px 16px', borderRadius: '20px' }}>
+                        Clique em qualquer lugar para fechar
+                    </div>
+                </div>
+            )}
+
             <button
                 onClick={() => navigate(-1)}
                 style={{
@@ -131,14 +156,21 @@ const HelpPage = () => {
                         </div>
                     </div>
 
-                    <div style={{
-                        width: '100%',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        border: '5px solid #eee',
-                        lineHeight: 0,
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-                    }}>
+                    <div
+                        onClick={() => setIsZoomed(true)}
+                        style={{
+                            width: '100%',
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                            border: '5px solid #eee',
+                            lineHeight: 0,
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                            cursor: 'zoom-in', // Indicate clickable
+                            transition: 'transform 0.2s'
+                        }}
+                        onMouseOver={e => e.currentTarget.style.transform = 'scale(1.02)'}
+                        onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                    >
                         <img
                             src="/assets/capturar.png"
                             alt="Planilha de Dados sendo processada"
@@ -154,6 +186,9 @@ const HelpPage = () => {
                             }}
                         />
                     </div>
+                    <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#888', marginTop: '-20px' }}>
+                        (Clique na imagem para ampliar 🔍)
+                    </p>
                 </div>
             </section>
 

@@ -94,7 +94,7 @@ const StudySession = ({ deck, onClose, currentUser }) => {
 
             {/* Card Container (Perspective) */}
             <div style={{ flex: 1, perspective: '1000px', cursor: 'pointer' }} onClick={() => !isFlipped && setIsFlipped(true)}>
-                <div style={{
+                <div id="flashcard-card" style={{
                     position: 'relative', width: '100%', height: '100%',
                     transformStyle: 'preserve-3d',
                     transition: 'transform 0.6s',
