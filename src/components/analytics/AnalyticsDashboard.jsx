@@ -115,25 +115,25 @@ const AnalyticsDashboard = () => {
         return Object.entries(counts).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 15);
     }, [filteredData, selectedArea]);
 
-    // Heatmap Data (Top Topics x Years)
+    // Heatmap Data (Top Specialties x Years) - User requested Col C (Specialty)
     const heatmapData = useMemo(() => {
         const subset = selectedArea ? filteredData.filter(d => d.area === selectedArea) : filteredData;
 
-        // 1. Aggregate Counts by Topic & Year
-        const topicCounts = {};
+        // 1. Aggregate Counts by Specialty & Year
+        const counts = {};
         const allYears = new Set();
 
         subset.forEach(d => {
-            if (!d.topic || d.topic === 'Outros' || d.topic === 'undefined') return;
-            const t = d.topic.trim();
-            if (!topicCounts[t]) topicCounts[t] = { total: 0, years: {} };
-            topicCounts[t].total++;
-            topicCounts[t].years[d.year] = (topicCounts[t].years[d.year] || 0) + 1;
+            if (!d.specialty || d.specialty === 'Geral' || d.specialty === 'undefined') return;
+            const t = d.specialty.trim();
+            if (!counts[t]) counts[t] = { total: 0, years: {} };
+            counts[t].total++;
+            counts[t].years[d.year] = (counts[t].years[d.year] || 0) + 1;
             allYears.add(d.year);
         });
 
-        // 2. Get Top 20 Topics by Volume
-        const topTopics = Object.entries(topicCounts)
+        // 2. Get Top 20 Specialties by Volume
+        const topItems = Object.entries(counts)
             .sort((a, b) => b[1].total - a[1].total)
             .slice(0, 20)
             .map(([name, data]) => ({ name, ...data }));
@@ -141,7 +141,7 @@ const AnalyticsDashboard = () => {
         // 3. Sorted Years Array for Columns
         const sortedYears = Array.from(allYears).sort((a, b) => a - b);
 
-        return { topics: topTopics, years: sortedYears };
+        return { items: topItems, years: sortedYears };
 
     }, [filteredData, selectedArea]);
 
@@ -368,14 +368,14 @@ const AnalyticsDashboard = () => {
 
                     {/* HEATMAP REPLACEMENT */}
                     <div style={cardStyle}>
-                        <h3 style={titleStyle}>Mapa de Calor (Heatmap) - Top Temas Recorrentes</h3>
-                        <p style={subtitleStyle}>Veja quando cada tema caiu ao longo dos anos. Quanto mais escuro, mais questões.</p>
+                        <h3 style={titleStyle}>Mapa de Calor (Heatmap) - Top Especialidades Recorrentes</h3>
+                        <p style={subtitleStyle}>Veja quando cada especialidade caiu ao longo dos anos. (Baseado na Coluna C)</p>
 
                         <div style={{ overflowX: 'auto', paddingBottom: '10px' }}>
                             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
                                 <thead>
                                     <tr>
-                                        <th style={{ padding: '8px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Tema</th>
+                                        <th style={{ padding: '8px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Especialidade</th>
                                         <th style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #ddd' }}>Total</th>
                                         {heatmapData.years.map(y => (
                                             <th key={y} style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #ddd', minWidth: '40px' }}>{y}</th>
@@ -383,12 +383,12 @@ const AnalyticsDashboard = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {heatmapData.topics.map((topic, i) => (
+                                    {heatmapData.items.map((item, i) => (
                                         <tr key={i} style={{ borderBottom: '1px solid #f0f0f0' }}>
-                                            <td style={{ padding: '8px', fontWeight: '500' }}>{topic.name}</td>
-                                            <td style={{ padding: '8px', textAlign: 'center', fontWeight: 'bold' }}>{topic.total}</td>
+                                            <td style={{ padding: '8px', fontWeight: '500' }}>{item.name}</td>
+                                            <td style={{ padding: '8px', textAlign: 'center', fontWeight: 'bold' }}>{item.total}</td>
                                             {heatmapData.years.map(y => {
-                                                const count = topic.years[y] || 0;
+                                                const count = item.years[y] || 0;
                                                 return (
                                                     <td key={y} style={{ padding: '4px', textAlign: 'center' }}>
                                                         <div style={{
