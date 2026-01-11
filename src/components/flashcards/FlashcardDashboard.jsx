@@ -185,6 +185,7 @@ const FlashcardDashboard = () => {
                             </div>
 
                             <button
+                                id={`deck-btn-${index}`}
                                 onClick={() => setSelectedDeck(deck)}
                                 disabled={deck.due === 0 && deck.new === 0}
                                 style={{

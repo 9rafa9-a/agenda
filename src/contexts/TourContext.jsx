@@ -163,17 +163,24 @@ export const TourProvider = ({ children }) => {
         },
         {
             id: 'flashcard-select-deck',
-            target: '#deck-card-0', // First deck
-            message: "Aqui estão seus decks.\nClique no primeiro para começar a revisar.",
+            target: '#deck-btn-0', // Target the BUTTON now
+            message: "Aqui estão seus decks.\nClique no botão **Estudar Agora**.",
             action: 'wait_click',
             route: '/flashcards'
         },
         {
-            id: 'flashcard-demo',
-            target: '#flashcard-card', // Need to ID the flashcard in StudySession
-            message: "A IA criou cards automaticamente!\nClique para virar e testar.",
-            action: 'next',
+            id: 'flashcard-flip',
+            target: '#flashcard-card',
+            message: "A IA criou cards automaticamente!\n**Clique no cartão** para ver a resposta.",
+            action: 'wait_click', // Wait for flip
             position: 'bottom',
+        },
+        {
+            id: 'flashcard-rate',
+            target: '#flashcard-rate-options',
+            message: "Agora avalie seu conhecimento.\nIsso ajusta quando você verá este card novamente.",
+            action: 'wait_click', // Or next
+            position: 'top',
         },
         {
             id: 'nav-quizzes',

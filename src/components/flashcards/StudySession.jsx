@@ -136,7 +136,7 @@ const StudySession = ({ deck, onClose, currentUser }) => {
             </div>
 
             {/* Controls */}
-            <div style={{
+            <div id="flashcard-rate-options" style={{
                 marginTop: '32px', minHeight: '80px',
                 opacity: isFlipped ? 1 : 0,
                 pointerEvents: isFlipped ? 'auto' : 'none',
