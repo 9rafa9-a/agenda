@@ -78,9 +78,9 @@ const ExamContextPanel = ({ diseaseName, editorContent = {}, onClose }) => {
         <div style={{
             position: 'fixed', top: 0, right: 0, bottom: 0,
             width: '450px', maxWidth: '90vw',
-            background: '#fff', boxShadow: '-4px 0 20px rgba(0,0,0,0.1)',
-            zIndex: 1000, display: 'flex', flexDirection: 'column',
-            borderLeft: '1px solid #eee'
+            background: '#fff', boxShadow: '-4px 0 20px rgba(0,0,0,0.15)',
+            zIndex: 2000, display: 'flex', flexDirection: 'column',
+            borderLeft: '1px solid #ddd'
         }}>
             {/* Header */}
             <div style={{ padding: '20px', borderBottom: '1px solid #eee', background: '#fef3e0' }}>
