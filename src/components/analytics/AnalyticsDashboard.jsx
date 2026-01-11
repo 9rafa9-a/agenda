@@ -14,6 +14,7 @@ const COLORS = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#219ebc'
 
 const AnalyticsDashboard = () => {
     // === GLOBAL STATE ===
+    const [selectedExam, setSelectedExam] = useState(null); // 'amrigs' | null
     const [yearRange, setYearRange] = useState([2017, 2030]); // Min/Max
     const [selectedArea, setSelectedArea] = useState(null); // Drill-down Root
     const [selectedSpecialty, setSelectedSpecialty] = useState(null); // Drill-down Level 2
@@ -228,11 +229,113 @@ const AnalyticsDashboard = () => {
         return '#e76f51'; // High
     };
 
+    // === EXAM SELECTOR SCREEN (Moved here to fix Hook Order) ===
+    if (!selectedExam) {
+        return (
+            <div style={{
+                fontFamily: 'var(--font-main)',
+                minHeight: '100vh',
+                background: '#FAFAFA',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                    <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '3rem', color: '#264653', marginBottom: '10px' }}>
+                        Harmonic Voyager 🧭
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '1.2rem' }}>Escolha o Raio-X que deseja explorar:</p>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', maxWidth: '1000px', width: '100%', padding: '20px' }}>
+
+                    {/* AMRIGS CARD */}
+                    <button
+                        onClick={() => setSelectedExam('amrigs')}
+                        style={{
+                            background: '#fff',
+                            border: 'none',
+                            borderRadius: '24px',
+                            padding: '40px',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            transition: 'transform 0.2s, box-shadow 0.2s',
+                            textAlign: 'center'
+                        }}
+                        onMouseEnter={e => {
+                            e.currentTarget.style.transform = 'translateY(-10px)';
+                            e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.12)';
+                        }}
+                        onMouseLeave={e => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
+                        }}
+                    >
+                        <div style={{
+                            width: '80px', height: '80px', borderRadius: '50%',
+                            background: '#e9c46a', color: '#fff',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            marginBottom: '20px', fontSize: '2rem'
+                        }}>
+                            🩺
+                        </div>
+                        <h2 style={{ color: '#264653', fontSize: '1.5rem', marginBottom: '10px' }}>AMRIGS</h2>
+                        <span style={{
+                            background: '#2a9d8f', color: '#fff', padding: '4px 12px', borderRadius: '12px',
+                            fontSize: '0.9rem', fontWeight: 'bold'
+                        }}>
+                            2017 - 2026
+                        </span>
+                        <p style={{ color: '#888', marginTop: '20px', lineHeight: '1.5' }}>
+                            Análise completa de 10 anos da prova da AMRIGS. Distribuição por áreas, especialidades e temas recorrentes.
+                        </p>
+                    </button>
+
+                    {/* COMING SOON CARD */}
+                    <div style={{
+                        background: '#f5f5f5',
+                        borderRadius: '24px',
+                        padding: '40px',
+                        border: '2px dashed #ddd',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        opacity: 0.7,
+                        cursor: 'not-allowed',
+                        color: '#999'
+                    }}>
+                        <div style={{ fontSize: '2rem', marginBottom: '10px' }}>🚧</div>
+                        <h3>Em Breve</h3>
+                        <p>Outras provas saindo do forno...</p>
+                    </div>
+
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div style={{ padding: '20px', maxWidth: '1600px', margin: '0 auto', fontFamily: 'var(--font-main)', background: '#FAFAFA', minHeight: '100vh' }} >
 
             {/* HEADER & GLOBAL FILTERS */}
-            <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+            <div style={{ marginBottom: '30px', textAlign: 'center', position: 'relative' }}>
+                <button
+                    onClick={() => setSelectedExam(null)}
+                    style={{
+                        position: 'absolute', left: 0, top: 0,
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        color: '#999', display: 'flex', alignItems: 'center', gap: '5px',
+                        fontWeight: 'bold', fontSize: '0.9rem'
+                    }}
+                >
+                    ⬅ Voltar para Seleção
+                </button>
+
                 <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '2.5rem', color: '#264653', marginBottom: '10px' }}>
                     Raio-X Interativo 🩺
                 </h1>

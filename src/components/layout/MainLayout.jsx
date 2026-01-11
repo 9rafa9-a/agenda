@@ -1,39 +1,55 @@
-import React, { useState } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
-import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2, Brain, User, FileText, BarChart2 } from 'lucide-react';
+import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2, Brain, User, FileText, BarChart2, ShieldAlert } from 'lucide-react';
 import DachshundMascot from '../fun/DachshundMascot';
 import BackgroundSlideshow from './BackgroundSlideshow';
 
 const MainLayout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Data & Navigation State
-  const [diseases, setDiseases] = useState([]);
-  const [subjects, setSubjects] = useState([]);
+  const [rawDiseases, setRawDiseases] = useState([]);
   const [subjectsOpen, setSubjectsOpen] = useState(true);
   const [showMascots, setShowMascots] = useState(true); // Default true
 
+  // User Identity State
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('app_user') || null);
+  const [passwordInput, setPasswordInput] = useState(''); // New: Password State
+  const [loginError, setLoginError] = useState(false); // New: Error State
+
+  // Filter Data based on User (Sandbox Mode)
+  const { displayDiseases, displaySubjects } = React.useMemo(() => {
+    let filtered = rawDiseases;
+    if (currentUser === 'Convidado') {
+      filtered = rawDiseases.filter(d => d.isGuest === true);
+    } else {
+      filtered = rawDiseases.filter(d => !d.isGuest);
+    }
+
+    // Extract Subjects from filtered list
+    const subjs = [...new Set(
+      filtered.map(d => d.subject ? d.subject.split(',') : [])
+        .flat()
+        .map(s => s.trim())
+        .filter(Boolean)
+    )].sort();
+
+    return { displayDiseases: filtered, displaySubjects: subjs };
+  }, [rawDiseases, currentUser]);
+
   // Real-time subscription
-  React.useEffect(() => {
+  useEffect(() => {
     const q = query(collection(db, "diseases"), orderBy("lastEdited", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const list = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
-      setDiseases(list);
-
-      // Extract unique subjects (Split by comma and trim)
-      const uniqueSubjects = [...new Set(
-        list.map(d => d.subject ? d.subject.split(',') : [])
-          .flat()
-          .map(s => s.trim())
-          .filter(Boolean)
-      )].sort();
-      setSubjects(uniqueSubjects);
+      setRawDiseases(list);
     }, (error) => {
       console.error("Error listening to diseases:", error);
     });
@@ -41,18 +57,31 @@ const MainLayout = () => {
     return () => unsubscribe();
   }, []);
 
-  // User Identity State
-  const [currentUser, setCurrentUser] = useState(localStorage.getItem('app_user') || null);
-
   const handleLogin = (user) => {
-    setCurrentUser(user);
-    localStorage.setItem('app_user', user);
+    if (user === 'Convidado') {
+      setCurrentUser('Convidado');
+      localStorage.setItem('app_user', 'Convidado');
+      // Redirect to Analytics immediately if guest logs in
+      navigate('/analytics');
+      return;
+    }
+
+    if (passwordInput === 'juju2026') {
+      setCurrentUser(user);
+      localStorage.setItem('app_user', user);
+      setLoginError(false);
+    } else {
+      setLoginError(true);
+      // Shake animation effect could be added here
+    }
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('app_user');
     setMobileMenuOpen(false);
+    setPasswordInput(''); // Reset password
+    navigate('/'); // Go home
   };
 
   // Manual refresh no longer needed but kept for context if needed
@@ -66,9 +95,25 @@ const MainLayout = () => {
         background: '#f8f9fa', zIndex: 9999,
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
       }}>
-        <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '3.5rem', marginBottom: '40px', color: '#555' }}>
+        <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '3.5rem', marginBottom: '10px', color: '#555' }}>
           Quem é você?
         </h1>
+        <p style={{ marginBottom: '30px', color: '#888' }}>Digite a senha para acessar.</p>
+
+        {/* Password Input */}
+        <input
+          type="password"
+          placeholder="******"
+          value={passwordInput}
+          onChange={e => { setPasswordInput(e.target.value); setLoginError(false); }}
+          style={{
+            padding: '12px 20px', fontSize: '1.2rem', borderRadius: '12px',
+            border: loginError ? '2px solid #ff6b6b' : '2px solid #ddd',
+            marginBottom: '30px', width: '280px', outline: 'none', textAlign: 'center'
+          }}
+        />
+        {loginError && <p style={{ color: '#ff6b6b', marginTop: '-20px', marginBottom: '20px', fontWeight: 'bold' }}>Senha incorreta!</p>}
+
         <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap', justifyContent: 'center' }}>
           {/* Rafa Button */}
           <button
@@ -76,16 +121,13 @@ const MainLayout = () => {
             style={{
               background: '#e3f2fd', color: '#1565c0',
               border: '2px solid #bbdefb', borderRadius: '30px',
-              padding: '40px 60px', cursor: 'pointer',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px',
-              transition: 'transform 0.2s, box-shadow 0.2s',
-              boxShadow: '0 4px 12px rgba(21, 101, 192, 0.1)'
+              padding: '30px 50px', cursor: 'pointer',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
+              transition: 'transform 0.2s', opacity: passwordInput ? 1 : 0.5
             }}
-            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            <span style={{ fontSize: '4rem' }}>👨🏻‍🦰</span>
-            <span style={{ fontSize: '2rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Dr. Rafa</span>
+            <span style={{ fontSize: '3rem' }}>👨🏻‍🦰</span>
+            <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Dr. Rafa</span>
           </button>
 
           {/* Ju Button */}
@@ -94,26 +136,43 @@ const MainLayout = () => {
             style={{
               background: '#fce4ec', color: '#c2185b',
               border: '2px solid #f8bbd0', borderRadius: '30px',
-              padding: '40px 60px', cursor: 'pointer',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px',
-              transition: 'transform 0.2s, box-shadow 0.2s',
-              boxShadow: '0 4px 12px rgba(194, 24, 91, 0.1)'
+              padding: '30px 50px', cursor: 'pointer',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
+              transition: 'transform 0.2s', opacity: passwordInput ? 1 : 0.5
             }}
-            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            <span style={{ fontSize: '4rem' }}>👩🏻‍🦰</span>
-            <span style={{ fontSize: '2rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Dra. Ju</span>
+            <span style={{ fontSize: '3rem' }}>👩🏻‍🦰</span>
+            <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-hand)', fontWeight: 'bold' }}>Dra. Ju</span>
           </button>
         </div>
-        <p style={{ marginTop: '40px', color: '#aaa' }}>Selecione para carregar seu progresso personalizado.</p>
+
+        {/* Guest Button */}
+        <button
+          onClick={() => handleLogin('Convidado')}
+          style={{
+            marginTop: '40px', background: 'none', border: 'none',
+            color: '#888', textDecoration: 'underline', cursor: 'pointer', fontSize: '1rem',
+            display: 'flex', alignItems: 'center', gap: '8px'
+          }}
+        >
+          <ShieldAlert size={16} /> Entrar como Convidado (Modo Visitante)
+        </button>
       </div >
     );
   }
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'transparent' }}>
-      <BackgroundSlideshow />
+      {/* Background Logic */}
+      {currentUser === 'Convidado' ? (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1,
+          background: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)' // Elegant light gradient
+        }} />
+      ) : (
+        <BackgroundSlideshow />
+      )}
+
       <DachshundMascot />
       {/* Mobile Header */}
       <div className="mobile-header" style={{
@@ -156,6 +215,7 @@ const MainLayout = () => {
         </h1>
 
         <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
           <NavLink to="/" end
             className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
             style={navStyle}
@@ -186,8 +246,8 @@ const MainLayout = () => {
 
             {subjectsOpen && (
               <div style={{ paddingLeft: '12px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                {subjects.length === 0 && <span style={{ padding: '8px 16px', fontSize: '0.8rem', color: '#aaa', fontStyle: 'italic' }}>Sem matérias ainda...</span>}
-                {subjects.map(subj => (
+                {displaySubjects.length === 0 && <span style={{ padding: '8px 16px', fontSize: '0.8rem', color: '#aaa', fontStyle: 'italic' }}>Sem matérias ainda...</span>}
+                {displaySubjects.map(subj => (
                   <NavLink
                     key={subj}
                     to={`/?subject=${encodeURIComponent(subj)}`}
@@ -254,6 +314,7 @@ const MainLayout = () => {
           >
             <Trash2 size={20} /> Lixeira
           </NavLink>
+
           {/* <NavLink to="/settings" style={navStyle}><Settings size={20} /> Ajustes</NavLink> */}
 
           {/* User Profile */}
@@ -303,7 +364,7 @@ const MainLayout = () => {
 
       {/* Main Content */}
       <main style={{ flex: 1, padding: '40px', overflowY: 'auto', paddingTop: '40px' }} className="main-content">
-        <Outlet context={{ diseases, refresh: fetchDiseases, currentUser }} key={location.pathname + location.search} />
+        <Outlet context={{ diseases: displayDiseases, refresh: fetchDiseases, currentUser }} key={location.pathname + location.search} />
       </main>
 
       {/* Global CSS for responsiveness */}

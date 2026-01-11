@@ -7,7 +7,7 @@ import { useReactToPrint } from 'react-to-print';
 // History Icons
 import { Printer, Save, ArrowLeft, History, RotateCcw, Trash2, Ban, CheckCircle, Brain, Sparkles, RotateCw, FileText, Loader2 } from 'lucide-react';
 // Firestore
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useOutletContext } from 'react-router-dom';
 import { doc, getDoc, getDocs, setDoc, updateDoc, collection, addDoc, query, orderBy, deleteDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { generateFlashcards } from '../../services/ai/gemini';
@@ -38,12 +38,11 @@ const SECTION_MAPPING = {
 };
 
 const DiseaseEditor = () => {
-    // ... (Hooks)
     const { id } = useParams();
     const navigate = useNavigate();
     const componentRef = useRef();
+    const { currentUser } = useOutletContext() || {};
 
-    // ... (State)
     const [name, setName] = useState('');
     const [subject, setSubject] = useState('');
     const [data, setData] = useState({
@@ -251,7 +250,8 @@ const DiseaseEditor = () => {
                 subject,
                 topics: data,
                 lastEdited: Date.now(),
-                userId: 'default-user'
+                userId: currentUser || 'default-user',
+                isGuest: currentUser === 'Convidado' // Tag Guest Data
             };
 
             if (id) {
