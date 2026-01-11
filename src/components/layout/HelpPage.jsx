@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Book, Brain, ShieldAlert, FileText, Activity } from 'lucide-react';
+import { ArrowLeft, Book, Brain, ShieldAlert, FileText, Activity, Compass } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTour } from '../../contexts/TourContext';
 
 const sectionStyle = {
     // Moved to CSS Class .help-section for responsive behavior
@@ -8,6 +9,7 @@ const sectionStyle = {
 
 const HelpPage = () => {
     const navigate = useNavigate();
+    const { startTour } = useTour();
     const [isZoomed, setIsZoomed] = useState(false);
 
     return (
@@ -51,7 +53,28 @@ const HelpPage = () => {
                 <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '3rem', color: 'var(--color-primary)', marginBottom: '10px' }}>
                     Como funciona o App?
                 </h1>
-                <p style={{ fontSize: '1.2rem', color: '#666' }}>Guia rápido e direto das funcionalidades.</p>
+                <p style={{ fontSize: '1.2rem', color: '#666', marginBottom: '30px' }}>Guia rápido e direto das funcionalidades.</p>
+
+                <button
+                    onClick={startTour}
+                    style={{
+                        padding: '12px 28px',
+                        borderRadius: '50px',
+                        border: 'none',
+                        background: 'var(--color-primary)',
+                        color: '#fff',
+                        fontSize: '1rem',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                        display: 'inline-flex', alignItems: 'center', gap: '10px',
+                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                        transition: 'transform 0.2s'
+                    }}
+                    onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                    <Compass size={20} /> Fazer Tour Guiado
+                </button>
             </header>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '80px', marginBottom: '80px' }}>
