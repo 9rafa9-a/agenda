@@ -52,6 +52,8 @@ const DiseaseEditor = () => {
 
     // Evidence Panel State
     const [showEvidence, setShowEvidence] = useState(false);
+    // Exam Context State
+    const [showExamContext, setShowExamContext] = useState(false);
 
     // Load data if ID exists
     useEffect(() => {
@@ -385,6 +387,25 @@ const DiseaseEditor = () => {
                             <style>{`.spin { animation: spin 1s linear infinite; } @keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
 
                             <button
+                                onClick={() => setShowExamContext(true)}
+                                style={{
+                                    display: 'flex', alignItems: 'center', gap: '8px',
+                                    padding: '8px 16px', borderRadius: '20px', border: '1px solid #ddd', cursor: 'pointer',
+                                    background: showExamContext ? '#ffedd5' : '#fff', color: showExamContext ? '#d97706' : '#555',
+                                    fontWeight: '600'
+                                }}>
+                                <FileText size={18} /> Questões
+                            </button>
+
+                            <button onClick={() => setShowEvidence(true)} style={{
+                                display: 'flex', alignItems: 'center', gap: '8px',
+                                padding: '8px 16px', borderRadius: '20px', border: '1px solid #ddd', cursor: 'pointer',
+                                background: '#fff', color: '#555', fontWeight: '600'
+                            }}>
+                                <Brain size={18} /> Evidências 🔬
+                            </button>
+
+                            <button
                                 onClick={handleTrash}
                                 style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#ff6b6b' }}
                             >
@@ -410,182 +431,178 @@ const DiseaseEditor = () => {
 
                     <div style={{ width: '1px', height: '24px', background: '#ddd' }}></div>
 
-                    <button
-                        onClick={() => setShowEvidence(true)}
-                        style={{
-                            display: 'flex', gap: '8px', alignItems: 'center', color: '#1565c0',
-                            background: '#e3f2fd', border: 'none', padding: '8px 16px',
-                            borderRadius: '20px', fontWeight: '600', cursor: 'pointer'
-                        }}
-                    >
-                        🔬 Evidências
-                    </button>
-                </div>
-            </div>
-
-            {/* Evidence Panel Drawer */}
-            {showEvidence && (
-                <EvidencePanel
-                    diseaseName={name}
-                    onClose={() => setShowEvidence(false)}
-                />
-            )}
-
-            {/* History Modal */}
-            {showHistory && (
-                <div style={{
-                    position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-                    background: 'rgba(0,0,0,0.5)', zIndex: 2000,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center'
-                }} onClick={() => setShowHistory(false)}>
-                    <div style={{
-                        background: '#fff', padding: '32px', borderRadius: '12px',
-                        width: '90%', maxWidth: '500px', maxHeight: '80vh', overflowY: 'auto'
-                    }} onClick={e => e.stopPropagation()}>
-                        <h3 style={{ marginTop: 0 }}>Histórico de Versões</h3>
-                        {loadingHistory ? <p>Carregando...</p> : (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                {historyList.length === 0 && <p style={{ color: '#aaa' }}>Nenhuma versão salva manualmente ainda.</p>}
-                                {historyList.map(v => (
-                                    <div key={v.vid} style={{
-                                        border: '1px solid #eee', padding: '12px', borderRadius: '8px',
-                                        display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-                                    }}>
-                                        <div>
-                                            <div style={{ fontWeight: 'bold' }}>{new Date(v.savedAt).toLocaleString()}</div>
-                                            <div style={{ fontSize: '0.8rem', color: '#666' }}>{v.topics ? Object.keys(v.topics).length : 0} tópicos</div>
-                                        </div>
-                                        <button
-                                            onClick={() => restoreVersion(v)}
-                                            style={{
-                                                background: '#eee', border: 'none', padding: '8px 12px', borderRadius: '6px',
-                                                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px'
-                                            }}
-                                        >
-                                            <RotateCcw size={14} /> Restaurar
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                        <button onClick={() => setShowHistory(false)} style={{ marginTop: '20px', width: '100%', padding: '12px', border: '1px solid #ddd', background: 'none', borderRadius: '8px', cursor: 'pointer' }}>Fechar</button>
-                    </div>
-                </div>
-            )}
-
-            {/* Printable Area Wrapper */}
-            <div ref={componentRef} style={{ padding: '20px' }} className="print-content">
-                {/* Header Input */}
-                <div style={{
-                    textAlign: 'center',
-                    marginBottom: '32px',
-                    background: '#fff',
-                    padding: '24px',
-                    borderRadius: 'var(--border-radius)',
-                    boxShadow: 'var(--shadow-sm)'
-                }}>
-                    <input
-                        type="text"
-                        value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
-                        placeholder="Matéria (ex: Ginecologia)"
-                        list="subjects-list"
-                        style={{
-                            display: 'block',
-                            margin: '0 auto 16px auto',
-                            padding: '8px 16px',
-                            borderRadius: '20px',
-                            border: '1px solid #eee',
-                            fontSize: '0.9rem',
-                            textAlign: 'center',
-                            width: '200px',
-                            outline: 'none',
-                            color: '#666'
-                        }}
-                    />
-                    <datalist id="subjects-list">
-                        <option value="Cardiologia" />
-                        <option value="Ginecologia" />
-                        <option value="Pediatria" />
-                        <option value="Cirurgia" />
-                        <option value="Preventiva" />
-                    </datalist>
-
-                    <label style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        textTransform: 'uppercase',
-                        marginBottom: '8px',
-                        color: '#888'
-                    }}>Tema da Aula / Doença</label>
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Ex: Insuficiência Cardíaca"
-                        style={{
-                            fontSize: '2rem',
-                            textAlign: 'center',
-                            border: 'none',
-                            borderBottom: '2px solid var(--color-primary)',
-                            outline: 'none',
-                            width: '100%',
-                            maxWidth: '600px',
-                            fontFamily: 'var(--font-main)',
-                            fontWeight: 'bold',
-                            color: 'var(--color-text)'
-                        }}
-                    />
-                </div>
-
-                {/* 9-Grid Layout */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: '24px'
-                }}>
-                    {Object.entries(DEFAULT_TOPICS).map(([key, config], idx) => (
-                        <TopicSection
-                            key={key}
-                            index={idx + 1}
-                            title={config.title}
-                            color={config.color}
-                            content={data[key]}
-                            isEditable={true}
-                            onChange={(val) => handleChange(key, val)}
-                        />
-                    ))}
-                </div>
-            </div>
-
-            {/* Save Button */}
-            <div style={{ marginTop: '40px', textAlign: 'center' }}>
-                <button
-                    onClick={handleManualSave}
-                    disabled={saving}
-                    style={{
-                        background: 'var(--color-text)',
-                        color: '#fff',
-                        padding: '12px 32px',
-                        borderRadius: '50px',
-                        fontSize: '1rem',
-                        fontWeight: '600',
-                        boxShadow: 'var(--shadow-md)',
-                        transition: 'transform 0.2s',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        opacity: saving ? 0.7 : 1
-                    }}
-                    onMouseOver={(e) => !saving && (e.currentTarget.style.transform = 'scale(1.05)')}
-                    onMouseOut={(e) => !saving && (e.currentTarget.style.transform = 'scale(1)')}
-                >
-                    <Save size={20} /> {saving ? 'Salvando...' : 'Salvar Resumo'}
+                    🔬 Evidências
                 </button>
             </div>
+        </div>
 
-            {/* PDF Styles Helper */}
-            <style>{`
+            {/* Evidence Panel Drawer */ }
+    {
+        showEvidence && (
+            <EvidencePanel
+                diseaseName={name}
+                onClose={() => setShowEvidence(false)}
+            />
+        )
+    }
+
+    {/* History Modal */ }
+    {
+        showHistory && (
+            <div style={{
+                position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                background: 'rgba(0,0,0,0.5)', zIndex: 2000,
+                display: 'flex', alignItems: 'center', justifyContent: 'center'
+            }} onClick={() => setShowHistory(false)}>
+                <div style={{
+                    background: '#fff', padding: '32px', borderRadius: '12px',
+                    width: '90%', maxWidth: '500px', maxHeight: '80vh', overflowY: 'auto'
+                }} onClick={e => e.stopPropagation()}>
+                    <h3 style={{ marginTop: 0 }}>Histórico de Versões</h3>
+                    {loadingHistory ? <p>Carregando...</p> : (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            {historyList.length === 0 && <p style={{ color: '#aaa' }}>Nenhuma versão salva manualmente ainda.</p>}
+                            {historyList.map(v => (
+                                <div key={v.vid} style={{
+                                    border: '1px solid #eee', padding: '12px', borderRadius: '8px',
+                                    display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                                }}>
+                                    <div>
+                                        <div style={{ fontWeight: 'bold' }}>{new Date(v.savedAt).toLocaleString()}</div>
+                                        <div style={{ fontSize: '0.8rem', color: '#666' }}>{v.topics ? Object.keys(v.topics).length : 0} tópicos</div>
+                                    </div>
+                                    <button
+                                        onClick={() => restoreVersion(v)}
+                                        style={{
+                                            background: '#eee', border: 'none', padding: '8px 12px', borderRadius: '6px',
+                                            cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px'
+                                        }}
+                                    >
+                                        <RotateCcw size={14} /> Restaurar
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    <button onClick={() => setShowHistory(false)} style={{ marginTop: '20px', width: '100%', padding: '12px', border: '1px solid #ddd', background: 'none', borderRadius: '8px', cursor: 'pointer' }}>Fechar</button>
+                </div>
+            </div>
+        )
+    }
+
+    {/* Printable Area Wrapper */ }
+    <div ref={componentRef} style={{ padding: '20px' }} className="print-content">
+        {/* Header Input */}
+        <div style={{
+            textAlign: 'center',
+            marginBottom: '32px',
+            background: '#fff',
+            padding: '24px',
+            borderRadius: 'var(--border-radius)',
+            boxShadow: 'var(--shadow-sm)'
+        }}>
+            <input
+                type="text"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                placeholder="Matéria (ex: Ginecologia)"
+                list="subjects-list"
+                style={{
+                    display: 'block',
+                    margin: '0 auto 16px auto',
+                    padding: '8px 16px',
+                    borderRadius: '20px',
+                    border: '1px solid #eee',
+                    fontSize: '0.9rem',
+                    textAlign: 'center',
+                    width: '200px',
+                    outline: 'none',
+                    color: '#666'
+                }}
+            />
+            <datalist id="subjects-list">
+                <option value="Cardiologia" />
+                <option value="Ginecologia" />
+                <option value="Pediatria" />
+                <option value="Cirurgia" />
+                <option value="Preventiva" />
+            </datalist>
+
+            <label style={{
+                display: 'block',
+                fontSize: '0.8rem',
+                textTransform: 'uppercase',
+                marginBottom: '8px',
+                color: '#888'
+            }}>Tema da Aula / Doença</label>
+            <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Ex: Insuficiência Cardíaca"
+                style={{
+                    fontSize: '2rem',
+                    textAlign: 'center',
+                    border: 'none',
+                    borderBottom: '2px solid var(--color-primary)',
+                    outline: 'none',
+                    width: '100%',
+                    maxWidth: '600px',
+                    fontFamily: 'var(--font-main)',
+                    fontWeight: 'bold',
+                    color: 'var(--color-text)'
+                }}
+            />
+        </div>
+
+        {/* 9-Grid Layout */}
+        <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '24px'
+        }}>
+            {Object.entries(DEFAULT_TOPICS).map(([key, config], idx) => (
+                <TopicSection
+                    key={key}
+                    index={idx + 1}
+                    title={config.title}
+                    color={config.color}
+                    content={data[key]}
+                    isEditable={true}
+                    onChange={(val) => handleChange(key, val)}
+                />
+            ))}
+        </div>
+    </div>
+
+    {/* Save Button */ }
+    <div style={{ marginTop: '40px', textAlign: 'center' }}>
+        <button
+            onClick={handleManualSave}
+            disabled={saving}
+            style={{
+                background: 'var(--color-text)',
+                color: '#fff',
+                padding: '12px 32px',
+                borderRadius: '50px',
+                fontSize: '1rem',
+                fontWeight: '600',
+                boxShadow: 'var(--shadow-md)',
+                transition: 'transform 0.2s',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                opacity: saving ? 0.7 : 1
+            }}
+            onMouseOver={(e) => !saving && (e.currentTarget.style.transform = 'scale(1.05)')}
+            onMouseOut={(e) => !saving && (e.currentTarget.style.transform = 'scale(1)')}
+        >
+            <Save size={20} /> {saving ? 'Salvando...' : 'Salvar Resumo'}
+        </button>
+    </div>
+
+    {/* PDF Styles Helper */ }
+    <style>{`
         @media print {
           .print-content {
              margin: 0;
@@ -598,7 +615,7 @@ const DiseaseEditor = () => {
           }
         }
       `}</style>
-        </div>
+        </div >
     );
 };
 
