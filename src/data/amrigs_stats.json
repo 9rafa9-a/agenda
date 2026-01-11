@@ -1324,7 +1324,7 @@
     "id": 36,
     "area": "Cirurgia Geral",
     "specialty": "Oncologia Cutânea",
-    "topic": "Carcinoma Espinocelular (Diagnóstico) 1",
+    "topic": "Carcinoma Espinocelular (Diagnóstico)",
     "focus": "Diagnóstico",
     "summary": "Úlcera de Marjolin: Diagnóstico histológico é Carcinoma Espinocelular (CEC) sobre cicatriz crônica.",
     "summaryLength": 99
@@ -1334,7 +1334,7 @@
     "id": 37,
     "area": "Clínica Médica",
     "specialty": "Hematologia",
-    "topic": "PTI (Indicações de Esplenectomia) 2",
+    "topic": "PTI (Indicações de Esplenectomia)",
     "focus": "Tratamento",
     "summary": "PTI (Púrpura Trombocitopênica Imune): Esplenectomia é indicada apenas em casos crônicos ou refratários a corticoide/imunoglobulina (Falha do tratamento clínico).",
     "summaryLength": 161
@@ -1344,7 +1344,7 @@
     "id": 38,
     "area": "Clínica Médica",
     "specialty": "Hematologia",
-    "topic": "Distúrbios da Hemostasia (Semiologia) 3",
+    "topic": "Distúrbios da Hemostasia (Semiologia)",
     "focus": "Diagnóstico",
     "summary": "Hemostasia: Sangramento articular/muscular (Hemartrose) = Fatores de Coagulação (Hemofilias). Sangramento pele/mucosa (Púrpura) = Plaquetas.",
     "summaryLength": 140
@@ -1354,7 +1354,7 @@
     "id": 39,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Infecções na Gestação",
-    "topic": "HIV (Manejo Puerperal) 4",
+    "topic": "HIV (Manejo Puerperal)",
     "focus": "Tratamento",
     "summary": "HIV Gestante: TARV iniciada na gestação deve ser mantida por toda a vida (independente do CD4) após o parto.",
     "summaryLength": 108
@@ -1364,7 +1364,7 @@
     "id": 40,
     "area": "Cirurgia Geral",
     "specialty": "Hemorragia Digestiva",
-    "topic": "Abordagem Inicial (Estabilidade Hemodinâmica) 5",
+    "topic": "Abordagem Inicial (Estabilidade Hemodinâmica)",
     "focus": "Tratamento",
     "summary": "Hemorragia Digestiva: Prioridade inicial é estabilidade hemodinâmica (Cristaloides/Volume/ABC). A etiologia vem depois.",
     "summaryLength": 119
@@ -1374,7 +1374,7 @@
     "id": 41,
     "area": "Clínica Médica",
     "specialty": "Nefrologia",
-    "topic": "Distúrbios do Sódio (Hiponatremia) 6",
+    "topic": "Distúrbios do Sódio (Hiponatremia)",
     "focus": "Epidemiologia/Risco",
     "summary": "Hiponatremia: É o distúrbio hidroeletrolítico mais comum em pacientes hospitalizados.",
     "summaryLength": 85
@@ -1384,7 +1384,7 @@
     "id": 42,
     "area": "Clínica Médica",
     "specialty": "Nefrologia",
-    "topic": "Hiponatremia Hipertônica (Hiperosmolar) 7",
+    "topic": "Hiponatremia Hipertônica (Hiperosmolar)",
     "focus": "Diagnóstico",
     "summary": "Estado Hiperosmolar (HHS): DM2 idoso + Hiperglicemia extrema + Desidratação. Leva a Hiponatremia (dilucional pela glicose alta) e convulsões/coma.",
     "summaryLength": 146
@@ -1394,7 +1394,7 @@
     "id": 43,
     "area": "Clínica Médica",
     "specialty": "Pneumologia / Infecto",
-    "topic": "Pneumonia em Fibrose Cística (Agentes) 8",
+    "topic": "Pneumonia em Fibrose Cística (Agentes)",
     "focus": "Diagnóstico",
     "summary": "Fibrose Cística: Pneumonia de repetição / Bronquiectasias. Agente clássico: Pseudomonas aeruginosa.",
     "summaryLength": 99
@@ -1404,7 +1404,7 @@
     "id": 44,
     "area": "Clínica Médica",
     "specialty": "Hepatologia",
-    "topic": "Hepatite C (História Natural e Tratamento) 9",
+    "topic": "Hepatite C (História Natural e Tratamento)",
     "focus": "Complicação/Prognóstico",
     "summary": "Hepatite C: A regra é cronificar (80%). Cirrose ocorre em 20-30% após décadas. Tratamento visa RVS (Resposta Virológica Sustentada = Cura).",
     "summaryLength": 139
@@ -1414,7 +1414,7 @@
     "id": 45,
     "area": "Clínica Médica",
     "specialty": "Hepatologia",
-    "topic": "Hepatite B (Marcadores e Evolução) 10",
+    "topic": "Hepatite B (Marcadores e Evolução)",
     "focus": "Diagnóstico",
     "summary": "Hepatite B: Anti-HBs positivo isolado = Cura ou Vacina. Hepatocarcinoma pode ocorrer na Hepatite B sem cirrose prévia (DNA oncogênico).",
     "summaryLength": 135
@@ -1424,7 +1424,7 @@
     "id": 46,
     "area": "Clínica Médica",
     "specialty": "Reumatologia",
-    "topic": "Lúpus Induzido por Drogas 11",
+    "topic": "Lúpus Induzido por Drogas",
     "focus": "Epidemiologia/Risco",
     "summary": "Lúpus Induzido por Drogas: Drogas clássicas: Procainamida (maior risco) e Hidralazina (mais comum). Marcador: Anti-Histona.",
     "summaryLength": 123
@@ -1434,7 +1434,7 @@
     "id": 47,
     "area": "Clínica Médica",
     "specialty": "Endocrinologia",
-    "topic": "Hipotireoidismo (Laboratório) 12",
+    "topic": "Hipotireoidismo (Laboratório)",
     "focus": "Diagnóstico",
     "summary": "Hipotireoidismo Primário: Falência da glândula (T4 baixo) leva ao aumento do estímulo hipofisário (TSH Alto).",
     "summaryLength": 109
@@ -1444,7 +1444,7 @@
     "id": 48,
     "area": "Clínica Médica",
     "specialty": "Nefrologia",
-    "topic": "Hipocalemia (Etiologias) 13",
+    "topic": "Hipocalemia (Etiologias)",
     "focus": "Epidemiologia/Risco",
     "summary": "Hipocalemia: Causa mais comum: Perdas gastrointestinais (diarreia infecciosa/vômitos) ou uso de diuréticos.",
     "summaryLength": 107
@@ -1454,7 +1454,7 @@
     "id": 49,
     "area": "Clínica Médica",
     "specialty": "Endocrinologia",
-    "topic": "Hiperaldosteronismo Primário 14",
+    "topic": "Hiperaldosteronismo Primário",
     "focus": "Diagnóstico",
     "summary": "Hiperaldosteronismo Primário: HAS resistente + Hipocalemia + Alcalose metabólica. Aldosterona retém Na+ (Pressão) e expolia K+.",
     "summaryLength": 127
@@ -1464,7 +1464,7 @@
     "id": 50,
     "area": "Clínica Médica",
     "specialty": "Hepatologia",
-    "topic": "Hepatite C (Interpretação Sorológica/Cura) 15",
+    "topic": "Hepatite C (Interpretação Sorológica/Cura)",
     "focus": "Diagnóstico",
     "summary": "HCV: Anti-HCV (+) = Contato prévio. HCV-RNA (genótipo) negativo = Ausência de vírus circulante (Cura espontânea ou pós-tratamento).",
     "summaryLength": 131
@@ -1474,7 +1474,7 @@
     "id": 51,
     "area": "Clínica Médica",
     "specialty": "Hematologia",
-    "topic": "Anemia Megaloblástica (Causas) 16",
+    "topic": "Anemia Megaloblástica (Causas)",
     "focus": "Diagnóstico",
     "summary": "Anemia Megaloblástica: Defeito na síntese de DNA. Causas: Deficiência de B12, Folato ou drogas inibidoras de DNA (Ex: Metotrexato, Hidroxiureia).",
     "summaryLength": 145
@@ -1484,7 +1484,7 @@
     "id": 52,
     "area": "Clínica Médica",
     "specialty": "Cardiologia",
-    "topic": "IECA (Efeitos Adversos/Tosse) 17",
+    "topic": "IECA (Efeitos Adversos/Tosse)",
     "focus": "Complicação/Prognóstico",
     "summary": "IECA: Efeito adverso clássico = Tosse seca (não produtiva) por acúmulo de bradicinina.",
     "summaryLength": 86
@@ -1494,7 +1494,7 @@
     "id": 53,
     "area": "Clínica Médica",
     "specialty": "Pneumologia",
-    "topic": "Asma (Gatilhos Medicamentosos) 18",
+    "topic": "Asma (Gatilhos Medicamentosos)",
     "focus": "Definição/Fisiopato",
     "summary": "Broncoespasmo: Desencadeantes: Beta-bloqueadores, AINEs (Aspirina), Histamina. Agonistas Beta-adrenérgicos (ex: Salbutamol) tratam e não causam.",
     "summaryLength": 144
@@ -1504,7 +1504,7 @@
     "id": 54,
     "area": "Clínica Médica",
     "specialty": "Nefrologia / Infecto",
-    "topic": "Pielonefrite Aguda (Diagnóstico) 19",
+    "topic": "Pielonefrite Aguda (Diagnóstico)",
     "focus": "Diagnóstico",
     "summary": "Pielonefrite vs Nefrolitíase: Febre alta + Dor lombar + Queda estado geral = Pielonefrite (Infecção). História prévia de dor/hematúria sugere cálculo como fator causal.",
     "summaryLength": 168
@@ -1514,7 +1514,7 @@
     "id": 55,
     "area": "Clínica Médica",
     "specialty": "Cardiologia",
-    "topic": "IAM com Supra (Conduta Inicial) 20",
+    "topic": "IAM com Supra (Conduta Inicial)",
     "focus": "Tratamento",
     "summary": "SCA sem Supra (Angina Instável/IAMSSST): Tratamento: AAS, Nitrato (se dor), Morfina (se dor refratária), Beta-bloqueador. Não fazer trombolítico.",
     "summaryLength": 145
@@ -1524,7 +1524,7 @@
     "id": 56,
     "area": "Clínica Médica",
     "specialty": "Nefrologia / Endócrino",
-    "topic": "Nefropatia Diabética (Manejo da PA) 21",
+    "topic": "Nefropatia Diabética (Manejo da PA)",
     "focus": "Tratamento",
     "summary": "Nefropatia Diabética Grave: Creatinina > 3.2 contraindica Metformina (risco acidose lática). Controle pressórico rigoroso e suspensão do tabagismo são vitais.",
     "summaryLength": 158
@@ -1534,7 +1534,7 @@
     "id": 57,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologia Cervical",
-    "topic": "Citopatológico (Conduta em Metaplasia) 22",
+    "topic": "Citopatológico (Conduta em Metaplasia)",
     "focus": "Prevenção/Rastreamento",
     "summary": "Preventivo (Colo): Metaplasia é achado benigno. Se citologia normal em < 30 anos: Rotina normal (repetir em 3 anos, se tiver 2 negativos anteriores anuais).",
     "summaryLength": 156
@@ -1544,7 +1544,7 @@
     "id": 58,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Oncologia Ginecológica",
-    "topic": "Fatores de Risco (Mama, Colo, Endométrio, Ovário) 23",
+    "topic": "Fatores de Risco (Mama, Colo, Endométrio, Ovário)",
     "focus": "Epidemiologia/Risco",
     "summary": "Fatores de Risco CA: Colo Uterino (Baixo nível socioeconômico/HPV). Ovário/Mama (BRCA). Endométrio (Obesidade/Anovulação - exposição estrogênica).",
     "summaryLength": 146
@@ -1554,7 +1554,7 @@
     "id": 59,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Endometriose",
-    "topic": "Fisiopatologia 24",
+    "topic": "Fisiopatologia",
     "focus": "Definição/Fisiopato",
     "summary": "Endometriose: Doença multifatorial: Menstruação retrógrada + Genética + Imunologia alterada + Ambiente inflamatório.",
     "summaryLength": 116
@@ -1564,7 +1564,7 @@
     "id": 60,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Infertilidade",
-    "topic": "Fator Tuboperitoneal (Causas) 25",
+    "topic": "Fator Tuboperitoneal (Causas)",
     "focus": "Epidemiologia/Risco",
     "summary": "Infertilidade Tubária: Principal causa é sequela de Doença Inflamatória Pélvica (DIP) -> Aderências/Hidrossalpinge.",
     "summaryLength": 115
@@ -1574,7 +1574,7 @@
     "id": 61,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Climatério",
-    "topic": "Terapia Hormonal (Indicações e Vias) 26",
+    "topic": "Terapia Hormonal (Indicações e Vias)",
     "focus": "Tratamento",
     "summary": "Terapia Hormonal (Menopausa): Se tem útero, OBRIGATÓRIO associar progestogênio ao estrogênio (para evitar Ca de Endométrio). Tabagismo não é contraindicação absoluta (preferir via transdérmica).",
     "summaryLength": 194
@@ -1584,7 +1584,7 @@
     "id": 62,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "SOP / Infertilidade",
-    "topic": "Riscos da Indução e da Síndrome 27",
+    "topic": "Riscos da Indução e da Síndrome",
     "focus": "Complicação/Prognóstico",
     "summary": "SOP (Riscos): Risco aumentado de Diabetes Gestacional, Abortamento e Síndrome de Hiperestimulação Ovariana (SHO) em tratamentos de fertilidade.",
     "summaryLength": 143
@@ -1594,7 +1594,7 @@
     "id": 63,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Fisiologia",
-    "topic": "Ciclo Menstrual (Neuroendocrinologia) 28",
+    "topic": "Ciclo Menstrual (Neuroendocrinologia)",
     "focus": "Definição/Fisiopato",
     "summary": "Amenorreia Hipotalâmica: Estresse -> Aumento de endorfinas/CRH -> Inibição do GnRH -> Anovulação.",
     "summaryLength": 97
@@ -1604,7 +1604,7 @@
     "id": 64,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
-    "topic": "Contracepção na Lactação 29",
+    "topic": "Contracepção na Lactação",
     "focus": "Tratamento",
     "summary": "Contracepção Lactação: Estrogênio (Combinados) prejudica aleitamento (Categoria 4 < 6 semanas). Usar Progestogênio isolado (Minipílula) ou DIU.",
     "summaryLength": 143
@@ -1614,7 +1614,7 @@
     "id": 65,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Rastreamento",
-    "topic": "Câncer de Colo Uterino (Idade de Início) 30",
+    "topic": "Câncer de Colo Uterino (Idade de Início)",
     "focus": "Prevenção/Rastreamento",
     "summary": "Rastreio Colo Uterino: Início aos 25 anos. Antes disso, alta prevalência de HPV mas alta taxa de clareamento espontâneo. Rastreio precoce gera overdiagnosis/overtreatment.",
     "summaryLength": 171
@@ -1624,7 +1624,7 @@
     "id": 66,
     "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
-    "topic": "Sigilo Médico (Código de Ética) 31",
+    "topic": "Sigilo Médico (Código de Ética)",
     "focus": "Definição/Fisiopato",
     "summary": "Sigilo Médico: É vedado revelar mesmo se fato público ou paciente falecido. Exceções: Dever legal, justa causa (risco à vida), consentimento escrito.",
     "summaryLength": 149
@@ -1634,7 +1634,7 @@
     "id": 67,
     "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
-    "topic": "Curva Normal (Média, Mediana, Moda) 32",
+    "topic": "Curva Normal (Média, Mediana, Moda)",
     "focus": "Definição/Fisiopato",
     "summary": "Curva Normal (Gauss): Simétrica. Média = Mediana = Moda. Assintótica (nunca toca o eixo X).",
     "summaryLength": 91
@@ -1644,7 +1644,7 @@
     "id": 68,
     "area": "Medicina Preventiva",
     "specialty": "Promoção da Saúde",
-    "topic": "Conceitos (Desvelamento) 33",
+    "topic": "Conceitos (Desvelamento)",
     "focus": "Definição/Fisiopato",
     "summary": "Desvelamento: Técnica da medicina de família para revelar (\"tirar o véu\") fatores estressores ocultos na queixa do paciente.",
     "summaryLength": 124
@@ -1654,7 +1654,7 @@
     "id": 69,
     "area": "Medicina Preventiva",
     "specialty": "Medicina de Família",
-    "topic": "Método Clínico Centrado na Pessoa 34",
+    "topic": "Método Clínico Centrado na Pessoa",
     "focus": "Diagnóstico",
     "summary": "Método Clínico Centrado na Pessoa: Explorar a experiência da doença (sentimentos, ideias, funções, expectativas). Não ignorar crenças, mas dialogar com elas.",
     "summaryLength": 157
@@ -1664,7 +1664,7 @@
     "id": 70,
     "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
-    "topic": "Segurança do Paciente (Metas Internacionais) 35",
+    "topic": "Segurança do Paciente (Metas Internacionais)",
     "focus": "Prevenção/Rastreamento",
     "summary": "Metas de Segurança do Paciente (OMS): Redução de custos NÃO é uma meta internacional de segurança. As metas focam em: Identificação, Comunicação, Medicamentos, Cirurgia segura, Mãos (infecção), Quedas/Úlceras.",
     "summaryLength": 209
@@ -1674,7 +1674,7 @@
     "id": 71,
     "area": "Medicina Preventiva",
     "specialty": "Saúde Pública / APS",
-    "topic": "Atributos da Atenção Primária 1",
+    "topic": "Atributos da Atenção Primária",
     "focus": "Epidemiologia/Risco",
     "summary": "Atenção Primária Forte: Sistemas baseados em APS têm melhores indicadores de saúde, maior equidade e menores custos (Starfield).",
     "summaryLength": 128
@@ -1684,7 +1684,7 @@
     "id": 72,
     "area": "Medicina Preventiva",
     "specialty": "Vigilância em Saúde",
-    "topic": "Desastres Naturais e Doenças Infecciosas 2",
+    "topic": "Desastres Naturais e Doenças Infecciosas",
     "focus": "Epidemiologia/Risco",
     "summary": "Desastres Naturais (Enchentes): Aumentam risco de Leptospirose (água contaminada), Doenças Diarreicas e Vetoriais (Dengue/Malária - água parada).",
     "summaryLength": 145
@@ -1694,7 +1694,7 @@
     "id": 73,
     "area": "Medicina Preventiva",
     "specialty": "Ética / Medicina Legal",
-    "topic": "Adolescente (ECA e Sigilo) 3",
+    "topic": "Adolescente (ECA e Sigilo)",
     "focus": "Definição/Fisiopato",
     "summary": "Sigilo no Adolescente: Adolescente tem direito a sigilo e privacidade, salvo se houver risco de vida/dano grave (ex: suicídio, abuso). Nesse caso, a quebra de sigilo é obrigatória e o paciente deve ser informado.",
     "summaryLength": 212
@@ -1704,7 +1704,7 @@
     "id": 74,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Diagnóstico de Gravidez",
-    "topic": "Sinais Clínicos e Beta-hCG 4",
+    "topic": "Sinais Clínicos e Beta-hCG",
     "focus": "Diagnóstico",
     "summary": "Diagnóstico de Gravidez: Beta-hCG é padrão-ouro laboratorial. Diagnóstico precoce e datação (DUM/USG precoce) são fundamentais. Ausência de sinais físicos não exclui gravidez inicial.",
     "summaryLength": 183
@@ -1724,7 +1724,7 @@
     "id": 76,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Mecanismo de Parto",
-    "topic": "Estática Fetal (Situação/Apresentação) 6",
+    "topic": "Estática Fetal (Situação/Apresentação)",
     "focus": "Diagnóstico",
     "summary": "Estática Fetal: Situação Longitudinal, Apresentação Cefálica, Posição OEA (Occípito-Esquerda-Anterior) é a mais comum. Plano 0 De Lee = Espinhas ciáticas.",
     "summaryLength": 154
@@ -1734,7 +1734,7 @@
     "id": 77,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Gemelaridade",
-    "topic": "Complicações e Associações 7",
+    "topic": "Complicações e Associações",
     "focus": "Complicação/Prognóstico",
     "summary": "Gestação Gemelar: Riscos aumentados: Prematuridade, Pré-eclâmpsia, RCIU. Reprodução assistida aumenta incidência.",
     "summaryLength": 113
@@ -1744,7 +1744,7 @@
     "id": 78,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Semiologia Obstétrica",
-    "topic": "Manobras de Leopold-Zweifel 8",
+    "topic": "Manobras de Leopold-Zweifel",
     "focus": "Diagnóstico",
     "summary": "Manobras de Leopold: Determinam Situação, Posição, Apresentação e Insinuação. Não diagnosticam \"Trabalho de Parto\" (que depende de dinâmica uterina e colo).",
     "summaryLength": 156
@@ -1754,7 +1754,7 @@
     "id": 79,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Doenças na Gestação",
-    "topic": "DHEG (Pré-eclâmpsia Grave e Conduta) 9",
+    "topic": "DHEG (Pré-eclâmpsia Grave e Conduta)",
     "focus": "Tratamento",
     "summary": "Pré-eclâmpsia Grave: Sinais de iminência de eclâmpsia (cefaleia, escotomas, epigastralgia) + > 34 semanas = Parto. Sulfato de Mg para prevenir convulsão.",
     "summaryLength": 153
@@ -1764,7 +1764,7 @@
     "id": 80,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Sangramento 1ª Metade",
-    "topic": "Diagnóstico Diferencial (Abortamento/Ectópica) 10",
+    "topic": "Diagnóstico Diferencial (Abortamento/Ectópica)",
     "focus": "Diagnóstico",
     "summary": "Beta-hCG: Deve dobrar a cada 48h em gestação viável. Queda dos títulos + Sangramento = Abortamento em curso ou Ectópica em resolução (Gestação não evolutiva).",
     "summaryLength": 158
@@ -1774,7 +1774,7 @@
     "id": 81,
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
-    "topic": "CIUR (Etiologia Tardia/Insuficiência Placentária) 11",
+    "topic": "CIUR (Etiologia Tardia/Insuficiência Placentária)",
     "focus": "Definição/Fisiopato",
     "summary": "CIUR Tardio (Assimétrico): Causa principal é Insuficiência Placentária. Ocorre \"brain sparing\" (cabeça normal, abdome pequeno). CIUR Precoce (Simétrico) = Genética/Infecção.",
     "summaryLength": 173
@@ -1784,7 +1784,7 @@
     "id": 82,
     "area": "Pediatria",
     "specialty": "Infectologia / Reumato",
-    "topic": "Miosite Aguda Viral (Benigna) 12",
+    "topic": "Miosite Aguda Viral (Benigna)",
     "focus": "Diagnóstico",
     "summary": "Miosite Viral Aguda: Criança pós-infecção viral (Influenza), dor na panturrilha, recusa a andar, CPK muito alta. Quadro benigno e autolimitado.",
     "summaryLength": 143
@@ -1794,7 +1794,7 @@
     "id": 83,
     "area": "Pediatria",
     "specialty": "Reumatologia",
-    "topic": "Febre Reumática vs Artrite Pós-Estreptocócica 13",
+    "topic": "Febre Reumática vs Artrite Pós-Estreptocócica",
     "focus": "Diagnóstico",
     "summary": "Febre Reumática vs Artrite Pós-Estreptocócica: FR = Poliartrite migratória fugaz, responde a AAS. Artrite Pós-Estrep = Persistente, não migratória, resposta pobre a AAS.",
     "summaryLength": 169
@@ -1804,7 +1804,7 @@
     "id": 84,
     "area": "Pediatria",
     "specialty": "Violência / Social",
-    "topic": "Maus-tratos na Infância 14",
+    "topic": "Maus-tratos na Infância",
     "focus": "Epidemiologia/Risco",
     "summary": "Maus Tratos: Maioria dos agressores são familiares/conhecidos. Negligência é a forma mais comum.",
     "summaryLength": 96
@@ -1814,7 +1814,7 @@
     "id": 85,
     "area": "Pediatria",
     "specialty": "Endocrinologia",
-    "topic": "Puberdade Precoce Central (Etiologia) 15",
+    "topic": "Puberdade Precoce Central (Etiologia)",
     "focus": "Definição/Fisiopato",
     "summary": "Puberdade Precoce: Meninas = 90% Idiopática. Meninos = 50% Tumor SNC (Obrigatório imagem de crânio em meninos).",
     "summaryLength": 111
@@ -1824,7 +1824,7 @@
     "id": 86,
     "area": "Pediatria",
     "specialty": "Cardiologia / Emergência",
-    "topic": "Taquicardia Supraventricular (Adenosina) 16",
+    "topic": "Taquicardia Supraventricular (Adenosina)",
     "focus": "Tratamento",
     "summary": "Taquicardia Supraventricular (TSV): Criança estável: Manobra vagal -> Adenosina IV (ataque rápido). Se instável: Cardioversão.",
     "summaryLength": 126
@@ -1834,7 +1834,7 @@
     "id": 87,
     "area": "Pediatria",
     "specialty": "Neonatologia",
-    "topic": "Icterícia e Aleitamento Materno 17",
+    "topic": "Icterícia e Aleitamento Materno",
     "focus": "Definição/Fisiopato",
     "summary": "Icterícia e Amamentação: Aleitamento precoce estimula trânsito intestinal -> eliminação de mecônio -> reduz circulação êntero-hepática de bilirrubina -> Reduz icterícia.",
     "summaryLength": 169
@@ -1844,7 +1844,7 @@
     "id": 88,
     "area": "Pediatria",
     "specialty": "Infectologia",
-    "topic": "Coqueluche (Diagnóstico e Tratamento) 18",
+    "topic": "Coqueluche (Diagnóstico e Tratamento)",
     "focus": "Tratamento",
     "summary": "Coqueluche: Tratamento com macrolídeo (Azitromicina) reduz o período de transmissão, mas não altera muito o curso da tosse na fase paroxística.",
     "summaryLength": 143
@@ -1854,7 +1854,7 @@
     "id": 89,
     "area": "Pediatria",
     "specialty": "Imunizações",
-    "topic": "Vacinação em Prematuros / Contraindicações 19",
+    "topic": "Vacinação em Prematuros / Contraindicações",
     "focus": "Prevenção/Rastreamento",
     "summary": "Vacinação Prematuro: Segue a Idade Cronológica (não corrigida). Única exceção é BCG (precisa de > 2kg).",
     "summaryLength": 103
@@ -1864,7 +1864,7 @@
     "id": 90,
     "area": "Pediatria",
     "specialty": "Gastroenterologia / Alergia",
-    "topic": "Alergia Alimentar (Diagnóstico) 20",
+    "topic": "Alergia Alimentar (Diagnóstico)",
     "focus": "Diagnóstico",
     "summary": "Alergia Alimentar: Padrão-ouro é o Teste de Provocação Oral (Desencadeamento). Testes de IgG não têm valor diagnóstico.",
     "summaryLength": 119
@@ -1874,7 +1874,7 @@
     "id": 91,
     "area": "Pediatria",
     "specialty": "Endocrinologia",
-    "topic": "Hiperplasia Adrenal Congênita 21",
+    "topic": "Hiperplasia Adrenal Congênita",
     "focus": "Diagnóstico",
     "summary": "HAC (Hiperplasia Adrenal Congênita): Deficiência de 21-Hidroxilase. Meninos correm risco de morte por crise de perda de sal (desidratação/choque) pois não têm genitália ambígua para avisar ao nascimento.",
     "summaryLength": 203
@@ -1884,7 +1884,7 @@
     "id": 92,
     "area": "Pediatria / Ginecologia",
     "specialty": "Puberdade",
-    "topic": "Amenorreia Primária / Atraso Puberal 22",
+    "topic": "Amenorreia Primária / Atraso Puberal",
     "focus": "Diagnóstico",
     "summary": "Amenorreia Primária: Se tem caracteres sexuais secundários (mamas presentes), pode aguardar menstruação até os 16 anos (atraso constitucional).",
     "summaryLength": 143
@@ -1894,7 +1894,7 @@
     "id": 93,
     "area": "Pediatria",
     "specialty": "Puberdade",
-    "topic": "Marcos do Desenvolvimento Puberal 23",
+    "topic": "Marcos do Desenvolvimento Puberal",
     "focus": "Diagnóstico",
     "summary": "Limites da Puberdade: Atraso puberal se: Menina sem mamas aos 13 anos; Menino sem aumento testicular aos 14 anos.",
     "summaryLength": 113
@@ -1904,7 +1904,7 @@
     "id": 94,
     "area": "Pediatria",
     "specialty": "Gastroenterologia",
-    "topic": "Constipação Intestinal (Causas Orgânicas) 24",
+    "topic": "Constipação Intestinal (Causas Orgânicas)",
     "focus": "Etiologia",
     "summary": "Constipação: Causas orgânicas: Hipotireoidismo, Hipercalcemia, Opiáceos. (Dica: Hipercalemia causa fraqueza muscular/arritmia, não constipação clássica).",
     "summaryLength": 153
@@ -1914,7 +1914,7 @@
     "id": 95,
     "area": "Psiquiatria",
     "specialty": "Psicoses",
-    "topic": "Esquizofrenia (Tratamento Farmacológico) 25",
+    "topic": "Esquizofrenia (Tratamento Farmacológico)",
     "focus": "Tratamento",
     "summary": "Esquizofrenia: Tratamento com Antipsicóticos. Das opções da prova (Nortriptilina, Sertralina, Lítio, Clozapina, Clonazepam), a única droga antipsicótica listada é a Clozapina (embora na prática seja para refratários, é a única opção correta de classe).",
     "summaryLength": 252
@@ -1924,7 +1924,7 @@
     "id": 96,
     "area": "Psiquiatria",
     "specialty": "Suicídio",
-    "topic": "Avaliação de Risco e Conduta 26",
+    "topic": "Avaliação de Risco e Conduta",
     "focus": "Tratamento",
     "summary": "Risco de Suicídio: Paciente com plano, desesperança, isolamento e fatores de risco (homem, idoso, doença crônica) = Risco Elevado. Conduta: Internação Psiquiátrica imediata (antidepressivo demora a fazer efeito).",
     "summaryLength": 212
@@ -1934,7 +1934,7 @@
     "id": 97,
     "area": "Pediatria",
     "specialty": "Otorrinolaringologia",
-    "topic": "Mastoidite (Diagnóstico por Imagem) 27",
+    "topic": "Mastoidite (Diagnóstico por Imagem)",
     "focus": "Diagnóstico",
     "summary": "Mastoidite: Complicação de OMA. Hiperemia retroauricular, apagamento do sulco, orelha de abano. Diagnóstico confirmado por TC de Mastoides.",
     "summaryLength": 139
