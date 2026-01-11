@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Maximize2, Minimize2, Flame } from 'lucide-react';
 
 // ... (colorMap)
