@@ -26,37 +26,6 @@ const AnalyticsDashboard = () => {
         );
     }, [yearRange]);
 
-    // Correct CustomTreemapContent to handle clicks properly
-    // Recharts passes `root` (the node metrics) to the content component
-    const CustomTreemapContent = (props) => {
-        const { x, y, width, height, index, name, depth } = props;
-
-        // We need to access the passed `onClick` from the parent scope or ensure props are passed
-        // However, passing a function like <CustomTreemapContent onClick={...} /> to the content prop 
-        // usually works if the component accepts it. 
-        // Let's verify if `name` is correctly populated.
-
-        return (
-            <g onClick={() => props.onClick && props.onClick(name)} style={{ cursor: 'pointer' }}>
-                <rect
-                    x={x}
-                    y={y}
-                    width={width}
-                    height={height}
-                    style={{
-                        fill: COLORS[index % COLORS.length],
-                        stroke: '#fff',
-                        strokeWidth: 2,
-                    }}
-                />
-                {width > 50 && height > 30 && (
-                    <text x={x + width / 2} y={y + height / 2} textAnchor="middle" fill="#fff" fontSize={14} fontWeight="bold" style={{ pointerEvents: 'none' }}>
-                        {name ? name.substring(0, width / 8) : ''}
-                    </text>
-                )}
-            </g>
-        );
-    };
     // === 1. MACRO VISION (B x A) ===
     // Filter to only Top 5-6 Areas to avoid clutter
     const MAIN_AREAS = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva', 'Psiquiatria'];
@@ -282,7 +251,7 @@ const AnalyticsDashboard = () => {
                 <TabBtn id="macro" icon={<LayoutGrid size={18} />} label="1. Visão Macro (Anual)" active={activeTab} set={setActiveTab} />
                 <TabBtn id="strategic" icon={<Layers size={18} />} label="2. Visão Estratégica (Especialidade)" active={activeTab} set={setActiveTab} />
                 <TabBtn id="tactical" icon={<Crosshair size={18} />} label="3. Visão Tática (Temas)" active={activeTab} set={setActiveTab} />
-                {/* <TabBtn id="custom" icon={<Search size={18}/>} label="4. Customizada" active={activeTab} set={setActiveTab} /> */}
+                <TabBtn id="custom" icon={<Search size={18} />} label="4. Laboratório (Personalizado)" active={activeTab} set={setActiveTab} />
             </div>
 
             {/* === VIEW 1: MACRO === */}
@@ -383,9 +352,8 @@ const AnalyticsDashboard = () => {
                                         ratio={4 / 3}
                                         stroke="#fff"
                                         fill="#264653"
-                                    >
-                                        <CustomTreemapContent onClick={(name) => { setSelectedSpecialty(name); }} />
-                                    </Treemap>
+                                        content={<CustomTreemapContent onClick={(name) => { console.log('Clicked:', name); setSelectedSpecialty(name); }} />}
+                                    />
                                 </ResponsiveContainer>
                             )}
                             <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#888', marginTop: '10px' }}>
@@ -510,6 +478,11 @@ const AnalyticsDashboard = () => {
                 )
             }
 
+            {/* === VIEW 4: CUSTOM === */}
+            {activeTab === 'custom' && (
+                <CustomAnalyticsView data={statsData} />
+            )}
+
         </div >
     );
 };
@@ -540,12 +513,24 @@ const activeBtn = (isActive, color) => ({
 });
 
 const CustomTreemapContent = (props) => {
-    const { x, y, width, height, index, name, onClick } = props;
+    const { x, y, width, height, index, name, onClick, depth } = props;
+
+    // Ignore Root Node (usually depth 0) to prevent it from covering children
+    if (depth < 1) return null;
+
+    // Dynamic Font Size
+    const fontSize = width > 100 ? 14 : width > 60 ? 12 : 10;
+
     return (
-        <g onClick={() => {
-            console.log('Treemap Click:', name, props);
-            if (onClick) onClick(name || (props.payload && props.payload.name));
-        }} style={{ cursor: 'pointer' }}>
+        <g
+            onClick={(e) => {
+                e.stopPropagation(); // Stop event bubbling
+                if (onClick) onClick(name || (props.payload && props.payload.name));
+            }}
+            style={{ cursor: 'pointer' }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = 0.8; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = 1; }}
+        >
             <rect
                 x={x}
                 y={y}
@@ -555,13 +540,28 @@ const CustomTreemapContent = (props) => {
                     fill: COLORS[index % COLORS.length],
                     stroke: '#fff',
                     strokeWidth: 2,
+                    pointerEvents: 'all', // Force pointer events
+                    transition: 'opacity 0.2s'
                 }}
             />
-            {width > 50 && height > 30 && (
-                <text x={x + width / 2} y={y + height / 2} textAnchor="middle" fill="#fff" fontSize={14} fontWeight="bold" style={{ pointerEvents: 'none' }}>
-                    {name.substring(0, width / 8)}
+            {/* Show label if width > 30 OR height > 20 */}
+            {(width > 30 && height > 20) && (
+                <text
+                    x={x + width / 2}
+                    y={y + height / 2}
+                    textAnchor="middle"
+                    fill="#fff"
+                    fontSize={fontSize}
+                    fontWeight="bold"
+                    dominantBaseline="middle"
+                    style={{ pointerEvents: 'none', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
+                >
+                    {name && name.length * (fontSize * 0.6) > width
+                        ? name.substring(0, Math.floor(width / (fontSize * 0.6))) + '..'
+                        : name}
                 </text>
             )}
+            <title>{name}</title>
         </g>
     );
 };
@@ -573,5 +573,148 @@ const cardStyle = {
 
 const titleStyle = { marginTop: 0, marginBottom: '16px', fontSize: '1.2rem', color: '#333' };
 const subtitleStyle = { color: '#888', marginBottom: '20px', fontSize: '0.9rem' };
+
+const CustomAnalyticsView = ({ data }) => {
+    // Custom Filter State
+    const [cYear, setCYear] = useState('all');
+    const [cArea, setCArea] = useState('all');
+    const [cSpecialty, setCSpecialty] = useState('all');
+    const [groupBy, setGroupBy] = useState('topic'); // 'area', 'specialty', 'topic', 'focus'
+
+    // Get Unique Options
+    const options = useMemo(() => {
+        const years = new Set();
+        const areas = new Set();
+        const specialties = new Set();
+
+        data.forEach(d => {
+            if (d.year) years.add(d.year);
+            if (d.area) areas.add(d.area);
+            if (d.specialty) specialties.add(d.specialty);
+        });
+
+        return {
+            years: Array.from(years).sort((a, b) => b - a),
+            areas: Array.from(areas).sort(),
+            specialties: Array.from(specialties).sort()
+        };
+    }, [data]);
+
+    // Filter Data
+    const filtered = useMemo(() => {
+        return data.filter(d => {
+            const matchYear = cYear === 'all' || d.year.toString() === cYear.toString();
+            const matchArea = cArea === 'all' || d.area === cArea;
+            const matchSpec = cSpecialty === 'all' || d.specialty === cSpecialty;
+            return matchYear && matchArea && matchSpec;
+        });
+    }, [data, cYear, cArea, cSpecialty]);
+
+    // Aggregate for Chart
+    const chartData = useMemo(() => {
+        const counts = {};
+        filtered.forEach(d => {
+            let key = d[groupBy];
+            if (!key || key === 'undefined' || key === 'Indefinido') key = 'Outros';
+            counts[key] = (counts[key] || 0) + 1;
+        });
+
+        return Object.entries(counts)
+            .map(([name, value]) => ({ name, value }))
+            .sort((a, b) => b.value - a.value)
+            .slice(0, 20); // Top 20 to avoid clutter
+    }, [filtered, groupBy]);
+
+    return (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
+            {/* Filters Sidebar */}
+            <div style={cardStyle}>
+                <h3 style={titleStyle}>Filtros e Configuração</h3>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '0.9rem' }}>📅 Ano da Prova</label>
+                        <select value={cYear} onChange={e => setCYear(e.target.value)} style={selectStyle}>
+                            <option value="all">Todos os Anos</option>
+                            {options.years.map(y => <option key={y} value={y}>{y}</option>)}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '0.9rem' }}>🏥 Grande Área</label>
+                        <select value={cArea} onChange={e => { setCArea(e.target.value); setCSpecialty('all'); }} style={selectStyle}>
+                            <option value="all">Todas as Áreas</option>
+                            {options.areas.map(a => <option key={a} value={a}>{a}</option>)}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '0.9rem' }}>🩺 Especialidade</label>
+                        <select value={cSpecialty} onChange={e => setCSpecialty(e.target.value)} style={selectStyle} disabled={cArea === 'all'}>
+                            <option value="all">Todas as Especialidades</option>
+                            {options.specialties
+                                .filter(s => cArea === 'all' || data.find(d => d.specialty === s && d.area === cArea)) // Filter options strictly
+                                .map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                    </div>
+
+                    <hr style={{ border: 'none', borderBottom: '1px solid #eee' }} />
+
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '0.9rem', color: '#e76f51' }}>📊 Agrupar Por (Eixo X)</label>
+                        <select value={groupBy} onChange={e => setGroupBy(e.target.value)} style={{ ...selectStyle, borderColor: '#e76f51' }}>
+                            <option value="topic">Tópicos (Assuntos)</option>
+                            <option value="focus">Foco da Questão (Diag/Trat)</option>
+                            <option value="specialty">Especialidade</option>
+                            <option value="area">Grande Área</option>
+                        </select>
+                    </div>
+
+                    <div style={{ textAlign: 'center', marginTop: '20px', padding: '10px', background: '#f8f9fa', borderRadius: '8px' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#264653' }}>{filtered.length}</div>
+                        <div style={{ fontSize: '0.8rem', color: '#666' }}>Questões Encontradas</div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Chart Area */}
+            <div style={cardStyle}>
+                <h3 style={titleStyle}>Visualização Personalizada</h3>
+                {filtered.length === 0 ? (
+                    <div style={{ padding: '50px', textAlign: 'center', color: '#aaa' }}>
+                        <Search size={48} style={{ opacity: 0.3, marginBottom: '20px' }} />
+                        <p>Nenhuma questão encontrada com esses filtros.</p>
+                    </div>
+                ) : (
+                    <ResponsiveContainer width="100%" height={500}>
+                        <PieChart>
+                            <Pie
+                                data={chartData}
+                                cx="50%"
+                                cy="50%"
+                                labelLine={false}
+                                label={({ name, percent }) => percent > 0.05 ? `${name} (${(percent * 100).toFixed(0)}%)` : ''}
+                                outerRadius={150}
+                                fill="#8884d8"
+                                dataKey="value"
+                            >
+                                {chartData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                            <RechartsTooltip />
+                            <Legend />
+                        </PieChart>
+                    </ResponsiveContainer>
+                )}
+            </div>
+        </div>
+    );
+};
+
+const selectStyle = {
+    width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ddd',
+    fontSize: '0.9rem', fontFamily: 'inherit', outline: 'none'
+};
 
 export default AnalyticsDashboard;
