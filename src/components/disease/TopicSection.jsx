@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Maximize2, Minimize2, Flame } from 'lucide-react';
 
-// ... (colorMap)
+const colorMap = {
+    pink: { bg: '#FADADD', border: '#F4B6BE' },
+    blue: { bg: '#D6EAF8', border: '#AED6F1' },
+    yellow: { bg: '#FCF3CF', border: '#F9E79F' },
+    default: { bg: '#FFFFFF', border: '#E0E0E0' }
+};
 
 const TopicSection = ({ title, content, color = 'default', isEditable, onChange, index, relevance }) => {
     // ... (hooks)
