@@ -115,6 +115,36 @@ const AnalyticsDashboard = () => {
         return Object.entries(counts).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 15);
     }, [filteredData, selectedArea]);
 
+    // Heatmap Data (Top Topics x Years)
+    const heatmapData = useMemo(() => {
+        const subset = selectedArea ? filteredData.filter(d => d.area === selectedArea) : filteredData;
+
+        // 1. Aggregate Counts by Topic & Year
+        const topicCounts = {};
+        const allYears = new Set();
+
+        subset.forEach(d => {
+            if (!d.topic || d.topic === 'Outros' || d.topic === 'undefined') return;
+            const t = d.topic.trim();
+            if (!topicCounts[t]) topicCounts[t] = { total: 0, years: {} };
+            topicCounts[t].total++;
+            topicCounts[t].years[d.year] = (topicCounts[t].years[d.year] || 0) + 1;
+            allYears.add(d.year);
+        });
+
+        // 2. Get Top 20 Topics by Volume
+        const topTopics = Object.entries(topicCounts)
+            .sort((a, b) => b[1].total - a[1].total)
+            .slice(0, 20)
+            .map(([name, data]) => ({ name, ...data }));
+
+        // 3. Sorted Years Array for Columns
+        const sortedYears = Array.from(allYears).sort((a, b) => a - b);
+
+        return { topics: topTopics, years: sortedYears };
+
+    }, [filteredData, selectedArea]);
+
     // Frequência x Recorrência (Scatter)
     // X: Years appeared, Y: Total Questions
     const scatterData = useMemo(() => {
@@ -178,6 +208,14 @@ const AnalyticsDashboard = () => {
         );
     };
 
+    // Helper for Heatmap Color
+    const getHeatColor = (count) => {
+        if (!count) return '#f0f0f0'; // Empty
+        if (count === 1) return '#e9c46a'; // Low
+        if (count === 2) return '#f4a261'; // Med
+        return '#e76f51'; // High
+    };
+
     return (
         <div style={{ padding: '20px', maxWidth: '1600px', margin: '0 auto', fontFamily: 'var(--font-main)', background: '#FAFAFA', minHeight: '100vh' }} >
 
@@ -190,7 +228,7 @@ const AnalyticsDashboard = () => {
 
                 {/* Year Filter (Simple Buttons for Era) */}
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px' }}>
-                    <button onClick={() => setYearRange([2014, 2030])} style={activeBtn(yearRange[0] === 2014, '#2a9d8f')}>Tudo (2014+)</button>
+                    <button onClick={() => setYearRange([2017, 2030])} style={activeBtn(yearRange[0] === 2017, '#2a9d8f')}>Tudo (2017+)</button>
                     <button onClick={() => setYearRange([2017, 2020])} style={activeBtn(yearRange[1] === 2020, '#e76f51')}>Era Antiga (17-20)</button>
                     <button onClick={() => setYearRange([2021, 2026])} style={activeBtn(yearRange[0] === 2021, '#264653')}>Era Moderna (21+)</button>
                 </div>
@@ -323,49 +361,55 @@ const AnalyticsDashboard = () => {
 
             {/* === VIEW 3: TACTICAL === */}
             {activeTab === 'tactical' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '24px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
                     <div style={{ gridColumn: '1 / -1', marginBottom: '10px' }}>
                         {selectedArea && <span style={{ background: '#264653', color: '#fff', padding: '4px 12px', borderRadius: '16px' }}>Filtro: {selectedArea}</span>}
                     </div>
 
+                    {/* HEATMAP REPLACEMENT */}
                     <div style={cardStyle}>
-                        <h3 style={titleStyle}>Top 15 Temas Recorrentes</h3>
-                        <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
-                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                        <h3 style={titleStyle}>Mapa de Calor (Heatmap) - Top Temas Recorrentes</h3>
+                        <p style={subtitleStyle}>Veja quando cada tema caiu ao longo dos anos. Quanto mais escuro, mais questões.</p>
+
+                        <div style={{ overflowX: 'auto', paddingBottom: '10px' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+                                <thead>
+                                    <tr>
+                                        <th style={{ padding: '8px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Tema</th>
+                                        <th style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #ddd' }}>Total</th>
+                                        {heatmapData.years.map(y => (
+                                            <th key={y} style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #ddd', minWidth: '40px' }}>{y}</th>
+                                        ))}
+                                    </tr>
+                                </thead>
                                 <tbody>
-                                    {topTopics.map((t, i) => (
-                                        <tr key={i} style={{ borderBottom: '1px solid #eee' }}>
-                                            <td style={{ padding: '8px', fontWeight: 'bold', color: '#888' }}>#{i + 1}</td>
-                                            <td style={{ padding: '8px' }}>{t.name}</td>
-                                            <td style={{ padding: '8px', textAlign: 'right' }}>
-                                                <span style={{ background: '#f0f0f0', padding: '2px 8px', borderRadius: '10px', fontSize: '0.8rem' }}>{t.value}</span>
-                                            </td>
+                                    {heatmapData.topics.map((topic, i) => (
+                                        <tr key={i} style={{ borderBottom: '1px solid #f0f0f0' }}>
+                                            <td style={{ padding: '8px', fontWeight: '500' }}>{topic.name}</td>
+                                            <td style={{ padding: '8px', textAlign: 'center', fontWeight: 'bold' }}>{topic.total}</td>
+                                            {heatmapData.years.map(y => {
+                                                const count = topic.years[y] || 0;
+                                                return (
+                                                    <td key={y} style={{ padding: '4px', textAlign: 'center' }}>
+                                                        <div style={{
+                                                            width: '100%', height: '24px', borderRadius: '4px',
+                                                            background: getHeatColor(count),
+                                                            color: count > 0 ? '#fff' : 'transparent',
+                                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                            fontSize: '0.8rem', fontWeight: 'bold'
+                                                        }}>
+                                                            {count > 0 ? count : ''}
+                                                        </div>
+                                                    </td>
+                                                );
+                                            })}
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-
-                    <div style={cardStyle}>
-                        <h3 style={titleStyle}>Matriz de Decisão (Quadrante Mágico)</h3>
-                        <p style={subtitleStyle}>Eixo X: Em quantos anos caiu (Recorrência) vs Eixo Y: Volume total de questões.</p>
-                        <ResponsiveContainer width="100%" height={500}>
-                            <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                                <CartesianGrid />
-                                <XAxis type="number" dataKey="x" name="Recorrência" unit=" anos" domain={[1, 'auto']} allowDecimals={false} />
-                                <YAxis type="number" dataKey="y" name="Volume" unit=" un" allowDecimals={false} />
-                                <ZAxis type="number" dataKey="z" range={[60, 400]} />
-                                <RechartsTooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip />} />
-                                <Scatter name="Temas" data={scatterData} fill="#8884d8">
-                                    {scatterData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={entry.x >= 3 && entry.y > 5 ? '#e76f51' : '#2a9d8f'} />
-                                    ))}
-                                </Scatter>
-                            </ScatterChart>
-                        </ResponsiveContainer>
-                        <p style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: '10px' }}>
-                            🔴 Vermelho: Temas que caíram em 3+ anos diferentes (Estudo Obrigatório).
+                        <p style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: '15px', color: '#666' }}>
+                            🟨 Amarelo (1 un) | 🟧 Laranja (2 un) | 🟥 Vermelho (3+ un)
                         </p>
                     </div>
                 </div>
