@@ -16,6 +16,13 @@ const AnalyticsDashboard = () => {
     const [selectedSpecialty, setSelectedSpecialty] = useState(null); // Drill-down Level 2
     const [activeTab, setActiveTab] = useState('macro'); // 'macro' | 'strategic' | 'tactical' | 'custom'
 
+    // === DATA FILTERS ===
+    const filteredData = useMemo(() => {
+        return statsData.filter(d =>
+            d.year >= yearRange[0] && d.year <= yearRange[1]
+        );
+    }, [yearRange]);
+
     // Correct CustomTreemapContent to handle clicks properly
     // Recharts passes `root` (the node metrics) to the content component
     const CustomTreemapContent = (props) => {
