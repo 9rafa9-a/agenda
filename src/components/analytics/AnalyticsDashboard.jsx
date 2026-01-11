@@ -342,7 +342,7 @@ const AnalyticsDashboard = () => {
                 <p style={{ color: '#666' }}>Explore os dados da prova em 4 níveis de profundidade.</p>
 
                 {/* Year Filter (Simple Buttons for Era) */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
                     <button onClick={() => setYearRange([2017, 2030])} style={activeBtn(yearRange[0] === 2017, '#2a9d8f')}>Tudo (2017+)</button>
                     <button onClick={() => setYearRange([2017, 2020])} style={activeBtn(yearRange[1] === 2020, '#e76f51')}>Era Antiga (17-20)</button>
                     <button onClick={() => setYearRange([2021, 2026])} style={activeBtn(yearRange[0] === 2021, '#264653')}>Era Moderna (21+)</button>
@@ -350,7 +350,7 @@ const AnalyticsDashboard = () => {
             </div>
 
             {/* TAB NAVIGATION */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '40px', borderBottom: '1px solid #ddd', paddingBottom: '10px' }}>
+            <div className="analytics-tabs" style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '40px', borderBottom: '1px solid #ddd', paddingBottom: '10px' }}>
                 <div id="tab-macro"><TabBtn id="macro" icon={<LayoutGrid size={18} />} label="1. Visão Macro (Anual)" active={activeTab} set={setActiveTab} /></div>
                 <div id="tab-strategic"><TabBtn id="strategic" icon={<Layers size={18} />} label="2. Visão Estratégica (Especialidade)" active={activeTab} set={setActiveTab} /></div>
                 <div id="tab-tactical"><TabBtn id="tactical" icon={<Crosshair size={18} />} label="3. Visão Tática (Temas)" active={activeTab} set={setActiveTab} /></div>
@@ -359,7 +359,7 @@ const AnalyticsDashboard = () => {
 
             {/* === VIEW 1: MACRO === */}
             {activeTab === 'macro' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
+                <div className="analytics-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
                     {/* SELECTOR CARD - User requested "Selector" */}
                     <div style={{ ...cardStyle, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                         <h3 style={titleStyle}>Resumo da Ópera</h3>
@@ -409,7 +409,7 @@ const AnalyticsDashboard = () => {
             {activeTab === 'strategic' && (
                 <div>
                     {/* BREADCRUMB */}
-                    <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                         <span style={{ fontWeight: 'bold', color: '#888' }}>Filtro Atual:</span>
                         {selectedArea ? (
                             <span
@@ -428,7 +428,7 @@ const AnalyticsDashboard = () => {
                         )}
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+                    <div className="analytics-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
                         <div style={cardStyle}>
                             <h3 style={titleStyle}>
                                 {selectedArea ? `Especialidades de ${selectedArea}` : 'Todas as Especialidades'}
@@ -494,7 +494,7 @@ const AnalyticsDashboard = () => {
             {/* === VIEW 3: TACTICAL === */}
             {
                 activeTab === 'tactical' && (
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
+                    <div className="analytics-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
                         <div style={{ gridColumn: '1 / -1', marginBottom: '10px' }}>
                             {selectedArea && <span style={{ background: '#264653', color: '#fff', padding: '4px 12px', borderRadius: '16px' }}>Filtro: {selectedArea}</span>}
                         </div>
@@ -586,6 +586,13 @@ const AnalyticsDashboard = () => {
                 <CustomAnalyticsView data={statsData} />
             )}
 
+            <style>{`
+                 @media (max-width: 900px) {
+                    .analytics-layout { grid-template-columns: 1fr !important; }
+                    .analytics-tabs { overflow-x: auto; justify-content: flex-start !important; padding-bottom: 5px; }
+                    .analytics-tabs > div { flex-shrink: 0; }
+                 }
+            `}</style>
         </div >
     );
 };
@@ -729,7 +736,7 @@ const CustomAnalyticsView = ({ data }) => {
     }, [filtered, groupBy]);
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
+        <div className="analytics-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
             {/* Filters Sidebar */}
             <div style={cardStyle}>
                 <h3 style={titleStyle}>Filtros e Configuração</h3>
