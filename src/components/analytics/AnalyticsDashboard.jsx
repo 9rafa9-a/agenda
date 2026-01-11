@@ -688,11 +688,11 @@ const subtitleStyle = { color: '#888', marginBottom: '20px', fontSize: '0.9rem' 
 
 const CustomAnalyticsView = ({ data }) => {
     // Custom Filter State
-    const [cYear, setCYear] = useState('all');
-    const [cArea, setCArea] = useState('all');
+    const [cYear, setCYear] = useState('2026'); // Requested default: 2026
+    const [cArea, setCArea] = useState('Clínica Médica'); // Requested default: Clínica Médica
     const [cSpecialty, setCSpecialty] = useState('all');
-    const [groupBy, setGroupBy] = useState('topic'); // 'area', 'specialty', 'topic', 'focus'
-    const [limit, setLimit] = useState(10); // User requested limit control
+    const [groupBy, setGroupBy] = useState('specialty'); // Requested default: Specialty
+    const [limit, setLimit] = useState(10); // Requested default: 10
 
     // Get Unique Options
     const options = useMemo(() => {
