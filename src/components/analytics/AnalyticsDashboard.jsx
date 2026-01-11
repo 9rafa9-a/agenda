@@ -350,11 +350,11 @@ const AnalyticsDashboard = () => {
             </div>
 
             {/* TAB NAVIGATION */}
-            <div className="analytics-tabs" style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '40px', borderBottom: '1px solid #ddd', paddingBottom: '10px' }}>
-                <div id="tab-macro"><TabBtn id="macro" icon={<LayoutGrid size={18} />} label="1. Visão Macro (Anual)" active={activeTab} set={setActiveTab} /></div>
-                <div id="tab-strategic"><TabBtn id="strategic" icon={<Layers size={18} />} label="2. Visão Estratégica (Especialidade)" active={activeTab} set={setActiveTab} /></div>
-                <div id="tab-tactical"><TabBtn id="tactical" icon={<Crosshair size={18} />} label="3. Visão Tática (Temas)" active={activeTab} set={setActiveTab} /></div>
-                <div id="tab-custom"><TabBtn id="custom" icon={<Search size={18} />} label="4. Laboratório (Personalizado)" active={activeTab} set={setActiveTab} /></div>
+            <div className="analytics-tabs" style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '30px', borderBottom: '1px solid #ddd', paddingBottom: '15px', flexWrap: 'wrap' }}>
+                <TabBtn id="macro" icon={<LayoutGrid size={18} />} label="1. Macro" desc="Anual" active={activeTab} set={setActiveTab} />
+                <TabBtn id="strategic" icon={<Layers size={18} />} label="2. Estratégia" desc="Especialidade" active={activeTab} set={setActiveTab} />
+                <TabBtn id="tactical" icon={<Crosshair size={18} />} label="3. Tática" desc="Temas" active={activeTab} set={setActiveTab} />
+                <TabBtn id="custom" icon={<Search size={18} />} label="4. Lab" desc="Personalizado" active={activeTab} set={setActiveTab} />
             </div>
 
             {/* === VIEW 1: MACRO === */}
@@ -599,19 +599,21 @@ const AnalyticsDashboard = () => {
 
 // === HELPERS ===
 
-const TabBtn = ({ id, icon, label, active, set }) => (
+const TabBtn = ({ id, icon, label, desc, active, set }) => (
     <button
         onClick={() => set(id)}
         style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            padding: '12px 24px', border: 'none', background: 'none',
-            fontSize: '1rem', fontWeight: active === id ? '700' : '500',
-            color: active === id ? '#264653' : '#999',
-            borderBottom: active === id ? '3px solid #264653' : '3px solid transparent',
-            cursor: 'pointer', transition: 'all 0.2s'
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
+            padding: '10px 16px', border: 'none', background: active === id ? '#e0f2f1' : '#fff',
+            fontSize: '0.9rem', fontWeight: active === id ? '700' : '500',
+            color: active === id ? '#264653' : '#666',
+            borderRadius: '12px',
+            border: active === id ? '2px solid #264653' : '1px solid #eee',
+            cursor: 'pointer', transition: 'all 0.2s', flex: '1 1 80px', minWidth: '80px'
         }}
     >
-        {icon} {label}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>{icon} <span>{label}</span></div>
+        {desc && <span style={{ fontSize: '0.75rem', opacity: 0.8 }}>{desc}</span>}
     </button>
 );
 
@@ -690,6 +692,7 @@ const CustomAnalyticsView = ({ data }) => {
     const [cArea, setCArea] = useState('all');
     const [cSpecialty, setCSpecialty] = useState('all');
     const [groupBy, setGroupBy] = useState('topic'); // 'area', 'specialty', 'topic', 'focus'
+    const [limit, setLimit] = useState(10); // User requested limit control
 
     // Get Unique Options
     const options = useMemo(() => {
@@ -732,8 +735,8 @@ const CustomAnalyticsView = ({ data }) => {
         return Object.entries(counts)
             .map(([name, value]) => ({ name, value }))
             .sort((a, b) => b.value - a.value)
-            .slice(0, 20); // Top 20 to avoid clutter
-    }, [filtered, groupBy]);
+            .slice(0, limit); // Dynamic Limit
+    }, [filtered, groupBy, limit]);
 
     return (
         <div className="analytics-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
@@ -777,6 +780,16 @@ const CustomAnalyticsView = ({ data }) => {
                             <option value="focus">Foco da Questão (Diag/Trat)</option>
                             <option value="specialty">Especialidade</option>
                             <option value="area">Grande Área</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '0.9rem', color: '#2a9d8f' }}>✂ Limite de Itens</label>
+                        <select value={limit} onChange={e => setLimit(Number(e.target.value))} style={{ ...selectStyle, borderColor: '#2a9d8f' }}>
+                            <option value={5}>Top 5 (Resumido)</option>
+                            <option value={10}>Top 10 (Padrão)</option>
+                            <option value={20}>Top 20 (Detalhado)</option>
+                            <option value={50}>Top 50 (Completo)</option>
                         </select>
                     </div>
 

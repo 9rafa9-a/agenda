@@ -380,6 +380,8 @@ const MainLayout = () => {
             width: 100% !important; transform: translateX(-100%); transition: transform 0.3s ease;
             border-right: none !important; background: #fff !important; z-index: 200;
             box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+            overflow-y: auto; /* Enable scrolling */
+            height: calc(100% - 60px); /* Explicit height calculation */
           }
           .sidebar.mobile-open { transform: translateX(0); }
         }
