@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
-import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2, Brain, User, FileText } from 'lucide-react';
+import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2, Brain, User, FileText, BarChart2 } from 'lucide-react';
 import DachshundMascot from '../fun/DachshundMascot';
 import BackgroundSlideshow from './BackgroundSlideshow';
 
@@ -227,75 +227,90 @@ const MainLayout = () => {
             Provinhas 📝
           </NavLink>
 
-          <NavLink to="/new"
-            className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
-            style={navStyle}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <PlusCircle size={20} /> Novo Resumo
-          </NavLink>
+          Provinhas 📝
+        </NavLink>
 
-          <NavLink to="/?trash=true"
-            className={({ isActive }) => window.location.search.includes('trash=true') ? 'nav-item active' : 'nav-item'}
-            style={{ ...navStyle, marginTop: '16px', color: '#ff6b6b' }}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <Trash2 size={20} /> Lixeira
-          </NavLink>
-          {/* <NavLink to="/settings" style={navStyle}><Settings size={20} /> Ajustes</NavLink> */}
+        <NavLink to="/analytics"
+          className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+          style={{
+            ...navStyle,
+            marginBottom: '8px'
+          }}
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <BarChart2 size={20} />
+          Raio-X (Stats) 📊
+        </NavLink>
 
-          {/* User Profile */}
-          <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: '1px solid #eee' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px', padding: '0 8px' }}>
-              <div style={{
-                width: '32px', height: '32px', borderRadius: '50%',
-                background: currentUser === 'Rafa' ? '#e3f2fd' : '#fce4ec',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '1.2rem'
-              }}>
-                {currentUser === 'Rafa' ? '👨🏻‍🦰' : '👩🏻‍🦰'}
-              </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 'bold', color: '#555' }}>{currentUser}</div>
-                <button onClick={handleLogout} style={{ fontSize: '0.7rem', color: '#888', border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}>
-                  Sair / Trocar
-                </button>
-              </div>
+        <NavLink to="/new"
+          className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+          style={navStyle}
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <PlusCircle size={20} /> Novo Resumo
+        </NavLink>
+
+        <NavLink to="/?trash=true"
+          className={({ isActive }) => window.location.search.includes('trash=true') ? 'nav-item active' : 'nav-item'}
+          style={{ ...navStyle, marginTop: '16px', color: '#ff6b6b' }}
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <Trash2 size={20} /> Lixeira
+        </NavLink>
+        {/* <NavLink to="/settings" style={navStyle}><Settings size={20} /> Ajustes</NavLink> */}
+
+        {/* User Profile */}
+        <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: '1px solid #eee' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px', padding: '0 8px' }}>
+            <div style={{
+              width: '32px', height: '32px', borderRadius: '50%',
+              background: currentUser === 'Rafa' ? '#e3f2fd' : '#fce4ec',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '1.2rem'
+            }}>
+              {currentUser === 'Rafa' ? '👨🏻‍🦰' : '👩🏻‍🦰'}
             </div>
-
-            <button
-              onClick={() => setShowMascots(!showMascots)}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                fontSize: '0.9rem',
-                color: showMascots ? 'var(--color-primary)' : '#aaa',
-                width: '100%',
-                padding: '8px 16px'
-              }}
-            >
-              <span style={{ fontSize: '1.2rem' }}>{showMascots ? '🐶' : '🚫'}</span>
-              {showMascots ? 'Salsichas: On' : 'Salsichas: Off'}
-            </button>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: 'bold', color: '#555' }}>{currentUser}</div>
+              <button onClick={handleLogout} style={{ fontSize: '0.7rem', color: '#888', border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}>
+                Sair / Trocar
+              </button>
+            </div>
           </div>
-        </nav>
 
-        <div style={{ fontSize: '0.8rem', color: '#ccc', textAlign: 'center', marginTop: '16px' }}>
-          v1.0.0
+          <button
+            onClick={() => setShowMascots(!showMascots)}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              fontSize: '0.9rem',
+              color: showMascots ? 'var(--color-primary)' : '#aaa',
+              width: '100%',
+              padding: '8px 16px'
+            }}
+          >
+            <span style={{ fontSize: '1.2rem' }}>{showMascots ? '🐶' : '🚫'}</span>
+            {showMascots ? 'Salsichas: On' : 'Salsichas: Off'}
+          </button>
         </div>
-      </aside>
+      </nav>
 
-      {/* Main Content */}
-      <main style={{ flex: 1, padding: '40px', overflowY: 'auto', paddingTop: '40px' }} className="main-content">
-        <Outlet context={{ diseases, refresh: fetchDiseases, currentUser }} key={location.pathname + location.search} />
-      </main>
+      <div style={{ fontSize: '0.8rem', color: '#ccc', textAlign: 'center', marginTop: '16px' }}>
+        v1.0.0
+      </div>
+    </aside>
 
-      {/* Global CSS for responsiveness */}
-      <style>{`
+      {/* Main Content */ }
+  <main style={{ flex: 1, padding: '40px', overflowY: 'auto', paddingTop: '40px' }} className="main-content">
+    <Outlet context={{ diseases, refresh: fetchDiseases, currentUser }} key={location.pathname + location.search} />
+  </main>
+
+  {/* Global CSS for responsiveness */ }
+  <style>{`
         .nav-item {
           display: flex;
           align-items: center;
@@ -361,7 +376,7 @@ const MainLayout = () => {
           }
         }
       `}</style>
-    </div>
+    </div >
   );
 };
 

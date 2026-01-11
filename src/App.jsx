@@ -5,6 +5,7 @@ import DiseaseEditor from './components/disease/DiseaseEditor';
 import FlashcardDashboard from './components/flashcards/FlashcardDashboard';
 import QuizDashboard from './components/quiz/QuizDashboard';
 import QuizSheet from './components/quiz/QuizSheet';
+import AnalyticsDashboard from './components/analytics/AnalyticsDashboard';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="flashcards" element={<FlashcardDashboard />} />
         <Route path="quizzes" element={<QuizDashboard />} />
         <Route path="quizzes/:id" element={<QuizSheet />} />
+        <Route path="analytics" element={<AnalyticsDashboard />} />
       </Route>
     </Routes>
   );
