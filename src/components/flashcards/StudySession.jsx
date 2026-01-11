@@ -143,10 +143,10 @@ const StudySession = ({ deck, onClose, currentUser }) => {
                 transition: 'opacity 0.2s',
                 display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px'
             }}>
-                <button onClick={() => handleRate(0)} style={{ ...btnStyle, background: '#ffcdd2', color: '#c62828' }}>Errei<br /><small>Agora</small></button>
-                <button onClick={() => handleRate(1)} style={{ ...btnStyle, background: '#ffe0b2', color: '#ef6c00' }}>Difícil<br /><small>2d</small></button>
-                <button onClick={() => handleRate(2)} style={{ ...btnStyle, background: '#c8e6c9', color: '#2e7d32' }}>Bom<br /><small>3d</small></button>
-                <button onClick={() => handleRate(3)} style={{ ...btnStyle, background: '#b3e5fc', color: '#0277bd' }}>Fácil<br /><small>5d</small></button>
+                <button id="btn-rate-0" onClick={() => handleRate(0)} style={{ ...btnStyle, background: '#ffcdd2', color: '#c62828' }}>Errei<br /><small>Agora</small></button>
+                <button id="btn-rate-1" onClick={() => handleRate(1)} style={{ ...btnStyle, background: '#ffe0b2', color: '#ef6c00' }}>Difícil<br /><small>2d</small></button>
+                <button id="btn-rate-2" onClick={() => handleRate(2)} style={{ ...btnStyle, background: '#c8e6c9', color: '#2e7d32' }}>Bom<br /><small>3d</small></button>
+                <button id="btn-rate-3" onClick={() => handleRate(3)} style={{ ...btnStyle, background: '#b3e5fc', color: '#0277bd' }}>Fácil<br /><small>5d</small></button>
             </div>
         </div>
     );

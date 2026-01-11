@@ -164,22 +164,25 @@ export const TourProvider = ({ children }) => {
         {
             id: 'flashcard-select-deck',
             target: '#deck-btn-0', // Target the BUTTON now
-            message: "Aqui estão seus decks.\nClique no botão **Estudar Agora**.",
-            action: 'wait_click',
+            message: "Vamos entrar no deck.\nClique no botão **Próximo** para abrir.",
+            action: 'next',
+            shouldClickTarget: true,
             route: '/flashcards'
         },
         {
             id: 'flashcard-flip',
             target: '#flashcard-card',
-            message: "A IA criou cards automaticamente!\n**Clique no cartão** para ver a resposta.",
-            action: 'wait_click', // Wait for flip
+            message: "A IA criou cards automaticamente!\nClique em **Próximo** para virar o cartão.",
+            action: 'next',
+            shouldClickTarget: true, // Auto-flip
             position: 'bottom',
         },
         {
             id: 'flashcard-rate',
-            target: '#flashcard-rate-options',
-            message: "Agora avalie seu conhecimento.\nIsso ajusta quando você verá este card novamente.",
-            action: 'wait_click', // Or next
+            target: '#btn-rate-2', // Target "Bom"
+            message: "Agora avalie seu conhecimento.\nVamos marcar como **'Bom'** para testar.",
+            action: 'next',
+            shouldClickTarget: true, // Auto-rate
             position: 'top',
         },
         {
