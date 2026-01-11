@@ -7,6 +7,8 @@ import {
 } from 'recharts';
 import { LayoutGrid, Layers, PieChart as PieIcon, Crosshair, Search, Filter, Sparkles } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore'; // Import Firestore
+import { db } from '../../lib/firebase'; // Import DB instance
 
 const COLORS = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#219ebc', '#023047', '#8ecae6'];
 
@@ -170,6 +172,46 @@ const AnalyticsDashboard = () => {
                 z: t.total * 50  // Bubble size
             }));
     }, [filteredData, selectedArea]);
+
+    // === USER DATA (For Gap Analysis) ===
+    const [userDiseases, setUserDiseases] = useState([]);
+
+    React.useEffect(() => {
+        const fetchDiseases = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "diseases"));
+                const topics = querySnapshot.docs.map(doc => doc.data().name.toLowerCase().trim());
+                setUserDiseases(topics);
+            } catch (error) {
+                console.error("Error fetching diseases:", error);
+            }
+        };
+        fetchDiseases();
+    }, []);
+
+    // Gap Analysis: Topics with high volume in exams but NO summary in userDiseases
+    const gapAnalysis = useMemo(() => {
+        // 1. Get All Topics with Count
+        const topicCounts = {};
+        filteredData.forEach(d => {
+            if (d.topic && d.topic !== 'Outros') {
+                const t = d.topic.trim();
+                topicCounts[t] = (topicCounts[t] || 0) + 1;
+            }
+        });
+
+        // 2. Filter High Yield (> 2 appearances) AND Missing
+        return Object.entries(topicCounts)
+            .filter(([topic, count]) => {
+                const isHighYield = count >= 2;
+                // Fuzzy check against user diseases
+                const isCovered = userDiseases.some(ud => ud.includes(topic.toLowerCase()) || topic.toLowerCase().includes(ud));
+                return isHighYield && !isCovered;
+            })
+            .sort((a, b) => b[1] - a[1]) // Most critical first
+            .slice(0, 5) // Top 5 Gaps
+            .map(([topic, count]) => ({ topic, count }));
+    }, [filteredData, userDiseases]);
 
     // === RENDER HELPERS ===
     const CustomTooltip = ({ active, payload, label }) => {
