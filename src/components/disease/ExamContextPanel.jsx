@@ -13,6 +13,7 @@ const ExamContextPanel = ({ diseaseName, editorContent = {}, onClose }) => {
             if (!d.topic) return false;
             // Fuzzy match: check if one contains the other
             const t = d.topic.toLowerCase().trim();
+            if (t.length < 4) return false; // Avoid short matches
             return t.includes(normalizedName) || normalizedName.includes(t);
         }).sort((a, b) => b.year - a.year);
     }, [diseaseName]);

@@ -75,6 +75,9 @@ const DiseaseEditor = () => {
         const relatedQuestions = statsData.filter(d => {
             if (!d.topic) return false;
             const t = d.topic.toLowerCase().trim();
+            // Safety: Ignore very short topics (e.g. acronyms) to avoid false positives
+            if (t.length < 4) return false;
+
             // Check if one contains the other (bidirectional)
             return t.includes(normalizedName) || normalizedName.includes(t);
         });
