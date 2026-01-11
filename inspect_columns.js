@@ -9,12 +9,11 @@ try {
 
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: 'EMPTY' });
 
-    console.log("=== INSPECTING COLS D (3) AND G (6) ===");
+    console.log("=== INSPECTING COL H (Index 7) ===");
     rows.slice(0, 20).forEach((row, i) => {
-        // Log the whole row for context if needed, but focus on 3 and 6
-        // JSON.stringify to see if it's really undefined or empty string
-        console.log(`Row ${i}: D(3)='${row[3]}', G(6)='${row[6]}', H(7)='${row[7]}'`);
-        // Checking H too just in case it shifted
+        // Log H to see if it has text
+        const hVal = row[7];
+        console.log(`Row ${i}: H(7)='${hVal ? hVal.toString().substring(0, 50) + '...' : 'undefined'}'`);
     });
 
 } catch (e) {

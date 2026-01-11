@@ -3,375 +3,362 @@ import React, { useState, useMemo } from 'react';
 import statsData from '../../data/amrigs_stats.json';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
-    Treemap, PieChart, Pie, Cell, Sector
+    Treemap, PieChart, Pie, Cell, LineChart, Line, ScatterChart, Scatter, ZAxis
 } from 'recharts';
-import { LayoutGrid, PieChart as PieIcon, BarChart2, Layers } from 'lucide-react';
+import { LayoutGrid, Layers, PieChart as PieIcon, Crosshair, Search, Filter } from 'lucide-react';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#ff6b6b'];
+const COLORS = ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#219ebc', '#023047', '#8ecae6'];
 
 const AnalyticsDashboard = () => {
-    const [activeTab, setActiveTab] = useState('overview');
+    // === GLOBAL STATE ===
+    const [yearRange, setYearRange] = useState([2014, 2030]); // Min/Max
+    const [selectedArea, setSelectedArea] = useState(null); // Drill-down Root
+    const [selectedSpecialty, setSelectedSpecialty] = useState(null); // Drill-down Level 2
+    const [activeTab, setActiveTab] = useState('macro'); // 'macro' | 'strategic' | 'tactical' | 'custom'
 
-    // --- DATA PROCESSING (Columns B, C, G ONLY) ---
-
-    // 1. Column B: Grande Área
-    const areaData = useMemo(() => {
-        const counts = {};
-        statsData.forEach(q => {
-            if (q.area) counts[q.area] = (counts[q.area] || 0) + 1;
-        });
-        return Object.entries(counts)
-            .map(([name, value]) => ({ name, value }))
-            .sort((a, b) => b.value - a.value);
-    }, []);
-
-    // 2. Column C: Especialidade
-    const specialtyData = useMemo(() => {
-        const counts = {};
-        statsData.forEach(q => {
-            if (q.specialty) counts[q.specialty] = (counts[q.specialty] || 0) + 1;
-        });
-        return Object.entries(counts)
-            .map(([name, value]) => ({ name, value }))
-            .sort((a, b) => b.value - a.value)
-            .slice(0, 20); // Top 20 strictly
-    }, []);
-
-    // 3. Column G: Foco (Tratamento, Diagnóstico...)
-    const focusData = useMemo(() => {
-        const counts = {};
-        statsData.forEach(q => {
-            // Clean specific focus values if needed, purely strictly from Col G
-            let f = q.focus || 'Indefinido';
-            // Remove brackets if still passing through
-            f = f.replace(/[\[\]]/g, '').trim();
-            if (f) counts[f] = (counts[f] || 0) + 1;
-        });
-        return Object.entries(counts)
-            .map(([name, value]) => ({ name, value }))
-            .sort((a, b) => b.value - a.value);
-    }, []);
-
-    // 4. Cross: Area (B) vs Specialty (C) - For Treemap
-    const areaSpecialtyHierarchy = useMemo(() => {
-        const areas = {};
-        statsData.forEach(q => {
-            if (!q.area || !q.specialty) return;
-            if (!areas[q.area]) areas[q.area] = {};
-            areas[q.area][q.specialty] = (areas[q.area][q.specialty] || 0) + 1;
-        });
-        return Object.entries(areas).map(([areaName, specs]) => ({
-            name: areaName,
-            children: Object.entries(specs).map(([specName, val]) => ({
-                name: specName,
-                size: val
-            }))
-        }));
-    }, []);
-
-    // 5. Cross: Area (B) vs Focus (G) - Heatmap Matrix
-    const areaFocusMatrix = useMemo(() => {
-        const matrix = {};
-        const allFocuses = new Set();
-
-        statsData.forEach(q => {
-            if (!q.area || !q.focus) return;
-            let f = q.focus.replace(/[\[\]]/g, '').trim();
-            allFocuses.add(f);
-
-            if (!matrix[q.area]) matrix[q.area] = {};
-            matrix[q.area][f] = (matrix[q.area][f] || 0) + 1;
-        });
-
-        return {
-            matrix,
-            focuses: Array.from(allFocuses).filter(f => f && f !== 'Indefinido').sort()
-        };
-    }, []);
-
-    // --- RENDER HELPERS ---
-
-    // Custom Active Shape for Pie Chart
-    const renderActiveShape = (props) => {
-        const RADIAN = Math.PI / 180;
-        const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
-        const sin = Math.sin(-RADIAN * midAngle);
-        const cos = Math.cos(-RADIAN * midAngle);
-        const sx = cx + (outerRadius + 10) * cos;
-        const sy = cy + (outerRadius + 10) * sin;
-        const mx = cx + (outerRadius + 30) * cos;
-        const my = cy + (outerRadius + 30) * sin;
-        const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-        const ey = my;
-        const textAnchor = cos >= 0 ? 'start' : 'end';
-
-        return (
-            <g>
-                <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill} fontSize={16} fontWeight="bold">
-                    {payload.name}
-                </text>
-                <Sector
-                    cx={cx}
-                    cy={cy}
-                    innerRadius={innerRadius}
-                    outerRadius={outerRadius}
-                    startAngle={startAngle}
-                    endAngle={endAngle}
-                    fill={fill}
-                />
-                <Sector
-                    cx={cx}
-                    cy={cy}
-                    startAngle={startAngle}
-                    endAngle={endAngle}
-                    innerRadius={outerRadius + 6}
-                    outerRadius={outerRadius + 10}
-                    fill={fill}
-                />
-                <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-                <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-                <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value} Questões`}</text>
-                <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-                    {`(${(percent * 100).toFixed(1)}%)`}
-                </text>
-            </g>
+    // === DATA FILTERS ===
+    const filteredData = useMemo(() => {
+        return statsData.filter(d =>
+            d.year >= yearRange[0] && d.year <= yearRange[1]
         );
+    }, [yearRange]);
+
+    // === 1. MACRO VISION (B x A) ===
+    // Line Chart: Area Growth over Years
+    const macroTemporalData = useMemo(() => {
+        const years = {}; // { 2017: { Cirurgia: 10, Clinica: 15 } }
+        const areas = new Set();
+        filteredData.forEach(d => {
+            if (!years[d.year]) years[d.year] = { name: d.year };
+            years[d.year][d.area] = (years[d.year][d.area] || 0) + 1;
+            areas.add(d.area);
+        });
+        return { data: Object.values(years).sort((a, b) => a.name - b.name), areas: Array.from(areas) };
+    }, [filteredData]);
+
+    // Area Distribution (Pie)
+    const macroDistribution = useMemo(() => {
+        const counts = {};
+        filteredData.forEach(d => counts[d.area] = (counts[d.area] || 0) + 1);
+        return Object.entries(counts).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
+    }, [filteredData]);
+
+    // === 2. STRATEGIC VISION (C & G) with Drill-down ===
+    // If Area Selected -> Show Specialty Tree
+    const strategicTreeData = useMemo(() => {
+        if (!selectedArea) return []; // Show all areas if none selected? Or top specialties?
+        // Let's make it Area-Specific
+        const specs = {};
+        filteredData.filter(d => d.area === selectedArea).forEach(d => {
+            specs[d.specialty] = (specs[d.specialty] || 0) + 1;
+        });
+        return Object.entries(specs).map(([name, size]) => ({ name, size })).sort((a, b) => b.size - a.size);
+    }, [filteredData, selectedArea]);
+
+    // Focus Breakdown (G) for Selected Specialty (Deep Dive)
+    const tacticalFocusData = useMemo(() => {
+        if (!selectedSpecialty) return [];
+        const focus = {};
+        filteredData.filter(d => d.specialty === selectedSpecialty).forEach(d => {
+            if (d.focus && d.focus !== 'Indefinido') focus[d.focus] = (focus[d.focus] || 0) + 1;
+        });
+        return Object.entries(focus).map(([name, value]) => ({ name, value }));
+    }, [filteredData, selectedSpecialty]);
+
+    // === 3. TACTICAL VISION (D x H) ===
+    // "Mapa da Mina" - Top Topics
+    const topTopics = useMemo(() => {
+        const counts = {};
+        const subset = selectedArea ? filteredData.filter(d => d.area === selectedArea) : filteredData;
+        subset.forEach(d => {
+            if (d.topic && d.topic !== 'Outros') counts[d.topic] = (counts[d.topic] || 0) + 1;
+        });
+        return Object.entries(counts).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 15);
+    }, [filteredData, selectedArea]);
+
+    // Frequência x Recorrência (Scatter)
+    // X: Years appeared, Y: Total Questions
+    const scatterData = useMemo(() => {
+        const topics = {};
+        const subset = selectedArea ? filteredData.filter(d => d.area === selectedArea) : filteredData;
+
+        subset.forEach(d => {
+            if (!d.topic || d.topic === 'Outros') return;
+            if (!topics[d.topic]) topics[d.topic] = { name: d.topic, total: 0, years: new Set() };
+            topics[d.topic].total++;
+            topics[d.topic].years.add(d.year);
+        });
+
+        return Object.values(topics).map(t => ({
+            name: t.name,
+            x: t.years.size, // Recurrence (Years)
+            y: t.total,      // Frequency (Volume)
+            z: 100 // Bubble size
+        }));
+    }, [filteredData, selectedArea]);
+
+
+    // === RENDERERS ===
+    const CustomTooltip = ({ active, payload, label }) => {
+        if (active && payload && payload.length) {
+            return (
+                <div style={{ background: '#fff', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
+                    <p style={{ fontWeight: 'bold' }}>{label || payload[0].name}</p>
+                    {payload.map((p, i) => (
+                        <p key={i} style={{ color: p.color || COLORS[0] }}>
+                            {p.name}: {p.value}
+                        </p>
+                    ))}
+                </div>
+            );
+        }
+        return null;
     };
 
-    const [activeIndex, setActiveIndex] = useState(0);
-    const onPieEnter = (_, index) => setActiveIndex(index);
-
     return (
-        <div style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto', fontFamily: 'var(--font-main)' }}>
-            <h1 style={{ fontFamily: 'var(--font-hand)', color: 'var(--color-primary)', textAlign: 'center', marginBottom: '20px' }}>
-                Raio-X: Análise Estratégica 📊
-            </h1>
+        <div style={{ padding: '20px', maxWidth: '1600px', margin: '0 auto', fontFamily: 'var(--font-main)', background: '#FAFAFA', minHeight: '100vh' }}>
 
-            {/* TAB NAVIGATION */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginBottom: '32px' }}>
-                {[
-                    { id: 'overview', icon: <LayoutGrid size={18} />, label: 'Visão Geral (B)' },
-                    { id: 'specialty', icon: <Layers size={18} />, label: 'Especialidades (C)' },
-                    { id: 'focus', icon: <PieIcon size={18} />, label: 'Foco da Banca (G)' },
-                    { id: 'matrix', icon: <BarChart2 size={18} />, label: 'Cruzamento (B x G)' },
-                ].map(tab => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        style={{
-                            display: 'flex', alignItems: 'center', gap: '8px',
-                            padding: '10px 20px', borderRadius: '24px',
-                            border: 'none', cursor: 'pointer',
-                            background: activeTab === tab.id ? 'var(--color-primary)' : '#f0f0f0',
-                            color: activeTab === tab.id ? '#fff' : '#666',
-                            fontWeight: '600', transition: 'all 0.2s',
-                            boxShadow: activeTab === tab.id ? '0 4px 12px rgba(156, 39, 176, 0.3)' : 'none'
-                        }}
-                    >
-                        {tab.icon} {tab.label}
-                    </button>
-                ))}
+            {/* HEADER & GLOBAL FILTERS */}
+            <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '2.5rem', color: '#264653', marginBottom: '10px' }}>
+                    Raio-X Interativo 🩺
+                </h1>
+                <p style={{ color: '#666' }}>Explore os dados da prova em 4 níveis de profundidade.</p>
+
+                {/* Year Filter (Simple Buttons for Era) */}
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px' }}>
+                    <button onClick={() => setYearRange([2014, 2030])} style={activeBtn(yearRange[0] === 2014, '#2a9d8f')}>Tudo (2014+)</button>
+                    <button onClick={() => setYearRange([2017, 2020])} style={activeBtn(yearRange[1] === 2020, '#e76f51')}>Era Antiga (17-20)</button>
+                    <button onClick={() => setYearRange([2021, 2026])} style={activeBtn(yearRange[0] === 2021, '#264653')}>Era Moderna (21+)</button>
+                </div>
             </div>
 
-            {/* TAB CONTENT */}
-            <div style={{ minHeight: '500px' }}>
+            {/* TAB NAVIGATION */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '40px', borderBottom: '1px solid #ddd', paddingBottom: '10px' }}>
+                <TabBtn id="macro" icon={<LayoutGrid size={18} />} label="1. Visão Macro (Anual)" active={activeTab} set={setActiveTab} />
+                <TabBtn id="strategic" icon={<Layers size={18} />} label="2. Visão Estratégica (Especialidade)" active={activeTab} set={setActiveTab} />
+                <TabBtn id="tactical" icon={<Crosshair size={18} />} label="3. Visão Tática (Temas)" active={activeTab} set={setActiveTab} />
+                {/* <TabBtn id="custom" icon={<Search size={18}/>} label="4. Customizada" active={activeTab} set={setActiveTab} /> */}
+            </div>
 
-                {/* TAB 1: OVERVIEW (COLUMN B) */}
-                {activeTab === 'overview' && (
+            {/* === VIEW 1: MACRO === */}
+            {activeTab === 'macro' && (
+                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px' }}>
                     <div style={cardStyle}>
-                        <h3 style={titleStyle}>Peso das Grandes Áreas (Coluna B)</h3>
-                        <p style={subtitleStyle}>Qual a proporção de cada grande área no total da prova?</p>
+                        <h3 style={titleStyle}>Linha do Tempo: Evolução das Grandes Áreas</h3>
                         <ResponsiveContainer width="100%" height={400}>
-                            <PieChart>
-                                <Pie
-                                    activeIndex={activeIndex}
-                                    activeShape={renderActiveShape}
-                                    data={areaData}
-                                    cx="50%"
-                                    cy="50%"
-                                    innerRadius={100}
-                                    outerRadius={140}
-                                    fill="#8884d8"
-                                    dataKey="value"
-                                    onMouseEnter={onPieEnter}
-                                >
-                                    {areaData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                    ))}
-                                </Pie>
-                            </PieChart>
+                            <LineChart data={macroTemporalData.data}>
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <RechartsTooltip content={<CustomTooltip />} />
+                                <Legend />
+                                {macroTemporalData.areas.map((area, idx) => (
+                                    <Line key={area} type="monotone" dataKey={area} stroke={COLORS[idx % COLORS.length]} strokeWidth={3} dot={{ r: 4 }} />
+                                ))}
+                            </LineChart>
                         </ResponsiveContainer>
                     </div>
-                )}
+                    <div style={cardStyle}>
+                        <h3 style={titleStyle}>Fatia do Bolo</h3>
+                        <ResponsiveContainer width="100%" height={400}>
+                            <PieChart>
+                                <Pie data={macroDistribution} innerRadius={80} outerRadius={120} fill="#82ca9d" dataKey="value" paddingAngle={2}>
+                                    {macroDistribution.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} cursor="pointer"
+                                            onClick={() => { setSelectedArea(entry.name); setActiveTab('strategic'); }} />
+                                    ))}
+                                </Pie>
+                                <RechartsTooltip />
+                                <Legend />
+                            </PieChart>
+                        </ResponsiveContainer>
+                        <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#888', marginTop: '10px' }}>
+                            👉 Clique numa fatia para ir à Visão Estratégica
+                        </p>
+                    </div>
+                </div>
+            )}
 
-                {/* TAB 2: SPECIALTIES (COLUMN C) */}
-                {activeTab === 'specialty' && (
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
-                        <div style={cardStyle}>
-                            <h3 style={titleStyle}>Top 20 Especialidades (Coluna C)</h3>
-                            <p style={subtitleStyle}>As especialidades mais cobradas independente da grande área.</p>
-                            <ResponsiveContainer width="100%" height={400}>
-                                <BarChart data={specialtyData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
-                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                    <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} interval={0} fontSize={12} />
-                                    <YAxis />
-                                    <RechartsTooltip />
-                                    <Bar dataKey="value" fill="#00C49F" radius={[4, 4, 0, 0]}>
-                                        {specialtyData.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                        ))}
-                                    </Bar>
-                                </BarChart>
-                            </ResponsiveContainer>
-                        </div>
+            {/* === VIEW 2: STRATEGIC === */}
+            {activeTab === 'strategic' && (
+                <div>
+                    {/* BREADCRUMB */}
+                    <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span style={{ fontWeight: 'bold', color: '#888' }}>Filtro Atual:</span>
+                        {selectedArea ? (
+                            <span
+                                onClick={() => setSelectedArea(null)}
+                                style={{ background: '#264653', color: '#fff', padding: '4px 12px', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                            >
+                                {selectedArea} <span style={{ opacity: 0.7 }}>✕ (Voltar)</span>
+                            </span>
+                        ) : (
+                            <span style={{ color: '#aaa', fontStyle: 'italic' }}>Todas as Áreas (Clique na Macro para filtrar)</span>
+                        )}
+                        {selectedSpecialty && (
+                            <span style={{ background: '#e9c46a', color: '#333', padding: '4px 12px', borderRadius: '16px' }}>
+                                ↳ {selectedSpecialty}
+                            </span>
+                        )}
+                    </div>
 
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
                         <div style={cardStyle}>
-                            <h3 style={titleStyle}>Hierarquia: Área (B) &gt; Especialidade (C)</h3>
-                            <p style={subtitleStyle}>Como as especialidades se distribuem dentro das grandes áreas.</p>
+                            <h3 style={titleStyle}>
+                                {selectedArea ? `Especialidades de ${selectedArea}` : 'Todas as Especialidades'}
+                            </h3>
                             <ResponsiveContainer width="100%" height={500}>
                                 <Treemap
-                                    data={areaSpecialtyHierarchy}
+                                    data={strategicTreeData}
                                     dataKey="size"
                                     ratio={4 / 3}
                                     stroke="#fff"
-                                    fill="#8884d8"
-                                    content={<CustomTreemapContent />}
-                                />
+                                    fill="#264653"
+                                >
+                                    {/* Simple Custom Content to allow Click */}
+                                    <CustomTreemapContent onClick={(name) => { setSelectedSpecialty(name); }} />
+                                </Treemap>
                             </ResponsiveContainer>
+                            <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#888', marginTop: '10px' }}>
+                                👉 Clique num bloco para ver o Foco (Deep Dive)
+                            </p>
                         </div>
-                    </div>
-                )}
 
-                {/* TAB 3: FOCUS (COLUMN G) */}
-                {activeTab === 'focus' && (
-                    <div style={cardStyle}>
-                        <h3 style={titleStyle}>Perfil da Banca (Coluna G)</h3>
-                        <p style={subtitleStyle}>O que a prova pede? Diagnóstico, Tratamento, Conduta ou Quadro Clínico?</p>
-                        <ResponsiveContainer width="100%" height={400}>
-                            <BarChart data={focusData} layout="vertical" margin={{ top: 20, right: 30, left: 100, bottom: 20 }}>
-                                <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                                <XAxis type="number" />
-                                <YAxis dataKey="name" type="category" width={120} />
-                                <RechartsTooltip />
-                                <Bar dataKey="value" fill="#FFBB28" radius={[0, 4, 4, 0]}>
-                                    {focusData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                    ))}
-                                </Bar>
-                            </BarChart>
-                        </ResponsiveContainer>
+                        {selectedSpecialty ? (
+                            <div style={cardStyle}>
+                                <h3 style={titleStyle}>Deep Dive: Como cai {selectedSpecialty}?</h3>
+                                <ResponsiveContainer width="100%" height={400}>
+                                    <BarChart data={tacticalFocusData} layout="vertical" margin={{ left: 40 }}>
+                                        <XAxis type="number" hide />
+                                        <YAxis dataKey="name" type="category" width={100} tick={{ fontSize: 12 }} />
+                                        <RechartsTooltip cursor={{ fill: 'transparent' }} />
+                                        <Bar dataKey="value" fill="#e76f51" radius={[0, 4, 4, 0]} barSize={40}>
+                                            {tacticalFocusData.map((entry, index) => (
+                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                            ))}
+                                        </Bar>
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                        ) : (
+                            <div style={{ ...cardStyle, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ccc' }}>
+                                Selecione uma especialidade no mapa ao lado para ver o raio-x do foco.
+                            </div>
+                        )}
                     </div>
-                )}
+                </div>
+            )}
 
-                {/* TAB 4: MATRIX (B x G) */}
-                {activeTab === 'matrix' && (
+            {/* === VIEW 3: TACTICAL === */}
+            {activeTab === 'tactical' && (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '24px' }}>
+                    <div style={{ gridColumn: '1 / -1', marginBottom: '10px' }}>
+                        {selectedArea && <span style={{ background: '#264653', color: '#fff', padding: '4px 12px', borderRadius: '16px' }}>Filtro: {selectedArea}</span>}
+                    </div>
+
                     <div style={cardStyle}>
-                        <h3 style={titleStyle}>Matriz: Área vs. Foco</h3>
-                        <p style={subtitleStyle}>Em Cirurgia cai mais "Conduta"? Em Clínica cai mais "Diagnóstico"?</p>
-                        <div style={{ overflowX: 'auto', marginTop: '20px' }}>
-                            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px', fontSize: '0.95rem' }}>
-                                <thead>
-                                    <tr>
-                                        <th style={{ padding: '12px', textAlign: 'left', color: '#888' }}>Área</th>
-                                        {areaFocusMatrix.focuses.map(f => (
-                                            <th key={f} style={{ padding: '12px', textAlign: 'center', color: '#555' }}>{f}</th>
-                                        ))}
-                                    </tr>
-                                </thead>
+                        <h3 style={titleStyle}>Top 15 Temas Recorrentes</h3>
+                        <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                 <tbody>
-                                    {Object.entries(areaFocusMatrix.matrix).map(([area, counts], idx) => (
-                                        <tr key={area} style={{ background: '#fff', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
-                                            <td style={{ padding: '16px', fontWeight: 'bold', color: COLORS[idx % COLORS.length], borderLeft: `4px solid ${COLORS[idx % COLORS.length]}`, borderRadius: '8px 0 0 8px' }}>
-                                                {area}
+                                    {topTopics.map((t, i) => (
+                                        <tr key={i} style={{ borderBottom: '1px solid #eee' }}>
+                                            <td style={{ padding: '8px', fontWeight: 'bold', color: '#888' }}>#{i + 1}</td>
+                                            <td style={{ padding: '8px' }}>{t.name}</td>
+                                            <td style={{ padding: '8px', textAlign: 'right' }}>
+                                                <span style={{ background: '#f0f0f0', padding: '2px 8px', borderRadius: '10px', fontSize: '0.8rem' }}>{t.value}</span>
                                             </td>
-                                            {areaFocusMatrix.focuses.map(f => {
-                                                const val = counts[f] || 0;
-                                                const maxVal = 50; // Normalize-ish
-                                                const opacity = Math.min((val / maxVal) * 0.8 + 0.1, 1);
-                                                return (
-                                                    <td key={f} style={{ textAlign: 'center', padding: '12px', background: idx % 2 === 0 ? '#fafafa' : '#fff' }}>
-                                                        {val > 0 ? (
-                                                            <div style={{
-                                                                display: 'inline-block',
-                                                                padding: '6px 12px',
-                                                                borderRadius: '12px',
-                                                                background: `rgba(33, 150, 243, ${opacity})`,
-                                                                color: opacity > 0.5 ? '#fff' : '#333',
-                                                                fontWeight: '600',
-                                                                minWidth: '40px'
-                                                            }}>
-                                                                {val}
-                                                            </div>
-                                                        ) : <span style={{ color: '#eee' }}>-</span>}
-                                                    </td>
-                                                );
-                                            })}
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                )}
 
-            </div>
+                    <div style={cardStyle}>
+                        <h3 style={titleStyle}>Matriz de Decisão (Quadrante Mágico)</h3>
+                        <p style={subtitleStyle}>Eixo X: Em quantos anos caiu? | Eixo Y: Volume total de questões.</p>
+                        <ResponsiveContainer width="100%" height={500}>
+                            <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                                <CartesianGrid />
+                                <XAxis type="number" dataKey="x" name="Anos (Recorrência)" unit=" anos" domain={[0, 'dataMax + 1']} />
+                                <YAxis type="number" dataKey="y" name="Total (Volume)" unit=" un" />
+                                <ZAxis type="number" dataKey="z" range={[50, 400]} />
+                                <RechartsTooltip cursor={{ strokeDasharray: '3 3' }} />
+                                <Scatter name="Temas" data={scatterData} fill="#8884d8">
+                                    {scatterData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={entry.x > 5 && entry.y > 5 ? '#e76f51' : '#2a9d8f'} />
+                                    ))}
+                                </Scatter>
+                            </ScatterChart>
+                        </ResponsiveContainer>
+                        <p style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: '10px' }}>
+                            🔴 Vermelho: Alta Recorrência + Alto Volume (Prioridade Máxima)
+                        </p>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };
 
-// --- STYLES & SUBCOMPONENTS ---
+// === HELPERS ===
 
-const cardStyle = {
-    background: '#fff',
-    borderRadius: '20px',
-    padding: '30px',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-    border: '1px solid #f0f0f0'
-};
+const TabBtn = ({ id, icon, label, active, set }) => (
+    <button
+        onClick={() => set(id)}
+        style={{
+            display: 'flex', alignItems: 'center', gap: '8px',
+            padding: '12px 24px', border: 'none', background: 'none',
+            fontSize: '1rem', fontWeight: active === id ? '700' : '500',
+            color: active === id ? '#264653' : '#999',
+            borderBottom: active === id ? '3px solid #264653' : '3px solid transparent',
+            cursor: 'pointer', transition: 'all 0.2s'
+        }}
+    >
+        {icon} {label}
+    </button>
+);
 
-const titleStyle = {
-    marginTop: 0,
-    marginBottom: '8px',
-    fontSize: '1.4rem',
-    color: '#333',
-    fontWeight: '700'
-};
-
-const subtitleStyle = {
-    color: '#888',
-    marginBottom: '24px',
-    fontSize: '0.95rem'
-};
+const activeBtn = (isActive, color) => ({
+    padding: '8px 16px', borderRadius: '20px', border: 'none', cursor: 'pointer',
+    background: isActive ? color : '#e0e0e0',
+    color: isActive ? '#fff' : '#666',
+    fontWeight: '600'
+});
 
 const CustomTreemapContent = (props) => {
-    const { depth, x, y, width, height, index, name, value, colors } = props;
-
+    const { x, y, width, height, index, name, onClick } = props;
     return (
-        <g>
+        <g onClick={() => onClick && onClick(name)} style={{ cursor: 'pointer' }}>
             <rect
                 x={x}
                 y={y}
                 width={width}
                 height={height}
                 style={{
-                    fill: depth < 2 ? COLORS[index % COLORS.length] : '#ffffff00',
+                    fill: COLORS[index % COLORS.length],
                     stroke: '#fff',
-                    strokeWidth: 2 / (depth + 1e-10),
-                    strokeOpacity: 1 / (depth + 1e-10),
+                    strokeWidth: 2,
                 }}
             />
-            {depth === 1 ? (
-                <text x={x + width / 2} y={y + height / 2} textAnchor="middle" fill="#fff" fontSize={16} fontWeight="bold" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
-                    {name}
+            {width > 50 && height > 30 && (
+                <text x={x + width / 2} y={y + height / 2} textAnchor="middle" fill="#fff" fontSize={14} fontWeight="bold" style={{ pointerEvents: 'none' }}>
+                    {name.substring(0, width / 8)}
                 </text>
-            ) : null}
-            {depth === 2 && width > 40 && height > 20 ? ( // Only show if enough space
-                <text x={x + width / 2} y={y + height / 2} textAnchor="middle" fill="#333" fontSize={11} fillOpacity={0.9}>
-                    {name.substring(0, width / 6)}...
-                </text>
-            ) : null}
+            )}
         </g>
     );
 };
+
+const cardStyle = {
+    background: '#fff', borderRadius: '16px', padding: '24px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.05)', border: '1px solid #eee'
+};
+
+const titleStyle = { marginTop: 0, marginBottom: '16px', fontSize: '1.2rem', color: '#333' };
+const subtitleStyle = { color: '#888', marginBottom: '20px', fontSize: '0.9rem' };
 
 export default AnalyticsDashboard;
