@@ -361,17 +361,33 @@ const AnalyticsDashboard = () => {
                             <h3 style={titleStyle}>
                                 {selectedArea ? `Especialidades de ${selectedArea}` : 'Todas as Especialidades'}
                             </h3>
-                            <ResponsiveContainer width="100%" height={500}>
-                                <Treemap
-                                    data={strategicTreeData}
-                                    dataKey="size"
-                                    ratio={4 / 3}
-                                    stroke="#fff"
-                                    fill="#264653"
-                                >
-                                    <CustomTreemapContent onClick={(name) => { setSelectedSpecialty(name); }} />
-                                </Treemap>
-                            </ResponsiveContainer>
+
+                            {!selectedArea ? (
+                                <div style={{ height: '500px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#aaa', border: '2px dashed #eee', borderRadius: '12px' }}>
+                                    <Filter size={48} style={{ marginBottom: '16px', opacity: 0.3 }} />
+                                    <p>Selecione uma Grande Área na <strong>Visão Macro</strong> (Aba 1)</p>
+                                    <p style={{ fontSize: '0.8rem' }}>para ver a distribuição de especialidades.</p>
+                                    <button
+                                        onClick={() => setActiveTab('macro')}
+                                        style={{ marginTop: '20px', padding: '8px 16px', background: '#264653', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer' }}
+                                    >
+                                        Ir para Visão Macro
+                                    </button>
+                                </div>
+                            ) : (
+                                <ResponsiveContainer width="100%" height={500}>
+                                    <Treemap
+                                        data={strategicTreeData}
+                                        dataKey="size"
+                                        nameKey="name"
+                                        ratio={4 / 3}
+                                        stroke="#fff"
+                                        fill="#264653"
+                                    >
+                                        <CustomTreemapContent onClick={(name) => { setSelectedSpecialty(name); }} />
+                                    </Treemap>
+                                </ResponsiveContainer>
+                            )}
                             <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#888', marginTop: '10px' }}>
                                 👉 Clique num bloco para ver o Foco (Deep Dive)
                             </p>
@@ -401,97 +417,100 @@ const AnalyticsDashboard = () => {
                         )}
                     </div>
                 </div>
-            )}
+            )
+            }
 
             {/* === VIEW 3: TACTICAL === */}
-            {activeTab === 'tactical' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
-                    <div style={{ gridColumn: '1 / -1', marginBottom: '10px' }}>
-                        {selectedArea && <span style={{ background: '#264653', color: '#fff', padding: '4px 12px', borderRadius: '16px' }}>Filtro: {selectedArea}</span>}
-                    </div>
+            {
+                activeTab === 'tactical' && (
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
+                        <div style={{ gridColumn: '1 / -1', marginBottom: '10px' }}>
+                            {selectedArea && <span style={{ background: '#264653', color: '#fff', padding: '4px 12px', borderRadius: '16px' }}>Filtro: {selectedArea}</span>}
+                        </div>
 
-                    {/* CONTENT GAP WIDGET */}
-                    <div style={cardStyle}>
-                        <h3 style={titleStyle}>🚨 Buracos no Estudo</h3>
-                        <p style={subtitleStyle}>Temas que caem MUITO e você ainda não tem resumo!</p>
+                        {/* CONTENT GAP WIDGET */}
+                        <div style={cardStyle}>
+                            <h3 style={titleStyle}>🚨 Buracos no Estudo</h3>
+                            <p style={subtitleStyle}>Temas que caem MUITO e você ainda não tem resumo!</p>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
-                            {gapAnalysis.length === 0 ? (
-                                <div style={{ textAlign: 'center', padding: '20px', color: '#2a9d8f' }}>
-                                    <Sparkles size={32} style={{ marginBottom: '10px' }} />
-                                    <p>Parabéns! Você tem resumos cobrindo todos os top temas!</p>
-                                </div>
-                            ) : (
-                                gapAnalysis.map((gap, i) => (
-                                    <div key={i} style={{
-                                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                                        padding: '10px', border: '1px solid #ffeba1', background: '#fff9db', borderRadius: '8px'
-                                    }}>
-                                        <div>
-                                            <div style={{ fontWeight: 'bold', color: '#d97706' }}>{gap.topic}</div>
-                                            <div style={{ fontSize: '0.8rem', color: '#b45309' }}>{gap.count} questões encontradas</div>
-                                        </div>
-                                        <a href={`/new?title=${encodeURIComponent(gap.topic)}`} style={{
-                                            background: '#d97706', color: '#fff', textDecoration: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold'
-                                        }}>
-                                            Criar Resumo
-                                        </a>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
+                                {gapAnalysis.length === 0 ? (
+                                    <div style={{ textAlign: 'center', padding: '20px', color: '#2a9d8f' }}>
+                                        <Sparkles size={32} style={{ marginBottom: '10px' }} />
+                                        <p>Parabéns! Você tem resumos cobrindo todos os top temas!</p>
                                     </div>
-                                ))
-                            )}
+                                ) : (
+                                    gapAnalysis.map((gap, i) => (
+                                        <div key={i} style={{
+                                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                            padding: '10px', border: '1px solid #ffeba1', background: '#fff9db', borderRadius: '8px'
+                                        }}>
+                                            <div>
+                                                <div style={{ fontWeight: 'bold', color: '#d97706' }}>{gap.topic}</div>
+                                                <div style={{ fontSize: '0.8rem', color: '#b45309' }}>{gap.count} questões encontradas</div>
+                                            </div>
+                                            <a href={`/new?title=${encodeURIComponent(gap.topic)}`} style={{
+                                                background: '#d97706', color: '#fff', textDecoration: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold'
+                                            }}>
+                                                Criar Resumo
+                                            </a>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
                         </div>
-                    </div>
 
-                    {/* HEATMAP REPLACEMENT */}
-                    <div style={cardStyle}>
-                        <h3 style={titleStyle}>Mapa de Calor (Heatmap) - Top Especialidades</h3>
-                        <p style={subtitleStyle}>Recorrência anual das especialidades (Col C).</p>
+                        {/* HEATMAP REPLACEMENT */}
+                        <div style={cardStyle}>
+                            <h3 style={titleStyle}>Mapa de Calor (Heatmap) - Top Especialidades</h3>
+                            <p style={subtitleStyle}>Recorrência anual das especialidades (Col C).</p>
 
-                        <div style={{ overflowX: 'auto', paddingBottom: '10px' }}>
-                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
-                                <thead>
-                                    <tr>
-                                        <th style={{ padding: '8px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Especialidade</th>
-                                        <th style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #ddd' }}>Total</th>
-                                        {heatmapData.years.map(y => (
-                                            <th key={y} style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #ddd', minWidth: '40px' }}>{y}</th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {heatmapData.items.map((item, i) => (
-                                        <tr key={i} style={{ borderBottom: '1px solid #f0f0f0' }}>
-                                            <td style={{ padding: '8px', fontWeight: '500' }}>{item.name}</td>
-                                            <td style={{ padding: '8px', textAlign: 'center', fontWeight: 'bold' }}>{item.total}</td>
-                                            {heatmapData.years.map(y => {
-                                                const count = item.years[y] || 0;
-                                                return (
-                                                    <td key={y} style={{ padding: '4px', textAlign: 'center' }}>
-                                                        <div style={{
-                                                            width: '100%', height: '24px', borderRadius: '4px',
-                                                            background: getHeatColor(count),
-                                                            color: count > 0 ? '#fff' : 'transparent',
-                                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                            fontSize: '0.8rem', fontWeight: 'bold'
-                                                        }}>
-                                                            {count > 0 ? count : ''}
-                                                        </div>
-                                                    </td>
-                                                );
-                                            })}
+                            <div style={{ overflowX: 'auto', paddingBottom: '10px' }}>
+                                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+                                    <thead>
+                                        <tr>
+                                            <th style={{ padding: '8px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Especialidade</th>
+                                            <th style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #ddd' }}>Total</th>
+                                            {heatmapData.years.map(y => (
+                                                <th key={y} style={{ padding: '8px', textAlign: 'center', borderBottom: '2px solid #ddd', minWidth: '40px' }}>{y}</th>
+                                            ))}
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {heatmapData.items.map((item, i) => (
+                                            <tr key={i} style={{ borderBottom: '1px solid #f0f0f0' }}>
+                                                <td style={{ padding: '8px', fontWeight: '500' }}>{item.name}</td>
+                                                <td style={{ padding: '8px', textAlign: 'center', fontWeight: 'bold' }}>{item.total}</td>
+                                                {heatmapData.years.map(y => {
+                                                    const count = item.years[y] || 0;
+                                                    return (
+                                                        <td key={y} style={{ padding: '4px', textAlign: 'center' }}>
+                                                            <div style={{
+                                                                width: '100%', height: '24px', borderRadius: '4px',
+                                                                background: getHeatColor(count),
+                                                                color: count > 0 ? '#fff' : 'transparent',
+                                                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                                fontSize: '0.8rem', fontWeight: 'bold'
+                                                            }}>
+                                                                {count > 0 ? count : ''}
+                                                            </div>
+                                                        </td>
+                                                    );
+                                                })}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: '15px', color: '#666' }}>
+                                🟨 Amarelo (1 un) | 🟧 Laranja (2 un) | 🟥 Vermelho (3+ un)
+                            </p>
                         </div>
-                        <p style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: '15px', color: '#666' }}>
-                            🟨 Amarelo (1 un) | 🟧 Laranja (2 un) | 🟥 Vermelho (3+ un)
-                        </p>
                     </div>
-                </div>
-            )}
+                )
+            }
 
-        </div>
+        </div >
     );
 };
 
@@ -523,7 +542,10 @@ const activeBtn = (isActive, color) => ({
 const CustomTreemapContent = (props) => {
     const { x, y, width, height, index, name, onClick } = props;
     return (
-        <g onClick={() => onClick && onClick(name)} style={{ cursor: 'pointer' }}>
+        <g onClick={() => {
+            console.log('Treemap Click:', name, props);
+            if (onClick) onClick(name || (props.payload && props.payload.name));
+        }} style={{ cursor: 'pointer' }}>
             <rect
                 x={x}
                 y={y}
