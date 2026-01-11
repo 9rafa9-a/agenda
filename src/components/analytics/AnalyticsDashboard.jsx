@@ -809,26 +809,28 @@ const CustomAnalyticsView = ({ data }) => {
                         <p>Nenhuma questão encontrada com esses filtros.</p>
                     </div>
                 ) : (
-                    <ResponsiveContainer width="100%" height={500}>
-                        <PieChart>
-                            <Pie
-                                data={chartData}
-                                cx="50%"
-                                cy="50%"
-                                labelLine={false}
-                                label={({ name, percent }) => percent > 0.05 ? `${name} (${(percent * 100).toFixed(0)}%)` : ''}
-                                outerRadius={150}
-                                fill="#8884d8"
-                                dataKey="value"
-                            >
-                                {chartData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                ))}
-                            </Pie>
-                            <RechartsTooltip />
-                            <Legend />
-                        </PieChart>
-                    </ResponsiveContainer>
+                    <div style={{ width: '100%', height: '500px', minHeight: '400px' }}>
+                        <ResponsiveContainer width="100%" height="100%">
+                            <PieChart margin={{ top: 20, right: 30, left: 30, bottom: 20 }}>
+                                <Pie
+                                    data={chartData}
+                                    cx="50%"
+                                    cy="50%"
+                                    labelLine={true}
+                                    label={({ name, percent }) => percent > 0.05 ? `${name} (${(percent * 100).toFixed(0)}%)` : ''}
+                                    outerRadius={120} // Reduced from 150 to prevent clipping
+                                    fill="#8884d8"
+                                    dataKey="value"
+                                >
+                                    {chartData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                                <RechartsTooltip />
+                                <Legend layout="horizontal" verticalAlign="bottom" align="center" wrapperStyle={{ paddingTop: '20px' }} />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    </div>
                 )}
             </div>
         </div>
