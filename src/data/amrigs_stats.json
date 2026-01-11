@@ -8555,7 +8555,7 @@
     "area": "Epidemiologia/Risco",
     "specialty": "Acalásia: É condição pré-maligna para Carcinoma Espinocelular de Esôfago (Risco aumentado).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Epidemiologia/Risco",
     "summary": ""
   },
   {
@@ -8564,7 +8564,7 @@
     "area": "Epidemiologia/Risco",
     "specialty": "Obesidade Mórbida: Associada a Doença Renal, Câncer (ex: próstata), Osteoartrite e alterações Epigenéticas.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Epidemiologia/Risco",
     "summary": ""
   },
   {
@@ -8573,7 +8573,7 @@
     "area": "Diagnóstico",
     "specialty": "Walled-off Necrosis (WON): Coleção pancreática > 4 semanas, heterogênea (sólido+líquido). Diferente de pseudocisto (líquido homogêneo).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8582,7 +8582,7 @@
     "area": "Diagnóstico",
     "specialty": "Encefalopatia de Wernicke: Pós-bariátrica + Vômitos. Tríade: Ataxia, Confusão, Oftalmoplegia (Nistagmo/Diplopia). Deficiência de Tiamina (B1).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8591,7 +8591,7 @@
     "area": "Tratamento",
     "specialty": "Cistite Aguda: Disúria + Polaciúria + Nitrito positivo. Tratamento empírico com Nitrofurantoína (5 dias) ou Fosfomicina.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8600,7 +8600,7 @@
     "area": "Tratamento",
     "specialty": "Teníase: Proglótides (\"fitas\") nas fezes. Tratamento com Praziquantel ou Niclosamida.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8609,7 +8609,7 @@
     "area": "Tratamento",
     "specialty": "Hidradenite Supurativa: Lesões vulvares/perineais, comedões, nódulos. Casos leves/iniciais: Antibiótico tópico (Clindamicina).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8618,7 +8618,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Postura de Decorticação (Flexora): Lesão Supratentorial (acima do núcleo rubro/hemisférios). Decerebração (Extensora) = Tronco.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8627,7 +8627,7 @@
     "area": "Diagnóstico",
     "specialty": "Síndrome de West: Espasmos infantis (flexão tronco) + Hipsarritmia no EEG + Atraso desenvolvimento.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8636,7 +8636,7 @@
     "area": "Tratamento",
     "specialty": "Crise de Ausência: Primeira linha = Etossuximida ou Valproato (Carbamazepina piora ausência).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8645,7 +8645,7 @@
     "area": "Diagnóstico",
     "specialty": "Epilepsia Rolândica (Benigna): Centro-temporal, sono/despertar, sintomas orofaciais/sialorreia. EEG: pontas centro-temporais.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8654,7 +8654,7 @@
     "area": "Complicação/Prognóstico",
     "specialty": "Edema Cerebral na CAD: Principal causa de morte. Sinais: Alteração sensório, cefaleia, bradicardia.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Complicação/Prognóstico",
     "summary": ""
   },
   {
@@ -8663,7 +8663,7 @@
     "area": "Diagnóstico",
     "specialty": "Nódulo Mamário Benigno: Jovem, oval, paralelo à pele, circunscrito (Fibroadenoma). Conduta BI-RADS 3: Seguimento USG semestral.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8672,7 +8672,7 @@
     "area": "Tratamento",
     "specialty": "Dismenorreia Primária: Dor cíclica desde menarca, exame normal. Tto: AINEs (inibem prostaglandinas) e/ou Anticoncepcionais.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8681,7 +8681,7 @@
     "area": "Diagnóstico",
     "specialty": "Infertilidade: Progesterona > 3 ng/mL confirma ovulação. HSG avalia trompas (padrão-ouro tubário, não uterino).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8690,7 +8690,7 @@
     "area": "Tratamento",
     "specialty": "Sangramento de Escape (Spotting): Comum nos primeiros 3 meses de ACO (adaptação). Conduta: Orientar e manter uso.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8699,7 +8699,7 @@
     "area": "Tratamento",
     "specialty": "Vaginose Bacteriana: pH > 4.5, Clue cells, Teste aminas +, Corrimento acinzentado. Tto: Secnidazol ou Metronidazol.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8708,7 +8708,7 @@
     "area": "Tratamento",
     "specialty": "Climatério (Não Hormonal): Terapia Cognitivo-Comportamental (TCC) tem evidência para redução de sintomas vasomotores.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8717,7 +8717,7 @@
     "area": "Tratamento",
     "specialty": "Endometriose Clínica: Tratamento empírico (Progestágenos/ACO) indicado antes da laparoscopia se exame físico/imagem normais.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8726,7 +8726,7 @@
     "area": "Tratamento",
     "specialty": "SOP (Sintomática): Hirsutismo + Irregularidade. Tto inicial: Anticoncepcionais Orais Combinados (reduzem androgênios e regulam ciclo).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8735,7 +8735,7 @@
     "area": "Tratamento",
     "specialty": "Pós-Bariátrica (Disabsortiva/Bypass): Evitar ACO oral (má absorção). Preferir DIU (Mirena/Cobre) ou Implante.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8744,7 +8744,7 @@
     "area": "Quadro Clínico",
     "specialty": "TDPM/SPM: Sintomas ocorrem na fase Lútea (pós-ovulatória) e desaparecem na menstruação.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Quadro Clínico",
     "summary": ""
   },
   {
@@ -8753,7 +8753,7 @@
     "area": "Prevenção/Rastreamento",
     "specialty": "Sigilo no Adolescente: Quebra obrigatória apenas se risco de vida, dano grave ao próprio/terceiros ou violência.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Prevenção/Rastreamento",
     "summary": ""
   },
   {
@@ -8762,7 +8762,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Atenção Primária: Coordenação do Cuidado (integração com rede especializada) é fundamental para consolidação.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8771,7 +8771,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Atributos APS: Longitudinalidade (vínculo temporal) + Coordenação (gestão do fluxo na rede).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8780,7 +8780,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Atenção Domiciliar: AD1 (Equipe básica) vs AD2/3 (Equipe multiprofissional/Paliativos/Crônicos agudizados).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8789,7 +8789,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Conselhos de Saúde: Deliberativos, Permanentes, Paritários (50% usuários). Aprovam planos de saúde.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8798,7 +8798,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Princípios SUS: Falta de comunicação entre serviços e perda de histórico fere a Integralidade (continuidade do cuidado).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8807,7 +8807,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "MCCP: 1. Pessoa (doença+experiência); 2. Contexto; 3. Plano comum (Common ground); 4. Relação médico-paciente.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8816,7 +8816,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Enfermagem Saúde Mental: Pode realizar acolhimento, escuta, estratificação de risco e projeto terapêutico (Matriciamento).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8825,7 +8825,7 @@
     "area": "Prevenção/Rastreamento",
     "specialty": "Notificação Imediata (24h): Óbito por arbovirose, Zika em gestante, Febre Amarela, Raiva.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Prevenção/Rastreamento",
     "summary": ""
   },
   {
@@ -8834,7 +8834,7 @@
     "area": "Prevenção/Rastreamento",
     "specialty": "Previne Brasil: Indicadores incluem Vacinas (Penta/Polio) e Citopatológico (25-64 anos). Odonto gestante = 1 consulta.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Prevenção/Rastreamento",
     "summary": ""
   },
   {
@@ -8843,7 +8843,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Ética Médica: Cirurgia Plástica Estética tem obrigação de resultado, mas prometer \"perfeição/sem cicatriz\" é infração ética (publicidade enganosa).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8852,7 +8852,7 @@
     "area": "Epidemiologia/Risco",
     "specialty": "Estudo Transversal: Avalia exposição e desfecho simultaneamente. Não define causalidade (apenas associação/prevalência).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Epidemiologia/Risco",
     "summary": ""
   },
   {
@@ -8861,7 +8861,7 @@
     "area": "Diagnóstico",
     "specialty": "Razão de Verossimilhança (LR): LR negativo < 0.1 descarta a doença com segurança, mesmo com pré-teste moderado.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8870,7 +8870,7 @@
     "area": "Epidemiologia/Risco",
     "specialty": "NNH (Number Needed to Harm): $1 / (Risco Exposto - Risco Controle)$. Ex: $1 / (0.10 - 0.05) = 20$.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Epidemiologia/Risco",
     "summary": ""
   },
   {
@@ -8879,7 +8879,7 @@
     "area": "Diagnóstico",
     "specialty": "Valor Preditivo Positivo (VPP): Depende diretamente da Prevalência. Alta prevalência (grupo de risco) = Alto VPP.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8888,7 +8888,7 @@
     "area": "Epidemiologia/Risco",
     "specialty": "Intenção de Tratar (ITT): Analisar pacientes no grupo original da randomização preserva a comparabilidade e evita viés de seleção.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Epidemiologia/Risco",
     "summary": ""
   },
   {
@@ -8897,7 +8897,7 @@
     "area": "Epidemiologia/Risco",
     "specialty": "Coorte: Parte da Exposição (ex: Fumar) e acompanha para observar o Desfecho (ex: Prematuridade).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Epidemiologia/Risco",
     "summary": ""
   },
   {
@@ -8906,7 +8906,7 @@
     "area": "Tratamento",
     "specialty": "Fase Latente do Parto: Até 5-6 cm de dilatação. 4cm com contrações regulares pode ser fase latente prolongada. Conduta: Expectante/Analgesia.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8915,7 +8915,7 @@
     "area": "Diagnóstico",
     "specialty": "Puerpério Normal: 10º dia = Lóquios amarelos/brancos (Serosa/Alba), útero intrapélvico (não palpável).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -8924,7 +8924,7 @@
     "area": "Tratamento",
     "specialty": "Endometrite Puerperal: Febre + Útero doloroso + Lóquios fétidos. Tto: Clindamicina + Gentamicina (cobre anaeróbios).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8933,7 +8933,7 @@
     "area": "Tratamento",
     "specialty": "Óbito Fetal: Via vaginal é preferencial (menos morbidade materna). Indução com Misoprostol (cuidado se houver cesárea anterior).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8942,7 +8942,7 @@
     "area": "Tratamento",
     "specialty": "Pós-datismo/Oligodrâmnio: 41 semanas + Adramnia (ILA < 5) = Indicação de interrupção da gestação (Indução).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8951,7 +8951,7 @@
     "area": "Prevenção/Rastreamento",
     "specialty": "Vacinação Gestante: dTpa a partir de 20 semanas. Hepatite B e Influenza podem ser dadas em qualquer trimestre.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Prevenção/Rastreamento",
     "summary": ""
   },
   {
@@ -8960,7 +8960,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Sarampo: Resposta imune elimina o vírus. IgM ausente na reinfecção (resposta anamnéstica IgG). Tto: Vitamina A.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -8969,7 +8969,7 @@
     "area": "Tratamento",
     "specialty": "Fissura Mamilar: Causa principal é \"Pega\" e posição incorretas. Correção da técnica resolve a dor.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8978,7 +8978,7 @@
     "area": "Prevenção/Rastreamento",
     "specialty": "Pega Correta: Boca bem aberta, lábios evertidos, queixo tocando a mama, aréola mais visível acima da boca (assimétrica).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Prevenção/Rastreamento",
     "summary": ""
   },
   {
@@ -8987,7 +8987,7 @@
     "area": "Tratamento",
     "specialty": "Constipação com Fecaloma: Esvaziamento (Desimpactação) com Enemas ou Laxante Osmótico (PEG) antes da manutenção.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -8996,7 +8996,7 @@
     "area": "Tratamento",
     "specialty": "Bronquiolite Viral Aguda: Primeiro episódio de sibilância < 2 anos. Tto: Suporte (Oxigênio + Lavagem nasal). Broncodilatadores não indicados.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -9005,7 +9005,7 @@
     "area": "Tratamento",
     "specialty": "Desidratação (Plano B): Criança com sinais de desidratação (irritada, sede), mas sem choque. Tto: SRO na Unidade de Saúde.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -9014,7 +9014,7 @@
     "area": "Complicação/Prognóstico",
     "specialty": "Crise Adrenal: Hiperpotassemia (K+) grave causa arritmias ventriculares e parada cardíaca.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Complicação/Prognóstico",
     "summary": ""
   },
   {
@@ -9023,7 +9023,7 @@
     "area": "Definição/Fisiopato",
     "specialty": "Afogamento: Principal mecanismo de lesão é a Hipoxemia.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Definição/Fisiopato",
     "summary": ""
   },
   {
@@ -9032,7 +9032,7 @@
     "area": "Prevenção/Rastreamento",
     "specialty": "HTLV na Gestação: Contraindicação ABSOLUTA ao aleitamento materno (transmissão vertical via leite).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Prevenção/Rastreamento",
     "summary": ""
   },
   {
@@ -9041,7 +9041,7 @@
     "area": "Tratamento",
     "specialty": "Sífilis Congênita: Tto 10 dias. Se perder acesso IV, pode concluir com Penicilina Procaína IM (se não houver neurossífilis).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -9050,7 +9050,7 @@
     "area": "Tratamento",
     "specialty": "Intoxicação Cocaína: Agitação/Hipertensão. Tto: Benzodiazepínicos (Diazepam). Beta-bloqueadores contraindicados (efeito alfa sem oposição).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -9059,7 +9059,7 @@
     "area": "Diagnóstico",
     "specialty": "Psicose Puerperal: Emergência psiquiátrica. Forte associação com Transtorno Bipolar.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -9068,7 +9068,7 @@
     "area": "Tratamento",
     "specialty": "Intoxicação Benzodiazepínicos: Coma/Depressão respiratória. Antídoto: Flumazenil.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -9077,7 +9077,7 @@
     "area": "Tratamento",
     "specialty": "TDAH: Psicoestimulantes melhoram sintomas nucleares e funcionamento social/autoestima. \"Feriados terapêuticos\" não são obrigatórios para todos.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -9086,7 +9086,7 @@
     "area": "Diagnóstico",
     "specialty": "Transtorno Opositor Desafiador (TOD): Humor raivoso, comportamento desafiante. Risco de transtornos internalizantes (humor) e externalizantes.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico",
     "summary": ""
   },
   {
@@ -9095,7 +9095,7 @@
     "area": "Epidemiologia/Risco",
     "specialty": "Amitriptilina (Tricíclico): Anticolinérgico (Boca seca/Constipação); Anti-alfa1 (Hipotensão postural); Anti-histamínico (Sedação/Ganho peso).",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Epidemiologia/Risco",
     "summary": ""
   },
   {
@@ -9104,7 +9104,7 @@
     "area": "Tratamento",
     "specialty": "Tabagismo: Bupropiona inicia 1-2 semanas ANTES de parar. Terapia combinada (Cognitiva + Farmaco) é mais eficaz.",
     "topic": "Outros",
-    "focus": "Indefinido",
+    "focus": "Tratamento",
     "summary": ""
   },
   {
@@ -9113,7 +9113,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Bases da Cirurgia",
     "topic": "Suturas e Técnica Operatória",
-    "focus": "Indefinido",
+    "focus": "Suturas e Técnica Operatória",
     "summary": ""
   },
   {
@@ -9122,7 +9122,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Abdome Agudo",
     "topic": "Diagnóstico Diferencial (Inflamatório)",
-    "focus": "Indefinido",
+    "focus": "Diagnóstico Diferencial (Inflamatório)",
     "summary": ""
   },
   {
@@ -9131,7 +9131,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Trauma",
     "topic": "Trauma Pélvico e Uretral",
-    "focus": "Indefinido",
+    "focus": "Trauma Pélvico e Uretral",
     "summary": ""
   },
   {
@@ -9140,7 +9140,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Trauma",
     "topic": "Trauma Abdominal Fechado (Conduta)",
-    "focus": "Indefinido",
+    "focus": "Trauma Abdominal Fechado (Conduta)",
     "summary": ""
   },
   {
@@ -9149,7 +9149,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Trauma",
     "topic": "Trauma Abdominal Penetrante (PAF)",
-    "focus": "Indefinido",
+    "focus": "Trauma Abdominal Penetrante (PAF)",
     "summary": ""
   },
   {
@@ -9158,7 +9158,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Trauma",
     "topic": "Atendimento Inicial (Choque/FAST)",
-    "focus": "Indefinido",
+    "focus": "Atendimento Inicial (Choque/FAST)",
     "summary": ""
   },
   {
@@ -9167,7 +9167,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Trauma",
     "topic": "Avaliação Primária (ABCDE)",
-    "focus": "Indefinido",
+    "focus": "Avaliação Primária (ABCDE)",
     "summary": ""
   },
   {
@@ -9176,7 +9176,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Cirurgia Pediátrica",
     "topic": "Abdome Agudo Obstrutivo (Intussuscepção)",
-    "focus": "Indefinido",
+    "focus": "Abdome Agudo Obstrutivo (Intussuscepção)",
     "summary": ""
   },
   {
@@ -9185,7 +9185,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Trauma",
     "topic": "Atendimento Inicial (Vias Aéreas)",
-    "focus": "Indefinido",
+    "focus": "Atendimento Inicial (Vias Aéreas)",
     "summary": ""
   },
   {
@@ -9194,7 +9194,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Cirurgia Bariátrica",
     "topic": "Complicações Pós-operatórias",
-    "focus": "Indefinido",
+    "focus": "Complicações Pós-operatórias",
     "summary": ""
   },
   {
@@ -9203,7 +9203,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Cirurgia Bariátrica",
     "topic": "Indicações Cirúrgicas",
-    "focus": "Indefinido",
+    "focus": "Indicações Cirúrgicas",
     "summary": ""
   },
   {
@@ -9212,7 +9212,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Complicações Pós-Op",
     "topic": "Deiscência de Anastomose",
-    "focus": "Indefinido",
+    "focus": "Deiscência de Anastomose",
     "summary": ""
   },
   {
@@ -9221,7 +9221,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Complicações Pós-Op",
     "topic": "Fístulas Digestivas",
-    "focus": "Indefinido",
+    "focus": "Fístulas Digestivas",
     "summary": ""
   },
   {
@@ -9230,7 +9230,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Abdome Agudo",
     "topic": "Obstrutivo (Bridas/Aderências)",
-    "focus": "Indefinido",
+    "focus": "Obstrutivo (Bridas/Aderências)",
     "summary": ""
   },
   {
@@ -9239,7 +9239,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Abdome Agudo",
     "topic": "Fisiopatologia da Dor (Visceral vs Somática)",
-    "focus": "Indefinido",
+    "focus": "Fisiopatologia da Dor (Visceral vs Somática)",
     "summary": ""
   },
   {
@@ -9248,7 +9248,7 @@
     "area": "Clínica Médica",
     "specialty": "Cardiologia",
     "topic": "Hipertensão Arterial Sistêmica (Risco)",
-    "focus": "Indefinido",
+    "focus": "Hipertensão Arterial Sistêmica (Risco)",
     "summary": ""
   },
   {
@@ -9257,7 +9257,7 @@
     "area": "Clínica Médica",
     "specialty": "Infectologia",
     "topic": "Tuberculose (Transmissão/Tratamento)",
-    "focus": "Indefinido",
+    "focus": "Tuberculose (Transmissão/Tratamento)",
     "summary": ""
   },
   {
@@ -9266,7 +9266,7 @@
     "area": "Ginecologia e Obstetrícia",
     "specialty": "Obstetrícia",
     "topic": "Infecções na Gestação (HIV)",
-    "focus": "Indefinido",
+    "focus": "Infecções na Gestação (HIV)",
     "summary": ""
   },
   {
@@ -9275,7 +9275,7 @@
     "area": "Pediatria",
     "specialty": "Neurologia Pediátrica",
     "topic": "Síndrome de Guillain-Barré (Paralisia Flácida)",
-    "focus": "Indefinido",
+    "focus": "Síndrome de Guillain-Barré (Paralisia Flácida)",
     "summary": ""
   },
   {
@@ -9284,7 +9284,7 @@
     "area": "Clínica Médica",
     "specialty": "Endocrinologia",
     "topic": "Distúrbios do Cálcio (Hipercalcemia)",
-    "focus": "Indefinido",
+    "focus": "Distúrbios do Cálcio (Hipercalcemia)",
     "summary": ""
   },
   {
@@ -9293,7 +9293,7 @@
     "area": "Clínica Médica",
     "specialty": "Infectologia",
     "topic": "Febre de Origem Obscura (FOO)",
-    "focus": "Indefinido",
+    "focus": "Febre de Origem Obscura (FOO)",
     "summary": ""
   },
   {
@@ -9302,7 +9302,7 @@
     "area": "Clínica Médica",
     "specialty": "Gastroenterologia",
     "topic": "Diarreia Aguda (Tratamento)",
-    "focus": "Indefinido",
+    "focus": "Diarreia Aguda (Tratamento)",
     "summary": ""
   },
   {
@@ -9311,7 +9311,7 @@
     "area": "Clínica Médica",
     "specialty": "Cardiologia/Infecto",
     "topic": "Efeitos Adversos (Macrolídeos/Arritmia)",
-    "focus": "Indefinido",
+    "focus": "Efeitos Adversos (Macrolídeos/Arritmia)",
     "summary": ""
   },
   {
@@ -9320,7 +9320,7 @@
     "area": "Clínica Médica",
     "specialty": "Nefrologia",
     "topic": "Litíase Renal (Prevenção)",
-    "focus": "Indefinido",
+    "focus": "Litíase Renal (Prevenção)",
     "summary": ""
   },
   {
@@ -9329,7 +9329,7 @@
     "area": "Clínica Médica",
     "specialty": "Neurologia",
     "topic": "AVC (Profilaxia Secundária/FA)",
-    "focus": "Indefinido",
+    "focus": "AVC (Profilaxia Secundária/FA)",
     "summary": ""
   },
   {
@@ -9338,7 +9338,7 @@
     "area": "Clínica Médica",
     "specialty": "Neurologia",
     "topic": "Epilepsia (Diagnóstico Diferencial/Síncope)",
-    "focus": "Indefinido",
+    "focus": "Epilepsia (Diagnóstico Diferencial/Síncope)",
     "summary": ""
   },
   {
@@ -9347,7 +9347,7 @@
     "area": "Clínica Médica",
     "specialty": "Endocrinologia",
     "topic": "Diabetes (Efeitos Adversos Medicamentosos)",
-    "focus": "Indefinido",
+    "focus": "Diabetes (Efeitos Adversos Medicamentosos)",
     "summary": ""
   },
   {
@@ -9356,7 +9356,7 @@
     "area": "Clínica Médica",
     "specialty": "Endocrinologia",
     "topic": "Diabetes (Quadro Clínico/Diagnóstico)",
-    "focus": "Indefinido",
+    "focus": "Diabetes (Quadro Clínico/Diagnóstico)",
     "summary": ""
   },
   {
@@ -9365,7 +9365,7 @@
     "area": "Pediatria",
     "specialty": "Infectologia",
     "topic": "Parasitoses (Cisticercose)",
-    "focus": "Indefinido",
+    "focus": "Parasitoses (Cisticercose)",
     "summary": ""
   },
   {
@@ -9374,7 +9374,7 @@
     "area": "Clínica Médica",
     "specialty": "Endocrinologia",
     "topic": "Adrenal/Gônadas (Esteroides Anabolizantes)",
-    "focus": "Indefinido",
+    "focus": "Adrenal/Gônadas (Esteroides Anabolizantes)",
     "summary": ""
   },
   {
@@ -9383,7 +9383,7 @@
     "area": "Clínica Médica",
     "specialty": "Infectologia",
     "topic": "Parasitoses Intestinais (Ciclo Biológico)",
-    "focus": "Indefinido",
+    "focus": "Parasitoses Intestinais (Ciclo Biológico)",
     "summary": ""
   },
   {
@@ -9392,7 +9392,7 @@
     "area": "Clínica Médica",
     "specialty": "Gastroenterologia",
     "topic": "Câncer de Esôfago (Fatores de Risco)",
-    "focus": "Indefinido",
+    "focus": "Câncer de Esôfago (Fatores de Risco)",
     "summary": ""
   },
   {
@@ -9401,7 +9401,7 @@
     "area": "Clínica Médica",
     "specialty": "Gastroenterologia",
     "topic": "Câncer de Esôfago (Geral)",
-    "focus": "Indefinido",
+    "focus": "Câncer de Esôfago (Geral)",
     "summary": ""
   },
   {
@@ -9410,7 +9410,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Pâncreas",
     "topic": "Pancreatite Aguda (Manejo Inicial)",
-    "focus": "Indefinido",
+    "focus": "Pancreatite Aguda (Manejo Inicial)",
     "summary": ""
   },
   {
@@ -9419,7 +9419,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Pâncreas",
     "topic": "Pancreatite Aguda (Diagnóstico e Gravidade)",
-    "focus": "Indefinido",
+    "focus": "Pancreatite Aguda (Diagnóstico e Gravidade)",
     "summary": ""
   },
   {
@@ -9428,7 +9428,7 @@
     "area": "Cirurgia Geral",
     "specialty": "Pâncreas",
     "topic": "Pancreatite Aguda (Indicações Cirúrgicas)",
-    "focus": "Indefinido",
+    "focus": "Pancreatite Aguda (Indicações Cirúrgicas)",
     "summary": ""
   },
   {
@@ -9437,7 +9437,7 @@
     "area": "Clínica Médica",
     "specialty": "Reumatologia / G.O.",
     "topic": "Osteoporose (Rastreamento/Densitometria)",
-    "focus": "Indefinido",
+    "focus": "Osteoporose (Rastreamento/Densitometria)",
     "summary": ""
   },
   {
@@ -9446,7 +9446,7 @@
     "area": "Clínica Médica",
     "specialty": "Endocrinologia",
     "topic": "Diabetes Mellitus (Metformina e Contraindicações)",
-    "focus": "Indefinido",
+    "focus": "Diabetes Mellitus (Metformina e Contraindicações)",
     "summary": ""
   },
   {
@@ -9455,7 +9455,7 @@
     "area": "Clínica Médica",
     "specialty": "Gastroenterologia",
     "topic": "H. pylori (Indicações de Erradicação)",
-    "focus": "Indefinido",
+    "focus": "H. pylori (Indicações de Erradicação)",
     "summary": ""
   },
   {
@@ -9464,7 +9464,7 @@
     "area": "Clínica Médica",
     "specialty": "Oncologia / Nefro",
     "topic": "Síndrome de Lise Tumoral (Manejo)",
-    "focus": "Indefinido",
+    "focus": "Síndrome de Lise Tumoral (Manejo)",
     "summary": ""
   },
   {
@@ -9473,7 +9473,7 @@
     "area": "Clínica Médica",
     "specialty": "Cardiologia / Neuro",
     "topic": "AVC / HAS (Profilaxia Secundária)",
-    "focus": "Indefinido",
+    "focus": "AVC / HAS (Profilaxia Secundária)",
     "summary": ""
   },
   {
@@ -9482,7 +9482,7 @@
     "area": "Clínica Médica",
     "specialty": "Pneumologia",
     "topic": "Pneumonia Adquirida na Comunidade (Seguimento)",
-    "focus": "Indefinido",
+    "focus": "Pneumonia Adquirida na Comunidade (Seguimento)",
     "summary": ""
   },
   {
@@ -9491,7 +9491,7 @@
     "area": "Clínica Médica",
     "specialty": "Cuidados Paliativos",
     "topic": "Dispneia Terminal (Manejo Farmacológico)",
-    "focus": "Indefinido",
+    "focus": "Dispneia Terminal (Manejo Farmacológico)",
     "summary": ""
   },
   {
@@ -9500,7 +9500,7 @@
     "area": "Clínica Médica",
     "specialty": "Cardiologia",
     "topic": "Síncope / Hipotensão Ortostática (Diagnóstico)",
-    "focus": "Indefinido",
+    "focus": "Síncope / Hipotensão Ortostática (Diagnóstico)",
     "summary": ""
   },
   {
@@ -9509,7 +9509,7 @@
     "area": "Clínica Médica",
     "specialty": "Hematologia",
     "topic": "Anemia Ferropriva (Tratamento e Resposta)",
-    "focus": "Indefinido",
+    "focus": "Anemia Ferropriva (Tratamento e Resposta)",
     "summary": ""
   },
   {
@@ -9518,7 +9518,7 @@
     "area": "Clínica Médica",
     "specialty": "Infectologia",
     "topic": "Influenza (Tratamento com Oseltamivir)",
-    "focus": "Indefinido",
+    "focus": "Influenza (Tratamento com Oseltamivir)",
     "summary": ""
   },
   {
@@ -9527,7 +9527,7 @@
     "area": "Clínica Médica",
     "specialty": "Infectologia / Imuno",
     "topic": "Vacinação em Imunocomprometidos (Contraindicações)",
-    "focus": "Indefinido",
+    "focus": "Vacinação em Imunocomprometidos (Contraindicações)",
     "summary": ""
   },
   {
@@ -9536,7 +9536,7 @@
     "area": "Clínica Médica",
     "specialty": "Geriatria / Neuro",
     "topic": "Delirium (Diagnóstico e Manejo)",
-    "focus": "Indefinido",
+    "focus": "Delirium (Diagnóstico e Manejo)",
     "summary": ""
   },
   {
@@ -9545,7 +9545,7 @@
     "area": "Ginecologia",
     "specialty": "Fisiologia",
     "topic": "Ciclo Menstrual (Hormônios)",
-    "focus": "Indefinido",
+    "focus": "Ciclo Menstrual (Hormônios)",
     "summary": ""
   },
   {
@@ -9554,7 +9554,7 @@
     "area": "Ginecologia",
     "specialty": "Infectologia Ginecológica",
     "topic": "Doença Inflamatória Pélvica (DIP)",
-    "focus": "Indefinido",
+    "focus": "Doença Inflamatória Pélvica (DIP)",
     "summary": ""
   },
   {
@@ -9563,7 +9563,7 @@
     "area": "Ginecologia",
     "specialty": "Planejamento Familiar",
     "topic": "Anticoncepcionais Hormonais Combinados",
-    "focus": "Indefinido",
+    "focus": "Anticoncepcionais Hormonais Combinados",
     "summary": ""
   },
   {
@@ -9572,7 +9572,7 @@
     "area": "Ginecologia",
     "specialty": "Ginecologia Geral",
     "topic": "Dismenorreia / Endometriose (Diagnóstico Diferencial)",
-    "focus": "Indefinido",
+    "focus": "Dismenorreia / Endometriose (Diagnóstico Diferencial)",
     "summary": ""
   },
   {
@@ -9581,7 +9581,7 @@
     "area": "Ginecologia",
     "specialty": "Fisiologia",
     "topic": "Ciclo Ovariano (Fase Lútea/Folicular)",
-    "focus": "Indefinido",
+    "focus": "Ciclo Ovariano (Fase Lútea/Folicular)",
     "summary": ""
   },
   {
@@ -9590,7 +9590,7 @@
     "area": "Ginecologia",
     "specialty": "Planejamento Familiar",
     "topic": "Contracepção na Lactação (Minipílula)",
-    "focus": "Indefinido",
+    "focus": "Contracepção na Lactação (Minipílula)",
     "summary": ""
   },
   {
@@ -9599,7 +9599,7 @@
     "area": "Ginecologia",
     "specialty": "Ginecologia Geral",
     "topic": "Sangramento Uterino Disfuncional",
-    "focus": "Indefinido",
+    "focus": "Sangramento Uterino Disfuncional",
     "summary": ""
   },
   {
@@ -9608,7 +9608,7 @@
     "area": "Ginecologia",
     "specialty": "Ginecologia Geral",
     "topic": "Irregularidade Menstrual (Causas por Idade)",
-    "focus": "Indefinido",
+    "focus": "Irregularidade Menstrual (Causas por Idade)",
     "summary": ""
   },
   {
@@ -9617,7 +9617,7 @@
     "area": "Ginecologia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Síndrome dos Ovários Policísticos (Fisiopatologia)",
-    "focus": "Indefinido",
+    "focus": "Síndrome dos Ovários Policísticos (Fisiopatologia)",
     "summary": ""
   },
   {
@@ -9626,7 +9626,7 @@
     "area": "Ginecologia",
     "specialty": "Planejamento Familiar",
     "topic": "Sangramento de Escape (Spotting) com ACO",
-    "focus": "Indefinido",
+    "focus": "Sangramento de Escape (Spotting) com ACO",
     "summary": ""
   },
   {
@@ -9635,7 +9635,7 @@
     "area": "Ginecologia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Amenorreia Primária (Síndrome de Rokitansky)",
-    "focus": "Indefinido",
+    "focus": "Amenorreia Primária (Síndrome de Rokitansky)",
     "summary": ""
   },
   {
@@ -9644,7 +9644,7 @@
     "area": "Preventiva",
     "specialty": "Demografia",
     "topic": "Transição Demográfica e Epidemiológica",
-    "focus": "Indefinido",
+    "focus": "Transição Demográfica e Epidemiológica",
     "summary": ""
   },
   {
@@ -9653,7 +9653,7 @@
     "area": "Preventiva",
     "specialty": "SUS",
     "topic": "Princípios e Diretrizes (Universalidade/Dever do Estado)",
-    "focus": "Indefinido",
+    "focus": "Princípios e Diretrizes (Universalidade/Dever do Estado)",
     "summary": ""
   },
   {
@@ -9662,7 +9662,7 @@
     "area": "Preventiva",
     "specialty": "Ética Médica",
     "topic": "Atendimento ao Adolescente (Sigilo)",
-    "focus": "Indefinido",
+    "focus": "Atendimento ao Adolescente (Sigilo)",
     "summary": ""
   },
   {
@@ -9671,7 +9671,7 @@
     "area": "Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Prevenção Quaternária",
-    "focus": "Indefinido",
+    "focus": "Prevenção Quaternária",
     "summary": ""
   },
   {
@@ -9680,7 +9680,7 @@
     "area": "Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudos Observacionais (Caso-Controle)",
-    "focus": "Indefinido",
+    "focus": "Estudos Observacionais (Caso-Controle)",
     "summary": ""
   },
   {
@@ -9689,7 +9689,7 @@
     "area": "Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Medidas de Frequência (Prevalência)",
-    "focus": "Indefinido",
+    "focus": "Medidas de Frequência (Prevalência)",
     "summary": ""
   },
   {
@@ -9698,7 +9698,7 @@
     "area": "Preventiva",
     "specialty": "Bioestatística",
     "topic": "Medidas de Tendência Central (Mediana)",
-    "focus": "Indefinido",
+    "focus": "Medidas de Tendência Central (Mediana)",
     "summary": ""
   },
   {
@@ -9707,7 +9707,7 @@
     "area": "Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Estratégias de Prevenção (Alto Risco vs Populacional)",
-    "focus": "Indefinido",
+    "focus": "Estratégias de Prevenção (Alto Risco vs Populacional)",
     "summary": ""
   },
   {
@@ -9716,7 +9716,7 @@
     "area": "Preventiva",
     "specialty": "Ética / Medicina Legal",
     "topic": "Declaração de Óbito (Responsabilidades)",
-    "focus": "Indefinido",
+    "focus": "Declaração de Óbito (Responsabilidades)",
     "summary": ""
   },
   {
@@ -9725,7 +9725,7 @@
     "area": "Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Cálculo de Prevalência (Interpretação de Gráfico)",
-    "focus": "Indefinido",
+    "focus": "Cálculo de Prevalência (Interpretação de Gráfico)",
     "summary": ""
   },
   {
@@ -9734,7 +9734,7 @@
     "area": "Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Isoimunização Rh (Solicitação de Coombs)",
-    "focus": "Indefinido",
+    "focus": "Isoimunização Rh (Solicitação de Coombs)",
     "summary": ""
   },
   {
@@ -9743,7 +9743,7 @@
     "area": "Obstetrícia",
     "specialty": "Patologias na Gestação",
     "topic": "Infecção Urinária (Fisiopatologia/Risco)",
-    "focus": "Indefinido",
+    "focus": "Infecção Urinária (Fisiopatologia/Risco)",
     "summary": ""
   },
   {
@@ -9752,7 +9752,7 @@
     "area": "Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Sofrimento Fetal Agudo (Cardiotocografia)",
-    "focus": "Indefinido",
+    "focus": "Sofrimento Fetal Agudo (Cardiotocografia)",
     "summary": ""
   },
   {
@@ -9761,7 +9761,7 @@
     "area": "Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Líquido Amniótico (Oligo e Polidrâmnio)",
-    "focus": "Indefinido",
+    "focus": "Líquido Amniótico (Oligo e Polidrâmnio)",
     "summary": ""
   },
   {
@@ -9770,7 +9770,7 @@
     "area": "Obstetrícia",
     "specialty": "Patologias na Gestação",
     "topic": "Infecções Congênitas (TORCHS)",
-    "focus": "Indefinido",
+    "focus": "Infecções Congênitas (TORCHS)",
     "summary": ""
   },
   {
@@ -9779,7 +9779,7 @@
     "area": "Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Trabalho de Parto Prematuro (Manejo)",
-    "focus": "Indefinido",
+    "focus": "Trabalho de Parto Prematuro (Manejo)",
     "summary": ""
   },
   {
@@ -9788,7 +9788,7 @@
     "area": "Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Crescimento Intrauterino Restrito (CIUR)",
-    "focus": "Indefinido",
+    "focus": "Crescimento Intrauterino Restrito (CIUR)",
     "summary": ""
   },
   {
@@ -9797,7 +9797,7 @@
     "area": "Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Rotura Prematura de Membranas (Corioamnionite)",
-    "focus": "Indefinido",
+    "focus": "Rotura Prematura de Membranas (Corioamnionite)",
     "summary": ""
   },
   {
@@ -9806,7 +9806,7 @@
     "area": "Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Vacinação na Gestante",
-    "focus": "Indefinido",
+    "focus": "Vacinação na Gestante",
     "summary": ""
   },
   {
@@ -9815,7 +9815,7 @@
     "area": "Pediatria",
     "specialty": "Neonatologia / Puericultura",
     "topic": "Aleitamento Materno (Técnica da Pega)",
-    "focus": "Indefinido",
+    "focus": "Aleitamento Materno (Técnica da Pega)",
     "summary": ""
   },
   {
@@ -9824,7 +9824,7 @@
     "area": "Pediatria",
     "specialty": "Neonatologia / Puericultura",
     "topic": "Aleitamento Materno (Benefícios Iniciais)",
-    "focus": "Indefinido",
+    "focus": "Aleitamento Materno (Benefícios Iniciais)",
     "summary": ""
   },
   {
@@ -9833,7 +9833,7 @@
     "area": "Pediatria",
     "specialty": "Crescimento e Desenv.",
     "topic": "Puberdade (Estirão do Crescimento)",
-    "focus": "Indefinido",
+    "focus": "Puberdade (Estirão do Crescimento)",
     "summary": ""
   },
   {
@@ -9842,7 +9842,7 @@
     "area": "Pediatria",
     "specialty": "Infectologia Pediátrica",
     "topic": "Meningococcemia (Diagnóstico e Conduta)",
-    "focus": "Indefinido",
+    "focus": "Meningococcemia (Diagnóstico e Conduta)",
     "summary": ""
   },
   {
@@ -9851,7 +9851,7 @@
     "area": "Pediatria",
     "specialty": "Pneumologia Pediátrica",
     "topic": "Pneumonia Complicada (Derrame Pleural)",
-    "focus": "Indefinido",
+    "focus": "Pneumonia Complicada (Derrame Pleural)",
     "summary": ""
   },
   {
@@ -9860,7 +9860,7 @@
     "area": "Pediatria",
     "specialty": "Infectologia Pediátrica",
     "topic": "Varicela (Contraindicações Medicamentosas/AAS)",
-    "focus": "Indefinido",
+    "focus": "Varicela (Contraindicações Medicamentosas/AAS)",
     "summary": ""
   },
   {
@@ -9869,7 +9869,7 @@
     "area": "Pediatria",
     "specialty": "Emergências Pediátricas",
     "topic": "Anafilaxia (Tratamento com Adrenalina)",
-    "focus": "Indefinido",
+    "focus": "Anafilaxia (Tratamento com Adrenalina)",
     "summary": ""
   },
   {
@@ -9878,7 +9878,7 @@
     "area": "Pediatria",
     "specialty": "Infectologia Pediátrica",
     "topic": "Mononucleose Infecciosa (Diagnóstico)",
-    "focus": "Indefinido",
+    "focus": "Mononucleose Infecciosa (Diagnóstico)",
     "summary": ""
   },
   {
@@ -9887,7 +9887,7 @@
     "area": "Pediatria",
     "specialty": "Reumatologia / Infecto",
     "topic": "Doença de Kawasaki (Diagnóstico Clínico)",
-    "focus": "Indefinido",
+    "focus": "Doença de Kawasaki (Diagnóstico Clínico)",
     "summary": ""
   },
   {
@@ -9896,7 +9896,7 @@
     "area": "Pediatria",
     "specialty": "Infectologia Pediátrica",
     "topic": "Exantema Súbito (Quadro Clínico)",
-    "focus": "Indefinido",
+    "focus": "Exantema Súbito (Quadro Clínico)",
     "summary": ""
   },
   {
@@ -9905,7 +9905,7 @@
     "area": "Pediatria",
     "specialty": "Gastroenterologia Ped.",
     "topic": "Refluxo Gastroesofágico Fisiológico",
-    "focus": "Indefinido",
+    "focus": "Refluxo Gastroesofágico Fisiológico",
     "summary": ""
   },
   {
@@ -9914,7 +9914,7 @@
     "area": "Pediatria",
     "specialty": "Cardiologia Pediátrica",
     "topic": "Sopro Inocente (Características)",
-    "focus": "Indefinido",
+    "focus": "Sopro Inocente (Características)",
     "summary": ""
   },
   {
@@ -9923,7 +9923,7 @@
     "area": "Pediatria",
     "specialty": "Neonatologia",
     "topic": "Triagem Auditiva (Teste da Orelhinha)",
-    "focus": "Indefinido",
+    "focus": "Triagem Auditiva (Teste da Orelhinha)",
     "summary": ""
   },
   {
@@ -9932,7 +9932,7 @@
     "area": "Clínica Médica",
     "specialty": "Reumatologia / Ortopedia",
     "topic": "Lombalgia (Sinais de Alarme/Red Flags)",
-    "focus": "Indefinido",
+    "focus": "Lombalgia (Sinais de Alarme/Red Flags)",
     "summary": ""
   },
   {
@@ -9941,7 +9941,7 @@
     "area": "Pediatria / Psiquiatria",
     "specialty": "Psiquiatria Infantil",
     "topic": "Transtorno do Espectro Autista (Epidemio)",
-    "focus": "Indefinido",
+    "focus": "Transtorno do Espectro Autista (Epidemio)",
     "summary": ""
   },
   {
@@ -9950,7 +9950,7 @@
     "area": "Psiquiatria",
     "specialty": "Dependência Química",
     "topic": "Alcoolismo (Tratamento/Dissulfiram)",
-    "focus": "Indefinido",
+    "focus": "Alcoolismo (Tratamento/Dissulfiram)",
     "summary": ""
   },
   {
@@ -9959,7 +9959,7 @@
     "area": "Psiquiatria",
     "specialty": "Transtornos do Humor",
     "topic": "Transtorno Bipolar vs Depressão",
-    "focus": "Indefinido",
+    "focus": "Transtorno Bipolar vs Depressão",
     "summary": ""
   },
   {
@@ -9968,7 +9968,7 @@
     "area": "Pediatria / Psiquiatria",
     "specialty": "Violência / Psiquiatria",
     "topic": "Síndrome de Munchausen por Procuração",
-    "focus": "Indefinido",
+    "focus": "Síndrome de Munchausen por Procuração",
     "summary": ""
   },
   {
@@ -9977,7 +9977,7 @@
     "area": "Psiquiatria",
     "specialty": "Dependência Química",
     "topic": "Tabagismo (Tratamento Farmacológico)",
-    "focus": "Indefinido",
+    "focus": "Tabagismo (Tratamento Farmacológico)",
     "summary": ""
   }
 ]

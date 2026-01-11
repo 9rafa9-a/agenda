@@ -39,8 +39,41 @@ try {
         const nameMatch = sheetName.match(/20\d{2}/);
         if (nameMatch) year = nameMatch[0];
 
-        // Inspect first few rows to find where data starts
+        // Inspect first few rows to find where data starts and identifying Focus column
         let tempYear = year;
+        let focusColIndex = -1;
+
+        // Scan first 20 rows to find a column that looks like Focus (starts with [)
+        for (let i = 0; i < Math.min(rows.length, 20); i++) {
+            const r = rows[i];
+            if (!r) continue;
+            r.forEach((cell, cellIdx) => {
+                if (typeof cell === 'string' && /^\[.*\]$/.test(cell.trim())) {
+                    focusColIndex = cellIdx;
+                }
+            });
+            if (focusColIndex !== -1) break;
+        }
+
+        // Fallback if strictly bracketed format not found, try keywords
+        if (focusColIndex === -1) {
+            for (let i = 0; i < Math.min(rows.length, 20); i++) {
+                const r = rows[i];
+                if (!r) continue;
+                r.forEach((cell, cellIdx) => {
+                    if (typeof cell === 'string' && (cell.includes('Diagnóstico') || cell.includes('Tratamento'))) {
+                        focusColIndex = cellIdx;
+                    }
+                });
+                if (focusColIndex !== -1) break;
+            }
+        }
+
+        // If still not found, default to 6 but warn
+        if (focusColIndex === -1 && rows.length > 5) {
+            // console.warn(`Could not identify Focus column for sheet ${sheetName}, defaulting to 6`);
+            focusColIndex = 6;
+        }
 
         rows.forEach((row, idx) => {
             if (!row || row.length === 0) return;
@@ -63,8 +96,8 @@ try {
                 let area = row[cols.area]?.trim();
                 if (!area) return;
 
-                // Extract Focus (remove brackets if present: [Diagnóstico] -> Diagnóstico)
-                let focus = row[cols.focus];
+                // Extract Focus using dynamic index
+                let focus = row[focusColIndex];
                 if (focus && typeof focus === 'string') {
                     focus = focus.replace(/[\[\]]/g, '').trim();
                 } else {

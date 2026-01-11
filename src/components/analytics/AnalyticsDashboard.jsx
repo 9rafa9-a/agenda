@@ -85,7 +85,7 @@ const AnalyticsDashboard = () => {
 
         return {
             matrix,
-            focuses: Array.from(allFocuses).sort()
+            focuses: Array.from(allFocuses).filter(f => f && f !== 'Indefinido').sort()
         };
     }, []);
 
