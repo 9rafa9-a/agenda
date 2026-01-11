@@ -5,7 +5,6 @@ import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
     Treemap, LineChart, Line, Cell
 } from 'recharts';
-import ReactWordcloud from 'react-wordcloud';
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#0088FE', '#00C49F'];
 
@@ -281,16 +280,35 @@ const AnalyticsDashboard = () => {
 
                 {/* 5. Word Cloud (Full Width) */}
                 <div style={{ ...cardStyle, gridColumn: '1 / -1', height: '400px' }}>
-                    <h3 style={titleStyle}>6. Nuvem de Palavras-Chave</h3>
-                    <div style={{ height: '350px' }}>
-                        <ReactWordcloud
-                            words={wordCloudData}
-                            options={{
-                                rotations: 0,
-                                rotationAngles: [0, 0],
-                                fontSizes: [20, 60],
-                            }}
-                        />
+                    <h3 style={titleStyle}>6. Nuvem de Palavras-Chave (Top 50)</h3>
+                    <div style={{
+                        height: '300px',
+                        display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center',
+                        gap: '12px', overflowY: 'auto', padding: '10px'
+                    }}>
+                        {wordCloudData.map((w, i) => {
+                            // Simple font sizing logic
+                            const maxVal = wordCloudData[0]?.value || 1;
+                            const minVal = wordCloudData[wordCloudData.length - 1]?.value || 1;
+                            const fontSize = 12 + ((w.value - minVal) / (maxVal - minVal)) * 36; // Range 12px to 48px
+
+                            return (
+                                <span key={w.text} style={{
+                                    fontSize: `${fontSize}px`,
+                                    color: COLORS[i % COLORS.length],
+                                    fontWeight: w.value > (maxVal / 2) ? 'bold' : 'normal',
+                                    opacity: 0.8 + (Math.random() * 0.2),
+                                    cursor: 'default',
+                                    transition: 'transform 0.2s',
+                                }}
+                                    title={`${w.text}: ${w.value} ocorrências`}
+                                    onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'}
+                                    onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                                >
+                                    {w.text}
+                                </span>
+                            );
+                        })}
                     </div>
                 </div>
 
