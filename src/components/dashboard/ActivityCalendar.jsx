@@ -25,7 +25,7 @@ const ActivityCalendar = ({ diseases = [] }) => {
     const colors = ['#f0f0f0', '#FADADD', '#F4B6BE', '#E68FAC']; // Default, Low, Med, High (Pink Theme)
 
     return (
-        <div style={{
+        <div className="activity-calendar-card" style={{
             background: '#fff',
             padding: '20px',
             borderRadius: 'var(--border-radius)',

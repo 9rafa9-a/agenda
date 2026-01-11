@@ -78,12 +78,11 @@ const Dashboard = () => {
                     )}
                 </div>
 
-                <div style={{ display: 'flex', gap: '12px', flex: 1, justifyContent: 'flex-end', minWidth: '300px' }}>
+                <div className="search-container" style={{ display: 'flex', gap: '8px', flex: 1, justifyContent: 'flex-end', flexWrap: 'wrap' }}>
                     {/* Search Bar */}
                     <div style={{
                         position: 'relative',
-                        flex: 1,
-                        maxWidth: '400px',
+                        flex: '1 1 200px', // Allow shrinking, grow, base 200
                         height: '48px',
                     }}>
                         <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#aaa' }} />
@@ -106,46 +105,48 @@ const Dashboard = () => {
                         />
                     </div>
 
-                    <button
-                        onClick={refresh}
-                        title="Recarregar lista"
-                        style={{
-                            background: '#fff',
-                            color: '#666',
-                            border: '1px solid #ddd',
-                            borderRadius: '50%',
-                            width: '48px',
-                            height: '48px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s',
-                            flexShrink: 0
-                        }}
-                    >
-                        <RefreshCw size={20} />
-                    </button>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                        <button
+                            onClick={refresh}
+                            title="Recarregar lista"
+                            style={{
+                                background: '#fff',
+                                color: '#666',
+                                border: '1px solid #ddd',
+                                borderRadius: '50%',
+                                width: '48px',
+                                height: '48px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s',
+                                flexShrink: 0
+                            }}
+                        >
+                            <RefreshCw size={20} />
+                        </button>
 
-                    <button
-                        onClick={() => navigate('/new')}
-                        style={{
-                            background: 'var(--color-primary)',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '50px',
-                            padding: '0 24px',
-                            height: '48px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            fontWeight: '600',
-                            boxShadow: 'var(--shadow-sm)',
-                            flexShrink: 0
-                        }}
-                    >
-                        <Plus size={20} /> <span className="hide-mobile">Novo Resumo</span>
-                    </button>
+                        <button
+                            onClick={() => navigate('/new')}
+                            style={{
+                                background: 'var(--color-primary)',
+                                color: '#fff',
+                                border: 'none',
+                                borderRadius: '50px',
+                                padding: '0 24px',
+                                height: '48px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                fontWeight: '600',
+                                boxShadow: 'var(--shadow-sm)',
+                                flexShrink: 0
+                            }}
+                        >
+                            <Plus size={20} /> <span className="hide-mobile">Novo Resumo</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -154,8 +155,8 @@ const Dashboard = () => {
 
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                gap: '24px'
+                gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', // Reduced min-width
+                gap: '16px' // Slightly tighter gap
             }}>
                 {filteredDiseases.map(item => (
                     <DiseaseCard key={item.id} {...item} />
@@ -172,7 +173,13 @@ const Dashboard = () => {
                 .hide-mobile { display: inline; }
                 @media (max-width: 600px) {
                     .hide-mobile { display: none; }
+                    .search-container { width: 100%; margin-top: 10px; }
                 }
+            `}</style>
+            <style>{`
+                 @media (max-width: 600px) {
+                    .activity-calendar-card { padding: 12px !important; }
+                 }
             `}</style>
         </div>
     );
