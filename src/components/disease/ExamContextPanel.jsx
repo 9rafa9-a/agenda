@@ -11,7 +11,9 @@ const ExamContextPanel = ({ diseaseName, editorContent = {}, onClose }) => {
 
         return statsData.filter(d => {
             if (!d.topic) return false;
-            return d.topic.toLowerCase().trim() === normalizedName;
+            // Fuzzy match: check if one contains the other
+            const t = d.topic.toLowerCase().trim();
+            return t.includes(normalizedName) || normalizedName.includes(t);
         }).sort((a, b) => b.year - a.year);
     }, [diseaseName]);
 
