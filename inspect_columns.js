@@ -9,23 +9,13 @@ try {
 
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: 'EMPTY' });
 
-    console.log("=== INSPECTING COLUMNS B (1), C (2), G (6) ===");
-    // Sample first 20 rows
+    console.log("=== INSPECTING COLS D (3) AND G (6) ===");
     rows.slice(0, 20).forEach((row, i) => {
-        console.log(`Row ${i}: B='${row[1]}', C='${row[2]}', G='${row[6]}'`);
+        // Log the whole row for context if needed, but focus on 3 and 6
+        // JSON.stringify to see if it's really undefined or empty string
+        console.log(`Row ${i}: D(3)='${row[3]}', G(6)='${row[6]}', H(7)='${row[7]}'`);
+        // Checking H too just in case it shifted
     });
-
-    console.log("\n=== COUNTING NON-EMPTY G (6) ===");
-    let countG = 0;
-    let total = 0;
-    rows.forEach(row => {
-        if (row[1] && row[1] !== 'EMPTY') { // If row has Area
-            total++;
-            if (row[6] && row[6] !== 'EMPTY') countG++;
-        }
-    });
-    console.log(`Total Rows with Area: ${total}`);
-    console.log(`Rows with Focus (G): ${countG}`);
 
 } catch (e) {
     console.error(e);
