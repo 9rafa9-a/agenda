@@ -5,7 +5,7 @@ import ExamContextPanel from './ExamContextPanel'; // New
 // PDF Export
 import { useReactToPrint } from 'react-to-print';
 // History Icons
-import { Printer, Save, ArrowLeft, History, RotateCcw, Trash2, Ban, CheckCircle, Brain, Sparkles, RotateCw, FileText, Loader2 } from 'lucide-react';
+import { Printer, Save, ArrowLeft, History, RotateCcw, Trash2, Ban, CheckCircle, Brain, Sparkles, RotateCw, FileText, Loader2, Check } from 'lucide-react';
 // Firestore
 import { useNavigate, useParams, useOutletContext } from 'react-router-dom';
 import { doc, getDoc, getDocs, setDoc, updateDoc, collection, addDoc, query, orderBy, deleteDoc } from 'firebase/firestore';
@@ -19,7 +19,7 @@ const DEFAULT_TOPICS = {
     clinical: { title: 'Quadro Clínico', color: 'pink' },
     diagnosis: { title: 'Diagnóstico', color: 'blue' },
     differential: { title: 'Diag. Diferencial', color: 'blue' },
-    treatment: { title: 'Tratamento/Conduta', color: 'blue' },
+    treatment: { title: 'Tratamento/Conduta', color: 'blue', id: 'section-treatment' },
     complications: { title: 'Complicações/Prog', color: 'yellow' },
     pearls: { title: 'Pegadinhas Prova (⚠️)', color: 'yellow' },
     notes: { title: 'Notas Questões (Erros)', color: 'yellow' },
@@ -449,6 +449,7 @@ const DiseaseEditor = () => {
                             <style>{`.spin { animation: spin 1s linear infinite; } @keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
 
                             <button
+                                id="btn-questions"
                                 onClick={() => setShowExamContext(true)}
                                 style={{
                                     display: 'flex', alignItems: 'center', gap: '8px',
@@ -459,7 +460,7 @@ const DiseaseEditor = () => {
                                 <FileText size={18} /> Questões
                             </button>
 
-                            <button onClick={() => setShowEvidence(true)} style={{
+                            <button id="btn-evidence" onClick={() => setShowEvidence(true)} style={{
                                 display: 'flex', alignItems: 'center', gap: '8px',
                                 padding: '8px 16px', borderRadius: '20px', border: '1px solid #ddd', cursor: 'pointer',
                                 background: '#fff', color: '#555', fontWeight: '600'
@@ -557,6 +558,7 @@ const DiseaseEditor = () => {
             {/* Printable Area Wrapper */}
             <div ref={componentRef} style={{ padding: '20px' }} className="print-content">
                 {/* Header Input */}
+                {/* Header Input */}
                 <div style={{
                     textAlign: 'center',
                     marginBottom: '32px',
@@ -566,6 +568,7 @@ const DiseaseEditor = () => {
                     boxShadow: 'var(--shadow-sm)'
                 }}>
                     <input
+                        id="input-subject"
                         type="text"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
@@ -600,6 +603,7 @@ const DiseaseEditor = () => {
                         color: '#888'
                     }}>Tema da Aula / Doença</label>
                     <input
+                        id="input-title"
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -619,26 +623,44 @@ const DiseaseEditor = () => {
                     />
                 </div>
 
-                {/* 9-Grid Layout */}
-                <div className="grid-layout">
-                    {Object.entries(DEFAULT_TOPICS).map(([key, config]) => (
-                        <TopicSection
-                            key={key}
-                            title={config.title}
-                            color={config.color}
-                            content={data[key]}
-                            onChange={(val) => handleChange(key, val)}
-                            isEditable={!trashed}
-                            index={key}
-                            relevance={sectionRelevance[key]} // Pass Smart Relevance
+                {/* VISUAL SECTIONS EDITOR */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+                    {/* Definition - Key Section */}
+                    <div style={sectionCardStyle}>
+                        <div style={{ marginBottom: '10px', fontWeight: 'bold', color: '#264653', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            📖 Definição / Fisiopatologia
+                            {data.definition && <Check size={16} color="green" />}
+                        </div>
+                        <textarea
+                            id="section-definition"
+                            value={data.definition}
+                            onChange={e => handleChange('definition', e.target.value)}
+                            placeholder="O que é? Como ocorre?..."
+                            style={textAreaStyle}
                         />
-                    ))}
+                    </div>
+                    {Object.entries(DEFAULT_TOPICS)
+                        .filter(([key]) => key !== 'definition')
+                        .map(([key, config]) => (
+                            <div id={config.id} key={key} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                                <TopicSection
+                                    title={config.title}
+                                    color={config.color}
+                                    content={data[key]}
+                                    onChange={(val) => handleChange(key, val)}
+                                    isEditable={!trashed}
+                                    index={key}
+                                    relevance={sectionRelevance[key]} // Pass Smart Relevance
+                                />
+                            </div>
+                        ))}
                 </div>
             </div>
 
             {/* Save Button */}
             <div style={{ marginTop: '40px', textAlign: 'center' }}>
                 <button
+                    id="btn-save"
                     onClick={handleManualSave}
                     disabled={saving}
                     style={{
@@ -678,6 +700,32 @@ const DiseaseEditor = () => {
       `}</style>
         </div >
     );
+};
+
+const sectionCardStyle = {
+    background: '#fff',
+    padding: '24px',
+    borderRadius: '16px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+    border: '1px solid #f0f0f0',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%'
+};
+
+const textAreaStyle = {
+    width: '100%',
+    flex: 1,
+    minHeight: '150px',
+    padding: '12px',
+    borderRadius: '8px',
+    border: '1px solid #eee',
+    resize: 'vertical',
+    fontFamily: 'var(--font-main)',
+    fontSize: '0.95rem',
+    lineHeight: '1.5',
+    outline: 'none',
+    marginTop: 'auto'
 };
 
 export default DiseaseEditor;

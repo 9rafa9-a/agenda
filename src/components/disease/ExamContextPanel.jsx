@@ -89,7 +89,7 @@ const ExamContextPanel = ({ diseaseName, editorContent = {}, onClose }) => {
                     <h2 style={{ margin: 0, fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px', color: '#d97706' }}>
                         <FileText size={20} /> Contexto AMRIGS
                     </h2>
-                    <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>
+                    <button id="btn-close-exam-context" onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>
                         <X size={24} />
                     </button>
                 </div>
@@ -97,6 +97,7 @@ const ExamContextPanel = ({ diseaseName, editorContent = {}, onClose }) => {
                 {/* Mode Toggle */}
                 <div style={{ display: 'flex', background: 'rgba(255,255,255,0.5)', padding: '4px', borderRadius: '8px', margin: '12px 0' }}>
                     <button
+                        id="btn-view-list"
                         onClick={() => setViewMode('list')}
                         style={{
                             flex: 1, padding: '6px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold',
@@ -107,6 +108,7 @@ const ExamContextPanel = ({ diseaseName, editorContent = {}, onClose }) => {
                         Questões ({examQuestions.length})
                     </button>
                     <button
+                        id="btn-view-checklist"
                         onClick={() => setViewMode('checklist')}
                         style={{
                             flex: 1, padding: '6px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold',
@@ -120,7 +122,7 @@ const ExamContextPanel = ({ diseaseName, editorContent = {}, onClose }) => {
 
                 {/* Filters (Only for List Mode) */}
                 {viewMode === 'list' && uniqueFocuses.length > 0 && (
-                    <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
+                    <div id="exam-filters-container" style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
                         <button onClick={() => setFilterFocus('all')} style={filterStyle(filterFocus === 'all')}>Tudo</button>
                         {uniqueFocuses.map(f => (
                             <button key={f} onClick={() => setFilterFocus(f)} style={filterStyle(filterFocus === f)}>{f}</button>
@@ -139,7 +141,7 @@ const ExamContextPanel = ({ diseaseName, editorContent = {}, onClose }) => {
                     ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             {filteredQuestions.map((q, idx) => (
-                                <div key={q.id || idx} style={{
+                                <div key={q.id || idx} className="exam-question-card" data-focus={q.focus} style={{
                                     background: '#fff', padding: '16px', borderRadius: '12px',
                                     border: '1px solid #eee', boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
                                     borderLeft: `4px solid ${getColorByFocus(q.focus)}`

@@ -351,10 +351,10 @@ const AnalyticsDashboard = () => {
 
             {/* TAB NAVIGATION */}
             <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '40px', borderBottom: '1px solid #ddd', paddingBottom: '10px' }}>
-                <TabBtn id="macro" icon={<LayoutGrid size={18} />} label="1. Visão Macro (Anual)" active={activeTab} set={setActiveTab} />
-                <TabBtn id="strategic" icon={<Layers size={18} />} label="2. Visão Estratégica (Especialidade)" active={activeTab} set={setActiveTab} />
-                <TabBtn id="tactical" icon={<Crosshair size={18} />} label="3. Visão Tática (Temas)" active={activeTab} set={setActiveTab} />
-                <TabBtn id="custom" icon={<Search size={18} />} label="4. Laboratório (Personalizado)" active={activeTab} set={setActiveTab} />
+                <div id="tab-macro"><TabBtn id="macro" icon={<LayoutGrid size={18} />} label="1. Visão Macro (Anual)" active={activeTab} set={setActiveTab} /></div>
+                <div id="tab-strategic"><TabBtn id="strategic" icon={<Layers size={18} />} label="2. Visão Estratégica (Especialidade)" active={activeTab} set={setActiveTab} /></div>
+                <div id="tab-tactical"><TabBtn id="tactical" icon={<Crosshair size={18} />} label="3. Visão Tática (Temas)" active={activeTab} set={setActiveTab} /></div>
+                <div id="tab-custom"><TabBtn id="custom" icon={<Search size={18} />} label="4. Laboratório (Personalizado)" active={activeTab} set={setActiveTab} /></div>
             </div>
 
             {/* === VIEW 1: MACRO === */}

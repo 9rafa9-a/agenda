@@ -23,7 +23,14 @@ const FlashcardDashboard = () => {
     };
 
     useEffect(() => {
-        if (currentUser) fetchDecks();
+        // Guest Bypass
+        const appUser = localStorage.getItem('app_user');
+        if (appUser === 'Convidado') {
+            setCurrentUser('Convidado');
+            setLoading(true);
+        } else if (currentUser) {
+            fetchDecks();
+        }
     }, [currentUser]);
 
     const fetchDecks = async () => {

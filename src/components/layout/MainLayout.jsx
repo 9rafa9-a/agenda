@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
-import { Book, PlusCircle, Settings, Menu, X, ChevronDown, ChevronRight, Hash, Trash2, Brain, User, FileText, BarChart2, ShieldAlert } from 'lucide-react';
+import { Book, PlusCircle, Layout, Brain, Trash2, Menu, X, ChevronDown, ChevronRight, BarChart2, FileText, Settings, ShieldAlert, HelpCircle } from 'lucide-react';
 import DachshundMascot from '../fun/DachshundMascot';
 import BackgroundSlideshow from './BackgroundSlideshow';
+import { useTour } from '../../contexts/TourContext';
+import TourOverlay from '../tour/TourOverlay';
 
 const MainLayout = () => {
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('app_user') || null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { startTour, active } = useTour();
 
   // Data & Navigation State
   const [rawDiseases, setRawDiseases] = useState([]);
@@ -17,9 +21,20 @@ const MainLayout = () => {
   const [showMascots, setShowMascots] = useState(true); // Default true
 
   // User Identity State
-  const [currentUser, setCurrentUser] = useState(localStorage.getItem('app_user') || null);
   const [passwordInput, setPasswordInput] = useState(''); // New: Password State
   const [loginError, setLoginError] = useState(false); // New: Error State
+
+  // TRIGGER TOUR FOR GUEST
+  useEffect(() => {
+    if (currentUser === 'Convidado') {
+      const hasSeen = localStorage.getItem('hasSeenGuestTour');
+      // Only start if not seen AND not currently active
+      if (!hasSeen && !active) {
+        const timer = setTimeout(() => startTour(), 1000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [currentUser, startTour, active]);
 
   // Filter Data based on User (Sandbox Mode)
   const { displayDiseases, displaySubjects } = React.useMemo(() => {
@@ -72,7 +87,6 @@ const MainLayout = () => {
       setLoginError(false);
     } else {
       setLoginError(true);
-      // Shake animation effect could be added here
     }
   };
 
@@ -84,7 +98,6 @@ const MainLayout = () => {
     navigate('/'); // Go home
   };
 
-  // Manual refresh no longer needed but kept for context if needed
   const fetchDiseases = () => { };
 
   // GLOBAL LOCK SCREEN
@@ -162,81 +175,79 @@ const MainLayout = () => {
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'transparent' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'var(--font-main)', background: '#f8f9fa' }}>
+      <TourOverlay />
+
       {/* Background Logic */}
       {currentUser === 'Convidado' ? (
         <div style={{
           position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1,
-          background: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)' // Elegant light gradient
+          background: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)'
         }} />
       ) : (
         <BackgroundSlideshow />
       )}
 
       <DachshundMascot />
+
       {/* Mobile Header */}
       <div className="mobile-header" style={{
-        display: 'none', // Hidden on desktop
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '60px',
-        background: '#fff',
-        borderBottom: '1px solid #eee',
-        zIndex: 100,
-        alignItems: 'center',
-        padding: '0 20px',
-        justifyContent: 'space-between'
+        display: 'none',
+        position: 'fixed', top: 0, left: 0, right: 0, height: '60px',
+        background: '#fff', borderBottom: '1px solid #eee', zIndex: 100,
+        alignItems: 'center', padding: '0 20px', justifyContent: 'space-between'
       }}>
-        <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '1.5rem', color: 'var(--color-primary)' }}>My Residência</h1>
+        <h1 style={{ fontFamily: 'var(--font-hand)', fontSize: '1.5rem', color: 'var(--color-primary)' }}>Minha Residência</h1>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Sidebar (Desktop) */}
-      <aside style={{
-        width: '250px',
-        padding: '32px',
-      }} className={`sidebar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+      {/* MOBILE OVERLAY */}
+      {mobileMenuOpen && (
+        <div
+          onClick={() => setMobileMenuOpen(false)}
+          style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)', zIndex: 99 }}
+        />
+      )}
 
-        {/* Mobile-only close button/padding adjustment */}
+      {/* Sidebar (Desktop) */}
+      <aside style={{ width: '250px', padding: '32px' }} className={`sidebar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+
         <div className="mobile-only" style={{ height: '40px', display: 'none' }}></div>
 
         <h1 className="desktop-logo" style={{
-          fontFamily: 'var(--font-hand)',
-          fontSize: '2.5rem',
-          color: 'var(--color-primary)',
-          marginBottom: '48px',
-          textAlign: 'center'
+          fontFamily: 'var(--font-hand)', fontSize: '2.5rem', color: 'var(--color-primary)',
+          marginBottom: '48px', textAlign: 'center'
         }}>
-          My Residência
+          Minha Residência
         </h1>
 
         <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
           <NavLink to="/" end
-            className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+            className={({ isActive }) => isActive && !window.location.search.includes('trash') ? 'nav-item active' : 'nav-item'}
             style={navStyle}
             onClick={() => setMobileMenuOpen(false)}
           >
             <Book size={20} /> Todos os Resumos
           </NavLink>
 
+          <NavLink id="nav-new" to="/new"
+            className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+            style={navStyle}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <PlusCircle size={20} /> Novo Resumo
+          </NavLink>
+
           {/* Collapsible Subjects */}
           <div>
             <div
               style={{
-                padding: '8px 16px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                color: '#888',
-                fontSize: '0.9rem',
-                fontWeight: '600',
-                textTransform: 'uppercase'
+                padding: '8px 16px', cursor: 'pointer', display: 'flex', alignItems: 'center',
+                justifyContent: 'space-between', color: '#888', fontSize: '0.9rem',
+                fontWeight: '600', textTransform: 'uppercase'
               }}
               onClick={() => setSubjectsOpen(!subjectsOpen)}
             >
@@ -263,48 +274,28 @@ const MainLayout = () => {
             )}
           </div>
 
-          <NavLink to="/flashcards"
+          <NavLink id="nav-flashcards" to="/flashcards"
             className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
-            style={{
-              ...navStyle,
-              marginBottom: '8px'
-            }}
+            style={{ ...navStyle, marginBottom: '8px' }}
             onClick={() => setMobileMenuOpen(false)}
           >
-            <Brain size={20} />
-            Flashcards (AI)
+            <Brain size={20} /> Flashcards (AI)
           </NavLink>
 
-          <NavLink to="/quizzes"
+          <NavLink id="nav-quizzes" to="/quizzes"
             className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
-            style={{
-              ...navStyle,
-              marginBottom: '8px'
-            }}
+            style={{ ...navStyle, marginBottom: '8px' }}
             onClick={() => setMobileMenuOpen(false)}
           >
-            <FileText size={20} />
-            Provinhas 📝
+            <FileText size={20} /> Provinhas 📝
           </NavLink>
 
-          <NavLink to="/analytics"
+          <NavLink id="nav-analytics" to="/analytics"
             className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
-            style={{
-              ...navStyle,
-              marginBottom: '8px'
-            }}
+            style={{ ...navStyle, marginBottom: '8px' }}
             onClick={() => setMobileMenuOpen(false)}
           >
-            <BarChart2 size={20} />
-            Raio-X (Stats) 📊
-          </NavLink>
-
-          <NavLink to="/new"
-            className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
-            style={navStyle}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <PlusCircle size={20} /> Novo Resumo
+            <BarChart2 size={20} /> Raio-X (Stats) 📊
           </NavLink>
 
           <NavLink to="/?trash=true"
@@ -315,7 +306,15 @@ const MainLayout = () => {
             <Trash2 size={20} /> Lixeira
           </NavLink>
 
-          {/* <NavLink to="/settings" style={navStyle}><Settings size={20} /> Ajustes</NavLink> */}
+          <div style={{ flex: 1 }}></div>
+
+          <NavLink id="nav-help" to="/help"
+            className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+            style={{ ...navStyle, marginTop: 'auto', borderTop: '1px solid #eee', paddingTop: '16px' }}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <HelpCircle size={20} /> Ajuda / Sobre
+          </NavLink>
 
           {/* User Profile */}
           <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: '1px solid #eee' }}>
@@ -339,16 +338,8 @@ const MainLayout = () => {
             <button
               onClick={() => setShowMascots(!showMascots)}
               style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                fontSize: '0.9rem',
-                color: showMascots ? 'var(--color-primary)' : '#aaa',
-                width: '100%',
-                padding: '8px 16px'
+                background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center',
+                gap: '12px', fontSize: '0.9rem', color: showMascots ? 'var(--color-primary)' : '#aaa', width: '100%', padding: '8px 16px'
               }}
             >
               <span style={{ fontSize: '1.2rem' }}>{showMascots ? '🐶' : '🚫'}</span>
@@ -367,71 +358,30 @@ const MainLayout = () => {
         <Outlet context={{ diseases: displayDiseases, refresh: fetchDiseases, currentUser }} key={location.pathname + location.search} />
       </main>
 
-      {/* Global CSS for responsiveness */}
       <style>{`
         .nav-item {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 12px 16px;
-          border-radius: 12px;
-          color: var(--color-text-light);
-          font-weight: 500;
-          transition: all 0.2s;
+          display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px;
+          color: var(--color-text-light); font-weight: 500; transition: all 0.2s;
         }
-        .nav-item:hover {
-          background: var(--color-secondary-light);
-          color: var(--color-text);
-        }
-        .nav-item.active {
-          background: var(--color-primary-light);
-          color: var(--color-primary);
-          font-weight: 600;
-        }
-        .nav-item.active-sub {
-            color: var(--color-primary);
-            font-weight: 600;
-            background: rgba(0,0,0,0.02);
-        }
-        .nav-item.sub:hover {
-            background: rgba(0,0,0,0.02);
-        }
+        .nav-item:hover { background: var(--color-secondary-light); color: var(--color-text); }
+        .nav-item.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+        .nav-item.active-sub { color: var(--color-primary); font-weight: 600; background: rgba(0,0,0,0.02); }
+        .nav-item.sub:hover { background: rgba(0,0,0,0.02); }
 
         @media (max-width: 768px) {
-          .desktop-sidebar { 
-            display: none; 
-          }
-          .mobile-header {
-            display: flex !important;
-          }
-          .main-content {
-            padding: 20px !important;
-            padding-top: 80px !important; /* Space for header */
-          }
-          .desktop-logo {
-            display: none;
-          }
-          .mobile-only {
-            display: block !important;
-          }
+          .desktop-sidebar { display: none; }
+          .mobile-header { display: flex !important; }
+          .main-content { padding: 20px !important; padding-top: 80px !important; }
+          .desktop-logo { display: none; }
+          .mobile-only { display: block !important; }
           
-          /* Mobile Sidebar Drawer */
           .sidebar {
-            position: fixed !important;
-            top: 60px !important;
-            left: 0;
-            bottom: 0;
-            width: 100% !important;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            border-right: none !important;
-            background: #fff !important; /* Solid white to prevent overlap issues */
-            z-index: 200;
+            position: fixed !important; top: 60px !important; left: 0; bottom: 0;
+            width: 100% !important; transform: translateX(-100%); transition: transform 0.3s ease;
+            border-right: none !important; background: #fff !important; z-index: 200;
             box-shadow: 2px 0 8px rgba(0,0,0,0.1);
           }
-          .sidebar.mobile-open {
-            transform: translateX(0);
-          }
+          .sidebar.mobile-open { transform: translateX(0); }
         }
       `}</style>
     </div >
@@ -440,7 +390,6 @@ const MainLayout = () => {
 
 const navStyle = {
   textDecoration: 'none',
-  // See CSS class above for hover/active
 };
 
 export default MainLayout;

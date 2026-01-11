@@ -69,6 +69,7 @@ const TopicSection = ({ title, content, color = 'default', isEditable, onChange,
                         {/* Smart Tag: Question Count Badge */}
                         {count > 0 && (
                             <span
+                                id={`badge-${index}`} // Added ID for Tour Targeting
                                 title={`${count} questões de prova encontradas sobre este tópico`}
                                 style={{
                                     fontSize: '0.7rem', fontWeight: 'bold',

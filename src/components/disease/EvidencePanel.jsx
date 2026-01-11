@@ -66,7 +66,7 @@ const EvidencePanel = ({ diseaseName, onClose }) => {
                     <h2 style={{ margin: 0, fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px', color: '#1565c0' }}>
                         <BookOpen size={20} /> Evidências
                     </h2>
-                    <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>
+                    <button id="btn-close-evidence" onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>
                         <X size={24} />
                     </button>
                 </div>
@@ -91,7 +91,7 @@ const EvidencePanel = ({ diseaseName, onClose }) => {
                 </div>
 
                 {/* Filters */}
-                <div style={{ display: 'flex', gap: '8px', marginTop: '12px', overflowX: 'auto', paddingBottom: '4px' }}>
+                <div id="evidence-filters-container" style={{ display: 'flex', gap: '8px', marginTop: '12px', overflowX: 'auto', paddingBottom: '4px' }}>
                     {['all', 'guideline', 'review', 'clinical_trial'].map(f => (
                         <button
                             key={f}
