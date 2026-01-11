@@ -147,6 +147,14 @@ export const TourProvider = ({ children }) => {
             message: "Não esqueça de **Salvar** seu progresso no final!",
             action: 'next'
         },
+        // Mobile Only Step (Again)
+        ...(window.innerWidth <= 768 ? [{
+            id: 'open-menu-flashcards',
+            target: '#mobile-menu-toggle',
+            message: "Abra o menu novamente para acessarmos os Flashcards.",
+            action: 'next',
+            shouldClickTarget: true
+        }] : []),
         {
             id: 'nav-flashcards',
             target: '#nav-flashcards',
