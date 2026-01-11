@@ -24,11 +24,16 @@ const AnalyticsDashboard = () => {
     }, [yearRange]);
 
     // === 1. MACRO VISION (B x A) ===
+    // Filter to only Top 5-6 Areas to avoid clutter
+    const MAIN_AREAS = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva', 'Psiquiatria'];
+
     // Line Chart: Area Growth over Years
     const macroTemporalData = useMemo(() => {
-        const years = {}; // { 2017: { Cirurgia: 10, Clinica: 15 } }
+        const years = {};
         const areas = new Set();
+
         filteredData.forEach(d => {
+            if (!MAIN_AREAS.includes(d.area)) return; // Filter clutter
             if (!years[d.year]) years[d.year] = { name: d.year };
             years[d.year][d.area] = (years[d.year][d.area] || 0) + 1;
             areas.add(d.area);
@@ -39,7 +44,10 @@ const AnalyticsDashboard = () => {
     // Area Distribution (Pie)
     const macroDistribution = useMemo(() => {
         const counts = {};
-        filteredData.forEach(d => counts[d.area] = (counts[d.area] || 0) + 1);
+        filteredData.forEach(d => {
+            if (!MAIN_AREAS.includes(d.area)) return;
+            counts[d.area] = (counts[d.area] || 0) + 1;
+        });
         return Object.entries(counts).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
     }, [filteredData]);
 
@@ -83,18 +91,22 @@ const AnalyticsDashboard = () => {
         const subset = selectedArea ? filteredData.filter(d => d.area === selectedArea) : filteredData;
 
         subset.forEach(d => {
-            if (!d.topic || d.topic === 'Outros') return;
-            if (!topics[d.topic]) topics[d.topic] = { name: d.topic, total: 0, years: new Set() };
-            topics[d.topic].total++;
-            topics[d.topic].years.add(d.year);
+            if (!d.topic || d.topic === 'Outros' || d.topic === 'undefined') return;
+            // Key by Topic Name
+            const key = d.topic.trim();
+            if (!topics[key]) topics[key] = { name: key, total: 0, years: new Set() };
+            topics[key].total++;
+            topics[key].years.add(d.year);
         });
 
-        return Object.values(topics).map(t => ({
-            name: t.name,
-            x: t.years.size, // Recurrence (Years)
-            y: t.total,      // Frequency (Volume)
-            z: 100 // Bubble size
-        }));
+        return Object.values(topics)
+            .filter(t => t.total >= 2) // Filter noise (items that appeared only once)
+            .map(t => ({
+                name: t.name,
+                x: t.years.size, // Recurrence
+                y: t.total,      // Volume
+                z: t.total * 50  // Bubble size
+            }));
     }, [filteredData, selectedArea]);
 
 
@@ -143,39 +155,51 @@ const AnalyticsDashboard = () => {
 
             {/* === VIEW 1: MACRO === */}
             {activeTab === 'macro' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px' }}>
-                    <div style={cardStyle}>
-                        <h3 style={titleStyle}>Linha do Tempo: Evolução das Grandes Áreas</h3>
-                        <ResponsiveContainer width="100%" height={400}>
-                            <LineChart data={macroTemporalData.data}>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <RechartsTooltip content={<CustomTooltip />} />
-                                <Legend />
-                                {macroTemporalData.areas.map((area, idx) => (
-                                    <Line key={area} type="monotone" dataKey={area} stroke={COLORS[idx % COLORS.length]} strokeWidth={3} dot={{ r: 4 }} />
-                                ))}
-                            </LineChart>
-                        </ResponsiveContainer>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '24px' }}>
+                    {/* SELECTOR CARD - User requested "Selector" */}
+                    <div style={{ ...cardStyle, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <h3 style={titleStyle}>Resumo da Ópera</h3>
+                        <p style={{ fontSize: '0.9rem', color: '#666' }}>Selecione uma área para focar:</p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            {macroDistribution.map((entry, idx) => (
+                                <button key={entry.name}
+                                    onClick={() => { setSelectedArea(entry.name); setActiveTab('strategic'); }}
+                                    style={{
+                                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                        padding: '12px', border: '1px solid #eee', borderRadius: '12px',
+                                        background: '#fff', cursor: 'pointer', transition: 'all 0.2s',
+                                        boxShadow: '0 2px 5px rgba(0,0,0,0.02)'
+                                    }}
+                                    onMouseOver={e => e.currentTarget.style.transform = 'translateX(5px)'}
+                                    onMouseOut={e => e.currentTarget.style.transform = 'translateX(0)'}
+                                >
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', color: COLORS[idx % COLORS.length] }}>
+                                        <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: COLORS[idx % COLORS.length] }} />
+                                        {entry.name}
+                                    </span>
+                                    <span style={{ color: '#999', fontSize: '0.9rem' }}>{entry.value}</span>
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                    <div style={cardStyle}>
-                        <h3 style={titleStyle}>Fatia do Bolo</h3>
-                        <ResponsiveContainer width="100%" height={400}>
-                            <PieChart>
-                                <Pie data={macroDistribution} innerRadius={80} outerRadius={120} fill="#82ca9d" dataKey="value" paddingAngle={2}>
-                                    {macroDistribution.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} cursor="pointer"
-                                            onClick={() => { setSelectedArea(entry.name); setActiveTab('strategic'); }} />
+
+                    <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: '24px' }}>
+                        <div style={cardStyle}>
+                            <h3 style={titleStyle}>Evolução Histórica (Linha do Tempo)</h3>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <LineChart data={macroTemporalData.data}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <RechartsTooltip content={<CustomTooltip />} />
+                                    <Legend />
+                                    {macroTemporalData.areas.map((area, idx) => (
+                                        <Line key={area} type="monotone" dataKey={area} stroke={COLORS[idx % COLORS.length]} strokeWidth={3} dot={{ r: 4 }} />
                                     ))}
-                                </Pie>
-                                <RechartsTooltip />
-                                <Legend />
-                            </PieChart>
-                        </ResponsiveContainer>
-                        <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#888', marginTop: '10px' }}>
-                            👉 Clique numa fatia para ir à Visão Estratégica
-                        </p>
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                        {/* Removed Pie Chart from here since we have the Selector List which acts as distribution view */}
                     </div>
                 </div>
             )}

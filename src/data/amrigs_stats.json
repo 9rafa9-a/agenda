@@ -482,7 +482,7 @@
   {
     "year": 2017,
     "id": 49,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Fisiologia",
     "topic": "Ciclo Menstrual (Hormônios)",
     "focus": "Fisiopato",
@@ -492,7 +492,7 @@
   {
     "year": 2017,
     "id": 50,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia Ginecológica",
     "topic": "Doença Inflamatória Pélvica (DIP)",
     "focus": "Definição",
@@ -502,7 +502,7 @@
   {
     "year": 2017,
     "id": 51,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Anticoncepcionais Hormonais Combinados",
     "focus": "Tratamento",
@@ -512,7 +512,7 @@
   {
     "year": 2017,
     "id": 52,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Dismenorreia / Endometriose (Diagnóstico Diferencial)",
     "focus": "Diagnóstico",
@@ -522,7 +522,7 @@
   {
     "year": 2017,
     "id": 53,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Fisiologia",
     "topic": "Ciclo Ovariano (Fase Lútea/Folicular)",
     "focus": "Fisiopato",
@@ -532,7 +532,7 @@
   {
     "year": 2017,
     "id": 54,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Contracepção na Lactação (Minipílula)",
     "focus": "Fisiopato",
@@ -542,7 +542,7 @@
   {
     "year": 2017,
     "id": 55,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Sangramento Uterino Disfuncional",
     "focus": "Definição",
@@ -552,7 +552,7 @@
   {
     "year": 2017,
     "id": 56,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Irregularidade Menstrual (Causas por Idade)",
     "focus": "Diagnóstico",
@@ -562,7 +562,7 @@
   {
     "year": 2017,
     "id": 57,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Síndrome dos Ovários Policísticos (Fisiopatologia)",
     "focus": "Fisiopato",
@@ -572,7 +572,7 @@
   {
     "year": 2017,
     "id": 58,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Sangramento de Escape (Spotting) com ACO",
     "focus": "Tratamento",
@@ -582,7 +582,7 @@
   {
     "year": 2017,
     "id": 59,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Amenorreia Primária (Síndrome de Rokitansky)",
     "focus": "Diagnóstico",
@@ -592,7 +592,7 @@
   {
     "year": 2017,
     "id": 60,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Demografia",
     "topic": "Transição Demográfica e Epidemiológica",
     "focus": "Definição",
@@ -602,7 +602,7 @@
   {
     "year": 2017,
     "id": 61,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "SUS",
     "topic": "Princípios e Diretrizes (Universalidade/Dever do Estado)",
     "focus": "Definição",
@@ -612,7 +612,7 @@
   {
     "year": 2017,
     "id": 62,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Atendimento ao Adolescente (Sigilo)",
     "focus": "Conduta",
@@ -622,7 +622,7 @@
   {
     "year": 2017,
     "id": 63,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Prevenção Quaternária",
     "focus": "Definição",
@@ -632,7 +632,7 @@
   {
     "year": 2017,
     "id": 64,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudos Observacionais (Caso-Controle)",
     "focus": "Definição",
@@ -642,7 +642,7 @@
   {
     "year": 2017,
     "id": 65,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Medidas de Frequência (Prevalência)",
     "focus": "Definição",
@@ -652,7 +652,7 @@
   {
     "year": 2017,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
     "topic": "Medidas de Tendência Central (Mediana)",
     "focus": "Definição",
@@ -662,7 +662,7 @@
   {
     "year": 2017,
     "id": 67,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Estratégias de Prevenção (Alto Risco vs Populacional)",
     "focus": "Definição",
@@ -672,7 +672,7 @@
   {
     "year": 2017,
     "id": 68,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética / Medicina Legal",
     "topic": "Declaração de Óbito (Responsabilidades)",
     "focus": "Conduta",
@@ -682,7 +682,7 @@
   {
     "year": 2017,
     "id": 69,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Cálculo de Prevalência (Interpretação de Gráfico)",
     "focus": "Epidemiologia",
@@ -692,7 +692,7 @@
   {
     "year": 2017,
     "id": 70,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Isoimunização Rh (Solicitação de Coombs)",
     "focus": "Diagnóstico",
@@ -702,7 +702,7 @@
   {
     "year": 2017,
     "id": 71,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologias na Gestação",
     "topic": "Infecção Urinária (Fisiopatologia/Risco)",
     "focus": "Fisiopato",
@@ -712,7 +712,7 @@
   {
     "year": 2017,
     "id": 72,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Sofrimento Fetal Agudo (Cardiotocografia)",
     "focus": "Diagnóstico",
@@ -722,7 +722,7 @@
   {
     "year": 2017,
     "id": 73,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Líquido Amniótico (Oligo e Polidrâmnio)",
     "focus": "Etiologia",
@@ -732,7 +732,7 @@
   {
     "year": 2017,
     "id": 74,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologias na Gestação",
     "topic": "Infecções Congênitas (TORCHS)",
     "focus": "Definição",
@@ -742,7 +742,7 @@
   {
     "year": 2017,
     "id": 75,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Trabalho de Parto Prematuro (Manejo)",
     "focus": "Tratamento",
@@ -752,7 +752,7 @@
   {
     "year": 2017,
     "id": 76,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Crescimento Intrauterino Restrito (CIUR)",
     "focus": "Diagnóstico",
@@ -762,7 +762,7 @@
   {
     "year": 2017,
     "id": 77,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Rotura Prematura de Membranas (Corioamnionite)",
     "focus": "Conduta",
@@ -772,7 +772,7 @@
   {
     "year": 2017,
     "id": 78,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Vacinação na Gestante",
     "focus": "Prevenção",
@@ -922,7 +922,7 @@
   {
     "year": 2017,
     "id": 93,
-    "area": "Pediatria / Psiquiatria",
+    "area": "Pediatria",
     "specialty": "Psiquiatria Infantil",
     "topic": "Transtorno do Espectro Autista (Epidemio)",
     "focus": "Epidemiologia",
@@ -952,7 +952,7 @@
   {
     "year": 2017,
     "id": 96,
-    "area": "Pediatria / Psiquiatria",
+    "area": "Pediatria",
     "specialty": "Violência / Psiquiatria",
     "topic": "Síndrome de Munchausen por Procuração",
     "focus": "Diagnóstico",
@@ -1352,7 +1352,7 @@
   {
     "year": 2018,
     "id": 39,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infecções na Gestação",
     "topic": "HIV (Manejo Puerperal) 4",
     "focus": "Tratamento",
@@ -1532,7 +1532,7 @@
   {
     "year": 2018,
     "id": 57,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologia Cervical",
     "topic": "Citopatológico (Conduta em Metaplasia) 22",
     "focus": "Prevenção/Rastreamento",
@@ -1542,7 +1542,7 @@
   {
     "year": 2018,
     "id": 58,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Oncologia Ginecológica",
     "topic": "Fatores de Risco (Mama, Colo, Endométrio, Ovário) 23",
     "focus": "Epidemiologia/Risco",
@@ -1552,7 +1552,7 @@
   {
     "year": 2018,
     "id": 59,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endometriose",
     "topic": "Fisiopatologia 24",
     "focus": "Definição/Fisiopato",
@@ -1562,7 +1562,7 @@
   {
     "year": 2018,
     "id": 60,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infertilidade",
     "topic": "Fator Tuboperitoneal (Causas) 25",
     "focus": "Epidemiologia/Risco",
@@ -1572,7 +1572,7 @@
   {
     "year": 2018,
     "id": 61,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Climatério",
     "topic": "Terapia Hormonal (Indicações e Vias) 26",
     "focus": "Tratamento",
@@ -1582,7 +1582,7 @@
   {
     "year": 2018,
     "id": 62,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "SOP / Infertilidade",
     "topic": "Riscos da Indução e da Síndrome 27",
     "focus": "Complicação/Prognóstico",
@@ -1592,7 +1592,7 @@
   {
     "year": 2018,
     "id": 63,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Fisiologia",
     "topic": "Ciclo Menstrual (Neuroendocrinologia) 28",
     "focus": "Definição/Fisiopato",
@@ -1602,7 +1602,7 @@
   {
     "year": 2018,
     "id": 64,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Contracepção na Lactação 29",
     "focus": "Tratamento",
@@ -1612,7 +1612,7 @@
   {
     "year": 2018,
     "id": 65,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Rastreamento",
     "topic": "Câncer de Colo Uterino (Idade de Início) 30",
     "focus": "Prevenção/Rastreamento",
@@ -1622,7 +1622,7 @@
   {
     "year": 2018,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Sigilo Médico (Código de Ética) 31",
     "focus": "Definição/Fisiopato",
@@ -1632,7 +1632,7 @@
   {
     "year": 2018,
     "id": 67,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
     "topic": "Curva Normal (Média, Mediana, Moda) 32",
     "focus": "Definição/Fisiopato",
@@ -1642,7 +1642,7 @@
   {
     "year": 2018,
     "id": 68,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Promoção da Saúde",
     "topic": "Conceitos (Desvelamento) 33",
     "focus": "Definição/Fisiopato",
@@ -1652,7 +1652,7 @@
   {
     "year": 2018,
     "id": 69,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina de Família",
     "topic": "Método Clínico Centrado na Pessoa 34",
     "focus": "Diagnóstico",
@@ -1662,7 +1662,7 @@
   {
     "year": 2018,
     "id": 70,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Segurança do Paciente (Metas Internacionais) 35",
     "focus": "Prevenção/Rastreamento",
@@ -1672,7 +1672,7 @@
   {
     "year": 2018,
     "id": 71,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública / APS",
     "topic": "Atributos da Atenção Primária 1",
     "focus": "Epidemiologia/Risco",
@@ -1682,7 +1682,7 @@
   {
     "year": 2018,
     "id": 72,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Vigilância em Saúde",
     "topic": "Desastres Naturais e Doenças Infecciosas 2",
     "focus": "Epidemiologia/Risco",
@@ -1692,7 +1692,7 @@
   {
     "year": 2018,
     "id": 73,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética / Medicina Legal",
     "topic": "Adolescente (ECA e Sigilo) 3",
     "focus": "Definição/Fisiopato",
@@ -1702,7 +1702,7 @@
   {
     "year": 2018,
     "id": 74,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Diagnóstico de Gravidez",
     "topic": "Sinais Clínicos e Beta-hCG 4",
     "focus": "Diagnóstico",
@@ -1712,7 +1712,7 @@
   {
     "year": 2018,
     "id": 75,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Trabalho de Parto Prematuro (Neuroproteção/Corticóide) 5",
     "focus": "Tratamento",
@@ -1722,7 +1722,7 @@
   {
     "year": 2018,
     "id": 76,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Mecanismo de Parto",
     "topic": "Estática Fetal (Situação/Apresentação) 6",
     "focus": "Diagnóstico",
@@ -1732,7 +1732,7 @@
   {
     "year": 2018,
     "id": 77,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Gemelaridade",
     "topic": "Complicações e Associações 7",
     "focus": "Complicação/Prognóstico",
@@ -1742,7 +1742,7 @@
   {
     "year": 2018,
     "id": 78,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Semiologia Obstétrica",
     "topic": "Manobras de Leopold-Zweifel 8",
     "focus": "Diagnóstico",
@@ -1752,7 +1752,7 @@
   {
     "year": 2018,
     "id": 79,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doenças na Gestação",
     "topic": "DHEG (Pré-eclâmpsia Grave e Conduta) 9",
     "focus": "Tratamento",
@@ -1762,7 +1762,7 @@
   {
     "year": 2018,
     "id": 80,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Sangramento 1ª Metade",
     "topic": "Diagnóstico Diferencial (Abortamento/Ectópica) 10",
     "focus": "Diagnóstico",
@@ -1772,7 +1772,7 @@
   {
     "year": 2018,
     "id": 81,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "CIUR (Etiologia Tardia/Insuficiência Placentária) 11",
     "focus": "Definição/Fisiopato",
@@ -2462,7 +2462,7 @@
   {
     "year": 2019,
     "id": 53,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endometriose",
     "topic": "Endometrioma de Ovário",
     "focus": "Tratamento",
@@ -2472,7 +2472,7 @@
   {
     "year": 2019,
     "id": 54,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Climatério",
     "topic": "Terapia Hormonal (Hipertensão Arterial)",
     "focus": "Tratamento",
@@ -2482,7 +2482,7 @@
   {
     "year": 2019,
     "id": 55,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Mastologia",
     "topic": "Rastreamento CA Mama (Mamas Densas)",
     "focus": "Prevenção/Rastreamento",
@@ -2492,7 +2492,7 @@
   {
     "year": 2019,
     "id": 56,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia",
     "topic": "ISTs (Sífilis, Herpes, Gonorreia)",
     "focus": "Diagnóstico",
@@ -2502,7 +2502,7 @@
   {
     "year": 2019,
     "id": 57,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infertilidade",
     "topic": "Investigação Básica do Casal",
     "focus": "Diagnóstico",
@@ -2512,7 +2512,7 @@
   {
     "year": 2019,
     "id": 58,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia",
     "topic": "Doença Inflamatória Pélvica (Complicações)",
     "focus": "Complicação/Prognóstico",
@@ -2522,7 +2522,7 @@
   {
     "year": 2019,
     "id": 59,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "SOP (Critérios Diagnósticos)",
     "focus": "Diagnóstico",
@@ -2532,7 +2532,7 @@
   {
     "year": 2019,
     "id": 60,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Rastreamento",
     "topic": "Câncer de Colo Uterino (Diretrizes de Coleta)",
     "focus": "Prevenção/Rastreamento",
@@ -2542,7 +2542,7 @@
   {
     "year": 2019,
     "id": 61,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Anticoncepcionais Hormonais (Mecanismo de Ação)",
     "focus": "Definição/Fisiopato",
@@ -2552,7 +2552,7 @@
   {
     "year": 2019,
     "id": 62,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Sigilo Profissional (Vedações)",
     "focus": "Definição/Fisiopato",
@@ -2562,7 +2562,7 @@
   {
     "year": 2019,
     "id": 63,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina de Família",
     "topic": "Abordagem Familiar (Família Disfuncional)",
     "focus": "Definição/Fisiopato",
@@ -2572,7 +2572,7 @@
   {
     "year": 2019,
     "id": 64,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina de Família",
     "topic": "Ferramentas de Abordagem (Genograma)",
     "focus": "Diagnóstico",
@@ -2582,7 +2582,7 @@
   {
     "year": 2019,
     "id": 65,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina de Família",
     "topic": "Atenção Domiciliar (Cuidado Domiciliar)",
     "focus": "Tratamento",
@@ -2592,7 +2592,7 @@
   {
     "year": 2019,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Vigilância em Saúde (Análise de Situação)",
     "focus": "Epidemiologia/Risco",
@@ -2602,7 +2602,7 @@
   {
     "year": 2019,
     "id": 67,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Conceitos Básicos (Probabilidade)",
     "focus": "Epidemiologia/Risco",
@@ -2612,7 +2612,7 @@
   {
     "year": 2019,
     "id": 68,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Cadeia de Transmissão (Hospedeiro Suscetível)",
     "focus": "Definição/Fisiopato",
@@ -2622,7 +2622,7 @@
   {
     "year": 2019,
     "id": 69,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública / APS",
     "topic": "Impacto da Atenção Primária / ESF",
     "focus": "Epidemiologia/Risco",
@@ -2632,7 +2632,7 @@
   {
     "year": 2019,
     "id": 70,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina de Família / Pediatria",
     "topic": "Indicadores de Saúde Infantil (Sensibilidade)",
     "focus": "Diagnóstico",
@@ -2642,7 +2642,7 @@
   {
     "year": 2019,
     "id": 71,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doenças na Gestação",
     "topic": "Pré-eclâmpsia Grave (Conduta/Interrupção)",
     "focus": "Tratamento",
@@ -2652,7 +2652,7 @@
   {
     "year": 2019,
     "id": 72,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infecções na Gestação",
     "topic": "Sífilis (Alergia à Penicilina/Dessensibilização)",
     "focus": "Tratamento",
@@ -2662,7 +2662,7 @@
   {
     "year": 2019,
     "id": 73,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infecções na Gestação",
     "topic": "HIV (Carga Viral e Via de Parto)",
     "focus": "Tratamento",
@@ -2672,7 +2672,7 @@
   {
     "year": 2019,
     "id": 74,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto",
     "topic": "Parto Pélvico (Manobras de Bracht e Rojas)",
     "focus": "Tratamento",
@@ -2682,7 +2682,7 @@
   {
     "year": 2019,
     "id": 75,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Avaliação de Vitalidade (Indicações)",
     "focus": "Prevenção/Rastreamento",
@@ -2692,7 +2692,7 @@
   {
     "year": 2019,
     "id": 76,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Sangramento 1ª Metade",
     "topic": "Doença Trofoblástica Gestacional (Mola)",
     "focus": "Diagnóstico",
@@ -2702,7 +2702,7 @@
   {
     "year": 2019,
     "id": 77,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doenças na Gestação",
     "topic": "Diabetes Gestacional (Fisiopatologia/Macrossomia)",
     "focus": "Definição/Fisiopato",
@@ -2712,7 +2712,7 @@
   {
     "year": 2019,
     "id": 78,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Semiologia Obstétrica",
     "topic": "Estática Fetal (Situação, Apresentação, Posição)",
     "focus": "Diagnóstico",
@@ -2722,7 +2722,7 @@
   {
     "year": 2019,
     "id": 79,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Imunizações",
     "topic": "Calendário Vacinal do Adulto",
     "focus": "Prevenção/Rastreamento",
@@ -3372,7 +3372,7 @@
   {
     "year": 2020,
     "id": 51,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Dismenorreia Primária (Tratamento Farmacológico)",
     "focus": "Tratamento",
@@ -3382,7 +3382,7 @@
   {
     "year": 2020,
     "id": 52,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia",
     "topic": "Amenorreia Primária (Insensibilidade Androgênica)",
     "focus": "Diagnóstico",
@@ -3392,7 +3392,7 @@
   {
     "year": 2020,
     "id": 53,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Índice de Pearl (Eficácia Contraceptiva)",
     "focus": "Epidemiologia/Risco",
@@ -3402,7 +3402,7 @@
   {
     "year": 2020,
     "id": 54,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Contraceptivo Injetável Trimestral (Contraindicações)",
     "focus": "Tratamento",
@@ -3412,7 +3412,7 @@
   {
     "year": 2020,
     "id": 55,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Climatério",
     "topic": "Fisiologia (Conversão Periférica de Estrona)",
     "focus": "Fisiologia",
@@ -3422,7 +3422,7 @@
   {
     "year": 2020,
     "id": 56,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia",
     "topic": "Doença Inflamatória Pélvica (Diagnóstico Clínico)",
     "focus": "Diagnóstico",
@@ -3432,7 +3432,7 @@
   {
     "year": 2020,
     "id": 57,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia",
     "topic": "Sífilis (Tratamento e Diagnóstico)",
     "focus": "Tratamento",
@@ -3442,7 +3442,7 @@
   {
     "year": 2020,
     "id": 58,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologia Cervical",
     "topic": "Citopatológico (Conduta em LSIL/LIEBG)",
     "focus": "Tratamento",
@@ -3452,7 +3452,7 @@
   {
     "year": 2020,
     "id": 59,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endometriose",
     "topic": "Associações Clínicas",
     "focus": "Diagnóstico",
@@ -3462,7 +3462,7 @@
   {
     "year": 2020,
     "id": 60,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Sangramento Pós-Menopausa (Investigação)",
     "focus": "Diagnóstico",
@@ -3472,7 +3472,7 @@
   {
     "year": 2020,
     "id": 61,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Mastologia",
     "topic": "Alterações Benignas da Mama",
     "focus": "Diagnóstico",
@@ -3482,7 +3482,7 @@
   {
     "year": 2020,
     "id": 62,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia",
     "topic": "Vulvovaginites na Gestação (Candidíase)",
     "focus": "Tratamento",
@@ -3492,7 +3492,7 @@
   {
     "year": 2020,
     "id": 63,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Código de Ética (Normas e Fiscalização)",
     "focus": "Definição/Fisiopato",
@@ -3502,7 +3502,7 @@
   {
     "year": 2020,
     "id": 64,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "SUS (Princípios e Regionalização)",
     "focus": "Epidemiologia/Risco",
@@ -3512,7 +3512,7 @@
   {
     "year": 2020,
     "id": 65,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Nutrição",
     "topic": "Micronutrientes no Idoso (Vit A, B12, Zinco)",
     "focus": "Prevenção/Rastreamento",
@@ -3522,7 +3522,7 @@
   {
     "year": 2020,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Prontuário Médico (Regras de Preenchimento)",
     "focus": "Definição/Fisiopato",
@@ -3532,7 +3532,7 @@
   {
     "year": 2020,
     "id": 67,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Gestação de Alto Risco",
     "topic": "Cardiopatia na Gestação (Via de Parto)",
     "focus": "Tratamento",
@@ -3542,7 +3542,7 @@
   {
     "year": 2020,
     "id": 68,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Sangramentos",
     "topic": "Placenta Prévia e Acretismo",
     "focus": "Diagnóstico",
@@ -3552,7 +3552,7 @@
   {
     "year": 2020,
     "id": 69,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto Pélvico",
     "topic": "Cabeça Derradeira (Manobra de Zavanelli)",
     "focus": "Tratamento",
@@ -3562,7 +3562,7 @@
   {
     "year": 2020,
     "id": 70,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Diagnóstico de Gravidez",
     "topic": "Beta-hCG (Cinética e Correlação USG)",
     "focus": "Diagnóstico",
@@ -3572,7 +3572,7 @@
   {
     "year": 2020,
     "id": 71,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doença Trofoblástica",
     "topic": "Mola Hidatiforme (Diagnóstico e Seguimento)",
     "focus": "Diagnóstico",
@@ -3582,7 +3582,7 @@
   {
     "year": 2020,
     "id": 72,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Sangramento 1ª Metade",
     "topic": "Gravidez Ectópica (Tratamento Medicamentoso)",
     "focus": "Tratamento",
@@ -3592,7 +3592,7 @@
   {
     "year": 2020,
     "id": 73,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Recomendações (Vacinas e Tinturas)",
     "focus": "Prevenção/Rastreamento",
@@ -3602,7 +3602,7 @@
   {
     "year": 2020,
     "id": 74,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doença Hipertensiva",
     "topic": "Pré-eclâmpsia (Complicações)",
     "focus": "Definição/Fisiopato",
@@ -3612,7 +3612,7 @@
   {
     "year": 2020,
     "id": 75,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Imunizações",
     "topic": "Eventos Adversos Pós-Vacinação (EAPV)",
     "focus": "Definição/Fisiopato",
@@ -3622,7 +3622,7 @@
   {
     "year": 2020,
     "id": 76,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Imunizações",
     "topic": "Vacina Tríplice Viral (Sarampo)",
     "focus": "Prevenção/Rastreamento",
@@ -3952,7 +3952,7 @@
   {
     "year": 2021,
     "id": 14,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde do Idoso",
     "topic": "Epidemiologia (Multimorbidade/Expectativa de Vida)",
     "focus": "Epidemiologia/Risco",
@@ -4032,7 +4032,7 @@
   {
     "year": 2021,
     "id": 22,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Fisiologia",
     "topic": "Modificações do Organismo Materno (Respiratório)",
     "focus": "Definição/Fisiopato",
@@ -4242,7 +4242,7 @@
   {
     "year": 2021,
     "id": 43,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral / Psiquiatria",
     "topic": "Transtorno Disfórico Pré-Menstrual (Critérios DSM-5)",
     "focus": "Diagnóstico",
@@ -4252,7 +4252,7 @@
   {
     "year": 2021,
     "id": 44,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Uroginecologia",
     "topic": "Bexiga Hiperativa (Diagnóstico)",
     "focus": "Diagnóstico",
@@ -4262,7 +4262,7 @@
   {
     "year": 2021,
     "id": 45,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Falência Ovariana Prematura (Conceitos)",
     "focus": "Diagnóstico",
@@ -4272,7 +4272,7 @@
   {
     "year": 2021,
     "id": 46,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Sangramento Uterino Anormal (Etiologia)",
     "focus": "Diagnóstico",
@@ -4282,7 +4282,7 @@
   {
     "year": 2021,
     "id": 47,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Oncologia Ginecológica",
     "topic": "Câncer de Endométrio (Fatores de Risco / Obesidade)",
     "focus": "Epidemiologia/Risco",
@@ -4292,7 +4292,7 @@
   {
     "year": 2021,
     "id": 48,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Anatomia",
     "topic": "Vascularização Pélvica (Artéria Uterina)",
     "focus": "Definição/Fisiopato",
@@ -4302,7 +4302,7 @@
   {
     "year": 2021,
     "id": 49,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina de Família",
     "topic": "Abordagem Familiar (Visita Domiciliar)",
     "focus": "Tratamento",
@@ -4312,7 +4312,7 @@
   {
     "year": 2021,
     "id": 50,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Medidas de Frequência (Prevalência)",
     "focus": "Epidemiologia/Risco",
@@ -4322,7 +4322,7 @@
   {
     "year": 2021,
     "id": 51,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Legislação do SUS (Lei 8.142/90 - Participação Social)",
     "focus": "Definição/Fisiopato",
@@ -4332,7 +4332,7 @@
   {
     "year": 2021,
     "id": 52,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
     "topic": "Testes de Hipótese (Comparação de Médias)",
     "focus": "Prevenção/Rastreamento",
@@ -4342,7 +4342,7 @@
   {
     "year": 2021,
     "id": 53,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Planejamento em Saúde",
     "focus": "Prevenção/Rastreamento",
@@ -4352,7 +4352,7 @@
   {
     "year": 2021,
     "id": 54,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina de Família",
     "topic": "Método Clínico Centrado na Pessoa",
     "focus": "Tratamento",
@@ -4362,7 +4362,7 @@
   {
     "year": 2021,
     "id": 55,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Código de Ética (Responsabilidades e Revisão)",
     "focus": "Definição/Fisiopato",
@@ -4372,7 +4372,7 @@
   {
     "year": 2021,
     "id": 56,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Atenção Primária à Saúde (Definição e Atributos)",
     "focus": "Definição/Fisiopato",
@@ -4382,7 +4382,7 @@
   {
     "year": 2021,
     "id": 57,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Violência",
     "topic": "Violência contra a Mulher (Abordagem na Consulta)",
     "focus": "Tratamento",
@@ -4392,7 +4392,7 @@
   {
     "year": 2021,
     "id": 58,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doença Trofoblástica",
     "topic": "Mola Hidatiforme (Patologia e Complicações)",
     "focus": "Diagnóstico",
@@ -4402,7 +4402,7 @@
   {
     "year": 2021,
     "id": 59,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Gestação Gemelar",
     "topic": "Epidemiologia e Riscos",
     "focus": "Epidemiologia/Risco",
@@ -4412,7 +4412,7 @@
   {
     "year": 2021,
     "id": 60,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto",
     "topic": "Apresentação Pélvica (Indicações de Cesárea)",
     "focus": "Tratamento",
@@ -4422,7 +4422,7 @@
   {
     "year": 2021,
     "id": 61,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Mecanismo de Parto",
     "topic": "Variedade de Posição (Nomenclatura)",
     "focus": "Diagnóstico",
@@ -4432,7 +4432,7 @@
   {
     "year": 2021,
     "id": 62,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Sangramento 2ª Metade",
     "topic": "Descolamento Prematuro de Placenta (Fatores de Risco)",
     "focus": "Epidemiologia/Risco",
@@ -4442,7 +4442,7 @@
   {
     "year": 2021,
     "id": 63,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Amniorrexe",
     "topic": "Ruptura Prematura de Membranas (Diagnóstico)",
     "focus": "Diagnóstico",
@@ -4452,7 +4452,7 @@
   {
     "year": 2021,
     "id": 64,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Diabetes Gestacional",
     "topic": "Diagnóstico e Conduta (Glicemia de Jejum)",
     "focus": "Diagnóstico",
@@ -5122,7 +5122,7 @@
   {
     "year": 2022,
     "id": 43,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Psiquiatria / Ginecologia",
     "topic": "Transtorno Disfórico Pré-Menstrual (TDPM)",
     "focus": "Diagnóstico",
@@ -5132,7 +5132,7 @@
   {
     "year": 2022,
     "id": 44,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Dismenorreia (Tratamento Clínico)",
     "focus": "Tratamento",
@@ -5142,7 +5142,7 @@
   {
     "year": 2022,
     "id": 45,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Oncologia Ginecológica",
     "topic": "Sangramento Uterino Anormal (Investigação Endometrial)",
     "focus": "Tratamento",
@@ -5152,7 +5152,7 @@
   {
     "year": 2022,
     "id": 46,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Climatério",
     "topic": "Hipoestrogenismo (Sintomas Vasomotores)",
     "focus": "Quadro Clínico",
@@ -5162,7 +5162,7 @@
   {
     "year": 2022,
     "id": 47,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infertilidade",
     "topic": "Propedêutica Básica (HSG e Biópsia)",
     "focus": "Diagnóstico",
@@ -5172,7 +5172,7 @@
   {
     "year": 2022,
     "id": 48,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologia Cervical",
     "topic": "Coleta de Citopatológico (Técnica)",
     "focus": "Prevenção/Rastreamento",
@@ -5182,7 +5182,7 @@
   {
     "year": 2022,
     "id": 49,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia",
     "topic": "HPV / Lesão Acetobranca (Diagnóstico)",
     "focus": "Diagnóstico",
@@ -5192,7 +5192,7 @@
   {
     "year": 2022,
     "id": 50,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Descentralização e Municipalização do SUS",
     "focus": "Epidemiologia/Risco",
@@ -5202,7 +5202,7 @@
   {
     "year": 2022,
     "id": 51,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia / Gestão",
     "topic": "Indicadores de Saúde (Confiabilidade/Validade)",
     "focus": "Epidemiologia/Risco",
@@ -5212,7 +5212,7 @@
   {
     "year": 2022,
     "id": 52,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina Baseada em Evidências",
     "topic": "Conceitos Fundamentais",
     "focus": "Definição/Fisiopato",
@@ -5222,7 +5222,7 @@
   {
     "year": 2022,
     "id": 53,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Transição Epidemiológica (Doenças Infecciosas)",
     "focus": "Epidemiologia/Risco",
@@ -5232,7 +5232,7 @@
   {
     "year": 2022,
     "id": 54,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Princípios do SUS (Universalidade)",
     "focus": "Definição/Fisiopato",
@@ -5242,7 +5242,7 @@
   {
     "year": 2022,
     "id": 55,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Agente Comunitário de Saúde (Atribuições)",
     "focus": "Tratamento",
@@ -5252,7 +5252,7 @@
   {
     "year": 2022,
     "id": 56,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Relação entre Médicos (Interconsultas)",
     "focus": "Definição/Fisiopato",
@@ -5262,7 +5262,7 @@
   {
     "year": 2022,
     "id": 57,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudos Transversais (Características)",
     "focus": "Epidemiologia/Risco",
@@ -5272,7 +5272,7 @@
   {
     "year": 2022,
     "id": 58,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Rastreamento (Viés de Sobrediagnóstico)",
     "focus": "Prevenção/Rastreamento",
@@ -5282,7 +5282,7 @@
   {
     "year": 2022,
     "id": 59,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Vieses em Pesquisa (Seleção/Memória)",
     "focus": "Definição/Fisiopato",
@@ -5292,7 +5292,7 @@
   {
     "year": 2022,
     "id": 60,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudos de Coorte (Conceito)",
     "focus": "Epidemiologia/Risco",
@@ -5302,7 +5302,7 @@
   {
     "year": 2022,
     "id": 61,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Atributos e Funções da APS",
     "focus": "Definição/Fisiopato",
@@ -5312,7 +5312,7 @@
   {
     "year": 2022,
     "id": 62,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética / Pesquisa",
     "topic": "Termo de Consentimento Livre e Esclarecido (TCLE)",
     "focus": "Definição/Fisiopato",
@@ -5322,7 +5322,7 @@
   {
     "year": 2022,
     "id": 63,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto Prematuro",
     "topic": "Fatores de Risco (História Prévia)",
     "focus": "Epidemiologia/Risco",
@@ -5332,7 +5332,7 @@
   {
     "year": 2022,
     "id": 64,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infecções na Gestação",
     "topic": "Toxoplasmose, Sífilis e HIV",
     "focus": "Epidemiologia/Risco",
@@ -5342,7 +5342,7 @@
   {
     "year": 2022,
     "id": 65,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Gemelaridade",
     "topic": "Tipos de Placentação (Corionicidade)",
     "focus": "Definição/Fisiopato",
@@ -5352,7 +5352,7 @@
   {
     "year": 2022,
     "id": 66,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doença Hipertensiva",
     "topic": "Anti-hipertensivos Contraindicados (IECA)",
     "focus": "Tratamento",
@@ -5362,7 +5362,7 @@
   {
     "year": 2022,
     "id": 67,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Monitorização Fetal (Categorias ACOG)",
     "focus": "Diagnóstico",
@@ -5372,7 +5372,7 @@
   {
     "year": 2022,
     "id": 68,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Puerpério Patológico",
     "topic": "Endometrite Puerperal (Diagnóstico)",
     "focus": "Diagnóstico",
@@ -5382,7 +5382,7 @@
   {
     "year": 2022,
     "id": 69,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto",
     "topic": "Parto Precipitado / Taquitócico",
     "focus": "Complicação/Prognóstico",
@@ -5392,7 +5392,7 @@
   {
     "year": 2022,
     "id": 70,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Vacinação na Gestante (Contraindicações/Vírus Vivo)",
     "focus": "Prevenção/Rastreamento",
@@ -5402,7 +5402,7 @@
   {
     "year": 2022,
     "id": 71,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Diabetes e Gestação",
     "topic": "Seguimento Fetal (Ultrassom e Doppler)",
     "focus": "Prevenção/Rastreamento",
@@ -5882,7 +5882,7 @@
   {
     "year": 2023,
     "id": 27,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Amenorreia Secundária (Hiperprolactinemia / Prolactinoma)",
     "focus": "Diagnóstico",
@@ -5892,7 +5892,7 @@
   {
     "year": 2023,
     "id": 28,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Gestação de Alto Risco",
     "topic": "Cardiopatia na Gestação (Hipertensão Pulmonar)",
     "focus": "Epidemiologia/Risco",
@@ -6112,7 +6112,7 @@
   {
     "year": 2023,
     "id": 50,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Climatério",
     "topic": "Transição Menopausal (Diagnóstico Hormonal)",
     "focus": "Diagnóstico",
@@ -6122,7 +6122,7 @@
   {
     "year": 2023,
     "id": 51,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endometriose",
     "topic": "Infertilidade (Fisiopatologia)",
     "focus": "Epidemiologia/Risco",
@@ -6132,7 +6132,7 @@
   {
     "year": 2023,
     "id": 52,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Progestágenos (Farmacologia)",
     "focus": "Definição/Fisiopato",
@@ -6142,7 +6142,7 @@
   {
     "year": 2023,
     "id": 53,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Uroginecologia",
     "topic": "Síndrome Genitourinária da Menopausa (Tratamento)",
     "focus": "Tratamento",
@@ -6152,7 +6152,7 @@
   {
     "year": 2023,
     "id": 54,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Síndrome de Morris (Insensibilidade Androgênica)",
     "focus": "Diagnóstico",
@@ -6162,7 +6162,7 @@
   {
     "year": 2023,
     "id": 55,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infertilidade",
     "topic": "Avaliação de Reserva Ovariana (Hormônio Antimülleriano)",
     "focus": "Diagnóstico",
@@ -6172,7 +6172,7 @@
   {
     "year": 2023,
     "id": 56,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Oncologia Ginecológica",
     "topic": "Câncer de Endométrio (Estadiamento Clínico)",
     "focus": "Prevenção/Rastreamento",
@@ -6182,7 +6182,7 @@
   {
     "year": 2023,
     "id": 57,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologia Cervical",
     "topic": "Colposcopia (Sinais de Invasão)",
     "focus": "Diagnóstico",
@@ -6192,7 +6192,7 @@
   {
     "year": 2023,
     "id": 58,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Vigilância em Saúde",
     "topic": "Notificação Compulsória (Lista Nacional)",
     "focus": "Epidemiologia/Risco",
@@ -6202,7 +6202,7 @@
   {
     "year": 2023,
     "id": 59,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Atenção Domiciliar (Objetivos)",
     "focus": "Definição/Fisiopato",
@@ -6212,7 +6212,7 @@
   {
     "year": 2023,
     "id": 60,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Coordenação do Cuidado (Atributos da APS)",
     "focus": "Definição/Fisiopato",
@@ -6222,7 +6222,7 @@
   {
     "year": 2023,
     "id": 61,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Integralidade (Conceito)",
     "focus": "Definição/Fisiopato",
@@ -6232,7 +6232,7 @@
   {
     "year": 2023,
     "id": 62,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
     "topic": "Erro Tipo II (Poder do Teste)",
     "focus": "Definição/Fisiopato",
@@ -6242,7 +6242,7 @@
   {
     "year": 2023,
     "id": 63,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudo de Coorte (Histórico / Retrospectiva)",
     "focus": "Epidemiologia/Risco",
@@ -6252,7 +6252,7 @@
   {
     "year": 2023,
     "id": 64,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina Baseada em Evidências",
     "topic": "Metanálise (Interpretação de Forest Plot)",
     "focus": "Definição/Fisiopato",
@@ -6262,7 +6262,7 @@
   {
     "year": 2023,
     "id": 65,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Código de Ética (Vedações)",
     "focus": "Definição/Fisiopato",
@@ -6272,7 +6272,7 @@
   {
     "year": 2023,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Medidas de Associação (Interpretação de Odds Ratio)",
     "focus": "Epidemiologia/Risco",
@@ -6282,7 +6282,7 @@
   {
     "year": 2023,
     "id": 67,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
     "topic": "Distribuição Assimétrica (Média vs Mediana)",
     "focus": "Definição/Fisiopato",
@@ -6292,7 +6292,7 @@
   {
     "year": 2023,
     "id": 68,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Validade Externa (Generalização)",
     "focus": "Epidemiologia/Risco",
@@ -6302,7 +6302,7 @@
   {
     "year": 2023,
     "id": 69,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Prontuário Médico (Correção de Registros)",
     "focus": "Definição/Fisiopato",
@@ -6312,7 +6312,7 @@
   {
     "year": 2023,
     "id": 70,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Abortamento",
     "topic": "Insuficiência Istmocervical (Diagnóstico)",
     "focus": "Diagnóstico",
@@ -6322,7 +6322,7 @@
   {
     "year": 2023,
     "id": 71,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto Prematuro",
     "topic": "Tocolíticos (Sulfato de Magnésio, Beta-agonistas, AINEs)",
     "focus": "Tratamento",
@@ -6332,7 +6332,7 @@
   {
     "year": 2023,
     "id": 72,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doença Hipertensiva",
     "topic": "Pré-Eclâmpsia (Sulfato de Magnésio / Intoxicação)",
     "focus": "Tratamento",
@@ -6342,7 +6342,7 @@
   {
     "year": 2023,
     "id": 73,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Polidrâmnio (Etiologia / Malformações)",
     "focus": "Diagnóstico",
@@ -6352,7 +6352,7 @@
   {
     "year": 2023,
     "id": 74,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Oligrâmnio (Índice de Líquido Amniótico - ILA)",
     "focus": "Diagnóstico",
@@ -6362,7 +6362,7 @@
   {
     "year": 2023,
     "id": 75,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Anemia Fetal (Dopplervelocimetria de Artéria Cerebral Média)",
     "focus": "Diagnóstico",
@@ -6372,7 +6372,7 @@
   {
     "year": 2023,
     "id": 76,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Restrição de Crescimento Fetal (RCF / Momento do Parto)",
     "focus": "Tratamento",
@@ -6462,7 +6462,7 @@
   {
     "year": 2023,
     "id": 85,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia na Gestação",
     "topic": "Sífilis Congênita (Critérios de Tratamento Materno Adequado)",
     "focus": "Tratamento",
@@ -6492,7 +6492,7 @@
   {
     "year": 2023,
     "id": 88,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Imunizações",
     "topic": "Imunização Passiva vs Ativa (Conceitos)",
     "focus": "Prevenção/Rastreamento",
@@ -6802,7 +6802,7 @@
   {
     "year": 2024,
     "id": 23,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Rastreamento",
     "topic": "Câncer Colorretal (Faixa Etária)",
     "focus": "Prevenção/Rastreamento",
@@ -6972,7 +6972,7 @@
   {
     "year": 2024,
     "id": 40,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia Ginecológica",
     "topic": "Molusco Contagioso (Diagnóstico)",
     "focus": "Diagnóstico",
@@ -7062,7 +7062,7 @@
   {
     "year": 2024,
     "id": 49,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária / Infecto",
     "topic": "Sífilis (Diagnóstico e Tratamento na APS)",
     "focus": "Tratamento",
@@ -7072,7 +7072,7 @@
   {
     "year": 2024,
     "id": 50,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária / Vigilância",
     "topic": "Tuberculose (Ações de Controle e Tratamento Supervisionado)",
     "focus": "Prevenção/Rastreamento",
@@ -7082,7 +7082,7 @@
   {
     "year": 2024,
     "id": 51,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Oncologia Ginecológica",
     "topic": "Massa Anexial (Diagnóstico Diferencial)",
     "focus": "Diagnóstico",
@@ -7092,7 +7092,7 @@
   {
     "year": 2024,
     "id": 52,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Sangramento Pós-Menopausa (Etiologia)",
     "focus": "Diagnóstico",
@@ -7102,7 +7102,7 @@
   {
     "year": 2024,
     "id": 53,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Amenorreia Primária (Investigação)",
     "focus": "Diagnóstico",
@@ -7112,7 +7112,7 @@
   {
     "year": 2024,
     "id": 54,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infertilidade",
     "topic": "Investigação do Casal Infértil (Critérios de Tempo)",
     "focus": "Tratamento",
@@ -7122,7 +7122,7 @@
   {
     "year": 2024,
     "id": 55,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologia Cervical",
     "topic": "Colo Uterino (Junção Escamocolunar - JEC)",
     "focus": "Fisiologia",
@@ -7132,7 +7132,7 @@
   {
     "year": 2024,
     "id": 56,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Semiologia",
     "topic": "Exame Físico (Posição do Útero ao Toque)",
     "focus": "Diagnóstico",
@@ -7142,7 +7142,7 @@
   {
     "year": 2024,
     "id": 57,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia / Bioestatística",
     "topic": "Análise de Correlação (Interpretação de Gráfico e p-valor)",
     "focus": "Epidemiologia/Risco",
@@ -7152,7 +7152,7 @@
   {
     "year": 2024,
     "id": 58,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "SUS (Princípios e Diretrizes)",
     "focus": "Definição/Fisiopato",
@@ -7162,7 +7162,7 @@
   {
     "year": 2024,
     "id": 59,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Estratégia Saúde da Família (Composição e Atribuições)",
     "focus": "Definição/Fisiopato",
@@ -7172,7 +7172,7 @@
   {
     "year": 2024,
     "id": 60,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "PNAB (Atribuições Comuns da Equipe)",
     "focus": "Definição/Fisiopato",
@@ -7182,7 +7182,7 @@
   {
     "year": 2024,
     "id": 61,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Vigilância em Saúde",
     "topic": "Notificação Compulsória (Doenças Imediatas)",
     "focus": "Epidemiologia/Risco",
@@ -7192,7 +7192,7 @@
   {
     "year": 2024,
     "id": 62,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Legislação do SUS (NOAS 2002)",
     "focus": "Definição/Fisiopato",
@@ -7202,7 +7202,7 @@
   {
     "year": 2024,
     "id": 63,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Atributos da APS (Acesso / Primeiro Contato)",
     "focus": "Definição/Fisiopato",
@@ -7212,7 +7212,7 @@
   {
     "year": 2024,
     "id": 64,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Coordenação do Cuidado / ICSAP",
     "focus": "Epidemiologia/Risco",
@@ -7222,7 +7222,7 @@
   {
     "year": 2024,
     "id": 65,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Testes Diagnósticos (Sensibilidade e Especificidade)",
     "focus": "Epidemiologia/Risco",
@@ -7232,7 +7232,7 @@
   {
     "year": 2024,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Valor Preditivo Positivo (Cálculo e Interpretação)",
     "focus": "Epidemiologia/Risco",
@@ -7242,7 +7242,7 @@
   {
     "year": 2024,
     "id": 67,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Medidas de Associação (Risco Relativo - Interpretação)",
     "focus": "Epidemiologia/Risco",
@@ -7252,7 +7252,7 @@
   {
     "year": 2024,
     "id": 68,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Testes Diagnósticos (Razão de Verossimilhança / Likelihood Ratio)",
     "focus": "Epidemiologia/Risco",
@@ -7262,7 +7262,7 @@
   {
     "year": 2024,
     "id": 69,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
     "topic": "Medidas de Precisão (Desvio-Padrão)",
     "focus": "Epidemiologia/Risco",
@@ -7272,7 +7272,7 @@
   {
     "year": 2024,
     "id": 70,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Amostragem (Cálculo de Tamanho de Amostra)",
     "focus": "Epidemiologia/Risco",
@@ -7282,7 +7282,7 @@
   {
     "year": 2024,
     "id": 71,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Publicidade Médica e Sigilo",
     "focus": "Definição/Fisiopato",
@@ -7292,7 +7292,7 @@
   {
     "year": 2024,
     "id": 72,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Periodicidade das Consultas",
     "focus": "Prevenção/Rastreamento",
@@ -7302,7 +7302,7 @@
   {
     "year": 2024,
     "id": 73,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Abortamento",
     "topic": "Cinética do Beta-hCG (Diagnóstico Diferencial)",
     "focus": "Diagnóstico",
@@ -7312,7 +7312,7 @@
   {
     "year": 2024,
     "id": 74,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doença Hipertensiva",
     "topic": "Pré-eclâmpsia (Critérios Diagnósticos de Gravidade)",
     "focus": "Diagnóstico",
@@ -7322,7 +7322,7 @@
   {
     "year": 2024,
     "id": 75,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Abortamento",
     "topic": "Insuficiência Istmocervical (Indicações de Cerclagem)",
     "focus": "Tratamento",
@@ -7332,7 +7332,7 @@
   {
     "year": 2024,
     "id": 76,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Embriologia / Pré-natal",
     "topic": "Defeitos do Tubo Neural (Ácido Fólico)",
     "focus": "Definição/Fisiopato",
@@ -7342,7 +7342,7 @@
   {
     "year": 2024,
     "id": 77,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto Operatório",
     "topic": "Fórcipe (Correção de Assinclitismo / Kielland)",
     "focus": "Tratamento",
@@ -7352,7 +7352,7 @@
   {
     "year": 2024,
     "id": 78,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Hemorragias",
     "topic": "Acretismo Placentário (Manejo Cirúrgico)",
     "focus": "Tratamento",
@@ -7362,7 +7362,7 @@
   {
     "year": 2024,
     "id": 79,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Doença Hipertensiva",
     "topic": "Pré-eclâmpsia (Prognóstico / Modelo fullPIERS)",
     "focus": "Complicação/Prognóstico",
@@ -7372,7 +7372,7 @@
   {
     "year": 2024,
     "id": 80,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Distocia",
     "topic": "Distocia Funcional (Incoordenação Uterina)",
     "focus": "Tratamento",
@@ -7382,7 +7382,7 @@
   {
     "year": 2024,
     "id": 81,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Imunizações",
     "topic": "Calendário do Adulto e Idoso",
     "focus": "Prevenção/Rastreamento",
@@ -7932,7 +7932,7 @@
   {
     "year": 2025,
     "id": 38,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Dengue na Gestação (Prevenção e Repelentes)",
     "focus": "Prevenção/Rastreamento",
@@ -8012,7 +8012,7 @@
   {
     "year": 2025,
     "id": 46,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Sangramento Uterino Anormal (Investigação na Menacme)",
     "focus": "Diagnóstico",
@@ -8022,7 +8022,7 @@
   {
     "year": 2025,
     "id": 47,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Pólipo Cervical (Diagnóstico e Conduta)",
     "focus": "Diagnóstico",
@@ -8032,7 +8032,7 @@
   {
     "year": 2025,
     "id": 48,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Mastologia",
     "topic": "Mamografia (BI-RADS 4 - Microcalcificações Pleomórficas)",
     "focus": "Diagnóstico",
@@ -8042,7 +8042,7 @@
   {
     "year": 2025,
     "id": 49,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Climatério",
     "topic": "Sintomas Vasomotores (Tratamento Não Hormonal e Hormonal)",
     "focus": "Tratamento",
@@ -8052,7 +8052,7 @@
   {
     "year": 2025,
     "id": 50,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Amenorreia Secundária (Teste da Progesterona)",
     "focus": "Diagnóstico",
@@ -8062,7 +8062,7 @@
   {
     "year": 2025,
     "id": 51,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "DIU (Técnica de Inserção / Pinça de Pozzi)",
     "focus": "Tratamento",
@@ -8072,7 +8072,7 @@
   {
     "year": 2025,
     "id": 52,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Anatomia",
     "topic": "Anatomia Genital Externa (Pequenos Lábios)",
     "focus": "Definição/Fisiopato",
@@ -8082,7 +8082,7 @@
   {
     "year": 2025,
     "id": 53,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia Ginecológica",
     "topic": "HPV / Condiloma (Tratamento com ATA)",
     "focus": "Tratamento",
@@ -8092,7 +8092,7 @@
   {
     "year": 2025,
     "id": 54,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Uroginecologia",
     "topic": "Prolapso Genital (Retocele - Diagnóstico e Tratamento)",
     "focus": "Diagnóstico",
@@ -8102,7 +8102,7 @@
   {
     "year": 2025,
     "id": 55,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Geriatria",
     "topic": "Farmacologia no Idoso (Polifarmácia e Interações)",
     "focus": "Definição/Fisiopato",
@@ -8112,7 +8112,7 @@
   {
     "year": 2025,
     "id": 56,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Atribuições do Médico de Família (PNAB)",
     "focus": "Definição/Fisiopato",
@@ -8122,7 +8122,7 @@
   {
     "year": 2025,
     "id": 57,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Princípios e Desafios (Coordenação do Cuidado)",
     "focus": "Definição/Fisiopato",
@@ -8132,7 +8132,7 @@
   {
     "year": 2025,
     "id": 58,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Princípios do SUS (Integralidade)",
     "focus": "Definição/Fisiopato",
@@ -8142,7 +8142,7 @@
   {
     "year": 2025,
     "id": 59,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Território e Territorialização na APS",
     "focus": "Definição/Fisiopato",
@@ -8152,7 +8152,7 @@
   {
     "year": 2025,
     "id": 60,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Vigilância em Saúde",
     "topic": "Notificação Compulsória Imediata (Doenças e Agravos)",
     "focus": "Epidemiologia/Risco",
@@ -8162,7 +8162,7 @@
   {
     "year": 2025,
     "id": 61,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Controle Social (Conselho Nacional de Saúde)",
     "focus": "Definição/Fisiopato",
@@ -8172,7 +8172,7 @@
   {
     "year": 2025,
     "id": 62,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Medidas de Impacto (NNT - Número Necessário para Tratar)",
     "focus": "Epidemiologia/Risco",
@@ -8182,7 +8182,7 @@
   {
     "year": 2025,
     "id": 63,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
     "topic": "Valor-p (Interpretação e Erros Comuns)",
     "focus": "Epidemiologia/Risco",
@@ -8192,7 +8192,7 @@
   {
     "year": 2025,
     "id": 64,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Metanálise (Forest Plot - Precisão e Intervalo de Confiança)",
     "focus": "Epidemiologia/Risco",
@@ -8202,7 +8202,7 @@
   {
     "year": 2025,
     "id": 65,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudo Caso-Controle (Viés de Seleção)",
     "focus": "Epidemiologia/Risco",
@@ -8212,7 +8212,7 @@
   {
     "year": 2025,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Testes Diagnósticos (Razão de Verossimilhança Positiva)",
     "focus": "Diagnóstico",
@@ -8222,7 +8222,7 @@
   {
     "year": 2025,
     "id": 67,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudos Epidemiológicos (Coorte Histórica vs Caso-Controle)",
     "focus": "Epidemiologia/Risco",
@@ -8232,7 +8232,7 @@
   {
     "year": 2025,
     "id": 68,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Testes Diagnósticos (Testes em Paralelo)",
     "focus": "Diagnóstico",
@@ -8242,7 +8242,7 @@
   {
     "year": 2025,
     "id": 69,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Testes Diagnósticos (Conceito de Padrão-Ouro)",
     "focus": "Definição/Fisiopato",
@@ -8252,7 +8252,7 @@
   {
     "year": 2025,
     "id": 70,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Vieses em Rastreamento (Viés de Tempo de Antecipação / Lead-time bias)",
     "focus": "Epidemiologia/Risco",
@@ -8262,7 +8262,7 @@
   {
     "year": 2025,
     "id": 71,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Assistência ao Parto",
     "topic": "3º Período (Manejo Ativo / Ocitocina)",
     "focus": "Tratamento",
@@ -8272,7 +8272,7 @@
   {
     "year": 2025,
     "id": 72,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Ultrassonografia (Morfológica de 1º Trimestre / TN)",
     "focus": "Prevenção/Rastreamento",
@@ -8282,7 +8282,7 @@
   {
     "year": 2025,
     "id": 73,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Puerpério Patológico",
     "topic": "Endometrite Puerperal (Diagnóstico e Tratamento)",
     "focus": "Diagnóstico",
@@ -8292,7 +8292,7 @@
   {
     "year": 2025,
     "id": 74,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Fisiologia Obstétrica",
     "topic": "Placenta (Mecanismos de Transporte)",
     "focus": "Definição/Fisiopato",
@@ -8302,7 +8302,7 @@
   {
     "year": 2025,
     "id": 75,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Prevenção de Pré-eclâmpsia (AAS e Cálcio)",
     "focus": "Prevenção/Rastreamento",
@@ -8312,7 +8312,7 @@
   {
     "year": 2025,
     "id": 76,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Abortamento",
     "topic": "Tipos Clínicos (Abortamento Inevitável)",
     "focus": "Diagnóstico",
@@ -8322,7 +8322,7 @@
   {
     "year": 2025,
     "id": 77,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Embriologia",
     "topic": "Anexos Fetais (Decíduas e Córion)",
     "focus": "Definição/Fisiopato",
@@ -8332,7 +8332,7 @@
   {
     "year": 2025,
     "id": 78,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Idade Gestacional (Margem de Erro da USG)",
     "focus": "Diagnóstico",
@@ -8342,7 +8342,7 @@
   {
     "year": 2025,
     "id": 79,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Vacinação na Gestante (Calendário PNI)",
     "focus": "Prevenção/Rastreamento",
@@ -8932,7 +8932,7 @@
   {
     "year": 2026,
     "id": 41,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia na Gestação",
     "topic": "Parasitoses Intestinais (Teníase - Tratamento na Gestação)",
     "focus": "Tratamento",
@@ -8942,7 +8942,7 @@
   {
     "year": 2026,
     "id": 42,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Dermatologia na Gestação",
     "topic": "Acne Vulgar (Tratamento Tópico Seguro)",
     "focus": "Tratamento",
@@ -9002,7 +9002,7 @@
   {
     "year": 2026,
     "id": 48,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Mastologia",
     "topic": "Nódulo Mamário (Fibroadenoma - Conduta)",
     "focus": "Diagnóstico",
@@ -9012,7 +9012,7 @@
   {
     "year": 2026,
     "id": 49,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Dismenorreia Primária (Tratamento com AINEs)",
     "focus": "Tratamento",
@@ -9022,7 +9022,7 @@
   {
     "year": 2026,
     "id": 50,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infertilidade",
     "topic": "Investigação Básica (Fator Ovulatório / Progesterona)",
     "focus": "Diagnóstico",
@@ -9032,7 +9032,7 @@
   {
     "year": 2026,
     "id": 51,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Sangramento Uterino Anormal (Uso de ACO - Sangramento de Escape)",
     "focus": "Tratamento",
@@ -9042,7 +9042,7 @@
   {
     "year": 2026,
     "id": 52,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia Ginecológica",
     "topic": "Vaginose Bacteriana (Diagnóstico e Tratamento)",
     "focus": "Tratamento",
@@ -9052,7 +9052,7 @@
   {
     "year": 2026,
     "id": 53,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Climatério",
     "topic": "Sintomas Vasomotores (Tratamento Não Hormonal - TCC)",
     "focus": "Tratamento",
@@ -9062,7 +9062,7 @@
   {
     "year": 2026,
     "id": 54,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endometriose",
     "topic": "Tratamento Clínico (Empírico com Progestogênios)",
     "focus": "Tratamento",
@@ -9072,7 +9072,7 @@
   {
     "year": 2026,
     "id": 55,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "SOP (Tratamento do Hirsutismo e Irregularidade Menstrual)",
     "focus": "Tratamento",
@@ -9082,7 +9082,7 @@
   {
     "year": 2026,
     "id": 56,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Contracepção Pós-Bariátrica (Implante de Etonogestrel)",
     "focus": "Tratamento",
@@ -9092,7 +9092,7 @@
   {
     "year": 2026,
     "id": 57,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Psiquiatria / Gineco",
     "topic": "Transtorno Disfórico Pré-Menstrual (Diagnóstico e Tratamento)",
     "focus": "Quadro Clínico",
@@ -9102,7 +9102,7 @@
   {
     "year": 2026,
     "id": 58,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica / Adolescente",
     "topic": "Sigilo Médico (Situações de Quebra de Sigilo - Álcool)",
     "focus": "Prevenção/Rastreamento",
@@ -9112,7 +9112,7 @@
   {
     "year": 2026,
     "id": 59,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Organização da APS (Coordenação e Longitudinalidade)",
     "focus": "Definição/Fisiopato",
@@ -9122,7 +9122,7 @@
   {
     "year": 2026,
     "id": 60,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Atributos da APS (Longitudinalidade e Coordenação)",
     "focus": "Definição/Fisiopato",
@@ -9132,7 +9132,7 @@
   {
     "year": 2026,
     "id": 61,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Atenção Domiciliar (Modalidades: AD1, AD2, AD3)",
     "focus": "Definição/Fisiopato",
@@ -9142,7 +9142,7 @@
   {
     "year": 2026,
     "id": 62,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Conselhos de Saúde (Atribuições e Paridade)",
     "focus": "Definição/Fisiopato",
@@ -9152,7 +9152,7 @@
   {
     "year": 2026,
     "id": 63,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Atenção Primária",
     "topic": "Longitudinalidade (Quebra de Vínculo e Continuidade)",
     "focus": "Definição/Fisiopato",
@@ -9162,7 +9162,7 @@
   {
     "year": 2026,
     "id": 64,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Medicina de Família",
     "topic": "Método Clínico Centrado na Pessoa (Componentes)",
     "focus": "Definição/Fisiopato",
@@ -9172,7 +9172,7 @@
   {
     "year": 2026,
     "id": 65,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Mental / APS",
     "topic": "Matriciamento e Cuidado Compartilhado",
     "focus": "Definição/Fisiopato",
@@ -9182,7 +9182,7 @@
   {
     "year": 2026,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Vigilância em Saúde",
     "topic": "Notificação Compulsória Imediata (Doenças e Prazos)",
     "focus": "Prevenção/Rastreamento",
@@ -9192,7 +9192,7 @@
   {
     "year": 2026,
     "id": 67,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Programa Previne Brasil (Indicadores)",
     "focus": "Prevenção/Rastreamento",
@@ -9202,7 +9202,7 @@
   {
     "year": 2026,
     "id": 68,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Publicidade Médica e Promessa de Resultado",
     "focus": "Definição/Fisiopato",
@@ -9212,7 +9212,7 @@
   {
     "year": 2026,
     "id": 69,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudos Transversais (Limitações / Causalidade Reversa)",
     "focus": "Epidemiologia/Risco",
@@ -9222,7 +9222,7 @@
   {
     "year": 2026,
     "id": 70,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Testes Diagnósticos (Razão de Verossimilhança Negativa)",
     "focus": "Diagnóstico",
@@ -9232,7 +9232,7 @@
   {
     "year": 2026,
     "id": 71,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Medidas de Impacto (NNH - Número Necessário para Causar Dano)",
     "focus": "Epidemiologia/Risco",
@@ -9242,7 +9242,7 @@
   {
     "year": 2026,
     "id": 72,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Valor Preditivo Positivo (Influência da Prevalência)",
     "focus": "Diagnóstico",
@@ -9252,7 +9252,7 @@
   {
     "year": 2026,
     "id": 73,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Ensaios Clínicos (Análise por Intenção de Tratar)",
     "focus": "Epidemiologia/Risco",
@@ -9262,7 +9262,7 @@
   {
     "year": 2026,
     "id": 74,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudos de Coorte (Desenho e Análise)",
     "focus": "Epidemiologia/Risco",
@@ -9272,7 +9272,7 @@
   {
     "year": 2026,
     "id": 75,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto",
     "topic": "Distocia Funcional (Fase Ativa Prolongada / Parada Secundária)",
     "focus": "Tratamento",
@@ -9282,7 +9282,7 @@
   {
     "year": 2026,
     "id": 76,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Puerpério",
     "topic": "Puerpério Fisiológico (Involução Uterina e Loquiação)",
     "focus": "Diagnóstico",
@@ -9292,7 +9292,7 @@
   {
     "year": 2026,
     "id": 77,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Puerpério Patológico",
     "topic": "Endometrite Puerperal (Tratamento Antibiótico)",
     "focus": "Tratamento",
@@ -9302,7 +9302,7 @@
   {
     "year": 2026,
     "id": 78,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Óbito Fetal",
     "topic": "Conduta no Óbito Fetal Intraútero",
     "focus": "Tratamento",
@@ -9312,7 +9312,7 @@
   {
     "year": 2026,
     "id": 79,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Gestação Prolongada",
     "topic": "Pós-datismo (Oligrâmnio e Indução)",
     "focus": "Tratamento",
@@ -9322,7 +9322,7 @@
   {
     "year": 2026,
     "id": 80,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Imunização na Gestante (Hepatite B e dTpa)",
     "focus": "Prevenção/Rastreamento",
@@ -9412,7 +9412,7 @@
   {
     "year": 2026,
     "id": 89,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia na Gestação",
     "topic": "HTLV (Prevenção da Transmissão Vertical / Aleitamento)",
     "focus": "Prevenção/Rastreamento",
@@ -10602,7 +10602,7 @@
   {
     "year": 2017,
     "id": 49,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Fisiologia",
     "topic": "Ciclo Menstrual (Hormônios)",
     "focus": "Indefinido",
@@ -10612,7 +10612,7 @@
   {
     "year": 2017,
     "id": 50,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Infectologia Ginecológica",
     "topic": "Doença Inflamatória Pélvica (DIP)",
     "focus": "Indefinido",
@@ -10622,7 +10622,7 @@
   {
     "year": 2017,
     "id": 51,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Anticoncepcionais Hormonais Combinados",
     "focus": "Indefinido",
@@ -10632,7 +10632,7 @@
   {
     "year": 2017,
     "id": 52,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Dismenorreia / Endometriose (Diagnóstico Diferencial)",
     "focus": "Indefinido",
@@ -10642,7 +10642,7 @@
   {
     "year": 2017,
     "id": 53,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Fisiologia",
     "topic": "Ciclo Ovariano (Fase Lútea/Folicular)",
     "focus": "Indefinido",
@@ -10652,7 +10652,7 @@
   {
     "year": 2017,
     "id": 54,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Contracepção na Lactação (Minipílula)",
     "focus": "Indefinido",
@@ -10662,7 +10662,7 @@
   {
     "year": 2017,
     "id": 55,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Sangramento Uterino Disfuncional",
     "focus": "Indefinido",
@@ -10672,7 +10672,7 @@
   {
     "year": 2017,
     "id": 56,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Ginecologia Geral",
     "topic": "Irregularidade Menstrual (Causas por Idade)",
     "focus": "Indefinido",
@@ -10682,7 +10682,7 @@
   {
     "year": 2017,
     "id": 57,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Síndrome dos Ovários Policísticos (Fisiopatologia)",
     "focus": "Indefinido",
@@ -10692,7 +10692,7 @@
   {
     "year": 2017,
     "id": 58,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Planejamento Familiar",
     "topic": "Sangramento de Escape (Spotting) com ACO",
     "focus": "Indefinido",
@@ -10702,7 +10702,7 @@
   {
     "year": 2017,
     "id": 59,
-    "area": "Ginecologia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Endocrinologia Ginecológica",
     "topic": "Amenorreia Primária (Síndrome de Rokitansky)",
     "focus": "Indefinido",
@@ -10712,7 +10712,7 @@
   {
     "year": 2017,
     "id": 60,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Demografia",
     "topic": "Transição Demográfica e Epidemiológica",
     "focus": "Indefinido",
@@ -10722,7 +10722,7 @@
   {
     "year": 2017,
     "id": 61,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "SUS",
     "topic": "Princípios e Diretrizes (Universalidade/Dever do Estado)",
     "focus": "Indefinido",
@@ -10732,7 +10732,7 @@
   {
     "year": 2017,
     "id": 62,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética Médica",
     "topic": "Atendimento ao Adolescente (Sigilo)",
     "focus": "Indefinido",
@@ -10742,7 +10742,7 @@
   {
     "year": 2017,
     "id": 63,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Prevenção Quaternária",
     "focus": "Indefinido",
@@ -10752,7 +10752,7 @@
   {
     "year": 2017,
     "id": 64,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Estudos Observacionais (Caso-Controle)",
     "focus": "Indefinido",
@@ -10762,7 +10762,7 @@
   {
     "year": 2017,
     "id": 65,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Medidas de Frequência (Prevalência)",
     "focus": "Indefinido",
@@ -10772,7 +10772,7 @@
   {
     "year": 2017,
     "id": 66,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Bioestatística",
     "topic": "Medidas de Tendência Central (Mediana)",
     "focus": "Indefinido",
@@ -10782,7 +10782,7 @@
   {
     "year": 2017,
     "id": 67,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Saúde Pública",
     "topic": "Estratégias de Prevenção (Alto Risco vs Populacional)",
     "focus": "Indefinido",
@@ -10792,7 +10792,7 @@
   {
     "year": 2017,
     "id": 68,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Ética / Medicina Legal",
     "topic": "Declaração de Óbito (Responsabilidades)",
     "focus": "Indefinido",
@@ -10802,7 +10802,7 @@
   {
     "year": 2017,
     "id": 69,
-    "area": "Preventiva",
+    "area": "Medicina Preventiva",
     "specialty": "Epidemiologia",
     "topic": "Cálculo de Prevalência (Interpretação de Gráfico)",
     "focus": "Indefinido",
@@ -10812,7 +10812,7 @@
   {
     "year": 2017,
     "id": 70,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Isoimunização Rh (Solicitação de Coombs)",
     "focus": "Indefinido",
@@ -10822,7 +10822,7 @@
   {
     "year": 2017,
     "id": 71,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologias na Gestação",
     "topic": "Infecção Urinária (Fisiopatologia/Risco)",
     "focus": "Indefinido",
@@ -10832,7 +10832,7 @@
   {
     "year": 2017,
     "id": 72,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Sofrimento Fetal Agudo (Cardiotocografia)",
     "focus": "Indefinido",
@@ -10842,7 +10842,7 @@
   {
     "year": 2017,
     "id": 73,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Líquido Amniótico (Oligo e Polidrâmnio)",
     "focus": "Indefinido",
@@ -10852,7 +10852,7 @@
   {
     "year": 2017,
     "id": 74,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Patologias na Gestação",
     "topic": "Infecções Congênitas (TORCHS)",
     "focus": "Indefinido",
@@ -10862,7 +10862,7 @@
   {
     "year": 2017,
     "id": 75,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Trabalho de Parto Prematuro (Manejo)",
     "focus": "Indefinido",
@@ -10872,7 +10872,7 @@
   {
     "year": 2017,
     "id": 76,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Medicina Fetal",
     "topic": "Crescimento Intrauterino Restrito (CIUR)",
     "focus": "Indefinido",
@@ -10882,7 +10882,7 @@
   {
     "year": 2017,
     "id": 77,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Parto e Puerpério",
     "topic": "Rotura Prematura de Membranas (Corioamnionite)",
     "focus": "Indefinido",
@@ -10892,7 +10892,7 @@
   {
     "year": 2017,
     "id": 78,
-    "area": "Obstetrícia",
+    "area": "Ginecologia e Obstetrícia",
     "specialty": "Pré-natal",
     "topic": "Vacinação na Gestante",
     "focus": "Indefinido",
@@ -11042,7 +11042,7 @@
   {
     "year": 2017,
     "id": 93,
-    "area": "Pediatria / Psiquiatria",
+    "area": "Pediatria",
     "specialty": "Psiquiatria Infantil",
     "topic": "Transtorno do Espectro Autista (Epidemio)",
     "focus": "Indefinido",
@@ -11072,7 +11072,7 @@
   {
     "year": 2017,
     "id": 96,
-    "area": "Pediatria / Psiquiatria",
+    "area": "Pediatria",
     "specialty": "Violência / Psiquiatria",
     "topic": "Síndrome de Munchausen por Procuração",
     "focus": "Indefinido",

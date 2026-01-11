@@ -9,12 +9,14 @@ try {
 
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: 'EMPTY' });
 
-    console.log("=== INSPECTING COL H (Index 7) ===");
-    rows.slice(0, 20).forEach((row, i) => {
-        // Log H to see if it has text
-        const hVal = row[7];
-        console.log(`Row ${i}: H(7)='${hVal ? hVal.toString().substring(0, 50) + '...' : 'undefined'}'`);
+    console.log("=== INSPECTING UNIQUE AREAS (Column B/1) ===");
+    const areas = new Set();
+    rows.forEach(row => {
+        if (row[1] && typeof row[1] === 'string' && row[1] !== 'Grande Área') {
+            areas.add(row[1].trim());
+        }
     });
+    console.log(Array.from(areas).sort());
 
 } catch (e) {
     console.error(e);

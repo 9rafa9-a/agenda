@@ -134,10 +134,27 @@ try {
             if (!isNaN(parseInt(firstCell)) && typeof row[1] === 'string') {
                 const cols = findColumns(row);
 
-                // Clean Area Name
+                // Clean and Normalize Area Name
                 let area = row[cols.area]?.trim();
-                // Fix typos common in these sheets
-                if (area === 'Clinica Medica') area = 'Clínica Médica';
+
+                // Normalization Map
+                if (area) {
+                    // Fix typos and consolidate
+                    if (area === 'Clinica Medica') area = 'Clínica Médica';
+                    if (area === 'Ginecologia' || area === 'Obstetrícia') area = 'Ginecologia e Obstetrícia';
+                    if (area === 'Preventiva') area = 'Medicina Preventiva';
+                    if (area.includes('Psiquiatria')) {
+                        // Decide where Psych goes. Usually Clinic or its own.
+                        // If it's "Pediatria / Psiquiatria", maybe duplicate? 
+                        // For simplicity, let's map "Pediatria / Psiquiatria" to Pediatria if it's primarily child psych, 
+                        // or keep it separate. The user wants 5 macro areas usually. 
+                        // Let's keep Psiquiatria separate if it exists alone, or map to Clínica if standard.
+                        // AMRIGS usually has Psiquiatria separate or part of Clinic. 
+                        // Let's assume separate is fine, but "Pediatria / Psiquiatria" -> Pediatria for now to reduce clutter.
+                        if (area.includes('Pediatria')) area = 'Pediatria';
+                    }
+                }
+
                 if (!area) return;
 
                 // Extract Focus using dynamic index
